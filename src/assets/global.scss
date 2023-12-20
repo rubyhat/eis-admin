@@ -1,0 +1,244 @@
+:root {
+  // --colors-red: #ff3b30;
+  // --colors-red-dark: #ff453a;
+  // --colors-orange: #ff9500;
+  // --colors-orange-dark: #ff9f0a;
+  // --colors-yellow: #ffcc00;
+  // --colors-yellow-dark: #ffd60a;
+  // --colors-green: #34c759;
+  // --colors-green-dark: #30d158;
+  // --colors-blue: #007aff;
+  // --colors-blue-dark: #0a84ff;
+  // --colors-indigo: #5856d6;
+  // --colors-indigo-dark: #5e5ce6;
+  // --colors-purple: #af52de;
+  // --colors-purple-dark: #bf5af2;
+  --colors-red: hsla(1, 100%, 56%, 1);
+  --colors-red-dark: hsla(3, 100%, 59%, 1);
+  --colors-orange: hsla(29, 100%, 50%, 1);
+  --colors-orange-dark: hsla(30, 100%, 54%, 1);
+  --colors-yellow: hsla(48, 100%, 50%, 1);
+  --colors-yellow-dark: hsla(49, 100%, 54%, 1);
+  --colors-green: hsla(123, 59%, 45%, 1);
+  --colors-green-dark: hsla(125, 60%, 47%, 1);
+  --colors-blue: hsla(211, 100%, 50%, 1);
+  --colors-blue-dark: hsla(213, 100%, 53%, 1);
+  --colors-indigo: hsla(233, 65%, 61%, 1);
+  --colors-indigo-dark: hsla(234, 76%, 65%, 1);
+  --colors-purple: hsla(283, 61%, 59%, 1);
+  --colors-purple-dark: hsla(284, 89%, 66%, 1);
+
+  --labels-primary: #000000;
+  --labels-secondary: hsla(240, 6%, 25%, 0.6);
+  --labels-tertiary: hsla(240, 6%, 25%, 0.3);
+  --labels-quaternary: hsla(240, 6%, 25%, 0.18);
+
+  --button-gradient-primary: linear-gradient(
+      180deg,
+      hsla(0, 0%, 100%, 0.17) 0%,
+      hsla(0, 0%, 100%, 0) 100%
+    ),
+    hsla(211, 100%, 50%, 1);
+}
+
+body {
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  color: var(--labels-primary);
+  font-family: "SF Pro", "SF Pro Display", "Helvetica", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+html,
+.wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+ul,
+nav,
+p {
+  padding: 0;
+  margin: 0;
+}
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-style: normal;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  white-space: pre-line;
+}
+
+.estate-details__swiper-wrapper .slide {
+  &:first-child {
+    margin-left: 16px;
+  }
+}
+.slide {
+  position: relative;
+}
+
+.section {
+  padding: 32px 0;
+  @media (max-width: 768px) {
+    padding: 24px 0;
+  }
+  @media (max-width: 600px) {
+    padding: 16px 0;
+  }
+}
+
+@mixin large-title {
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-size: 34px;
+  font-style: normal;
+  line-height: 41px; /* 120.588% */
+  letter-spacing: -0.4px;
+}
+
+.large-title-regular {
+  @include large-title;
+  font-weight: 400;
+}
+
+.large-title-emphasized {
+  @include large-title;
+  font-weight: 700;
+}
+
+@mixin title-first {
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-size: 28px;
+  font-style: normal;
+  line-height: 34px; /* 121.429% */
+  letter-spacing: -0.4px;
+}
+
+.title-first-regular {
+  @include title-first;
+  font-weight: 400;
+}
+
+.title-first-emphasized {
+  @include title-first;
+  font-weight: 700;
+}
+
+@mixin title-second {
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-size: 22px;
+  font-style: normal;
+  line-height: 28px; /* 127.273% */
+  letter-spacing: -0.4px;
+}
+
+.title-second-regular {
+  @include title-second;
+  font-weight: 400;
+}
+
+.title-second-emphasized {
+  @include title-second;
+  font-weight: 700;
+}
+
+@mixin title-third {
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-size: 20px;
+  font-style: normal;
+  line-height: 25px; /* 125% */
+  letter-spacing: -0.4px;
+}
+
+.title-third-regular {
+  @include title-third;
+  font-weight: 400;
+}
+
+.title-third-emphasized {
+  @include title-third;
+  font-weight: 600;
+}
+
+@mixin text-body {
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-size: 17px;
+  font-style: normal;
+  line-height: 22px; /* 129.412% */
+  letter-spacing: -0.4px;
+}
+
+.text-body-regular {
+  @include text-body;
+  font-weight: 400;
+}
+
+.text-body-emphasized {
+  @include text-body;
+  font-weight: 600;
+}
+
+@mixin text-callout {
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 21px; /* 131.25% */
+  letter-spacing: -0.4px;
+}
+
+.text-callout-regular {
+  @include text-callout;
+  font-weight: 400;
+}
+
+.text-callout-emphasized {
+  @include text-callout;
+  font-weight: 600;
+}
