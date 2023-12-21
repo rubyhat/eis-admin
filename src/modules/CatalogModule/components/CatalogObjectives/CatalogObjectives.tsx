@@ -15,6 +15,16 @@ export const CatalogObjectives = () => {
       <CatalogCard />
       <CatalogCard />
       <CatalogCard />
+      <CatalogCard />
+      <CatalogCard />
+      <CatalogCard />
+      <CatalogCard />
+      <CatalogCard />
+      <CatalogCard />
+      <CatalogCard />
+      <CatalogCard />
+      <CatalogCard />
+      <CatalogCard />
     </Box>
   );
 };

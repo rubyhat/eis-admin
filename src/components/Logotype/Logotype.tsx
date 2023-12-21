@@ -16,6 +16,9 @@ export const Logotype = () => {
       <Typography color="customColors.colorsBlue" marginLeft={0.5}>
         Agency
       </Typography>
+      <Typography marginLeft={0.5} color="customColors.colorsGreen">
+        [ Admin Panel ]
+      </Typography>
     </Typography>
   );
 };

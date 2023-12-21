@@ -2,6 +2,8 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 import { CatalogObjectives } from "./components/CatalogObjectives";
 import { CatalogSortGroup } from "./components/CatalogSortGroup";
+import { FilterMobileWrapper } from "../FilterModule/components/FilterMobileWrapper";
+import { FilterModule } from "../FilterModule";
 
 export const CatalogModule = () => {
   return (
@@ -33,13 +35,22 @@ export const CatalogModule = () => {
               </Typography>
               <CatalogSortGroup />
             </Box>
-            {/* <FilterMobileWrapper /> */}
+            <FilterMobileWrapper />
           </Box>
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={8} lg={9}>
           <CatalogObjectives />
         </Grid>
-        <Grid item xs={12} md={4}></Grid>
+        <Grid
+          item
+          md={4}
+          lg={3}
+          sx={{ display: { xs: "none", md: "inherit" } }}
+        >
+          <Box>
+            <FilterModule />
+          </Box>
+        </Grid>
       </Grid>
     </Container>
   );
