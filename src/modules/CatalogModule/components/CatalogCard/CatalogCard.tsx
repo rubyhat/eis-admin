@@ -45,11 +45,18 @@ export const CatalogCard = () => {
             2-х комнатная | 45м2 | Т 16.000.000
           </Typography>
         </Box>
-        <Box display="flex" alignItems="center">
+        <Box display="flex" alignItems="center" marginLeft={1}>
           <Typography
             component="p"
             variant="textSubheadlineRegular"
             color="customColors.labelsSecondary"
+            sx={{
+              marginBottom: 0.25,
+              display: {
+                xs: "none",
+                sm: "inherit",
+              },
+            }}
           >
             Детали
           </Typography>

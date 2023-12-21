@@ -42,7 +42,7 @@ export const Header = () => {
               <React.Fragment>
                 <MenuList />
                 <CustomButton variant="contained" size="medium">
-                  Добавить объект
+                  + Добавить объект
                 </CustomButton>
               </React.Fragment>
             )}

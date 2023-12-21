@@ -70,7 +70,7 @@ export const DrawerMenu = ({
             fullWidth
             sx={{ marginTop: 2 }}
           >
-            Позвоните нам
+            + Добавить объект
           </CustomButton>
         </Box>
       </Box>
