@@ -7,6 +7,7 @@ import { CustomButton } from "../../../../components/CustomButton";
 import { MenuList } from "../MenuList";
 import { useHeaderStore } from "../../store/useHeaderStore";
 import { useScreenSize } from "../../../../hooks/useScreenSize";
+import { useNavigate } from "react-router-dom";
 
 interface DrawerMenuProps {
   onClick: () => void;
@@ -15,6 +16,7 @@ interface DrawerMenuProps {
 export const DrawerMenu = ({
   onClick: handleBurgerIconClick,
 }: DrawerMenuProps) => {
+  const navigate = useNavigate();
   const { isMobile } = useScreenSize();
   const { isHeaderBurgerOpen, setIsHeaderBurgerOpen } = useHeaderStore(
     (state) => state,
@@ -69,6 +71,7 @@ export const DrawerMenu = ({
             size="large"
             fullWidth
             sx={{ marginTop: 2 }}
+            onClick={() => navigate("/catalog/create")}
           >
             + Добавить объект
           </CustomButton>

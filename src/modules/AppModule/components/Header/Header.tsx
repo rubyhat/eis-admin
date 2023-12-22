@@ -11,8 +11,10 @@ import { useHeaderStore } from "../../store/useHeaderStore";
 import { CustomButton } from "../../../../components/CustomButton";
 import { DrawerMenu } from "../DrawerMenu";
 import { useScreenSize } from "../../../../hooks/useScreenSize";
+import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
+  const navigate = useNavigate();
   const { isTablet, isMobile } = useScreenSize();
 
   const { setIsHeaderBurgerOpen } = useHeaderStore((state) => state);
@@ -41,7 +43,11 @@ export const Header = () => {
             ) : (
               <React.Fragment>
                 <MenuList />
-                <CustomButton variant="contained" size="medium">
+                <CustomButton
+                  variant="contained"
+                  size="medium"
+                  onClick={() => navigate("/catalog/create")}
+                >
                   + Добавить объект
                 </CustomButton>
               </React.Fragment>
