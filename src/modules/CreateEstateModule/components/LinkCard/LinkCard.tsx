@@ -1,9 +1,17 @@
 import { Box, Typography } from "@mui/material";
 import { IoIosArrowForward } from "react-icons/io";
 
-export const LinkCard = () => {
+interface LinkCardProps {
+  title: string;
+  subtitle: string;
+  onClick?: () => void;
+}
+
+export const LinkCard = (props: LinkCardProps) => {
+  const { title, subtitle, onClick } = props;
   return (
     <Box
+      onClick={onClick && onClick}
       sx={{
         display: "flex",
         justifyContent: "space-between",
@@ -21,14 +29,14 @@ export const LinkCard = () => {
     >
       <Box>
         <Typography component="p" variant="textBodyRegular">
-          Продать
+          {title}
         </Typography>
         <Typography
           component="p"
           variant="textCalloutRegular"
           color="customColors.labelsSecondary"
         >
-          Продажа недвижимости
+          {subtitle}
         </Typography>
       </Box>
       <Box sx={{ display: "flex" }}>

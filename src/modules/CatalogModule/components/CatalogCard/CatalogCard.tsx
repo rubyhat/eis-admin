@@ -27,7 +27,7 @@ export const CatalogCard = () => {
           padding: 2,
         }}
         component={Link}
-        to="#"
+        to="/catalog/123"
       >
         <Box>
           <Typography
