@@ -2,15 +2,17 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 import { LinkCard } from "../LinkCard";
 import { CustomButton } from "../../../../components/CustomButton";
+import { StepData } from "../../store";
 
 interface ListLinkStepProps {
   title: string;
+  data: StepData[];
   onSubmit: () => void;
   onCancel: () => void;
 }
 
 export const ListLinkStep = (props: ListLinkStepProps) => {
-  const { title, onSubmit, onCancel } = props;
+  const { title, data, onSubmit, onCancel } = props;
   return (
     <Box width={1}>
       <Typography
@@ -21,7 +23,19 @@ export const ListLinkStep = (props: ListLinkStepProps) => {
         {title}
       </Typography>
       <Box sx={{ padding: "32px 0" }}>
-        <LinkCard title="Продать" subtitle="Продажа недвижимости" />
+        {data.map(({ id, title, subtitle }) => (
+          <Box
+            key={id}
+            sx={{
+              marginBottom: 2,
+              "&:last-child": {
+                marginBottom: 0,
+              },
+            }}
+          >
+            <LinkCard id={id} title={title} subtitle={subtitle} />
+          </Box>
+        ))}
       </Box>
       <Box
         sx={{

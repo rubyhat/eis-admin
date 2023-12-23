@@ -1,7 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import { IoIosArrowForward } from "react-icons/io";
+import { CategoryType, ServiceType } from "../../../CatalogModule/store";
 
 interface LinkCardProps {
+  id: ServiceType | CategoryType; // todo: set selected type in store
   title: string;
   subtitle: string;
   onClick?: () => void;

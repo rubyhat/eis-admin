@@ -7,7 +7,7 @@ export type CategoryType =
   | "apartment"
   | "house"
   | "land"
-  | "commercial"
+  | "cottage"
   | "business"
   | "factory"
   | "other"; // Категория: квартира, дом, земельный участок, коммерческая недвижимость, бизнес, завод, другое
