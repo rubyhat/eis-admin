@@ -3,6 +3,7 @@ import { tempObjectData } from "./tempObjectData";
 
 export type ActiveSortType = "new" | "cheap" | "rich";
 
+//todo: transport types and  interfaces to shared types directory
 export type CategoryType =
   | "apartment"
   | "house"

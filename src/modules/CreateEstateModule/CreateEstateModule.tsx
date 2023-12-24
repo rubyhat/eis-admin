@@ -2,6 +2,7 @@ import { Box, Container, Grid } from "@mui/material";
 import React from "react";
 import { ListLinkStep } from "./components/ListLinkStep";
 import { useCreateEstateStore } from "./store";
+import { EstateFormModule } from "../EstateFormModule";
 
 export const CreateEstateModule = () => {
   const { step, setStep, listLinkSteps } = useCreateEstateStore(
@@ -9,10 +10,13 @@ export const CreateEstateModule = () => {
   );
   const handleListStepSubmit = () => setStep(step + 1);
   const handleListStepCancel = () => setStep(step - 1);
+
+  if (step === 3) return <EstateFormModule />;
+
   return (
-    <Container sx={{ height: 1 }}>
-      <Grid container spacing={2} sx={{ height: 1 }}>
-        <Grid item xs={12} sx={{ height: 1 }}>
+    <Container>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
           <Box
             sx={{
               width: 1,
