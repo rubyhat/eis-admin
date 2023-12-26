@@ -27,7 +27,7 @@ export const DetailsList = () => {
         title="59.6 м², Площадь кухни — 16.6 м²"
         label="Площадь, м²"
       />
-      <DetailsListItem title="Хорошее" label="Состояние" />
+      <DetailsListItem title="Евроремонт" label="Состояние" />
       <DetailsListItem
         label="Видео обзор"
         videoLink="https://www.instagram.com/reel/C0yxbgDt63W/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA=="

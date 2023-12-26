@@ -14,7 +14,7 @@ export type CategoryType =
   | "other"; // Категория: квартира, дом, земельный участок, коммерческая недвижимость, бизнес, завод, другое
 export type ServiceType = "sell" | "rent"; // Продажа или аренда
 export type VisibilityStatusType = "active" | "sold" | "canceled" | "checking"; // Активен, Продан, Отменен, На проверке, на клиенте показываем только Активные
-export type HouseConditionType = "perfect" | "good" | "bad" | "free" | "build"; // Хорошее, среднее, требует ремонта, свободная планировка, черновая отделка
+export type HouseConditionType = "perfect" | "good" | "bad" | "free" | "build"; // Хорошее, среднее, требует ремонта, свободная планировка, черновая отделка / евроремонт - косметический ремонт - без ремонта - предчистовая
 export type HouseType = "part" | "full" | "cottage"; // Часть дома, Целый дом, Дача
 export type FurnitureType = "part" | "full" | "none"; // Мебелирован: частично, полностью, без мебели
 export type ElectricType = "part" | "full" | "none"; // Электричество: частично, есть, нет

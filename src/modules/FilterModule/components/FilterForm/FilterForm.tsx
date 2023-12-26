@@ -277,12 +277,12 @@ export const FilterForm = () => {
                     variant="textCalloutRegular"
                     color="customColors.labelsSecondary"
                   >
-                    Например: Хорошее
+                    Например: Евроремонт
                   </Typography>
                 </MenuItem>
-                <MenuItem value="perfect">Хорошее</MenuItem>
-                <MenuItem value="good">Среднее</MenuItem>
-                <MenuItem value="bad">Требует ремонта</MenuItem>
+                <MenuItem value="perfect">Евроремонт</MenuItem>
+                <MenuItem value="good">Косметический ремонт</MenuItem>
+                <MenuItem value="bad">Без ремонта</MenuItem>
                 <MenuItem value="free">Свободная планировка</MenuItem>
                 <MenuItem value="build">Черновая отделка</MenuItem>
               </Select>
