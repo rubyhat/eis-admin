@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 const ProtectedRoute = React.lazy(() => import("./ProtectedRoute"));
 const Home = React.lazy(() => import("../pages/Home"));
+const Login = React.lazy(() => import("../pages/Login"));
 const Catalog = React.lazy(() => import("../pages/Catalog"));
 const CreateEstate = React.lazy(() => import("../pages/CreateEstate"));
 const EstateDetails = React.lazy(() => import("../pages/EstateDetails"));
@@ -19,6 +20,8 @@ export const RouteList = () => {
       <Route path="/catalog" element={<Catalog />} />
       <Route path="/catalog/:id" element={<EstateDetails />} />
       <Route path="/catalog/create" element={<CreateEstate />} />
+
+      <Route path="/login" element={<Login />} />
 
       <Route
         path="/access-denied"
