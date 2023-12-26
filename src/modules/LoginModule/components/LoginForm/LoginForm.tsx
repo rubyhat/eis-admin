@@ -3,9 +3,11 @@ import React from "react";
 import { CustomInput } from "../../../../components/CustomInput";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { CustomButton } from "../../../../components/CustomButton";
+import { useLoginStore } from "../../store";
 
 export const LoginForm = () => {
   const [isLoading, setIsLoading] = React.useState(false);
+  const { setIsAuth } = useLoginStore((state) => state);
 
   const {
     register,
@@ -21,6 +23,7 @@ export const LoginForm = () => {
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
     setIsLoading(false);
+    setIsAuth(true); // todo: create request
   };
 
   return (
