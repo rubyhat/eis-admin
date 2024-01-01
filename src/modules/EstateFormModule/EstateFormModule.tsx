@@ -96,19 +96,7 @@ export const EstateFormModule = () => {
                   <Select
                     {...field}
                     displayEmpty
-                    sx={{
-                      height: "36px",
-                      width: "100%",
-                      fontSize: "15px",
-                      "&:hover": {
-                        "& fieldset": {
-                          borderColor: "hsla(213, 100%, 53%, 1) !important",
-                        },
-                      },
-                      "& fieldset": {
-                        borderColor: "customColors.labelsQuaternary",
-                      },
-                    }}
+                    sx={selectStyles}
                     inputProps={{ sx: selectInputProps }}
                   >
                     <MenuItem disabled value="">
@@ -170,19 +158,7 @@ export const EstateFormModule = () => {
                 render={({ field }) => (
                   <Select
                     {...field}
-                    sx={{
-                      height: "36px",
-                      width: "100%",
-                      fontSize: "15px",
-                      "&:hover": {
-                        "& fieldset": {
-                          borderColor: "hsla(213, 100%, 53%, 1) !important",
-                        },
-                      },
-                      "& fieldset": {
-                        borderColor: "customColors.labelsQuaternary",
-                      },
-                    }}
+                    sx={selectStyles}
                     inputProps={{ sx: selectInputProps }}
                   >
                     <MenuItem value="checking">На проверке</MenuItem>
@@ -209,19 +185,7 @@ export const EstateFormModule = () => {
                   <Select
                     {...field}
                     displayEmpty
-                    sx={{
-                      height: "36px",
-                      width: "100%",
-                      fontSize: "15px",
-                      "&:hover": {
-                        "& fieldset": {
-                          borderColor: "hsla(213, 100%, 53%, 1) !important",
-                        },
-                      },
-                      "& fieldset": {
-                        borderColor: "customColors.labelsQuaternary",
-                      },
-                    }}
+                    sx={selectStyles}
                     inputProps={{ sx: selectInputProps }}
                   >
                     <MenuItem value="roze">Артур Розе</MenuItem>
@@ -247,19 +211,7 @@ export const EstateFormModule = () => {
                   <Select
                     {...field}
                     displayEmpty
-                    sx={{
-                      height: "36px",
-                      width: "100%",
-                      fontSize: "15px",
-                      "&:hover": {
-                        "& fieldset": {
-                          borderColor: "hsla(213, 100%, 53%, 1) !important",
-                        },
-                      },
-                      "& fieldset": {
-                        borderColor: "customColors.labelsQuaternary",
-                      },
-                    }}
+                    sx={selectStyles}
                     inputProps={{ sx: selectInputProps }}
                   >
                     <MenuItem disabled value="">
@@ -463,19 +415,7 @@ export const EstateFormModule = () => {
                       <Select
                         {...field}
                         displayEmpty
-                        sx={{
-                          height: "36px",
-                          width: "100%",
-                          fontSize: "15px",
-                          "&:hover": {
-                            "& fieldset": {
-                              borderColor: "hsla(213, 100%, 53%, 1) !important",
-                            },
-                          },
-                          "& fieldset": {
-                            borderColor: "customColors.labelsQuaternary",
-                          },
-                        }}
+                        sx={selectStyles}
                         inputProps={{ sx: selectInputProps }}
                       >
                         <MenuItem disabled value="">
@@ -511,19 +451,7 @@ export const EstateFormModule = () => {
                       <Select
                         {...field}
                         displayEmpty
-                        sx={{
-                          height: "36px",
-                          width: "100%",
-                          fontSize: "15px",
-                          "&:hover": {
-                            "& fieldset": {
-                              borderColor: "hsla(213, 100%, 53%, 1) !important",
-                            },
-                          },
-                          "& fieldset": {
-                            borderColor: "customColors.labelsQuaternary",
-                          },
-                        }}
+                        sx={selectStyles}
                         inputProps={{ sx: selectInputProps }}
                       >
                         <MenuItem disabled value="">
@@ -568,19 +496,7 @@ export const EstateFormModule = () => {
                       <Select
                         {...field}
                         displayEmpty
-                        sx={{
-                          height: "36px",
-                          width: "100%",
-                          fontSize: "15px",
-                          "&:hover": {
-                            "& fieldset": {
-                              borderColor: "hsla(213, 100%, 53%, 1) !important",
-                            },
-                          },
-                          "& fieldset": {
-                            borderColor: "customColors.labelsQuaternary",
-                          },
-                        }}
+                        sx={selectStyles}
                         inputProps={{ sx: selectInputProps }}
                       >
                         <MenuItem disabled value="">
@@ -620,19 +536,7 @@ export const EstateFormModule = () => {
                       <Select
                         {...field}
                         displayEmpty
-                        sx={{
-                          height: "36px",
-                          width: "100%",
-                          fontSize: "15px",
-                          "&:hover": {
-                            "& fieldset": {
-                              borderColor: "hsla(213, 100%, 53%, 1) !important",
-                            },
-                          },
-                          "& fieldset": {
-                            borderColor: "customColors.labelsQuaternary",
-                          },
-                        }}
+                        sx={selectStyles}
                         inputProps={{ sx: selectInputProps }}
                       >
                         <MenuItem disabled value="">
@@ -666,19 +570,7 @@ export const EstateFormModule = () => {
                       <Select
                         {...field}
                         displayEmpty
-                        sx={{
-                          height: "36px",
-                          width: "100%",
-                          fontSize: "15px",
-                          "&:hover": {
-                            "& fieldset": {
-                              borderColor: "hsla(213, 100%, 53%, 1) !important",
-                            },
-                          },
-                          "& fieldset": {
-                            borderColor: "customColors.labelsQuaternary",
-                          },
-                        }}
+                        sx={selectStyles}
                         inputProps={{ sx: selectInputProps }}
                       >
                         <MenuItem disabled value="">
