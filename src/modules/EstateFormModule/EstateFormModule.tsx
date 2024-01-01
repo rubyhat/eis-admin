@@ -27,6 +27,20 @@ const selectInputProps = {
   fontSize: 16,
 };
 
+const selectStyles = {
+  height: "36px",
+  width: "100%",
+  fontSize: "15px",
+  "&:hover": {
+    "& fieldset": {
+      borderColor: "hsla(213, 100%, 53%, 1) !important",
+    },
+  },
+  "& fieldset": {
+    borderColor: "customColors.labelsQuaternary",
+  },
+};
+
 export const EstateFormModule = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const { formFieldsData, setFormFieldsData } = useCreateEstateStore(
@@ -127,22 +141,15 @@ export const EstateFormModule = () => {
                 render={({ field }) => (
                   <Select
                     {...field}
-                    sx={{
-                      height: "36px",
-                      width: "100%",
-                      fontSize: "15px",
-                      "& fieldset": {
-                        borderColor: "customColors.labelsQuaternary",
-                      },
-                    }}
+                    sx={selectStyles}
                     inputProps={{ sx: selectInputProps }}
                   >
                     <MenuItem value="apartment">Квартира</MenuItem>
-                    <MenuItem value="house">Дома</MenuItem>
-                    <MenuItem value="cottage">Дачи</MenuItem>
+                    <MenuItem value="house">Дом</MenuItem>
+                    <MenuItem value="cottage">Дача</MenuItem>
                     <MenuItem value="land">Земельный участок</MenuItem>
                     <MenuItem value="business">Бизнес</MenuItem>
-                    <MenuItem value="factory">Заводы и фабрики</MenuItem>
+                    <MenuItem value="factory">Завод или фабрика</MenuItem>
                     <MenuItem value="other">Другое</MenuItem>
                   </Select>
                 )}
@@ -815,12 +822,321 @@ export const EstateFormModule = () => {
                     placeholder="Например: 2"
                   />
                 </Box>
+                {formFieldsData.category === "apartment" && (
+                  <>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1.5,
+                        marginBottom: 1.5,
+                      }}
+                    >
+                      <Box>
+                        <Typography
+                          component="p"
+                          color="customColors.labelsSecondary"
+                          variant="textCalloutRegular"
+                          marginBottom={0.5}
+                        >
+                          Этаж
+                        </Typography>
+                        <CustomInput
+                          id="targetFloor"
+                          register={register}
+                          errors={errors}
+                          disabled={isLoading}
+                          formatPrice={false}
+                          placeholder="Например: 2"
+                        />
+                      </Box>
+                      <Typography
+                        component="p"
+                        color="customColors.labelsSecondary"
+                        variant="textCalloutRegular"
+                        marginTop={3}
+                      >
+                        /
+                      </Typography>
+                      <Box>
+                        <Typography
+                          component="p"
+                          color="customColors.labelsSecondary"
+                          variant="textCalloutRegular"
+                          marginBottom={0.5}
+                        >
+                          Всего
+                        </Typography>
+                        <CustomInput
+                          id="totalFloor"
+                          register={register}
+                          errors={errors}
+                          disabled={isLoading}
+                          formatPrice={false}
+                          placeholder="Например: 5"
+                        />
+                      </Box>
+                    </Box>
+                  </>
+                )}
+                {formFieldsData.category === "house" && (
+                  <>
+                    <Box marginBottom={1.5}>
+                      <Typography
+                        component="p"
+                        color="customColors.labelsSecondary"
+                        variant="textCalloutRegular"
+                        marginBottom={0.5}
+                      >
+                        Тип дома
+                      </Typography>
+                      <Controller
+                        name="houseType"
+                        control={control}
+                        render={({ field }) => (
+                          <Select
+                            {...field}
+                            displayEmpty
+                            sx={selectStyles}
+                            inputProps={{ sx: selectInputProps }}
+                          >
+                            <MenuItem disabled value="">
+                              <Typography
+                                variant="textCalloutRegular"
+                                color="customColors.labelsSecondary"
+                              >
+                                Например: Часть дома
+                              </Typography>
+                            </MenuItem>
+                            <MenuItem value="part">Часть дома</MenuItem>
+                            <MenuItem value="full">Целый дом</MenuItem>
+                            <MenuItem value="other">Другое</MenuItem>
+                          </Select>
+                        )}
+                      />
+                    </Box>
+                    <Box marginBottom={1.5}>
+                      <Typography
+                        component="p"
+                        color="customColors.labelsSecondary"
+                        variant="textCalloutRegular"
+                        marginBottom={0.5}
+                      >
+                        Электричество
+                      </Typography>
+                      <Controller
+                        name="electricType"
+                        control={control}
+                        render={({ field }) => (
+                          <Select
+                            {...field}
+                            displayEmpty
+                            sx={selectStyles}
+                            inputProps={{ sx: selectInputProps }}
+                          >
+                            <MenuItem disabled value="">
+                              <Typography
+                                variant="textCalloutRegular"
+                                color="customColors.labelsSecondary"
+                              >
+                                Например: Чаcтично
+                              </Typography>
+                            </MenuItem>
+                            <MenuItem value="part">Частично</MenuItem>
+                            <MenuItem value="full">Есть</MenuItem>
+                            <MenuItem value="none">Нет</MenuItem>
+                          </Select>
+                        )}
+                      />
+                    </Box>
+                    <Box marginBottom={1.5}>
+                      <Typography
+                        component="p"
+                        color="customColors.labelsSecondary"
+                        variant="textCalloutRegular"
+                        marginBottom={0.5}
+                      >
+                        Отопление
+                      </Typography>
+                      <Controller
+                        name="heatingType"
+                        control={control}
+                        render={({ field }) => (
+                          <Select
+                            {...field}
+                            displayEmpty
+                            sx={selectStyles}
+                            inputProps={{ sx: selectInputProps }}
+                          >
+                            <MenuItem disabled value="">
+                              <Typography
+                                variant="textCalloutRegular"
+                                color="customColors.labelsSecondary"
+                              >
+                                Например: Центральное
+                              </Typography>
+                            </MenuItem>
+                            <MenuItem value="central">Центральное</MenuItem>
+                            <MenuItem value="gas">Газовое</MenuItem>
+                            <MenuItem value="solid">Твердое топливо</MenuItem>
+                            <MenuItem value="liquid">Жидкое топливо</MenuItem>
+                            <MenuItem value="none">Нет</MenuItem>
+                          </Select>
+                        )}
+                      />
+                    </Box>
+                    <Box marginBottom={1.5}>
+                      <Typography
+                        component="p"
+                        color="customColors.labelsSecondary"
+                        variant="textCalloutRegular"
+                        marginBottom={0.5}
+                      >
+                        Газ
+                      </Typography>
+                      <Controller
+                        name="gasType"
+                        control={control}
+                        render={({ field }) => (
+                          <Select
+                            {...field}
+                            displayEmpty
+                            sx={selectStyles}
+                            inputProps={{ sx: selectInputProps }}
+                          >
+                            <MenuItem disabled value="">
+                              <Typography
+                                variant="textCalloutRegular"
+                                color="customColors.labelsSecondary"
+                              >
+                                Например: Центральное
+                              </Typography>
+                            </MenuItem>
+                            <MenuItem value="central">Центральное</MenuItem>
+                            <MenuItem value="auto">Автономное</MenuItem>
+                            <MenuItem value="canConnect">
+                              Можно подключить
+                            </MenuItem>
+                            <MenuItem value="none">Нет</MenuItem>
+                          </Select>
+                        )}
+                      />
+                    </Box>
+                    <Box marginBottom={1.5}>
+                      <Typography
+                        component="p"
+                        color="customColors.labelsSecondary"
+                        variant="textCalloutRegular"
+                        marginBottom={0.5}
+                      >
+                        Канализация
+                      </Typography>
+                      <Controller
+                        name="sewerType"
+                        control={control}
+                        render={({ field }) => (
+                          <Select
+                            {...field}
+                            displayEmpty
+                            sx={selectStyles}
+                            inputProps={{ sx: selectInputProps }}
+                          >
+                            <MenuItem disabled value="">
+                              <Typography
+                                variant="textCalloutRegular"
+                                color="customColors.labelsSecondary"
+                              >
+                                Например: Центральная
+                              </Typography>
+                            </MenuItem>
+                            <MenuItem value="central">Центральная</MenuItem>
+                            <MenuItem value="septik">Септик</MenuItem>
+                            <MenuItem value="canConnect">
+                              Можно подключить
+                            </MenuItem>
+                            <MenuItem value="none">Нет</MenuItem>
+                          </Select>
+                        )}
+                      />
+                    </Box>
+                    <Box marginBottom={1.5}>
+                      <Typography
+                        component="p"
+                        color="customColors.labelsSecondary"
+                        variant="textCalloutRegular"
+                        marginBottom={0.5}
+                      >
+                        Туалет
+                      </Typography>
+                      <Controller
+                        name="toiletType"
+                        control={control}
+                        render={({ field }) => (
+                          <Select
+                            {...field}
+                            displayEmpty
+                            sx={selectStyles}
+                            inputProps={{ sx: selectInputProps }}
+                          >
+                            <MenuItem disabled value="">
+                              <Typography
+                                variant="textCalloutRegular"
+                                color="customColors.labelsSecondary"
+                              >
+                                Например: Внутри
+                              </Typography>
+                            </MenuItem>
+                            <MenuItem value="in">Внутри</MenuItem>
+                            <MenuItem value="out">Снаружи</MenuItem>
+                            <MenuItem value="none">Нет</MenuItem>
+                          </Select>
+                        )}
+                      />
+                    </Box>
+                    <Box marginBottom={1.5}>
+                      <Typography
+                        component="p"
+                        color="customColors.labelsSecondary"
+                        variant="textCalloutRegular"
+                        marginBottom={0.5}
+                      >
+                        Канализация
+                      </Typography>
+                      <Controller
+                        name="waterType"
+                        control={control}
+                        render={({ field }) => (
+                          <Select
+                            {...field}
+                            displayEmpty
+                            sx={selectStyles}
+                            inputProps={{ sx: selectInputProps }}
+                          >
+                            <MenuItem disabled value="">
+                              <Typography
+                                variant="textCalloutRegular"
+                                color="customColors.labelsSecondary"
+                              >
+                                Например: Центральная
+                              </Typography>
+                            </MenuItem>
+                            <MenuItem value="central">Центральная</MenuItem>
+                            <MenuItem value="borehole">Скважина</MenuItem>
+                            <MenuItem value="canConnect">
+                              Можно подключить
+                            </MenuItem>
+                            <MenuItem value="none">Нет</MenuItem>
+                          </Select>
+                        )}
+                      />
+                    </Box>
+                  </>
+                )}
               </>
             )}
-            <CustomButton type="submit">Добавить</CustomButton>
           </Grid>
           <Grid item xs={12} md={6}>
-            photo
+            <CustomButton type="submit">Добавить</CustomButton>
           </Grid>
         </Grid>
       </Box>
