@@ -62,7 +62,6 @@ export const EstateFormModule = () => {
     setFormFieldsData(data as FormFieldsData);
 
     console.log(data);
-    console.log(setFormFieldsData);
 
     // estateAgent: {
     //   id: 1,
@@ -131,6 +130,14 @@ export const EstateFormModule = () => {
                     {...field}
                     sx={selectStyles}
                     inputProps={{ sx: selectInputProps }}
+                    onChange={(e) => {
+                      field.onChange(e); // вызов обработчика из react-hooks-form
+
+                      setFormFieldsData({
+                        ...formFieldsData,
+                        category: e.target.value,
+                      });
+                    }}
                   >
                     <MenuItem value="apartment">Квартира</MenuItem>
                     <MenuItem value="house">Дом</MenuItem>
