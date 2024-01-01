@@ -9,18 +9,14 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import {
-  useForm,
-  FieldValues,
-  SubmitHandler,
-  Controller,
-} from "react-hook-form";
+import { FieldValues, SubmitHandler, Controller } from "react-hook-form";
 import { CustomButton } from "../../components/CustomButton";
 import { CustomInput } from "../../components/CustomInput";
 import {
   FormFieldsData,
   useCreateEstateStore,
 } from "../CreateEstateModule/store";
+import { useFormFields } from "./hooks/useFormFields";
 
 const selectInputProps = {
   padding: 1,
@@ -46,20 +42,12 @@ export const EstateFormModule = () => {
   const { formFieldsData, setFormFieldsData } = useCreateEstateStore(
     (state) => state,
   );
-  const {
-    control,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FieldValues>({
-    defaultValues: {
-      ...formFieldsData,
-    },
-  });
+  const { control, register, handleSubmit, errors, updateFormFields } =
+    useFormFields();
 
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(false);
-    setFormFieldsData(data as FormFieldsData);
+    updateFormFields(data as FormFieldsData);
 
     console.log(data);
 
