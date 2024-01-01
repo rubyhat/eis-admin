@@ -9,7 +9,6 @@ import {
 import React from "react";
 import { FieldValues, SubmitHandler, Controller } from "react-hook-form";
 import { CustomButton } from "../../components/CustomButton";
-import { CustomInput } from "../../components/CustomInput";
 import {
   FormFieldsData,
   useCreateEstateStore,
@@ -18,12 +17,12 @@ import { useFormFields } from "./hooks/useFormFields";
 import { BasicFormFields } from "./components/BasicFormFields";
 import { selectInputProps, selectStyles } from "./assets/styles";
 import { HomeFormFields } from "./components/HomeFormFields";
+import { ApartmentFormFields } from "./components/ApartmentFormFields";
 
 export const EstateFormModule = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const { formFieldsData } = useCreateEstateStore((state) => state);
-  const { control, register, handleSubmit, errors, updateFormFields } =
-    useFormFields();
+  const { control, handleSubmit, updateFormFields } = useFormFields();
 
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(false);
@@ -55,61 +54,7 @@ export const EstateFormModule = () => {
               <>
                 <HomeFormFields isLoading={isLoading} />
                 {formFieldsData.category === "apartment" && (
-                  <>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 1.5,
-                        marginBottom: 1.5,
-                      }}
-                    >
-                      <Box>
-                        <Typography
-                          component="p"
-                          color="customColors.labelsSecondary"
-                          variant="textCalloutRegular"
-                          marginBottom={0.5}
-                        >
-                          Этаж
-                        </Typography>
-                        <CustomInput
-                          id="targetFloor"
-                          register={register}
-                          errors={errors}
-                          disabled={isLoading}
-                          formatPrice={false}
-                          placeholder="Например: 2"
-                        />
-                      </Box>
-                      <Typography
-                        component="p"
-                        color="customColors.labelsSecondary"
-                        variant="textCalloutRegular"
-                        marginTop={3}
-                      >
-                        /
-                      </Typography>
-                      <Box>
-                        <Typography
-                          component="p"
-                          color="customColors.labelsSecondary"
-                          variant="textCalloutRegular"
-                          marginBottom={0.5}
-                        >
-                          Всего
-                        </Typography>
-                        <CustomInput
-                          id="totalFloor"
-                          register={register}
-                          errors={errors}
-                          disabled={isLoading}
-                          formatPrice={false}
-                          placeholder="Например: 5"
-                        />
-                      </Box>
-                    </Box>
-                  </>
+                  <ApartmentFormFields isLoading={isLoading} />
                 )}
                 {formFieldsData.category === "house" && (
                   <>
