@@ -7,7 +7,7 @@ import { StepData } from "../../store";
 interface ListLinkStepProps {
   title: string;
   data: StepData[];
-  onSubmit: () => void;
+  onSubmit: (v: string) => void;
   onCancel: () => void;
 }
 
@@ -59,7 +59,7 @@ export const ListLinkStep = (props: ListLinkStepProps) => {
         >
           Назад
         </CustomButton>
-        <CustomButton onClick={onSubmit}>Дальше</CustomButton>
+        <CustomButton onClick={() => onSubmit(selected)}>Дальше</CustomButton>
       </Box>
     </Box>
   );

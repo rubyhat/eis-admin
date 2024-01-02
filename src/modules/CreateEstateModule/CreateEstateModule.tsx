@@ -3,12 +3,21 @@ import React from "react";
 import { ListLinkStep } from "./components/ListLinkStep";
 import { useCreateEstateStore } from "./store";
 import { EstateFormModule } from "../EstateFormModule";
+import { CategoryType, ServiceType } from "../CatalogModule/store";
 
 export const CreateEstateModule = () => {
-  const { step, setStep, listLinkSteps } = useCreateEstateStore(
-    (state) => state,
-  );
-  const handleListStepSubmit = () => setStep(step + 1);
+  const { step, listLinkSteps, formFieldsData, setStep, setFormFieldsData } =
+    useCreateEstateStore((state) => state);
+
+  const handleCategoryListStepSubmit = (v: string) => {
+    setStep(step + 1);
+    setFormFieldsData({ ...formFieldsData, category: v as CategoryType }); // todo: stop using as [type]
+  };
+
+  const handleServiceListStepSubmit = (v: string) => {
+    setStep(step + 1);
+    setFormFieldsData({ ...formFieldsData, type: v as ServiceType }); // todo: stop using as [type]
+  };
   const handleListStepCancel = () => setStep(step - 1);
 
   if (step === 3) return <EstateFormModule />;
@@ -29,7 +38,7 @@ export const CreateEstateModule = () => {
             <Box sx={{ width: 1, maxWidth: "470px" }}>
               {step === 1 && (
                 <ListLinkStep
-                  onSubmit={handleListStepSubmit}
+                  onSubmit={handleServiceListStepSubmit}
                   onCancel={handleListStepCancel}
                   title="Выберите целевое назначение"
                   data={listLinkSteps.service}
@@ -37,7 +46,7 @@ export const CreateEstateModule = () => {
               )}
               {step === 2 && (
                 <ListLinkStep
-                  onSubmit={handleListStepSubmit}
+                  onSubmit={handleCategoryListStepSubmit}
                   onCancel={handleListStepCancel}
                   title="Выберите тип объекта недвижимости"
                   data={listLinkSteps.category}
