@@ -13,6 +13,8 @@ interface ListLinkStepProps {
 
 export const ListLinkStep = (props: ListLinkStepProps) => {
   const { title, data, onSubmit, onCancel } = props;
+  const [selected, setSelected] = React.useState(data[0].id);
+
   return (
     <Box width={1}>
       <Typography
@@ -33,7 +35,13 @@ export const ListLinkStep = (props: ListLinkStepProps) => {
               },
             }}
           >
-            <LinkCard id={id} title={title} subtitle={subtitle} />
+            <LinkCard
+              id={id}
+              title={title}
+              subtitle={subtitle}
+              selected={selected}
+              onClick={() => setSelected(id)}
+            />
           </Box>
         ))}
       </Box>

@@ -36,7 +36,9 @@ export const EstateFormModule = () => {
       <Box component="form" onSubmit={handleSubmit(handleFormSubmit)}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography>Добавить новый объект недвижимости</Typography>
+            <Typography component="h1" variant="titleFirstRegular">
+              Добавить новый объект недвижимости
+            </Typography>
           </Grid>
           <Grid item xs={12} md={3}>
             <BasicFormFields isLoading={isLoading} />
