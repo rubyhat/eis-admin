@@ -3,6 +3,9 @@ import { Box, IconButton, Typography } from "@mui/material";
 import { IoImagesOutline } from "react-icons/io5";
 import { AiOutlineDelete } from "react-icons/ai";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/scss";
+
 interface ImagesFormFieldProps {
   onImagesUpload: (files: FileList) => void;
 }
@@ -92,28 +95,38 @@ export const ImagesFormField = ({ onImagesUpload }: ImagesFormFieldProps) => {
             Выбрано фотографий: {selectedImages.length}
           </Typography>
           <Box>
-            {selectedImages.map((image) => (
-              <Box key={image} sx={{ position: "relative" }}>
-                <IconButton
-                  onClick={() => handleClickDeleteButton(image)}
-                  sx={{
-                    position: "absolute",
-                    right: 8,
-                    top: 8,
-                    backgroundColor: "rgba(255,255,255, 0.5)",
-                  }}
-                  color="error"
-                >
-                  <AiOutlineDelete size={20} />
-                </IconButton>
-                <Box
-                  sx={{ width: 1 }}
-                  component="img"
-                  src={image}
-                  alt={image}
-                />
-              </Box>
-            ))}
+            <Swiper slidesPerView={1.05} spaceBetween={8} speed={666}>
+              {selectedImages.map((image, index) => (
+                <SwiperSlide key={index} className="slide">
+                  <Box sx={{ position: "relative" }}>
+                    <IconButton
+                      onClick={() => handleClickDeleteButton(image)}
+                      sx={{
+                        position: "absolute",
+                        right: 8,
+                        top: 8,
+                        backgroundColor: "rgba(255,255,255, 0.5)",
+                      }}
+                      color="error"
+                    >
+                      <AiOutlineDelete size={20} />
+                    </IconButton>
+                    <Box
+                      sx={{
+                        borderRadius: 3,
+                        width: 1, // занимает 100% ширины контейнера
+                        height: "auto", // автоматическая высота для сохранения пропорций
+                        maxWidth: "100%", // максимальная ширина ограничена шириной контейнера
+                        objectFit: "contain", // сохраняет пропорции изображения
+                      }}
+                      component="img"
+                      src={image}
+                      alt={image}
+                    />
+                  </Box>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </Box>
         </Box>
       )}
