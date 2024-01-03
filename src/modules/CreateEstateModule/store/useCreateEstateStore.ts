@@ -78,7 +78,7 @@ export interface FormFieldsData {
   price: number;
   discount: number;
   description: string;
-  images: string[];
+  images: FileList | [];
   videoLink: string;
   estateAgent: string; // todo: transform to EstateAgentInfo interface
   city: string;
@@ -117,7 +117,7 @@ export interface CreateEstate {
 }
 
 export const useCreateEstateStore = create<CreateEstate>((set) => ({
-  step: 1,
+  step: 3,
   setStep: (v) => set({ step: v }),
   listLinkSteps: listLinkStepsData,
   formFieldsData: formFieldsDataInitial,

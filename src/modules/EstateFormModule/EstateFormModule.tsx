@@ -11,6 +11,7 @@ import { BasicFormFields } from "./components/BasicFormFields";
 import { HomeFormFields } from "./components/HomeFormFields";
 import { ApartmentFormFields } from "./components/ApartmentFormFields";
 import { HouseFormFileds } from "./components/HouseFormFileds";
+import { ImagesFormField } from "./components/ImagesFormField";
 
 export const EstateFormModule = () => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -29,6 +30,10 @@ export const EstateFormModule = () => {
     //   avatar: "",
     //   phone: "",
     // },
+  };
+
+  const onImagesUpload = (files: FileList) => {
+    console.log("files", files);
   };
 
   return (
@@ -58,6 +63,7 @@ export const EstateFormModule = () => {
             )}
           </Grid>
           <Grid item xs={12} md={6}>
+            <ImagesFormField onImagesUpload={onImagesUpload} />
             <CustomButton type="submit">Добавить</CustomButton>
           </Grid>
         </Grid>
