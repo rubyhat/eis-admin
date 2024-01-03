@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 import { IoImagesOutline } from "react-icons/io5";
+import { AiOutlineDelete } from "react-icons/ai";
 
 interface ImagesFormFieldProps {
   onImagesUpload: (files: FileList) => void;
@@ -30,6 +31,15 @@ export const ImagesFormField = ({ onImagesUpload }: ImagesFormFieldProps) => {
 
   const handleCustomInputClick = () => {
     fileInputRef.current?.click();
+  };
+  const handleClickDeleteButton = (imageToRemove: string) => {
+    setSelectedImages((currentImages) =>
+      currentImages.filter((image) => image !== imageToRemove),
+    );
+    // todo: switch to react-dropzone
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   //todo: remove before build
@@ -62,7 +72,7 @@ export const ImagesFormField = ({ onImagesUpload }: ImagesFormFieldProps) => {
         }}
       >
         <Box textAlign="center">
-          <IoImagesOutline size={24} color="hsla(211, 100%, 50%, 1)" />
+          <IoImagesOutline size={32} color="hsla(211, 100%, 50%, 1)" />
           <Typography
             component="p"
             variant="textBodyRegular"
@@ -82,13 +92,25 @@ export const ImagesFormField = ({ onImagesUpload }: ImagesFormFieldProps) => {
             Выбрано фотографий: {selectedImages.length}
           </Typography>
           <Box>
-            {selectedImages.map((image, index) => (
-              <Box key={index} sx={{ position: "relative" }}>
+            {selectedImages.map((image) => (
+              <Box key={image} sx={{ position: "relative" }}>
+                <IconButton
+                  onClick={() => handleClickDeleteButton(image)}
+                  sx={{
+                    position: "absolute",
+                    right: 8,
+                    top: 8,
+                    backgroundColor: "rgba(255,255,255, 0.5)",
+                  }}
+                  color="error"
+                >
+                  <AiOutlineDelete size={20} />
+                </IconButton>
                 <Box
                   sx={{ width: 1 }}
                   component="img"
                   src={image}
-                  alt="Превью"
+                  alt={image}
                 />
               </Box>
             ))}
