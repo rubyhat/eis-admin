@@ -18,16 +18,21 @@ export const ImagesFormField = ({ onImagesUpload }: ImagesFormFieldProps) => {
 
       setSelectedImages((prevImages) => [...prevImages, ...filesArray]);
       onImagesUpload(e.target.files);
-
-      // Очистка URL-ов для освобождения памяти
-      filesArray.forEach((fileURL) => URL.revokeObjectURL(fileURL));
     }
   };
+
+  React.useEffect(() => {
+    // Очистка URL-ов для освобождения памяти при размонтировании компонента
+    return () => {
+      selectedImages.forEach((fileURL) => URL.revokeObjectURL(fileURL));
+    };
+  }, [selectedImages]);
 
   const handleCustomInputClick = () => {
     fileInputRef.current?.click();
   };
 
+  //todo: remove before build
   React.useEffect(() => console.log(selectedImages), [selectedImages]);
 
   return (
@@ -67,6 +72,29 @@ export const ImagesFormField = ({ onImagesUpload }: ImagesFormFieldProps) => {
           </Typography>
         </Box>
       </Box>
+      {Boolean(selectedImages.length) && (
+        <Box>
+          <Typography
+            component="h6"
+            variant="titleThirdRegular"
+            sx={{ padding: "16px 0 8px 0" }}
+          >
+            Выбрано фотографий: {selectedImages.length}
+          </Typography>
+          <Box>
+            {selectedImages.map((image, index) => (
+              <Box key={index} sx={{ position: "relative" }}>
+                <Box
+                  sx={{ width: 1 }}
+                  component="img"
+                  src={image}
+                  alt="Превью"
+                />
+              </Box>
+            ))}
+          </Box>
+        </Box>
+      )}
     </Box>
   );
 };
