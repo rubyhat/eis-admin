@@ -38,8 +38,8 @@ const list = [
 export const MenuList = () => {
   return (
     <>
-      {list.map((item) => (
-        <Grid item xs={12} sm={6} md={3}>
+      {list.map((item, index) => (
+        <Grid item xs={12} sm={6} md={3} key={index}>
           <Box
             component={Link}
             to={item.link}
