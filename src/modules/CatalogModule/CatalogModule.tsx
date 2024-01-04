@@ -4,8 +4,10 @@ import { CatalogObjectives } from "./components/CatalogObjectives";
 import { CatalogSortGroup } from "./components/CatalogSortGroup";
 import { FilterMobileWrapper } from "../FilterModule/components/FilterMobileWrapper";
 import { FilterModule } from "../FilterModule";
+import useTitle from "../../hooks/useTitle";
 
 export const CatalogModule = () => {
+  useTitle("Каталог");
   return (
     <Container>
       <Grid container spacing={2}>
