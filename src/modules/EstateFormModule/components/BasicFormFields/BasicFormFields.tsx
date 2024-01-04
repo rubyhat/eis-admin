@@ -32,12 +32,20 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
           marginBottom={0.5}
         >
           Тип
+          <Typography
+            component="span"
+            color="customColors.colorsRed"
+            marginLeft={0.5}
+          >
+            *
+          </Typography>
         </Typography>
         <Controller
           name="type"
           control={control}
           render={({ field }) => (
             <Select
+              required
               {...field}
               displayEmpty
               sx={selectStyles}
@@ -65,6 +73,13 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
           marginBottom={0.5}
         >
           Категория
+          <Typography
+            component="span"
+            color="customColors.colorsRed"
+            marginLeft={0.5}
+          >
+            *
+          </Typography>
         </Typography>
         <Controller
           defaultValue="apartment"
@@ -72,6 +87,7 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
           control={control}
           render={({ field }) => (
             <Select
+              required
               {...field}
               sx={selectStyles}
               inputProps={{ sx: selectInputProps }}
@@ -103,12 +119,20 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
           marginBottom={0.5}
         >
           Статус
+          <Typography
+            component="span"
+            color="customColors.colorsRed"
+            marginLeft={0.5}
+          >
+            *
+          </Typography>
         </Typography>
         <Controller
           name="visibilityStatus"
           control={control}
           render={({ field }) => (
             <Select
+              required
               {...field}
               sx={selectStyles}
               inputProps={{ sx: selectInputProps }}
@@ -129,12 +153,20 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
           marginBottom={0.5}
         >
           Агент
+          <Typography
+            component="span"
+            color="customColors.colorsRed"
+            marginLeft={0.5}
+          >
+            *
+          </Typography>
         </Typography>
         <Controller
           name="estateAgent"
           control={control}
           render={({ field }) => (
             <Select
+              required
               {...field}
               displayEmpty
               sx={selectStyles}
@@ -155,12 +187,20 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
           marginBottom={0.5}
         >
           Город
+          <Typography
+            component="span"
+            color="customColors.colorsRed"
+            marginLeft={0.5}
+          >
+            *
+          </Typography>
         </Typography>
         <Controller
           name="city"
           control={control}
           render={({ field }) => (
             <Select
+              required
               {...field}
               displayEmpty
               sx={selectStyles}
@@ -189,8 +229,16 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
           marginBottom={0.5}
         >
           Улица
+          <Typography
+            component="span"
+            color="customColors.colorsRed"
+            marginLeft={0.5}
+          >
+            *
+          </Typography>
         </Typography>
         <CustomInput
+          required
           id="street"
           register={register}
           errors={errors}
@@ -243,14 +291,23 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
           marginBottom={0.5}
         >
           Стоимость
+          <Typography
+            component="span"
+            color="customColors.colorsRed"
+            marginLeft={0.5}
+          >
+            *
+          </Typography>
         </Typography>
         <CustomInput
+          required
           id="price"
           register={register}
           errors={errors}
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: 42 000 000"
+          type="number"
         />
       </Box>
       <Box marginBottom={1.5}>
@@ -269,6 +326,7 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: 2 000 000"
+          type="number"
         />
       </Box>
       <Box marginBottom={1.5}>

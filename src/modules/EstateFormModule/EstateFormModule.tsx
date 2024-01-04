@@ -13,6 +13,9 @@ import { ApartmentFormFields } from "./components/ApartmentFormFields";
 import { HouseFormFileds } from "./components/HouseFormFileds";
 import { ImagesFormField } from "./components/ImagesFormField";
 
+const livingSpaces = ["apartment", "house", "cottage"];
+const houseAndCottage = ["house", "cottage"];
+
 export const EstateFormModule = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const { formFieldsData } = useCreateEstateStore((state) => state);
@@ -49,14 +52,13 @@ export const EstateFormModule = () => {
             <BasicFormFields isLoading={isLoading} />
           </Grid>
           <Grid item xs={12} md={3}>
-            {(formFieldsData.category === "apartment" ||
-              formFieldsData.category === "house") && (
+            {livingSpaces.includes(formFieldsData.category) && (
               <>
                 <HomeFormFields isLoading={isLoading} />
                 {formFieldsData.category === "apartment" && (
                   <ApartmentFormFields isLoading={isLoading} />
                 )}
-                {formFieldsData.category === "house" && (
+                {houseAndCottage.includes(formFieldsData.category) && (
                   <HouseFormFileds isLoading={isLoading} />
                 )}
               </>
