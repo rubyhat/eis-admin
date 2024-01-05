@@ -178,10 +178,11 @@ export const FilterForm = () => {
                     Например: Квартира
                   </Typography>
                 </MenuItem>
-                <MenuItem value="apart">Квартира</MenuItem>
-                <MenuItem value="house">Дома и дачи</MenuItem>
-                <MenuItem value="earth">Земельный участок</MenuItem>
-                <MenuItem value="dachya">Коммерческая недвижимость</MenuItem>
+                <MenuItem value="apartment">Квартира</MenuItem>
+                <MenuItem value="house">Дом</MenuItem>
+                <MenuItem value="cottage">Дача</MenuItem>
+                <MenuItem value="land">Земельный участок</MenuItem>
+                <MenuItem value="business">Коммерческая недвижимость</MenuItem>
               </Select>
             )}
           />

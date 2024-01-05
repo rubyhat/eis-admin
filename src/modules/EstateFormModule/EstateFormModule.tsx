@@ -12,6 +12,7 @@ import { HomeFormFields } from "./components/HomeFormFields";
 import { ApartmentFormFields } from "./components/ApartmentFormFields";
 import { HouseFormFileds } from "./components/HouseFormFileds";
 import { ImagesFormField } from "./components/ImagesFormField";
+import { LandFormFields } from "./components/LandFormFields";
 
 const livingSpaces = ["apartment", "house", "cottage"];
 const houseAndCottage = ["house", "cottage"];
@@ -62,6 +63,9 @@ export const EstateFormModule = () => {
                   <HouseFormFileds isLoading={isLoading} />
                 )}
               </>
+            )}
+            {formFieldsData.category === "land" && (
+              <LandFormFields isLoading={isLoading} />
             )}
           </Grid>
           <Grid item xs={12} md={6}>
