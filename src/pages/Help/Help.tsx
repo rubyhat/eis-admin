@@ -1,5 +1,11 @@
+import { Box } from "@mui/material";
 import React from "react";
+import { HelpModule } from "../../modules/HelpModule";
 
 export const Help = () => {
-  return <div>Help</div>;
+  return (
+    <Box className="section">
+      <HelpModule />
+    </Box>
+  );
 };
