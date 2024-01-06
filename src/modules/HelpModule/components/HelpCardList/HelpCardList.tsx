@@ -1,14 +1,14 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
+import { HelpCard } from "../HelpCard/HelpCard";
 
-interface Link {
+export interface HelpCardLink {
   title: string;
   to: string;
   disabled: boolean;
 }
 
-const links: Link[] = [
+const links: HelpCardLink[] = [
   {
     title: "Объекты",
     to: "/help/estate",
@@ -35,37 +35,8 @@ export const HelpCardList = () => {
   return (
     <>
       {links.map((link, index) => (
-        <Grid key={index} item xs={12} md={3}>
-          <Box
-            component={Link}
-            to={link.to}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 1,
-              height: 270,
-              border: "4px solid",
-              borderColor: "customColors.labelsQuaternary",
-              borderRadius: 10,
-              cursor: link.disabled ? "no-drop" : "pointer",
-              transition: "all 333ms ease",
-              "&:hover": link.disabled
-                ? {}
-                : {
-                    borderColor: "customColors.labelsSecondary",
-                    color: "customColors.labelsSecondary",
-                  },
-            }}
-          >
-            <Typography
-              component="h6"
-              color="customColors.labelsSecondary"
-              variant="titleSecondRegular"
-            >
-              {link.title}
-            </Typography>
-          </Box>
+        <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
+          <HelpCard link={link} />
         </Grid>
       ))}
     </>
