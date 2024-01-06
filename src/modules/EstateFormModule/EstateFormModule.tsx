@@ -13,6 +13,7 @@ import { ApartmentFormFields } from "./components/ApartmentFormFields";
 import { HouseFormFileds } from "./components/HouseFormFileds";
 import { ImagesFormField } from "./components/ImagesFormField";
 import { LandFormFields } from "./components/LandFormFields";
+import { RichTextEditorField } from "./components/RichTextEditorField";
 
 const livingSpaces = ["apartment", "house", "cottage"];
 const houseAndCottage = ["house", "cottage"];
@@ -69,6 +70,7 @@ export const EstateFormModule = () => {
             )}
           </Grid>
           <Grid item xs={12} md={6}>
+            <RichTextEditorField />
             <ImagesFormField onImagesUpload={onImagesUpload} />
             <CustomButton type="submit">Добавить</CustomButton>
           </Grid>
