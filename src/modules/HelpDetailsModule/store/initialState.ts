@@ -1,5 +1,5 @@
 import { HelpDetailsStore } from ".";
-
+//todo: need CRUD for FAQ in backend
 export const initialState: HelpDetailsStore = {
   estate: {
     title: "Объекты недвижимости",
