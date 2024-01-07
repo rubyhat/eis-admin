@@ -6,6 +6,7 @@ const Home = React.lazy(() => import("../pages/Home"));
 const Help = React.lazy(() => import("../pages/Help"));
 const Login = React.lazy(() => import("../pages/Login"));
 const Catalog = React.lazy(() => import("../pages/Catalog"));
+const HelpDetails = React.lazy(() => import("../pages/HelpDetails"));
 const CreateEstate = React.lazy(() => import("../pages/CreateEstate"));
 const EstateDetails = React.lazy(() => import("../pages/EstateDetails"));
 
@@ -18,7 +19,10 @@ export const RouteList = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+
       <Route path="/help" element={<Help />} />
+      <Route path="/help/:id" element={<HelpDetails />} />
+
       <Route path="/catalog" element={<Catalog />} />
       <Route path="/catalog/:id" element={<EstateDetails />} />
       <Route path="/catalog/create" element={<CreateEstate />} />
