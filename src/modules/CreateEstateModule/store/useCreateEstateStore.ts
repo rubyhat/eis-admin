@@ -53,7 +53,7 @@ const formFieldsDataInitial: FormFieldsData = {
   category: "apartment",
   visibilityStatus: "checking",
   estateAgent: "roze",
-  city: "",
+  city: "krg",
   street: "",
   houseNumber: "",
   isInfoHidden: false,
