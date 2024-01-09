@@ -3,7 +3,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { CategoryType, ServiceType } from "../../../CatalogModule/store";
 
 interface LinkCardProps {
-  id: ServiceType | CategoryType; // todo: set selected type in store
+  id: ServiceType | CategoryType;
   title: string;
   subtitle: string;
   selected: string;
