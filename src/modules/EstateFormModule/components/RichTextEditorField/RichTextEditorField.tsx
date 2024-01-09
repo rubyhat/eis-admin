@@ -3,9 +3,11 @@ import React from "react";
 import ReactQuill from "react-quill";
 
 import "react-quill/dist/quill.snow.css";
+import { useFormFields } from "../../hooks/useFormFields";
+import { Controller } from "react-hook-form";
 
 export const RichTextEditorField = () => {
-  const [value, setValue] = React.useState("");
+  const { control } = useFormFields();
 
   return (
     <Box
@@ -22,7 +24,19 @@ export const RichTextEditorField = () => {
         },
       }}
     >
-      <ReactQuill theme="snow" value={value} onChange={setValue} />
+      <Controller
+        name="description"
+        control={control}
+        render={({ field: { onChange, onBlur, value, ref } }) => (
+          <ReactQuill
+            theme="snow"
+            value={value || ""}
+            onChange={onChange}
+            onBlur={onBlur}
+            ref={ref}
+          />
+        )}
+      />
     </Box>
   );
 };
