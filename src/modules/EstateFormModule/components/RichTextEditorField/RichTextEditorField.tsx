@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import ReactQuill from "react-quill";
 
@@ -24,6 +24,14 @@ export const RichTextEditorField = () => {
         },
       }}
     >
+      <Typography
+        component="p"
+        color="customColors.labelsSecondary"
+        variant="textCalloutRegular"
+        marginBottom={0.5}
+      >
+        Описание
+      </Typography>
       <Controller
         name="description"
         control={control}
