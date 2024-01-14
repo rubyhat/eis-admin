@@ -9,6 +9,10 @@ export const CatalogSortGroup = () => {
       sx={{
         alignItems: { xs: "flex-start", md: "center" },
         flexDirection: { xs: "column", md: "row" },
+        maxWidth: 1,
+        overflow: "hidden",
+        overflowX: "scroll",
+        paddingBottom: { xs: 1.5, sm: 0 },
       }}
     >
       <Typography

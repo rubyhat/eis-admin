@@ -74,7 +74,6 @@ export const CatalogSortButtons = () => {
           xs: "480px",
           sm: "inherit",
         },
-        // todo: сделать горизонтальный скролл на моб. версии
         overflowX: {
           xs: "scroll",
           sm: "hidden",
