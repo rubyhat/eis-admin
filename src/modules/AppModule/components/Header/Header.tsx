@@ -32,10 +32,10 @@ export const Header = () => {
     >
       <Container>
         <Grid container spacing={2} alignItems="center">
-          <Grid item xs={6} md={3}>
+          <Grid item xs={8} md={3}>
             <Logotype />
           </Grid>
-          <Grid item xs={6} md={9} display="flex" justifyContent="end">
+          <Grid item xs={4} md={9} display="flex" justifyContent="end">
             {isTablet || isMobile ? (
               <IconButton color="primary" onClick={handleBurgerIconClick}>
                 <RxHamburgerMenu />

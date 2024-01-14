@@ -12,12 +12,13 @@ export const Footer = () => {
       <Container>
         <Grid container spacing={2}>
           <Grid item xs={12}>
+            <Logotype />
+          </Grid>
+          <Grid item xs={12}>
             <Box display="flex" alignItems="center">
-              <Logotype />
               <Typography
                 variant="textCalloutRegular"
                 color="customColors.labelsSecondary"
-                marginLeft={2}
               >
                 © 2019–2024 Все права защищены
               </Typography>
