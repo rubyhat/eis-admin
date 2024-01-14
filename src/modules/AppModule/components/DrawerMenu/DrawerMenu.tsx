@@ -35,6 +35,11 @@ export const DrawerMenu = ({
     }
     setIsHeaderBurgerOpen(false);
   };
+
+  const handleClickAddEstate = () => {
+    setIsHeaderBurgerOpen(false);
+    navigate("/catalog/create");
+  };
   return (
     <SwipeableDrawer
       anchor={isMobile ? "bottom" : "right"}
@@ -65,13 +70,13 @@ export const DrawerMenu = ({
           </IconButton>
         </Box>
         <Box padding={1.5}>
-          <MenuList isVertical />
+          <MenuList isVertical onClick={() => setIsHeaderBurgerOpen(false)} />
           <CustomButton
             variant="contained"
             size="large"
             fullWidth
             sx={{ marginTop: 2 }}
-            onClick={() => navigate("/catalog/create")}
+            onClick={handleClickAddEstate}
           >
             + Добавить объект
           </CustomButton>
