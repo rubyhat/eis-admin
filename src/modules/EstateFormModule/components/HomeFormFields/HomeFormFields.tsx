@@ -1,16 +1,15 @@
 import { Box, MenuItem, Select, Typography } from "@mui/material";
 import React from "react";
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { selectInputProps, selectStyles } from "../../assets/styles";
 import { CustomInput } from "../../../../components/CustomInput";
-import { useFormFields } from "../../hooks/useFormFields";
 
 interface HomeFormFieldsProps {
   isLoading: boolean;
 }
 
 export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
-  const { control, register, errors } = useFormFields();
+  const { control, register, formState } = useFormContext();
   return (
     <>
       <Box marginBottom={1.5}>
@@ -208,7 +207,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
         <CustomInput
           id="roomCount"
           register={register}
-          errors={errors}
+          errors={formState.errors}
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: 2"
@@ -226,7 +225,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
         <CustomInput
           id="houseBuildingYear"
           register={register}
-          errors={errors}
+          errors={formState.errors}
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: 2023"
@@ -244,7 +243,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
         <CustomInput
           id="houseSquare"
           register={register}
-          errors={errors}
+          errors={formState.errors}
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: 42"
@@ -262,7 +261,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
         <CustomInput
           id="kitchenSquare"
           register={register}
-          errors={errors}
+          errors={formState.errors}
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: 15"
@@ -280,7 +279,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
         <CustomInput
           id="countFloor"
           register={register}
-          errors={errors}
+          errors={formState.errors}
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: 2"
@@ -298,7 +297,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
         <CustomInput
           id="ceilingHeight"
           register={register}
-          errors={errors}
+          errors={formState.errors}
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: 2.5"
@@ -316,7 +315,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
         <CustomInput
           id="ceilingHeight"
           register={register}
-          errors={errors}
+          errors={formState.errors}
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: 2"

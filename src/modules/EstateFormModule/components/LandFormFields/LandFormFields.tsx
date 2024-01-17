@@ -1,14 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import { CustomInput } from "../../../../components/CustomInput";
-import { useFormFields } from "../../hooks/useFormFields";
+import { useFormContext } from "react-hook-form";
 
 interface LandFormFieldsProps {
   isLoading: boolean;
 }
 
 export const LandFormFields = ({ isLoading }: LandFormFieldsProps) => {
-  const { register, errors } = useFormFields();
+  const { register, formState } = useFormContext();
   return (
     <>
       <Box marginBottom={1.5}>
@@ -23,7 +23,7 @@ export const LandFormFields = ({ isLoading }: LandFormFieldsProps) => {
         <CustomInput
           id="videoLink"
           register={register}
-          errors={errors}
+          errors={formState.errors}
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: 12 соток"

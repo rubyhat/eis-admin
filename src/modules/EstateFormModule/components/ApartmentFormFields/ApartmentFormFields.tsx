@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import { CustomInput } from "../../../../components/CustomInput";
-import { useFormFields } from "../../hooks/useFormFields";
+import { useFormContext } from "react-hook-form";
 
 interface ApartmentFormFieldsProps {
   isLoading: boolean;
@@ -10,7 +10,7 @@ interface ApartmentFormFieldsProps {
 export const ApartmentFormFields = ({
   isLoading,
 }: ApartmentFormFieldsProps) => {
-  const { register, errors } = useFormFields();
+  const { register, formState } = useFormContext();
   return (
     <>
       <Box
@@ -33,7 +33,7 @@ export const ApartmentFormFields = ({
           <CustomInput
             id="targetFloor"
             register={register}
-            errors={errors}
+            errors={formState.errors}
             disabled={isLoading}
             formatPrice={false}
             placeholder="Например: 2"
@@ -59,7 +59,7 @@ export const ApartmentFormFields = ({
           <CustomInput
             id="totalFloor"
             register={register}
-            errors={errors}
+            errors={formState.errors}
             disabled={isLoading}
             formatPrice={false}
             placeholder="Например: 5"

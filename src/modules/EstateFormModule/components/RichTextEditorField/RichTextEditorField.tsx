@@ -3,11 +3,10 @@ import React from "react";
 import ReactQuill from "react-quill";
 
 import "react-quill/dist/quill.snow.css";
-import { useFormFields } from "../../hooks/useFormFields";
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 export const RichTextEditorField = () => {
-  const { control } = useFormFields();
+  const { control } = useFormContext();
 
   return (
     <Box

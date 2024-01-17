@@ -7,8 +7,7 @@ import {
   Switch,
   Typography,
 } from "@mui/material";
-import { useFormFields } from "../../hooks/useFormFields";
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { selectInputProps, selectStyles } from "../../assets/styles";
 import { CustomInput } from "../../../../components/CustomInput";
 
@@ -17,7 +16,7 @@ interface HouseFormFiledsProps {
 }
 
 export const HouseFormFileds = ({ isLoading }: HouseFormFiledsProps) => {
-  const { control, register, errors } = useFormFields();
+  const { control, register, formState } = useFormContext();
   return (
     <>
       <Box marginBottom={1.5}>
@@ -267,7 +266,7 @@ export const HouseFormFileds = ({ isLoading }: HouseFormFiledsProps) => {
         <CustomInput
           id="plotSquare"
           register={register}
-          errors={errors}
+          errors={formState.errors}
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: ул. Гоголя"

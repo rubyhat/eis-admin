@@ -4,6 +4,7 @@ import {
   useCreateEstateStore,
 } from "../../CreateEstateModule/store";
 
+// todo: remove, deprecated
 export const useFormFields = () => {
   const { formFieldsData, setFormFieldsData } = useCreateEstateStore(
     (state) => state,

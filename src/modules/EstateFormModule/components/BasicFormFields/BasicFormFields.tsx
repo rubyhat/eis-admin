@@ -7,9 +7,8 @@ import {
   Switch,
   Typography,
 } from "@mui/material";
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { selectInputProps, selectStyles } from "../../assets/styles";
-import { useFormFields } from "../../hooks/useFormFields";
 import { useCreateEstateStore } from "../../../CreateEstateModule/store";
 import { CustomInput } from "../../../../components/CustomInput";
 
@@ -21,7 +20,7 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
   const { formFieldsData, setFormFieldsData } = useCreateEstateStore(
     (state) => state,
   );
-  const { control, register, errors } = useFormFields();
+  const { control, register, formState } = useFormContext();
   return (
     <>
       <Box marginBottom={1.5}>
@@ -241,7 +240,7 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
           required
           id="street"
           register={register}
-          errors={errors}
+          errors={formState.errors}
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: ул. Гоголя"
@@ -259,7 +258,7 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
         <CustomInput
           id="houseNumber"
           register={register}
-          errors={errors}
+          errors={formState.errors}
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: 42"
@@ -277,7 +276,7 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
         <CustomInput
           id="mapLink"
           register={register}
-          errors={errors}
+          errors={formState.errors}
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: https://2gis.kz/..."
@@ -303,7 +302,7 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
           required
           id="price"
           register={register}
-          errors={errors}
+          errors={formState.errors}
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: 42 000 000"
@@ -322,7 +321,7 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
         <CustomInput
           id="discount"
           register={register}
-          errors={errors}
+          errors={formState.errors}
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: 2 000 000"
@@ -341,7 +340,7 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
         <CustomInput
           id="videoLink"
           register={register}
-          errors={errors}
+          errors={formState.errors}
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: https://instagram.com/..."

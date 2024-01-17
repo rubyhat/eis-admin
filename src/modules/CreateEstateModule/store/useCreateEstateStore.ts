@@ -1,13 +1,20 @@
 import { create } from "zustand";
 import {
   CategoryType,
+  ElectricType,
   EthernetType,
   FurnitureType,
+  GasType,
+  HeatingType,
   HouseConditionType,
   HouseRoofMaterialType,
+  HouseType,
   HouseWallMaterialType,
   ServiceType,
+  SewerType,
+  ToiletType,
   VisibilityStatusType,
+  WaterType,
 } from "../../CatalogModule/store";
 
 const listLinkStepsData: ListLinkSteps = {
@@ -39,6 +46,7 @@ const listLinkStepsData: ListLinkSteps = {
 };
 
 const formFieldsDataInitial: FormFieldsData = {
+  // basic values
   description: "",
   price: 0,
   discount: 0,
@@ -106,6 +114,34 @@ export interface Apartment extends FormFieldsData {
   houseRoofMaterial: HouseRoofMaterialType; // Материал крыши
   furniture: FurnitureType; // Мебелирован ли?
   ethernet: EthernetType; // Интернет
+}
+
+// Только в доме
+export interface House extends Apartment {
+  plotSquare: number; // Площадь/количество соток земли у дома
+  hasBasement: boolean; // Есть/нет цокольный этаж
+  hasMansard: boolean; // Есть/нет мансарда
+  houseType: HouseType; // Тип дома, бывает что в одном доме два хозяина, поделен по-полам;
+  electricType: ElectricType;
+  heatingType: HeatingType;
+  gasType: GasType;
+  sewerType: SewerType;
+  toiletType: ToiletType;
+  waterType: WaterType;
+}
+// Только в квартире
+export interface Flat extends Apartment {
+  targetFloor: number; // Этаж, на котором находится объект
+  totalFloor: number; // Общее количество этажей в здании
+}
+
+export interface Commercial extends FormFieldsData {}
+export interface Business extends FormFieldsData {}
+export interface Factory extends FormFieldsData {}
+export interface OtherObject extends FormFieldsData {}
+
+export interface Land extends FormFieldsData {
+  landSquare: string; // Площадь земли
 }
 
 export interface CreateEstate {
