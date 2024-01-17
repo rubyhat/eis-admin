@@ -46,6 +46,7 @@ export const HouseFormFileds = ({ isLoading }: HouseFormFiledsProps) => {
                   Например: Часть дома
                 </Typography>
               </MenuItem>
+              <MenuItem value="">Не указывать</MenuItem>
               <MenuItem value="part">Часть дома</MenuItem>
               <MenuItem value="full">Целый дом</MenuItem>
               <MenuItem value="other">Другое</MenuItem>
@@ -80,6 +81,7 @@ export const HouseFormFileds = ({ isLoading }: HouseFormFiledsProps) => {
                   Например: Чаcтично
                 </Typography>
               </MenuItem>
+              <MenuItem value="">Не указывать</MenuItem>
               <MenuItem value="part">Частично</MenuItem>
               <MenuItem value="full">Есть</MenuItem>
               <MenuItem value="none">Нет</MenuItem>
@@ -114,6 +116,7 @@ export const HouseFormFileds = ({ isLoading }: HouseFormFiledsProps) => {
                   Например: Центральное
                 </Typography>
               </MenuItem>
+              <MenuItem value="">Не указывать</MenuItem>
               <MenuItem value="central">Центральное</MenuItem>
               <MenuItem value="gas">Газовое</MenuItem>
               <MenuItem value="solid">Твердое топливо</MenuItem>
@@ -150,6 +153,7 @@ export const HouseFormFileds = ({ isLoading }: HouseFormFiledsProps) => {
                   Например: Центральное
                 </Typography>
               </MenuItem>
+              <MenuItem value="">Не указывать</MenuItem>
               <MenuItem value="central">Центральное</MenuItem>
               <MenuItem value="auto">Автономное</MenuItem>
               <MenuItem value="canConnect">Можно подключить</MenuItem>
@@ -185,6 +189,7 @@ export const HouseFormFileds = ({ isLoading }: HouseFormFiledsProps) => {
                   Например: Центральная
                 </Typography>
               </MenuItem>
+              <MenuItem value="">Не указывать</MenuItem>
               <MenuItem value="central">Центральная</MenuItem>
               <MenuItem value="septik">Септик</MenuItem>
               <MenuItem value="canConnect">Можно подключить</MenuItem>
@@ -220,6 +225,7 @@ export const HouseFormFileds = ({ isLoading }: HouseFormFiledsProps) => {
                   Например: Внутри
                 </Typography>
               </MenuItem>
+              <MenuItem value="">Не указывать</MenuItem>
               <MenuItem value="in">Внутри</MenuItem>
               <MenuItem value="out">Снаружи</MenuItem>
               <MenuItem value="none">Нет</MenuItem>
@@ -254,6 +260,7 @@ export const HouseFormFileds = ({ isLoading }: HouseFormFiledsProps) => {
                   Например: Центральная
                 </Typography>
               </MenuItem>
+              <MenuItem value="">Не указывать</MenuItem>
               <MenuItem value="central">Центральная</MenuItem>
               <MenuItem value="borehole">Скважина</MenuItem>
               <MenuItem value="canConnect">Можно подключить</MenuItem>

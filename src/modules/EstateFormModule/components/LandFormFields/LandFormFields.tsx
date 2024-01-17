@@ -21,7 +21,7 @@ export const LandFormFields = ({ isLoading }: LandFormFieldsProps) => {
           Площадь земельного участка
         </Typography>
         <CustomInput
-          id="videoLink"
+          id="landSquare"
           register={register}
           errors={formState.errors}
           disabled={isLoading}
