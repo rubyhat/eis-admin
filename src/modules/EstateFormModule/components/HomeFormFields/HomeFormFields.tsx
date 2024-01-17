@@ -39,6 +39,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
                   Например: Евроремонт
                 </Typography>
               </MenuItem>
+              <MenuItem value="">Не указывать</MenuItem>
               <MenuItem value="perfect">Евроремонт</MenuItem>
               <MenuItem value="good">Косметический ремонт</MenuItem>
               <MenuItem value="bad">Без ремонта</MenuItem>
@@ -75,6 +76,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
                   Например: Кирпич
                 </Typography>
               </MenuItem>
+              <MenuItem value="">Не указывать</MenuItem>
               <MenuItem value="brick">Кирпич</MenuItem>
               <MenuItem value="wood">Дерево</MenuItem>
               <MenuItem value="gasSilicateBlock">Газосиликатный блок</MenuItem>
@@ -116,6 +118,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
                   Например: Черепица
                 </Typography>
               </MenuItem>
+              <MenuItem value="">Не указывать</MenuItem>
               <MenuItem value="tile">Черепица</MenuItem>
               <MenuItem value="soft">Мягкая кровля</MenuItem>
               <MenuItem value="metal">Металл</MenuItem>
@@ -154,6 +157,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
                   Например: Без мебели
                 </Typography>
               </MenuItem>
+              <MenuItem value="">Не указывать</MenuItem>
               <MenuItem value="full">Полностью</MenuItem>
               <MenuItem value="part">Частично</MenuItem>
               <MenuItem value="none">Без мебели</MenuItem>
@@ -188,6 +192,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
                   Например: Подключен
                 </Typography>
               </MenuItem>
+              <MenuItem value="">Не указывать</MenuItem>
               <MenuItem value="connected">Подключен</MenuItem>
               <MenuItem value="toConnect">Можно подключить</MenuItem>
               <MenuItem value="none">Без интернета</MenuItem>
@@ -203,6 +208,13 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           marginBottom={0.5}
         >
           Количество комнат
+          <Typography
+            component="span"
+            color="customColors.colorsRed"
+            marginLeft={0.5}
+          >
+            *
+          </Typography>
         </Typography>
         <CustomInput
           id="roomCount"
@@ -211,24 +223,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: 2"
-        />
-      </Box>
-      <Box marginBottom={1.5}>
-        <Typography
-          component="p"
-          color="customColors.labelsSecondary"
-          variant="textCalloutRegular"
-          marginBottom={0.5}
-        >
-          Год постройки
-        </Typography>
-        <CustomInput
-          id="houseBuildingYear"
-          register={register}
-          errors={formState.errors}
-          disabled={isLoading}
-          formatPrice={false}
-          placeholder="Например: 2023"
+          required
         />
       </Box>
       <Box marginBottom={1.5}>
@@ -239,6 +234,13 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           marginBottom={0.5}
         >
           Площадь, общая м2
+          <Typography
+            component="span"
+            color="customColors.colorsRed"
+            marginLeft={0.5}
+          >
+            *
+          </Typography>
         </Typography>
         <CustomInput
           id="houseSquare"
@@ -247,6 +249,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: 42"
+          required
         />
       </Box>
       <Box marginBottom={1.5}>
@@ -265,6 +268,24 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           disabled={isLoading}
           formatPrice={false}
           placeholder="Например: 15"
+        />
+      </Box>
+      <Box marginBottom={1.5}>
+        <Typography
+          component="p"
+          color="customColors.labelsSecondary"
+          variant="textCalloutRegular"
+          marginBottom={0.5}
+        >
+          Год постройки
+        </Typography>
+        <CustomInput
+          id="houseBuildingYear"
+          register={register}
+          errors={formState.errors}
+          disabled={isLoading}
+          formatPrice={false}
+          placeholder="Например: 2023"
         />
       </Box>
       <Box marginBottom={1.5}>
