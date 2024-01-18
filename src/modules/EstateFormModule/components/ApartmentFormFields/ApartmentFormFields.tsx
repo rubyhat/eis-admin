@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import { CustomInput } from "../../../../components/CustomInput";
 import { useFormContext } from "react-hook-form";
@@ -12,60 +12,62 @@ export const ApartmentFormFields = ({
 }: ApartmentFormFieldsProps) => {
   const { register, formState } = useFormContext();
   return (
-    <>
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: 1.5,
-          marginBottom: 1.5,
-        }}
-      >
-        <Box>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textCalloutRegular"
-            marginBottom={0.5}
-          >
-            Этаж
-          </Typography>
-          <CustomInput
-            id="targetFloor"
-            register={register}
-            errors={formState.errors}
-            disabled={isLoading}
-            formatPrice={false}
-            placeholder="Например: 2"
-          />
-        </Box>
-        <Typography
-          component="p"
-          color="customColors.labelsSecondary"
-          variant="textCalloutRegular"
-          marginTop={3}
+    <Grid container spacing={2}>
+      <Grid item xs={12} md={3}>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1.5,
+            marginBottom: 1.5,
+          }}
         >
-          /
-        </Typography>
-        <Box>
+          <Box>
+            <Typography
+              component="p"
+              color="customColors.labelsSecondary"
+              variant="textCalloutRegular"
+              marginBottom={0.5}
+            >
+              Этаж
+            </Typography>
+            <CustomInput
+              id="targetFloor"
+              register={register}
+              errors={formState.errors}
+              disabled={isLoading}
+              formatPrice={false}
+              placeholder="Например: 2"
+            />
+          </Box>
           <Typography
             component="p"
             color="customColors.labelsSecondary"
             variant="textCalloutRegular"
-            marginBottom={0.5}
+            marginTop={3}
           >
-            Всего
+            /
           </Typography>
-          <CustomInput
-            id="totalFloor"
-            register={register}
-            errors={formState.errors}
-            disabled={isLoading}
-            formatPrice={false}
-            placeholder="Например: 5"
-          />
+          <Box>
+            <Typography
+              component="p"
+              color="customColors.labelsSecondary"
+              variant="textCalloutRegular"
+              marginBottom={0.5}
+            >
+              Всего
+            </Typography>
+            <CustomInput
+              id="totalFloor"
+              register={register}
+              errors={formState.errors}
+              disabled={isLoading}
+              formatPrice={false}
+              placeholder="Например: 5"
+            />
+          </Box>
         </Box>
-      </Box>
-    </>
+      </Grid>
+    </Grid>
   );
 };

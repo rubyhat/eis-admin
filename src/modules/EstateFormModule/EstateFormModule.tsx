@@ -68,14 +68,83 @@ export const EstateFormModule = () => {
                   size="small"
                   sx={{ marginLeft: "auto" }}
                 >
-                  + Добавить
+                  Сохранить
                 </CustomButton>
               </Box>
               <CustomHr />
             </Grid>
           </Grid>
+          <Typography
+            component="h6"
+            variant="titleThirdRegular"
+            marginBottom={1}
+          >
+            Базовые свойства
+          </Typography>
           <BasicFormFields isLoading={isLoading} />
+          <CustomHr />
+          {livingSpaces.includes(formFieldsData.category) && (
+            <>
+              <Typography
+                component="h6"
+                variant="titleThirdRegular"
+                marginBottom={1}
+              >
+                Общие свойства
+              </Typography>
+              <HomeFormFields isLoading={isLoading} />
+              <CustomHr />
+              {formFieldsData.category === "apartment" && (
+                <>
+                  <Typography
+                    component="h6"
+                    variant="titleThirdRegular"
+                    marginBottom={1}
+                  >
+                    Cвойства квартиры
+                  </Typography>
+                  <ApartmentFormFields isLoading={isLoading} />
+                  <CustomHr />
+                </>
+              )}
+              {houseAndCottage.includes(formFieldsData.category) && (
+                <>
+                  <Typography
+                    component="h6"
+                    variant="titleThirdRegular"
+                    marginBottom={1}
+                  >
+                    Cвойства дома и дачи
+                  </Typography>
+                  <HouseFormFileds isLoading={isLoading} />
+                  <CustomHr />
+                </>
+              )}
+            </>
+          )}
+          {formFieldsData.category === "land" && (
+            <>
+              <Typography
+                component="h6"
+                variant="titleThirdRegular"
+                marginBottom={1}
+              >
+                Cвойства земельного участка
+              </Typography>
+              <LandFormFields isLoading={isLoading} />
+              <CustomHr />
+            </>
+          )}
           <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography
+                component="h6"
+                variant="titleThirdRegular"
+                marginBottom={-1}
+              >
+                Cвойства дома и дачи
+              </Typography>
+            </Grid>
             <ImagesFormField onImagesUpload={onImagesUpload} />
             <Grid item xs={12} md={6}>
               <RichTextEditorField />
@@ -94,25 +163,10 @@ export const EstateFormModule = () => {
                 color="black"
                 dangerouslySetInnerHTML={{
                   __html: formFieldsData.description,
-                }}
+                }} // add styles for data
               ></Typography>
-            </Grid>
-          </Grid>
-          <Grid container spacing={2}>
-            <Grid item xs={12} md={3}>
-              {livingSpaces.includes(formFieldsData.category) && (
-                <>
-                  <HomeFormFields isLoading={isLoading} />
-                  {formFieldsData.category === "apartment" && (
-                    <ApartmentFormFields isLoading={isLoading} />
-                  )}
-                  {houseAndCottage.includes(formFieldsData.category) && (
-                    <HouseFormFileds isLoading={isLoading} />
-                  )}
-                </>
-              )}
-              {formFieldsData.category === "land" && (
-                <LandFormFields isLoading={isLoading} />
+              {formFieldsData.description === "" && (
+                <Typography>Начните писать текст...</Typography>
               )}
             </Grid>
           </Grid>

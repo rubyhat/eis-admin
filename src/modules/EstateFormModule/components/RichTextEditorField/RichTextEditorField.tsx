@@ -11,7 +11,8 @@ export const RichTextEditorField = () => {
   const { formFieldsData, setFormFieldsData } = useCreateEstateStore(
     (state) => state,
   );
-
+  // todo: баг в текстовом редакторе, когда начинаем писать, то первый символ игнорируется,
+  // onChange={onChange} если вернуть старый обработчик, то все ок
   return (
     <Box
       sx={{
