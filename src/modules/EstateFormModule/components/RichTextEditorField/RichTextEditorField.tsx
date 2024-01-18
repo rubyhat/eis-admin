@@ -4,9 +4,13 @@ import ReactQuill from "react-quill";
 
 import "react-quill/dist/quill.snow.css";
 import { Controller, useFormContext } from "react-hook-form";
+import { useCreateEstateStore } from "../../../CreateEstateModule/store";
 
 export const RichTextEditorField = () => {
   const { control } = useFormContext();
+  const { formFieldsData, setFormFieldsData } = useCreateEstateStore(
+    (state) => state,
+  );
 
   return (
     <Box
@@ -38,7 +42,14 @@ export const RichTextEditorField = () => {
           <ReactQuill
             theme="snow"
             value={value || ""}
-            onChange={onChange}
+            onChange={(e) => {
+              onChange(e); // вызов обработчика из react-hooks-form
+
+              setFormFieldsData({
+                ...formFieldsData,
+                description: e,
+              });
+            }}
             onBlur={onBlur}
             ref={ref}
           />

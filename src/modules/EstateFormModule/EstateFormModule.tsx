@@ -89,6 +89,13 @@ export const EstateFormModule = () => {
               >
                 Превью описания
               </Typography>
+              <Typography
+                component="div"
+                color="black"
+                dangerouslySetInnerHTML={{
+                  __html: formFieldsData.description,
+                }}
+              ></Typography>
             </Grid>
           </Grid>
           <Grid container spacing={2}>
