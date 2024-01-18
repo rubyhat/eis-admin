@@ -166,7 +166,9 @@ export const EstateFormModule = () => {
                 }} // add styles for data
               ></Typography>
               {formFieldsData.description === "" && (
-                <Typography>Начните писать текст...</Typography>
+                <Typography variant="textCalloutRegular">
+                  Начните писать текст...
+                </Typography>
               )}
             </Grid>
           </Grid>

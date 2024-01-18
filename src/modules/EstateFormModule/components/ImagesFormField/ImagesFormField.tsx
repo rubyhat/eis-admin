@@ -10,6 +10,8 @@ interface ImagesFormFieldProps {
   onImagesUpload: (files: FileList) => void;
 }
 
+// todo: добавить кнопку "Очистить все"
+// баг: добавили 2 фото - пролистнули на 2 фото и вернулись на 1, удалили 1 = баг со 2 фото
 export const ImagesFormField = ({ onImagesUpload }: ImagesFormFieldProps) => {
   const [selectedImages, setSelectedImages] = React.useState<string[]>([]);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
@@ -104,6 +106,11 @@ export const ImagesFormField = ({ onImagesUpload }: ImagesFormFieldProps) => {
         >
           Выбрано фотографий: {selectedImages.length}
         </Typography>
+        {Boolean(!selectedImages.length) && (
+          <Typography component="p" variant="textCalloutRegular">
+            Добавьте фотографии, здесь можно будет их просмотреть
+          </Typography>
+        )}
         {Boolean(selectedImages.length) && (
           <Box>
             <Box>
