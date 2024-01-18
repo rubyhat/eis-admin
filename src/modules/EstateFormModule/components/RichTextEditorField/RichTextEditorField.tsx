@@ -17,7 +17,7 @@ export const RichTextEditorField = () => {
             borderRadius: "8px 8px 0 0",
           },
           "& .ql-container, .ql-editor": {
-            minHeight: 200,
+            minHeight: 300,
             borderRadius: "0 0 8px 8px",
           },
         },

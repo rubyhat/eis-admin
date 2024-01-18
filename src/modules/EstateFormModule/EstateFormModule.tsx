@@ -18,6 +18,7 @@ import { HouseFormFileds } from "./components/HouseFormFileds";
 import { ImagesFormField } from "./components/ImagesFormField";
 import { LandFormFields } from "./components/LandFormFields";
 import { RichTextEditorField } from "./components/RichTextEditorField";
+import { CustomHr } from "../../components/CustomHr";
 
 const livingSpaces = ["apartment", "house", "cottage"];
 const houseAndCottage = ["house", "cottage"];
@@ -58,13 +59,39 @@ export const EstateFormModule = () => {
         <Box component="form" onSubmit={methods.handleSubmit(handleFormSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography component="h1" variant="titleFirstRegular">
-                Добавить новый объект недвижимости
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Typography component="h1" variant="titleFirstRegular">
+                  Добавить новый объект недвижимости
+                </Typography>
+                <CustomButton
+                  type="submit"
+                  size="small"
+                  sx={{ marginLeft: "auto" }}
+                >
+                  + Добавить
+                </CustomButton>
+              </Box>
+              <CustomHr />
+            </Grid>
+          </Grid>
+          <BasicFormFields isLoading={isLoading} />
+          <Grid container spacing={2}>
+            <ImagesFormField onImagesUpload={onImagesUpload} />
+            <Grid item xs={12} md={6}>
+              <RichTextEditorField />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Typography
+                component="p"
+                color="customColors.labelsSecondary"
+                variant="textCalloutRegular"
+                marginBottom={0.5}
+              >
+                Превью описания
               </Typography>
             </Grid>
-            <Grid item xs={12} md={3}>
-              <BasicFormFields isLoading={isLoading} />
-            </Grid>
+          </Grid>
+          <Grid container spacing={2}>
             <Grid item xs={12} md={3}>
               {livingSpaces.includes(formFieldsData.category) && (
                 <>
@@ -80,11 +107,6 @@ export const EstateFormModule = () => {
               {formFieldsData.category === "land" && (
                 <LandFormFields isLoading={isLoading} />
               )}
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <RichTextEditorField />
-              <ImagesFormField onImagesUpload={onImagesUpload} />
-              <CustomButton type="submit">Добавить</CustomButton>
             </Grid>
           </Grid>
         </Box>
