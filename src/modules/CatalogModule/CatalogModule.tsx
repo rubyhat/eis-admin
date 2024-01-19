@@ -9,6 +9,7 @@ import { FilterModule } from "../FilterModule";
 import useTitle from "../../hooks/useTitle";
 import { useLocation } from "react-router-dom";
 import { useCatalogStore } from "./store";
+import { CatalogCardSkeleton } from "./components/CatalogCardSkeleton";
 
 export const CatalogModule = () => {
   useTitle("Каталог");
@@ -68,11 +69,15 @@ export const CatalogModule = () => {
         <Grid item xs={12} md={8} lg={9}>
           {isSuccess && Boolean(!estateObjects.length) && (
             <Alert severity="info">
-              В данный момент нет подходящих объектов недвижимости, но уже
-              совсем скоро нам будет что Вам показать
+              В данный момент нет подходящих объектов недвижимости, проверьте
+              правильно ли заданы фильтры и сортировка, а также точно ли
+              существует такой объект недвижимости
             </Alert>
           )}
-          {isLoading && <p>Загрузка...</p>}
+          {isLoading &&
+            Array.from(new Array(9)).map((_, index) => (
+              <CatalogCardSkeleton key={index} />
+            ))}
           {isError && (
             <Alert severity="warning">
               Произошла ошибка во время запроса данных с сервера! В данный
