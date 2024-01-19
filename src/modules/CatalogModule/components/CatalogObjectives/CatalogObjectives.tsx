@@ -1,8 +1,11 @@
 import { Box } from "@mui/material";
 import React from "react";
 import { CatalogCard } from "../CatalogCard";
+import { useCatalogStore } from "../../store";
 
 export const CatalogObjectives = () => {
+  const { estateObjects } = useCatalogStore((state) => state);
+
   return (
     <Box
       component="ul"
@@ -12,19 +15,9 @@ export const CatalogObjectives = () => {
         borderRadius: 2,
       }}
     >
-      <CatalogCard />
-      <CatalogCard />
-      <CatalogCard />
-      <CatalogCard />
-      <CatalogCard />
-      <CatalogCard />
-      <CatalogCard />
-      <CatalogCard />
-      <CatalogCard />
-      <CatalogCard />
-      <CatalogCard />
-      <CatalogCard />
-      <CatalogCard />
+      {estateObjects.map((item, index) => (
+        <CatalogCard key={index} item={item} />
+      ))}
     </Box>
   );
 };

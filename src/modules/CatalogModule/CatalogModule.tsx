@@ -1,13 +1,38 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography, Alert } from "@mui/material";
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { apiCatalogModule } from "./api/apiCatalogModule";
 import { CatalogObjectives } from "./components/CatalogObjectives";
 import { CatalogSortGroup } from "./components/CatalogSortGroup";
 import { FilterMobileWrapper } from "../FilterModule/components/FilterMobileWrapper";
 import { FilterModule } from "../FilterModule";
 import useTitle from "../../hooks/useTitle";
+import { useLocation } from "react-router-dom";
+import { useCatalogStore } from "./store";
 
 export const CatalogModule = () => {
   useTitle("Каталог");
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const { estateObjects, setEstateObjects } = useCatalogStore((state) => state);
+
+  const {
+    data: catalogData,
+    isLoading,
+    isSuccess,
+    isError,
+  } = useQuery({
+    queryFn: () => apiCatalogModule.fetchCatalog(searchParams.toString()),
+    queryKey: ["catalogItems"],
+  });
+
+  React.useEffect(() => {
+    if (isSuccess && !isError) {
+      setEstateObjects(catalogData);
+    }
+  }, [catalogData, isError, isSuccess, setEstateObjects]);
+
   return (
     <Container>
       <Grid container spacing={2}>
@@ -41,7 +66,22 @@ export const CatalogModule = () => {
           </Box>
         </Grid>
         <Grid item xs={12} md={8} lg={9}>
-          <CatalogObjectives />
+          {isSuccess && Boolean(!estateObjects.length) && (
+            <Alert severity="info">
+              В данный момент нет подходящих объектов недвижимости, но уже
+              совсем скоро нам будет что Вам показать
+            </Alert>
+          )}
+          {isLoading && <p>Загрузка...</p>}
+          {isError && (
+            <Alert severity="warning">
+              Произошла ошибка во время запроса данных с сервера! В данный
+              момент уже ведутся работы по улучшению платформы, скоро здесь
+              появятся объекты недвижимости, пожалуйста, попробуйте зайти
+              позднее!
+            </Alert>
+          )}
+          {isSuccess && Boolean(estateObjects.length) && <CatalogObjectives />}
         </Grid>
         <Grid
           item

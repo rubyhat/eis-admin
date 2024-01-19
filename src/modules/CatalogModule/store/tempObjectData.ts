@@ -1,5 +1,6 @@
 import { ObjectItem } from "./useCatalogStore";
 
+//todo: remove deprecated
 export const tempObjectData: ObjectItem[] = [
   {
     description: "Современная квартира в новостройке",
@@ -15,7 +16,7 @@ export const tempObjectData: ObjectItem[] = [
     isCommercial: false,
     isPledge: false,
     isDocumentsGood: true,
-    type: "buy",
+    type: "sell",
     visibilityStatus: "active",
     category: "apartment",
     estateAgent: {
@@ -80,7 +81,7 @@ export const tempObjectData: ObjectItem[] = [
     isCommercial: true,
     isPledge: false,
     isDocumentsGood: true,
-    type: "buy",
+    type: "sell",
     visibilityStatus: "sold",
     category: "land",
     estateAgent: {
@@ -115,7 +116,7 @@ export const tempObjectData: ObjectItem[] = [
     isDocumentsGood: false,
     type: "rent",
     visibilityStatus: "checking",
-    category: "commercial",
+    category: "business",
     estateAgent: {
       id: "uuid-121314",
       name: "Дмитрий Кузнецов",
@@ -146,7 +147,7 @@ export const tempObjectData: ObjectItem[] = [
     isCommercial: true,
     isPledge: false,
     isDocumentsGood: true,
-    type: "buy",
+    type: "sell",
     visibilityStatus: "active",
     category: "business",
     estateAgent: {

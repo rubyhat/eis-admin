@@ -1,8 +1,13 @@
 import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
+import { AllObjectsType } from "../../store";
 
-export const CatalogCard = () => {
+interface CatalogCardProps {
+  item: AllObjectsType;
+}
+
+export const CatalogCard = ({ item }: CatalogCardProps) => {
   return (
     <Box
       component="li"
@@ -27,7 +32,7 @@ export const CatalogCard = () => {
           padding: 2,
         }}
         component={Link}
-        to="/catalog/123"
+        to={`/catalog/${item.id}`}
       >
         <Box>
           <Typography

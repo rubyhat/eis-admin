@@ -1,7 +1,7 @@
 import { create } from "zustand";
-import { tempObjectData } from "./tempObjectData";
 
 export type ActiveSortType = "new" | "cheap" | "rich";
+export type AllObjectsType = ObjectItem | Apartment | House | Flat;
 
 //todo: transport types and  interfaces to shared types directory
 export type CategoryType =
@@ -61,6 +61,7 @@ export interface GeoPositionInfo {
 
 // Общие характеристики, вне зависимости от категории объекта
 export interface ObjectItem {
+  id: string; // Уникальный айди экземпляра
   description: string; // Текстовое описание объекта недвижимости
   price: number; // or string? Стоимость
   discount: number; // or string? Размер снижения стоимость(скидки)
@@ -123,12 +124,14 @@ export interface Land extends ObjectItem {
 }
 export interface CatalogStore {
   activeSortType: VisibilityStatusType;
-  estateObject: ObjectItem[];
+  estateObjects: AllObjectsType[];
   setActiveSortType: (v: VisibilityStatusType) => void;
+  setEstateObjects: (v: AllObjectsType[]) => void;
 }
 
 export const useCatalogStore = create<CatalogStore>((set) => ({
   activeSortType: "active",
-  estateObject: tempObjectData,
+  estateObjects: [],
   setActiveSortType: (v) => set({ activeSortType: v }),
+  setEstateObjects: (v) => set({ estateObjects: v }),
 }));
