@@ -12,15 +12,47 @@ import { CustomButton } from "../../../../components/CustomButton";
 import { DrawerMenu } from "../DrawerMenu";
 import { useScreenSize } from "../../../../hooks/useScreenSize";
 import { useNavigate } from "react-router-dom";
+import { useLoginStore } from "../../../LoginModule/store";
 
 export const Header = () => {
   const navigate = useNavigate();
   const { isTablet, isMobile } = useScreenSize();
+  const { isAuth } = useLoginStore((state) => state);
 
   const { setIsHeaderBurgerOpen } = useHeaderStore((state) => state);
 
   const handleBurgerIconClick = () => setIsHeaderBurgerOpen(true);
 
+  if (!isAuth) {
+    return (
+      <Box
+        component="header"
+        sx={{
+          padding: isMobile ? "8px 0" : "16px 0",
+          borderBottom: "1px solid",
+          borderColor: "customColors.labelsQuaternary",
+        }}
+      >
+        <Container>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={12}>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Logotype />
+                <CustomButton
+                  variant="contained"
+                  size="medium"
+                  onClick={() => navigate("/login")}
+                  sx={{ marginLeft: "auto" }}
+                >
+                  Войти
+                </CustomButton>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+    );
+  }
   return (
     <Box
       component="header"

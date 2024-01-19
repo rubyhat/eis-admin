@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import { useLoginStore } from "../modules/LoginModule/store";
 
 const ProtectedRoute = React.lazy(() => import("./ProtectedRoute"));
 const Home = React.lazy(() => import("../pages/Home"));
@@ -10,15 +11,24 @@ const HelpDetails = React.lazy(() => import("../pages/HelpDetails"));
 const CreateEstate = React.lazy(() => import("../pages/CreateEstate"));
 const EstateDetails = React.lazy(() => import("../pages/EstateDetails"));
 
+const NoAuth = React.lazy(() => import("../pages/System/NoAuth"));
 const AccessDenied = React.lazy(() => import("../pages/System/AccessDenied"));
 const PageNotFound = React.lazy(() => import("../pages/System/PageNotFound"));
 
 export const RouteList = () => {
-  const isAuth = true;
+  const { isAuth } = useLoginStore((state) => state);
 
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      {/* <Route path="/" element={<Home />} /> */}
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute isAuth={isAuth}>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
 
       <Route path="/help" element={<Help />} />
       <Route path="/help/:id" element={<HelpDetails />} />
@@ -37,6 +47,7 @@ export const RouteList = () => {
           </ProtectedRoute>
         }
       />
+      <Route path="/no-auth" element={<NoAuth />} />
       <Route path="/page-not-found" element={<PageNotFound />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>

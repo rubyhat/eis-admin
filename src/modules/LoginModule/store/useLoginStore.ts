@@ -6,6 +6,6 @@ export interface LoginStore {
 }
 
 export const useLoginStore = create<LoginStore>((set) => ({
-  isAuth: true, //todo: switch to false in default
+  isAuth: false,
   setIsAuth: (v) => set({ isAuth: v }),
 }));
