@@ -8,6 +8,7 @@ import { Footer } from "./components/Footer";
 import { ThemeProvider } from "@emotion/react";
 import { appTheme } from "./appTheme";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ToasterProvider } from "../../providers/ToasterProvider";
 
 const client = new QueryClient();
 
@@ -25,6 +26,7 @@ export const App = () => {
             </main>
             <Footer />
           </div>
+          <ToasterProvider />
         </ThemeProvider>
       </QueryClientProvider>
     </Router>

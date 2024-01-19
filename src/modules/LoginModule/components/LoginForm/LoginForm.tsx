@@ -1,13 +1,18 @@
-import { Box, Typography } from "@mui/material";
+import { Alert, Box, Typography } from "@mui/material";
 import React from "react";
 import { CustomInput } from "../../../../components/CustomInput";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { CustomButton } from "../../../../components/CustomButton";
 import { useLoginStore } from "../../store";
+import { LoginProps, apiLoginModule } from "../../api";
+import { useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 export const LoginForm = () => {
   const [isLoading, setIsLoading] = React.useState(false);
+  const [errorCode, setErrorCode] = React.useState<number | null>(null);
   const { setIsAuth } = useLoginStore((state) => state);
+  const queryClient = useQueryClient();
 
   const {
     register,
@@ -15,22 +20,73 @@ export const LoginForm = () => {
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
-      nickname: "",
+      username: "",
       password: "",
     },
   });
 
+  const sendLogin = async (data: LoginProps) => {
+    setIsLoading(true);
+    try {
+      await queryClient.fetchQuery({
+        queryKey: ["sendLogin"],
+        queryFn: () => apiLoginModule.login(data),
+      });
+      toast.success("Авторизация прошла успешно!");
+      setIsAuth(true);
+    } catch (error: unknown) {
+      if (typeof error === "object" && error !== null) {
+        // Приведение типа error к нужному интерфейсу
+        const axiosError = error as { status?: number; message?: string };
+        if (axiosError.status === 401) {
+          toast.error("Введен не правильный логин или пароль");
+        }
+        if (axiosError.status === 404) {
+          toast.error("Такого пользователя не существует");
+        }
+
+        if (axiosError.status) setErrorCode(axiosError.status);
+      } else {
+        // Обработка других типов ошибок
+        toast.error(
+          "Извините, произошла ошибка, попробуйте повторить позднее.",
+        );
+      }
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
     setIsLoading(false);
-    setIsAuth(true); // todo: create request
+    sendLogin({
+      username: data.username,
+      password: data.password,
+    });
   };
 
   return (
     <Box component="form" onSubmit={handleSubmit(handleFormSubmit)}>
       <Typography variant="titleSecondRegular">Авторизация</Typography>
+      {errorCode && (
+        <Box margin={"8px 0 12px 0"}>
+          {errorCode === 404 && (
+            <Alert severity="error">
+              Такого пользователя не существует. Проверьте введенные данные и
+              попробуйте еще раз.
+            </Alert>
+          )}
+          {errorCode === 401 && (
+            <Alert severity="error">
+              Не правильный логин или пароль. Проверьте введенные данные и
+              попробуйте еще раз.
+            </Alert>
+          )}
+        </Box>
+      )}
       <CustomInput
-        id="nickname"
+        id="username"
         register={register}
         errors={errors}
         disabled={isLoading}
