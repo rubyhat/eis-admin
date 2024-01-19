@@ -7,21 +7,26 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { ThemeProvider } from "@emotion/react";
 import { appTheme } from "./appTheme";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const client = new QueryClient();
 
 export const App = () => {
   return (
     <Router>
-      <ThemeProvider theme={appTheme}>
-        <div className="wrapper">
-          <Header />
-          <main className="content">
-            <Suspense>
-              <RouteList />
-            </Suspense>
-          </main>
-          <Footer />
-        </div>
-      </ThemeProvider>
+      <QueryClientProvider client={client}>
+        <ThemeProvider theme={appTheme}>
+          <div className="wrapper">
+            <Header />
+            <main className="content">
+              <Suspense>
+                <RouteList />
+              </Suspense>
+            </main>
+            <Footer />
+          </div>
+        </ThemeProvider>
+      </QueryClientProvider>
     </Router>
   );
 };
