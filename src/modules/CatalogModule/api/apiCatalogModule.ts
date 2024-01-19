@@ -10,8 +10,6 @@ export const apiCatalogModule = {
         return response.data.data;
       })
       .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.log("fetchCatalogError", error);
         throw error;
       });
   },

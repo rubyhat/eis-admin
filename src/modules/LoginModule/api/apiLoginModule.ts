@@ -18,6 +18,11 @@ export const apiLoginModule = {
       .post("/auth/login", data)
       .then((response) => {
         if (response.status >= 422) throw new Error("Ошибка сервера!");
+        localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem(
+          "accessTokenExpiration",
+          response.data.accessTokenExpiration,
+        );
         return response.data.data;
       })
       .catch((error: AxiosError) => {
