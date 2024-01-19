@@ -43,12 +43,16 @@ axiosBaseWrap.interceptors.request.use(
 
     // Проверяем есть ли токен в локальном сторе
     if (token && expiration) {
-      const now = new Date();
-      // Если токен протух, то обновляем его
-      if (now.getTime() > parseInt(expiration)) {
-        const newToken = await updateAccessToken();
-        if (newToken) {
-          config.headers["Authorization"] = `Bearer ${newToken}`;
+      if (config.url !== "/auth/refresh") {
+        const now = new Date().getTime();
+        // Если токен протух, то обновляем его
+        if (now > parseInt(expiration)) {
+          const newToken = await updateAccessToken();
+          if (newToken) {
+            config.headers["Authorization"] = `Bearer ${newToken}`;
+          }
+        } else {
+          config.headers["Authorization"] = `Bearer ${token}`;
         }
       } else {
         config.headers["Authorization"] = `Bearer ${token}`;

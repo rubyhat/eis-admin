@@ -5,14 +5,14 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { CustomButton } from "../../../../components/CustomButton";
 import { useLoginStore } from "../../store";
 import { LoginProps, apiLoginModule } from "../../api";
-import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 export const LoginForm = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [errorCode, setErrorCode] = React.useState<number | null>(null);
   const { setIsAuth } = useLoginStore((state) => state);
-  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -28,12 +28,10 @@ export const LoginForm = () => {
   const sendLogin = async (data: LoginProps) => {
     setIsLoading(true);
     try {
-      await queryClient.fetchQuery({
-        queryKey: ["sendLogin"],
-        queryFn: () => apiLoginModule.login(data),
-      });
+      await apiLoginModule.login(data);
       toast.success("Авторизация прошла успешно!");
       setIsAuth(true);
+      navigate("/");
     } catch (error: unknown) {
       if (typeof error === "object" && error !== null) {
         // Приведение типа error к нужному интерфейсу

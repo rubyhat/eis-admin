@@ -18,10 +18,12 @@ export const apiLoginModule = {
       .post("/auth/login", data)
       .then((response) => {
         if (response.status >= 422) throw new Error("Ошибка сервера!");
+        const expiresIn = response.data.accessTokenExpiration; // Продолжительность жизни токена
+        const expirationTime = new Date().getTime() + expiresIn;
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem(
           "accessTokenExpiration",
-          response.data.accessTokenExpiration,
+          expirationTime.toString(),
         );
         return response.data.data;
       })
