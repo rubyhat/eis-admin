@@ -1,7 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
+import { TbCurrencyTenge } from "react-icons/tb";
 import { AllObjectsType } from "../../store";
+import { usePriceNormalize } from "../../../../hooks/usePriceNormalize";
 
 interface CatalogCardProps {
   item: AllObjectsType;
@@ -46,8 +48,10 @@ export const CatalogCard = ({ item }: CatalogCardProps) => {
             component="p"
             variant="textSubheadlineRegular"
             color="customColors.labelsSecondary"
+            sx={{ display: "flex", alignItems: "center" }}
           >
-            2-х комнатная | 45м2 | Т 16.000.000
+            2-х комнатная | 45м2 | <TbCurrencyTenge size={16} />{" "}
+            {usePriceNormalize(item.price).totalPrice}
           </Typography>
         </Box>
         <Box display="flex" alignItems="center" marginLeft={1}>
