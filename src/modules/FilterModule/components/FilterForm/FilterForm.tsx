@@ -13,76 +13,124 @@ import {
   SubmitHandler,
   useForm,
 } from "react-hook-form";
+import toast from "react-hot-toast";
 import { CustomButton } from "../../../../components/CustomButton";
 import { CustomInput } from "../../../../components/CustomInput";
-import { useLocation } from "react-router-dom";
+import { FilterState, initialFilterState, useFilterStore } from "../../store";
+import { useQueryClient } from "@tanstack/react-query";
+import { apiCatalogModule } from "../../../CatalogModule/api/apiCatalogModule";
+
+const selectStyles = {
+  height: "36px",
+  width: "100%",
+  fontSize: "15px",
+  "&:hover": {
+    "& fieldset": {
+      borderColor: "hsla(213, 100%, 53%, 1) !important",
+    },
+  },
+  "& fieldset": {
+    borderColor: "customColors.labelsQuaternary",
+  },
+};
 
 const selectInputProps = {
   padding: 1,
   fontSize: 16,
 };
 
+// todo: при выборе фильтров - обновляется урл страницы - если обновить страницу - урл остался прежним,
+// а форма в фильтре обнулилась. Нужно либо очищать урл при обновлении страницы, либо обновлять фильтр
+// в зависимости от урла
 export const FilterForm = () => {
+  const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = React.useState(false);
+  const { filterState, setIsMobileFilterModalOpen, setFilterState } =
+    useFilterStore((state) => state);
+
   const {
     control,
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FieldValues>({
     defaultValues: {
-      city: "",
-      category: "",
-      houseWallMaterial: "",
-      houseCondition: "",
-      roomCount: "",
-      priceStart: "",
-      priceEnd: "",
-      houseSquare: "",
-      kitchenSquare: "",
-      houseBuildingYear: "",
-      mortgage: false,
-      hasSwap: false,
+      ...filterState,
     },
   });
-  const location = useLocation();
 
   React.useEffect(() => {
-    const fetchData = async () => {
+    const updateFilterState = async () => {
       // Получаем параметры из URL
       const searchParams = new URLSearchParams(location.search);
 
       // Преобразуем их в объект
       const params = Object.fromEntries(searchParams.entries());
-      console.log("params: ", params);
-
-      // todo: create request
-      // try {
-      //   // Выполняем GET-запрос с параметрами
-      //   const response = await axios.get('/your-endpoint', { params });
-      //   console.log(response.data);
-      //   // Обработка полученных данных
-      // } catch (error) {
-      //   console.error('Ошибка при выполнении запроса:', error);
-      //   // Обработка ошибки
-      // }
+      const newFilterValues = { ...initialFilterState, ...params };
+      setFilterState(newFilterValues); // обновляем стейт в стейт менеджере
+      reset(newFilterValues); // обновляем стейт в react-hook-form
     };
 
     // Проверяем, есть ли параметры в URL
     if (location.search) {
-      fetchData();
+      updateFilterState();
     }
-  }, [location]);
+  }, [setFilterState, reset, queryClient]);
 
-  const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(false);
+  const fetchData = async (queryParams: string = "") => {
+    setIsLoading(true);
+    try {
+      await queryClient.fetchQuery({
+        queryKey: ["catalogItems"],
+        queryFn: () => apiCatalogModule.fetchCatalog(queryParams),
+      });
+      toast.success("Фльтры успешно обновлены!");
+    } catch (error) {
+      toast.error("Извините, произошла ошибка, попробуйте повторить позднее.");
+      // eslint-disable-next-line no-console
+      console.error("fetch data error", error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
+  const updateUrlParams = (data: FieldValues) => {
+    // Очищаем от пустых значений
     const filteredData = Object.fromEntries(
       Object.entries(data).filter(([, value]) => value !== ""),
     );
 
+    // Сохраняем стейт фильтра
+    setFilterState({ ...data } as FilterState);
+
+    // Создаем параметры для ссылки
     const queryParams = new URLSearchParams(filteredData).toString();
-    console.log(queryParams); //todo: create request
+
+    // Получение текущего URL
+    const currentUrl = new URL(window.location.href);
+
+    // Добавляем параметры запроса к текущему URL
+    currentUrl.search = queryParams;
+
+    // Обновляем URL без перезагрузки страницы
+    window.history.pushState({}, "", currentUrl);
+
+    // Делаем запрос за данными на сервер
+    fetchData(queryParams);
+  };
+
+  const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
+    updateUrlParams(data);
+    setIsMobileFilterModalOpen(false);
+  };
+
+  const handleFormReset = () => {
+    reset(initialFilterState);
+    setFilterState(initialFilterState);
+    setIsMobileFilterModalOpen(false);
+    updateUrlParams(initialFilterState);
   };
 
   return (
@@ -92,7 +140,32 @@ export const FilterForm = () => {
           Фильтры
         </Typography>
       </Box>
-      <Box padding="12px 16px 0 16px">
+      <Box padding="0px 16px">
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textFootnoteRegular"
+            marginBottom={0.5}
+          >
+            Тип
+          </Typography>
+          <Controller
+            name="type"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="sell">Купить</MenuItem>
+                <MenuItem value="rent">Арендовать</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
         <Box marginBottom={1.5}>
           <Typography
             component="p"
@@ -109,19 +182,7 @@ export const FilterForm = () => {
               <Select
                 {...field}
                 displayEmpty
-                sx={{
-                  height: "36px",
-                  width: "100%",
-                  fontSize: "15px",
-                  "&:hover": {
-                    "& fieldset": {
-                      borderColor: "hsla(213, 100%, 53%, 1) !important",
-                    },
-                  },
-                  "& fieldset": {
-                    borderColor: "customColors.labelsQuaternary",
-                  },
-                }}
+                sx={selectStyles}
                 inputProps={{ sx: selectInputProps }}
               >
                 <MenuItem disabled value="">
@@ -155,19 +216,7 @@ export const FilterForm = () => {
               <Select
                 {...field}
                 displayEmpty
-                sx={{
-                  height: "36px",
-                  width: "100%",
-                  fontSize: "15px",
-                  "&:hover": {
-                    "& fieldset": {
-                      borderColor: "hsla(213, 100%, 53%, 1) !important",
-                    },
-                  },
-                  "& fieldset": {
-                    borderColor: "customColors.labelsQuaternary",
-                  },
-                }}
+                sx={selectStyles}
                 inputProps={{ sx: selectInputProps }}
               >
                 <MenuItem disabled value="">
@@ -180,9 +229,11 @@ export const FilterForm = () => {
                 </MenuItem>
                 <MenuItem value="apartment">Квартира</MenuItem>
                 <MenuItem value="house">Дом</MenuItem>
-                <MenuItem value="cottage">Дача</MenuItem>
+                {/* <MenuItem value="cottage">Дача</MenuItem> */}
                 <MenuItem value="land">Земельный участок</MenuItem>
                 <MenuItem value="business">Коммерческая недвижимость</MenuItem>
+                {/* <MenuItem value="factory">Заводы, фабрики</MenuItem> */}
+                {/* <MenuItem value="other">Другое</MenuItem> */}
               </Select>
             )}
           />
@@ -203,19 +254,7 @@ export const FilterForm = () => {
               <Select
                 {...field}
                 displayEmpty
-                sx={{
-                  height: "36px",
-                  width: "100%",
-                  fontSize: "15px",
-                  "&:hover": {
-                    "& fieldset": {
-                      borderColor: "hsla(213, 100%, 53%, 1) !important",
-                    },
-                  },
-                  "& fieldset": {
-                    borderColor: "customColors.labelsQuaternary",
-                  },
-                }}
+                sx={selectStyles}
                 inputProps={{ sx: selectInputProps }}
               >
                 <MenuItem disabled value="">
@@ -258,19 +297,7 @@ export const FilterForm = () => {
                 {...field}
                 placeholder="Выбрать состояние"
                 displayEmpty
-                sx={{
-                  height: "36px",
-                  width: "100%",
-                  fontSize: "15px",
-                  "&:hover": {
-                    "& fieldset": {
-                      borderColor: "hsla(213, 100%, 53%, 1) !important",
-                    },
-                  },
-                  "& fieldset": {
-                    borderColor: "customColors.labelsQuaternary",
-                  },
-                }}
+                sx={selectStyles}
                 inputProps={{ sx: selectInputProps }}
               >
                 <MenuItem disabled value="">
@@ -306,14 +333,7 @@ export const FilterForm = () => {
               <Select
                 {...field}
                 displayEmpty
-                sx={{
-                  fontSize: "15px",
-                  height: "36px",
-                  width: "100%",
-                  "& fieldset": {
-                    borderColor: "customColors.labelsQuaternary",
-                  },
-                }}
+                sx={selectStyles}
                 inputProps={{ sx: selectInputProps }}
               >
                 <MenuItem disabled value="">
@@ -423,8 +443,15 @@ export const FilterForm = () => {
             control={control}
             render={({ field }) => (
               <FormControlLabel
-                {...field}
-                control={<Switch />}
+                control={
+                  <Switch
+                    {...field}
+                    checked={field.value === "true"}
+                    onChange={(e) =>
+                      field.onChange(e.target.checked.toString())
+                    }
+                  />
+                }
                 label="Есть ипотека"
               />
             )}
@@ -434,19 +461,37 @@ export const FilterForm = () => {
             control={control}
             render={({ field }) => (
               <FormControlLabel
-                {...field}
-                control={<Switch />}
+                control={
+                  <Switch
+                    {...field}
+                    checked={field.value === "true"}
+                    onChange={(e) =>
+                      field.onChange(e.target.checked.toString())
+                    }
+                  />
+                }
                 label="Есть обмен"
               />
             )}
           />
         </Box>
       </Box>
-      <Box padding="0 16px 12px 16px" display="flex" gap={2}>
-        <CustomButton isCancelVariant size="small" fullWidth>
+      <Box padding="0px 16px 12px 16px" display="flex" gap={2}>
+        <CustomButton
+          isCancelVariant
+          size="medium"
+          fullWidth
+          onClick={handleFormReset}
+          disabled={isLoading}
+        >
           Сбросить
         </CustomButton>
-        <CustomButton size="small" fullWidth type="submit" disabled={isLoading}>
+        <CustomButton
+          size="medium"
+          fullWidth
+          type="submit"
+          disabled={isLoading}
+        >
           Применить
         </CustomButton>
       </Box>
