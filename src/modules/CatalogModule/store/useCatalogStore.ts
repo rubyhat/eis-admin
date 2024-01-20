@@ -54,7 +54,7 @@ export interface EstateAgentInfo {
 export interface GeoPositionInfo {
   city: string; // Город
   street: string; // Улица
-  houseNumber: number; // Номер дома
+  houseNumber: number | null; // Номер дома
   isInfoHidden: boolean; // Свитчер для сокрытия адреса
   mapLink: string; // Ссылка на 2гис
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 import {
@@ -8,7 +9,11 @@ import {
 } from "react-hook-form";
 import { CustomButton } from "../../components/CustomButton";
 import {
-  FormFieldsData,
+  Apartment,
+  Flat,
+  FormFieldsType,
+  House,
+  Land,
   useCreateEstateStore,
 } from "../CreateEstateModule/store";
 import { BasicFormFields } from "./components/BasicFormFields";
@@ -19,6 +24,7 @@ import { ImagesFormField } from "./components/ImagesFormField";
 import { LandFormFields } from "./components/LandFormFields";
 import { RichTextEditorField } from "./components/RichTextEditorField";
 import { CustomHr } from "../../components/CustomHr";
+import { apiCreateEstateModule } from "../CreateEstateModule/api";
 
 const livingSpaces = ["apartment", "house", "cottage"];
 const houseAndCottage = ["house", "cottage"];
@@ -31,16 +37,147 @@ export const EstateFormModule = () => {
 
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(false);
-    setFormFieldsData(data as FormFieldsData);
+    setFormFieldsData(data as FormFieldsType);
+    const {
+      // basic values
+      description,
+      price,
+      discount,
+      images,
+      videoLink,
+      mortgage,
+      hasSwap,
+      isCommercial,
+      isPledge,
+      isDocumentsGood,
+      type,
+      category,
+      visibilityStatus,
+      // estateAgent, // add data from user info req, need user info req
+      geoPosition,
+    } = data as FormFieldsType;
 
-    console.log(data);
+    const {
+      // Apartment
+      roomCount,
+      houseBuildingYear,
+      houseSquare,
+      kitchenSquare,
+      countFloor,
+      ceilingHeight,
+      toiletCount,
+      houseCondition,
+      houseWallMaterial,
+      houseRoofMaterial,
+      furniture,
+      ethernet,
+    } = data as Apartment;
 
-    // estateAgent: {
-    //   id: 1,
-    //   name: "Артур Розе",
-    //   avatar: "",
-    //   phone: "",
-    // },
+    const {
+      // House
+      plotSquare,
+      hasBasement,
+      hasMansard,
+      houseType,
+      electricType,
+      heatingType,
+      gasType,
+      sewerType,
+      toiletType,
+      waterType,
+    } = data as House;
+
+    const {
+      // Flat
+      targetFloor,
+      totalFloor,
+    } = data as Flat;
+
+    const {
+      // Land
+      landSquare,
+    } = data as Land;
+
+    const basicData = {
+      description: description,
+      price: price,
+      discount: discount,
+      images: images, // add images
+      videoLink: videoLink,
+      mortgage: mortgage,
+      hasSwap: hasSwap,
+      isCommercial: isCommercial,
+      isPledge: isPledge,
+      isDocumentsGood: isDocumentsGood,
+      type: type,
+      category: category,
+      visibilityStatus: visibilityStatus,
+      // estateAgent: estateAgent,
+      geoPosition: geoPosition,
+    };
+
+    const apartmentData = {
+      roomCount: roomCount,
+      houseBuildingYear: houseBuildingYear,
+      houseSquare: houseSquare,
+      kitchenSquare: kitchenSquare,
+      countFloor: countFloor,
+      ceilingHeight: ceilingHeight,
+      toiletCount: toiletCount,
+      houseCondition: houseCondition,
+      houseWallMaterial: houseWallMaterial,
+      houseRoofMaterial: houseRoofMaterial,
+      furniture: furniture,
+      ethernet: ethernet,
+    };
+
+    const houseData = {
+      plotSquare: plotSquare,
+      hasBasement: hasBasement,
+      hasMansard: hasMansard,
+      houseType: houseType,
+      electricType: electricType,
+      heatingType: heatingType,
+      gasType: gasType,
+      sewerType: sewerType,
+      toiletType: toiletType,
+      waterType: waterType,
+    };
+
+    const flatData = { targetFloor: targetFloor, totalFloor: totalFloor };
+
+    const landData = { landSquare: landSquare };
+
+    const totalData = {
+      apartment: { ...apartmentData, ...flatData },
+      cottage: { ...apartmentData, ...houseData },
+      house: { ...apartmentData, ...houseData },
+      land: { ...landData },
+      business: {},
+      factory: {},
+      other: {},
+    };
+
+    const createObjectReq = () => {
+      const sendData = {
+        ...basicData,
+        ...totalData[category],
+      };
+      // const filteredData = Object.fromEntries(
+      //   Object.entries(sendData).filter(([, value]) => value !== ""),
+      // );
+      const filteredData = Object.entries(sendData).reduce(
+        (acc, [key, value]) => {
+          if (value !== "" && value !== null) {
+            acc[key] = value;
+          }
+          return acc;
+        },
+        {} as Record<string, any>,
+      );
+      apiCreateEstateModule.createObject(filteredData as FormFieldsType);
+    };
+    createObjectReq();
   };
 
   const onImagesUpload = (files: FileList) => {

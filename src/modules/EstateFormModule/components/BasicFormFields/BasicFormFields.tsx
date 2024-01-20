@@ -193,10 +193,98 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
             variant="textCalloutRegular"
             marginBottom={0.5}
           >
+            Город
+            <Typography
+              component="span"
+              color="customColors.colorsRed"
+              variant="textCalloutRegular"
+              marginLeft={0.5}
+            >
+              *
+            </Typography>
+          </Typography>
+          <Controller
+            name="geoPosition.city"
+            control={control}
+            render={({ field }) => (
+              <Select
+                required
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem disabled value="">
+                  <Typography
+                    variant="textCalloutRegular"
+                    color="customColors.labelsSecondary"
+                  >
+                    Например: Караганда
+                  </Typography>
+                </MenuItem>
+                <MenuItem value="krg">Караганда</MenuItem>
+                <MenuItem value="ast">Астана</MenuItem>
+                <MenuItem value="alm">Аламата</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Улица
+            <Typography
+              component="span"
+              color="customColors.colorsRed"
+              variant="textCalloutRegular"
+              marginLeft={0.5}
+            >
+              *
+            </Typography>
+          </Typography>
+          <CustomInput
+            required
+            id="geoPosition.street"
+            register={register}
+            errors={formState.errors}
+            disabled={isLoading}
+            formatPrice={false}
+            placeholder="Например: ул. Гоголя"
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Дом
+          </Typography>
+          <CustomInput
+            id="geoPosition.houseNumber"
+            register={register}
+            errors={formState.errors}
+            disabled={isLoading}
+            formatPrice={false}
+            placeholder="Например: 42"
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
             Ссылка на карту 2gis
           </Typography>
           <CustomInput
-            id="mapLink"
+            id="geoPosition.mapLink"
             register={register}
             errors={formState.errors}
             disabled={isLoading}
@@ -204,6 +292,8 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
             placeholder="Например: https://2gis.kz/..."
           />
         </Box>
+      </Grid>
+      <Grid item xs={12} md={3}>
         <Box marginBottom={1.5}>
           <Typography
             component="p"
@@ -271,96 +361,6 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
         </Box>
       </Grid>
       <Grid item xs={12} md={3}>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textCalloutRegular"
-            marginBottom={0.5}
-          >
-            Город
-            <Typography
-              component="span"
-              color="customColors.colorsRed"
-              variant="textCalloutRegular"
-              marginLeft={0.5}
-            >
-              *
-            </Typography>
-          </Typography>
-          <Controller
-            name="city"
-            control={control}
-            render={({ field }) => (
-              <Select
-                required
-                {...field}
-                displayEmpty
-                sx={selectStyles}
-                inputProps={{ sx: selectInputProps }}
-              >
-                <MenuItem disabled value="">
-                  <Typography
-                    variant="textCalloutRegular"
-                    color="customColors.labelsSecondary"
-                  >
-                    Например: Караганда
-                  </Typography>
-                </MenuItem>
-                <MenuItem value="krg">Караганда</MenuItem>
-                <MenuItem value="ast">Астана</MenuItem>
-                <MenuItem value="alm">Аламата</MenuItem>
-              </Select>
-            )}
-          />
-        </Box>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textCalloutRegular"
-            marginBottom={0.5}
-          >
-            Улица
-            <Typography
-              component="span"
-              color="customColors.colorsRed"
-              variant="textCalloutRegular"
-              marginLeft={0.5}
-            >
-              *
-            </Typography>
-          </Typography>
-          <CustomInput
-            required
-            id="street"
-            register={register}
-            errors={formState.errors}
-            disabled={isLoading}
-            formatPrice={false}
-            placeholder="Например: ул. Гоголя"
-          />
-        </Box>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textCalloutRegular"
-            marginBottom={0.5}
-          >
-            Дом
-          </Typography>
-          <CustomInput
-            id="houseNumber"
-            register={register}
-            errors={formState.errors}
-            disabled={isLoading}
-            formatPrice={false}
-            placeholder="Например: 42"
-          />
-        </Box>
-      </Grid>
-      <Grid item xs={12} md={3}>
         <Typography
           component="p"
           color="customColors.labelsSecondary"
@@ -422,6 +422,17 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
                 {...field}
                 control={<Switch />}
                 label="Документы в порядке"
+              />
+            )}
+          />
+          <Controller
+            name="geoPosition.isInfoHidden"
+            control={control}
+            render={({ field }) => (
+              <FormControlLabel
+                {...field}
+                control={<Switch />}
+                label="Скрыть адрес"
               />
             )}
           />

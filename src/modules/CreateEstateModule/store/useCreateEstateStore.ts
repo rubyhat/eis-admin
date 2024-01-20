@@ -5,6 +5,7 @@ import {
   EthernetType,
   FurnitureType,
   GasType,
+  GeoPositionInfo,
   HeatingType,
   HouseConditionType,
   HouseRoofMaterialType,
@@ -45,62 +46,63 @@ const listLinkStepsData: ListLinkSteps = {
   ],
 };
 
-const formFieldsDataInitial: FormFieldsData | Apartment | House | Flat | Land =
-  {
-    // basic values
-    description: "",
-    price: 0,
-    discount: 0,
-    images: [],
-    videoLink: "",
-    mortgage: false,
-    hasSwap: false,
-    isCommercial: false,
-    isPledge: false,
-    isDocumentsGood: true,
-    type: "sell",
-    category: "apartment",
-    visibilityStatus: "checking",
-    estateAgent: "roze",
+const formFieldsDataInitial: FormFieldsType = {
+  // basic values
+  description: "",
+  price: null,
+  discount: null,
+  images: [],
+  videoLink: "",
+  mortgage: false,
+  hasSwap: false,
+  isCommercial: false,
+  isPledge: false,
+  isDocumentsGood: true,
+  type: "sell",
+  category: "apartment",
+  visibilityStatus: "checking",
+  estateAgent: "roze",
+  geoPosition: {
     city: "krg",
     street: "",
-    houseNumber: "",
+    houseNumber: null,
     isInfoHidden: false,
     mapLink: "",
+  },
 
-    // Apartment
-    roomCount: 1,
-    houseBuildingYear: null,
-    houseSquare: null,
-    kitchenSquare: null,
-    countFloor: null,
-    ceilingHeight: null,
-    toiletCount: null,
-    houseCondition: "",
-    houseWallMaterial: "",
-    houseRoofMaterial: "",
-    furniture: "",
-    ethernet: "",
+  // Apartment
+  roomCount: null,
+  houseBuildingYear: null,
+  houseSquare: null,
+  kitchenSquare: null,
+  countFloor: null,
+  ceilingHeight: null,
+  toiletCount: null,
+  houseCondition: "",
+  houseWallMaterial: "",
+  houseRoofMaterial: "",
+  furniture: "",
+  ethernet: "",
 
-    // House
-    plotSquare: null,
-    hasBasement: false,
-    hasMansard: false,
-    houseType: "",
-    electricType: "",
-    heatingType: "",
-    gasType: "",
-    sewerType: "",
-    toiletType: "",
-    waterType: "",
+  // House
+  plotSquare: null,
+  hasBasement: false,
+  hasMansard: false,
+  houseType: "",
+  electricType: "",
+  heatingType: "",
+  gasType: "",
+  sewerType: "",
+  toiletType: "",
+  waterType: "",
 
-    // Flat
-    targetFloor: null,
-    totalFloor: null,
+  // Flat
+  targetFloor: null,
+  totalFloor: null,
 
-    // Land
-    landSquare: "",
-  };
+  // Land
+  landSquare: "",
+};
 
 export interface ListLinkSteps {
   service: StepData[];
@@ -113,60 +115,57 @@ export interface StepData {
   subtitle: string;
 }
 
+export type FormFieldsType = FormFieldsData | Apartment | House | Flat | Land;
 export interface FormFieldsData {
   category: CategoryType;
   visibilityStatus: VisibilityStatusType;
   type: ServiceType;
-  price: number;
-  discount: number;
+  price: number | null;
+  discount?: number | null;
   description: string;
-  images: FileList | [];
-  videoLink: string;
-  estateAgent: string; // todo: transform to EstateAgentInfo interface
-  city: string;
-  street: string;
-  houseNumber: string;
-  mapLink: string;
+  images?: FileList | [];
+  videoLink?: string;
+  estateAgent?: string; // todo: transform to EstateAgentInfo interface
   mortgage: boolean;
   hasSwap: boolean;
   isCommercial: boolean;
   isPledge: boolean;
   isDocumentsGood: boolean;
-  isInfoHidden: boolean;
+  geoPosition: GeoPositionInfo; // Данные об объекте недвижимости, где она
 }
 
 export interface Apartment extends FormFieldsData {
-  roomCount: number; // Количество комнат
-  houseBuildingYear: number | null; // Год постройки
+  roomCount: number | null; // Количество комнат
+  houseBuildingYear?: number | null; // Год постройки
   houseSquare: number | null; // Площадь общая
-  kitchenSquare: number | null; // Площадь кухни
-  countFloor: number | null; // Количество этажей в квартире/доме (бывают двухэтажные квартиры, трех этажные котеджи и т.д.)
-  ceilingHeight: number | null; // Высота потолков
-  toiletCount: number | null; // Количество сан.узлов
-  houseCondition: HouseConditionType | ""; // Состояние дома
-  houseWallMaterial: HouseWallMaterialType | ""; // Материал стен
-  houseRoofMaterial: HouseRoofMaterialType | ""; // Материал крыши
-  furniture: FurnitureType | ""; // Мебелирован ли?
-  ethernet: EthernetType | ""; // Интернет
+  kitchenSquare?: number | null; // Площадь кухни
+  countFloor?: number | null; // Количество этажей в квартире/доме (бывают двухэтажные квартиры, трех этажные котеджи и т.д.)
+  ceilingHeight?: number | null; // Высота потолков
+  toiletCount?: number | null; // Количество сан.узлов
+  houseCondition?: HouseConditionType | ""; // Состояние дома
+  houseWallMaterial?: HouseWallMaterialType | ""; // Материал стен
+  houseRoofMaterial?: HouseRoofMaterialType | ""; // Материал крыши
+  furniture?: FurnitureType | ""; // Мебелирован ли?
+  ethernet?: EthernetType | ""; // Интернет
 }
 
 // Только в доме
 export interface House extends Apartment {
-  plotSquare: number | null; // Площадь/количество соток земли у дома
-  hasBasement: boolean; // Есть/нет цокольный этаж
-  hasMansard: boolean; // Есть/нет мансарда
-  houseType: HouseType | ""; // Тип дома, бывает что в одном доме два хозяина, поделен по-полам;
-  electricType: ElectricType | "";
-  heatingType: HeatingType | "";
-  gasType: GasType | "";
-  sewerType: SewerType | "";
-  toiletType: ToiletType | "";
-  waterType: WaterType | "";
+  plotSquare?: number | null; // Площадь/количество соток земли у дома
+  hasBasement?: boolean; // Есть/нет цокольный этаж
+  hasMansard?: boolean; // Есть/нет мансарда
+  houseType?: HouseType | ""; // Тип дома, бывает что в одном доме два хозяина, поделен по-полам;
+  electricType?: ElectricType | "";
+  heatingType?: HeatingType | "";
+  gasType?: GasType | "";
+  sewerType?: SewerType | "";
+  toiletType?: ToiletType | "";
+  waterType?: WaterType | "";
 }
 // Только в квартире
 export interface Flat extends Apartment {
-  targetFloor: number | null; // Этаж, на котором находится объект
-  totalFloor: number | null; // Общее количество этажей в здании
+  targetFloor?: number | null; // Этаж, на котором находится объект
+  totalFloor?: number | null; // Общее количество этажей в здании
 }
 
 export interface Commercial extends FormFieldsData {}
