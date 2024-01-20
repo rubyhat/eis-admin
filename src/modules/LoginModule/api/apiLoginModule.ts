@@ -20,6 +20,7 @@ export const apiLoginModule = {
         if (response.status >= 422) throw new Error("Ошибка сервера!");
         const expiresIn = response.data.accessTokenExpiration; // Продолжительность жизни токена
         const expirationTime = new Date().getTime() + expiresIn;
+        // const expirationTime = new Date().getTime() + 3000;
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem(
           "accessTokenExpiration",
