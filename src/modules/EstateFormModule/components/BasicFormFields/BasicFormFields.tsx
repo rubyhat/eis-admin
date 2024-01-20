@@ -376,7 +376,15 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
             render={({ field }) => (
               <FormControlLabel
                 {...field}
-                control={<Switch />}
+                control={
+                  <Switch
+                    {...field}
+                    checked={field.value === "true"}
+                    onChange={(e) =>
+                      field.onChange(e.target.checked.toString())
+                    }
+                  />
+                }
                 label="Есть ипотека"
               />
             )}
@@ -387,7 +395,15 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
             render={({ field }) => (
               <FormControlLabel
                 {...field}
-                control={<Switch />}
+                control={
+                  <Switch
+                    {...field}
+                    checked={field.value === "true"}
+                    onChange={(e) =>
+                      field.onChange(e.target.checked.toString())
+                    }
+                  />
+                }
                 label="Есть обмен"
               />
             )}
@@ -398,7 +414,15 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
             render={({ field }) => (
               <FormControlLabel
                 {...field}
-                control={<Switch />}
+                control={
+                  <Switch
+                    {...field}
+                    checked={field.value === "true"}
+                    onChange={(e) =>
+                      field.onChange(e.target.checked.toString())
+                    }
+                  />
+                }
                 label="Коммерческая недвижимость"
               />
             )}
@@ -409,7 +433,15 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
             render={({ field }) => (
               <FormControlLabel
                 {...field}
-                control={<Switch />}
+                control={
+                  <Switch
+                    {...field}
+                    checked={field.value === "true"}
+                    onChange={(e) =>
+                      field.onChange(e.target.checked.toString())
+                    }
+                  />
+                }
                 label="В залоге"
               />
             )}
@@ -419,8 +451,15 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
             control={control}
             render={({ field }) => (
               <FormControlLabel
-                {...field}
-                control={<Switch />}
+                control={
+                  <Switch
+                    {...field}
+                    checked={field.value === "true"} // todo: проверить, почему состояне не чекнутое при открытии формы, когда в стейте true
+                    onChange={(e) =>
+                      field.onChange(e.target.checked.toString())
+                    }
+                  />
+                }
                 label="Документы в порядке"
               />
             )}
@@ -431,7 +470,15 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
             render={({ field }) => (
               <FormControlLabel
                 {...field}
-                control={<Switch />}
+                control={
+                  <Switch
+                    {...field}
+                    checked={field.value === "true"}
+                    onChange={(e) =>
+                      field.onChange(e.target.checked.toString())
+                    }
+                  />
+                }
                 label="Скрыть адрес"
               />
             )}
