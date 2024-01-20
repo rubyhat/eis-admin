@@ -16,7 +16,7 @@ import {
   ToiletType,
   VisibilityStatusType,
   WaterType,
-} from "../../CatalogModule/store";
+} from "../../../shared/interfaces/EstateObjectTypes";
 
 const listLinkStepsData: ListLinkSteps = {
   service: [

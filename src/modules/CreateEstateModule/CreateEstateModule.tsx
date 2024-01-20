@@ -3,8 +3,11 @@ import React from "react";
 import { ListLinkStep } from "./components/ListLinkStep";
 import { useCreateEstateStore } from "./store";
 import { EstateFormModule } from "../EstateFormModule";
-import { CategoryType, ServiceType } from "../CatalogModule/store";
 import useTitle from "../../hooks/useTitle";
+import {
+  CategoryType,
+  ServiceType,
+} from "../../shared/interfaces/EstateObjectTypes";
 
 export const CreateEstateModule = () => {
   useTitle("Добавление нового объекта");
