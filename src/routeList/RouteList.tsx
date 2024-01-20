@@ -20,7 +20,6 @@ export const RouteList = () => {
 
   return (
     <Routes>
-      {/* <Route path="/" element={<Home />} /> */}
       <Route
         path="/"
         element={
@@ -30,12 +29,47 @@ export const RouteList = () => {
         }
       />
 
-      <Route path="/help" element={<Help />} />
-      <Route path="/help/:id" element={<HelpDetails />} />
+      <Route
+        path="/help"
+        element={
+          <ProtectedRoute isAuth={isAuth}>
+            <Help />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/help/:id"
+        element={
+          <ProtectedRoute isAuth={isAuth}>
+            <HelpDetails />
+          </ProtectedRoute>
+        }
+      />
 
-      <Route path="/catalog" element={<Catalog />} />
-      <Route path="/catalog/:id" element={<EstateDetails />} />
-      <Route path="/catalog/create" element={<CreateEstate />} />
+      <Route
+        path="/catalog"
+        element={
+          <ProtectedRoute isAuth={isAuth}>
+            <Catalog />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/catalog/:id"
+        element={
+          <ProtectedRoute isAuth={isAuth}>
+            <EstateDetails />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/catalog/create"
+        element={
+          <ProtectedRoute isAuth={isAuth}>
+            <CreateEstate />
+          </ProtectedRoute>
+        }
+      />
 
       <Route path="/login" element={<Login />} />
 
