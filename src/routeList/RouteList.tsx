@@ -6,6 +6,7 @@ const ProtectedRoute = React.lazy(() => import("./ProtectedRoute"));
 const Home = React.lazy(() => import("../pages/Home"));
 const Help = React.lazy(() => import("../pages/Help"));
 const Login = React.lazy(() => import("../pages/Login"));
+const Users = React.lazy(() => import("../pages/Users"));
 const Catalog = React.lazy(() => import("../pages/Catalog"));
 const HelpDetails = React.lazy(() => import("../pages/HelpDetails"));
 const CreateEstate = React.lazy(() => import("../pages/CreateEstate"));
@@ -25,6 +26,15 @@ export const RouteList = () => {
         element={
           <ProtectedRoute isAuth={isAuth}>
             <Home />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/users"
+        element={
+          <ProtectedRoute isAuth={isAuth}>
+            <Users />
           </ProtectedRoute>
         }
       />
@@ -71,8 +81,6 @@ export const RouteList = () => {
         }
       />
 
-      <Route path="/login" element={<Login />} />
-
       <Route
         path="/access-denied"
         element={
@@ -81,6 +89,7 @@ export const RouteList = () => {
           </ProtectedRoute>
         }
       />
+      <Route path="/login" element={<Login />} />
       <Route path="/no-auth" element={<NoAuth />} />
       <Route path="/page-not-found" element={<PageNotFound />} />
       <Route path="*" element={<PageNotFound />} />

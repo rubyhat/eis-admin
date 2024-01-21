@@ -20,8 +20,8 @@ const list = [
   },
   {
     icon: <AiOutlineUser size={128} color="#DCDCDD" />,
-    link: "#",
-    disabled: true,
+    link: "/users",
+    disabled: false,
   },
   {
     icon: <GoGraph size={128} color="#DCDCDD" />,
