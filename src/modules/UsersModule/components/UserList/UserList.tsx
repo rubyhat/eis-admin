@@ -2,7 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { apiUsersModule } from "../../api";
 import { UserCard } from "../UserCard";
-import { Grid } from "@mui/material";
+import { Alert, Grid } from "@mui/material";
+import { UserCardSkeleton } from "../UserCardSkeleton";
 
 export const UserList = () => {
   const {
@@ -17,16 +18,22 @@ export const UserList = () => {
 
   if (isLoading) {
     return (
-      <Grid item xs={12}>
-        Загрузка...
-      </Grid>
+      <>
+        {Array.from(new Array(5)).map((_, index) => (
+          <Grid item xs={12} md={4} key={index}>
+            <UserCardSkeleton />
+          </Grid>
+        ))}
+      </>
     );
   }
 
   if (isError) {
     return (
-      <Grid item xs={12}>
-        Ошибка...!
+      <Grid item xs={12} md={4}>
+        <Alert severity="error">
+          Произошла ошибка! Пожалуйста, обратитесь в тех. поддержку
+        </Alert>
       </Grid>
     );
   }
