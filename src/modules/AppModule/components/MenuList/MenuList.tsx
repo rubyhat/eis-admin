@@ -18,7 +18,7 @@ interface LinkObject {
 const links: LinkObject[] = [
   { title: "Объекты", to: "/catalog" },
   { title: "Заявки", to: "/" },
-  { title: "Сотрудники", to: "/" },
+  { title: "Сотрудники", to: "/users" },
   { title: "Обучение", to: "/" },
   { title: "Помощь", to: "/help" },
 ];
