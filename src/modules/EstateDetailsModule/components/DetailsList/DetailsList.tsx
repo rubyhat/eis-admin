@@ -86,7 +86,12 @@ export const DetailsList = ({ estateDetails }: DetailsListProps) => {
           label="Количество сан. узлов"
         />
       )}
-      <DetailsListItem title="Панельный" label="Тип дома" />
+      {estateDetails.houseType && (
+        <DetailsListItem
+          title={estateObjectDictionary.houseType[estateDetails.houseType]}
+          label="Тип дома"
+        />
+      )}
       {estateDetails.houseWallMaterial && (
         <DetailsListItem
           title={
@@ -122,6 +127,56 @@ export const DetailsList = ({ estateDetails }: DetailsListProps) => {
       {estateDetails.houseSquare && (
         <DetailsListItem title={squareText} label="Площадь, м²" />
       )}
+      {estateDetails.plotSquare && (
+        <DetailsListItem
+          title={String(estateDetails.plotSquare)}
+          label="Площадь земельного участка"
+        />
+      )}
+      {estateDetails.electricType && (
+        <DetailsListItem
+          title={
+            estateObjectDictionary.electricType[estateDetails.electricType]
+          }
+          label="Электричество"
+        />
+      )}
+      {estateDetails.heatingType && (
+        <DetailsListItem
+          title={estateObjectDictionary.heatingType[estateDetails.heatingType]}
+          label="Отопление"
+        />
+      )}
+      {estateDetails.waterType && (
+        <DetailsListItem
+          title={estateObjectDictionary.waterType[estateDetails.waterType]}
+          label="Вода"
+        />
+      )}
+      {estateDetails.sewerType && (
+        <DetailsListItem
+          title={estateObjectDictionary.sewerType[estateDetails.sewerType]}
+          label="Канализация"
+        />
+      )}
+      {estateDetails.gasType && (
+        <DetailsListItem
+          title={estateObjectDictionary.gasType[estateDetails.gasType]}
+          label="Газ"
+        />
+      )}
+      {estateDetails.toiletType && (
+        <DetailsListItem
+          title={estateObjectDictionary.toiletType[estateDetails.toiletType]}
+          label="Сан. узел"
+        />
+      )}
+      {estateDetails.ethernet && (
+        <DetailsListItem
+          title={estateObjectDictionary.ethernet[estateDetails.ethernet]}
+          label="Сан. узел"
+        />
+      )}
       <DetailsListItem
         title={
           estateDetails.isDocumentsGood ? "В порядке" : "Требуется проверка"
@@ -140,11 +195,18 @@ export const DetailsList = ({ estateDetails }: DetailsListProps) => {
         title={estateDetails.hasSwap ? "Есть обмен" : "Нет обмена"}
         label="Обмен"
       />
-
-      <DetailsListItem
-        label="Видео обзор"
-        videoLink={estateDetails.videoLink}
-      />
+      {estateDetails.hasBasement && (
+        <DetailsListItem title="Есть" label="Цокольный этаж" />
+      )}
+      {estateDetails.hasMansard && (
+        <DetailsListItem title="Есть" label="Мансарда" />
+      )}
+      {estateDetails.videoLink && (
+        <DetailsListItem
+          label="Видео обзор"
+          videoLink={estateDetails.videoLink}
+        />
+      )}
     </Box>
   );
 };

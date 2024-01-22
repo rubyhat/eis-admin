@@ -45,4 +45,49 @@ export const estateObjectDictionary = {
     full: "Полностью",
     none: "Без мебели",
   },
+  houseType: {
+    part: "Целый дом",
+    full: "Часть дома",
+    other: "Другое",
+  },
+  electricType: {
+    part: "Частичное",
+    full: "Есть",
+    none: "Нет",
+  },
+  heatingType: {
+    central: "Центральное", // todo: добавить на электричестве
+    gas: "На газу",
+    solid: "На твердом топливе",
+    liquid: "На жидком топливе",
+    none: "Нет",
+  },
+  gasType: {
+    central: "Центральный",
+    auto: "Автономный",
+    canConnect: "Можно подключить",
+    none: "Нет",
+  },
+  sewerType: {
+    central: "Центральная",
+    septik: "Септик",
+    canConnect: "Можно подключить",
+    none: "Нет",
+  },
+  toiletType: {
+    in: "Внутри дома",
+    out: "Снаружи дома",
+    none: "Нет",
+  },
+  waterType: {
+    central: "Центральная",
+    borehole: "Скважина",
+    canConnect: "Можно подключить",
+    none: "Нет",
+  },
+  ethernet: {
+    connected: "Подключен",
+    toConnect: "Можно подключить",
+    none: "Нет",
+  },
 };

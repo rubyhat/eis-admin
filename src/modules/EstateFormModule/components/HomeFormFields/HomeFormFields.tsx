@@ -341,7 +341,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
             Количество сан. узлов
           </Typography>
           <CustomInput
-            id="ceilingHeight"
+            id="toiletCount"
             register={register}
             errors={formState.errors}
             disabled={isLoading}
