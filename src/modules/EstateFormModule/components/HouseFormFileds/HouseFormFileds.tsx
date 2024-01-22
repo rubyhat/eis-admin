@@ -244,7 +244,7 @@ export const HouseFormFileds = ({ isLoading }: HouseFormFiledsProps) => {
             variant="textCalloutRegular"
             marginBottom={0.5}
           >
-            Канализация
+            Водопровод
           </Typography>
           <Controller
             name="waterType"
@@ -261,11 +261,11 @@ export const HouseFormFileds = ({ isLoading }: HouseFormFiledsProps) => {
                     variant="textCalloutRegular"
                     color="customColors.labelsSecondary"
                   >
-                    Например: Центральная
+                    Например: Центральный
                   </Typography>
                 </MenuItem>
                 <MenuItem value="">Не указывать</MenuItem>
-                <MenuItem value="central">Центральная</MenuItem>
+                <MenuItem value="central">Центральный</MenuItem>
                 <MenuItem value="borehole">Скважина</MenuItem>
                 <MenuItem value="canConnect">Можно подключить</MenuItem>
                 <MenuItem value="none">Нет</MenuItem>

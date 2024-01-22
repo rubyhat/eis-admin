@@ -5,6 +5,7 @@ import { TbCurrencyTenge } from "react-icons/tb";
 
 import { usePriceNormalize } from "../../../../hooks/usePriceNormalize";
 import { DisplayEstateObject } from "../../../CreateEstateModule/store";
+import { estateObjectDictionary } from "../../../../shared/dictionaries/EstateObjectDictionary";
 
 interface CatalogCardProps {
   item: DisplayEstateObject;
@@ -44,7 +45,7 @@ export const CatalogCard = ({ item }: CatalogCardProps) => {
             variant="textBodyRegular"
             color="customColors.labelsPrimary"
           >
-            Проспект Нуркена Абдирова, 124/3а
+            {item.geoPosition.street}, {item.geoPosition.houseNumber}
           </Typography>
           <Typography
             component="p"
@@ -52,8 +53,10 @@ export const CatalogCard = ({ item }: CatalogCardProps) => {
             color="customColors.labelsSecondary"
             sx={{ display: "flex", alignItems: "center" }}
           >
-            2-х комнатная | 45м2 | <TbCurrencyTenge size={16} />{" "}
-            {usePriceNormalize(item.price || 0).totalPrice}
+            {estateObjectDictionary.category[item.category]} | Комнат:{" "}
+            {item.roomCount} | Площадь: {item.houseSquare} м² |{" "}
+            <TbCurrencyTenge size={16} />{" "}
+            {usePriceNormalize(item.price || 0, item.discount || 0).totalPrice}
           </Typography>
         </Box>
         <Box display="flex" alignItems="center" marginLeft={1}>
