@@ -7,9 +7,22 @@ import { ImageViewer } from "./components/ImageViewer/ImageViewer";
 import { SettingsButtonBar } from "./components/SettingsButtonBar";
 import { CustomHr } from "../../components/CustomHr";
 import { TitleGroup } from "./components/TitleGroup";
+import { useLocation, useParams } from "react-router";
+import { DisplayEstateObject } from "../CreateEstateModule/store";
 
 export const EstateDetailsModule = () => {
   useTitle("Детали объекта недвижимости");
+  const location = useLocation();
+  const { id } = useParams();
+  const [estateDetails, setEstateDetails] =
+    React.useState<DisplayEstateObject | null>(null);
+
+  React.useEffect(() => {
+    if (location.state?.estateDetails) {
+      setEstateDetails(location.state.estateDetails);
+    }
+  }, [location.state.estateDetails]);
+  console.log(estateDetails, id);
 
   return (
     <Container>

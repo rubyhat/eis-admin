@@ -17,6 +17,7 @@ import {
   VisibilityStatusType,
   WaterType,
 } from "../../../shared/interfaces/EstateObjectTypes";
+import { DisplayEstateObject } from "../../CreateEstateModule/store";
 
 export type ActiveSortType = "new" | "cheap" | "rich";
 export type AllObjectsType = ObjectItem | Apartment | House | Flat;
@@ -93,9 +94,9 @@ export interface Land extends ObjectItem {
 }
 export interface CatalogStore {
   activeSortType: VisibilityStatusType;
-  estateObjects: AllObjectsType[];
+  estateObjects: DisplayEstateObject[];
   setActiveSortType: (v: VisibilityStatusType) => void;
-  setEstateObjects: (v: AllObjectsType[]) => void;
+  setEstateObjects: (v: DisplayEstateObject[]) => void;
 }
 
 export const useCatalogStore = create<CatalogStore>((set) => ({

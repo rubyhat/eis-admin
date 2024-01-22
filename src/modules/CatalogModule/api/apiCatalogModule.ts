@@ -1,8 +1,8 @@
 import { axiosBaseWrap } from "../../../configs/AxiosConfig";
-import { AllObjectsType } from "../store";
+import { DisplayEstateObject } from "../../CreateEstateModule/store";
 
 export const apiCatalogModule = {
-  fetchCatalog(params: string): Promise<AllObjectsType[]> {
+  fetchCatalog(params: string): Promise<DisplayEstateObject[]> {
     return axiosBaseWrap
       .get(`/catalog?${params}`)
       .then((response) => {

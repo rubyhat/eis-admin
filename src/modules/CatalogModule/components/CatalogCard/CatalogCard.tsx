@@ -2,11 +2,12 @@ import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { TbCurrencyTenge } from "react-icons/tb";
-import { AllObjectsType } from "../../store";
+
 import { usePriceNormalize } from "../../../../hooks/usePriceNormalize";
+import { DisplayEstateObject } from "../../../CreateEstateModule/store";
 
 interface CatalogCardProps {
-  item: AllObjectsType;
+  item: DisplayEstateObject;
 }
 
 export const CatalogCard = ({ item }: CatalogCardProps) => {
@@ -34,7 +35,8 @@ export const CatalogCard = ({ item }: CatalogCardProps) => {
           padding: 2,
         }}
         component={Link}
-        to={`/catalog/${item.id}`}
+        to={{ pathname: `/catalog/${item._id}` }}
+        state={{ estateDetails: item }}
       >
         <Box>
           <Typography
@@ -51,7 +53,7 @@ export const CatalogCard = ({ item }: CatalogCardProps) => {
             sx={{ display: "flex", alignItems: "center" }}
           >
             2-х комнатная | 45м2 | <TbCurrencyTenge size={16} />{" "}
-            {usePriceNormalize(item.price).totalPrice}
+            {usePriceNormalize(item.price || 0).totalPrice}
           </Typography>
         </Box>
         <Box display="flex" alignItems="center" marginLeft={1}>

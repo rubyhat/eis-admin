@@ -116,6 +116,14 @@ export interface StepData {
 }
 
 export type FormFieldsType = FormFieldsData | Apartment | House | Flat | Land;
+export interface DisplayEstateObject
+  extends FormFieldsData,
+    Apartment,
+    House,
+    Flat,
+    Land {
+  _id: string;
+}
 export interface FormFieldsData {
   category: CategoryType;
   visibilityStatus: VisibilityStatusType;
