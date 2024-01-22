@@ -100,8 +100,8 @@ export const EstateFormModule = () => {
 
     const basicData = {
       description: description,
-      price: price,
-      discount: discount,
+      price: Number(price),
+      discount: Number(discount),
       images: images, // add images
       videoLink: videoLink,
       mortgage: mortgage,
@@ -112,18 +112,19 @@ export const EstateFormModule = () => {
       type: type,
       category: category,
       visibilityStatus: visibilityStatus,
+      estateAgent: "65a579da338bf8d0b1ef78e5", // todo: remove this hardcode after tests
       // estateAgent: estateAgent,
       geoPosition: geoPosition,
     };
 
     const apartmentData = {
-      roomCount: roomCount,
-      houseBuildingYear: houseBuildingYear,
-      houseSquare: houseSquare,
-      kitchenSquare: kitchenSquare,
-      countFloor: countFloor,
-      ceilingHeight: ceilingHeight,
-      toiletCount: toiletCount,
+      roomCount: Number(roomCount),
+      houseBuildingYear: Number(houseBuildingYear),
+      houseSquare: Number(houseSquare),
+      kitchenSquare: Number(kitchenSquare),
+      countFloor: Number(countFloor),
+      ceilingHeight: Number(ceilingHeight),
+      toiletCount: Number(toiletCount),
       houseCondition: houseCondition,
       houseWallMaterial: houseWallMaterial,
       houseRoofMaterial: houseRoofMaterial,
@@ -132,7 +133,7 @@ export const EstateFormModule = () => {
     };
 
     const houseData = {
-      plotSquare: plotSquare,
+      plotSquare: Number(plotSquare),
       hasBasement: hasBasement,
       hasMansard: hasMansard,
       houseType: houseType,
@@ -144,9 +145,12 @@ export const EstateFormModule = () => {
       waterType: waterType,
     };
 
-    const flatData = { targetFloor: targetFloor, totalFloor: totalFloor };
+    const flatData = {
+      targetFloor: Number(targetFloor),
+      totalFloor: Number(totalFloor),
+    };
 
-    const landData = { landSquare: landSquare };
+    const landData = { landSquare: Number(landSquare) };
 
     const totalData = {
       apartment: { ...apartmentData, ...flatData },
