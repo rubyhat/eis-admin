@@ -20,9 +20,11 @@ interface EstateDetailsStore {
   activeImage: string;
   activeImageIndex: number;
   isViewerModalOpen: boolean;
+  isDeleteDrawerOpen: boolean;
   setImages: (v: string[]) => void;
   setActiveImage: (v: string, i: number) => void;
   setIsViewerModalOpen: (v: boolean) => void;
+  setIsDeleteDrawerOpen: (v: boolean) => void;
 }
 
 export const useEstateDetailsStore = create<EstateDetailsStore>((set) => ({
@@ -30,7 +32,9 @@ export const useEstateDetailsStore = create<EstateDetailsStore>((set) => ({
   activeImageIndex: 0,
   images: tempThumbs,
   isViewerModalOpen: false,
+  isDeleteDrawerOpen: false,
   setImages: (v) => set({ images: v }),
   setActiveImage: (v, i) => set({ activeImage: v, activeImageIndex: i }),
   setIsViewerModalOpen: (v) => set({ isViewerModalOpen: v }),
+  setIsDeleteDrawerOpen: (v) => set({ isDeleteDrawerOpen: v }),
 }));

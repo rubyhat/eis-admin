@@ -179,7 +179,7 @@ export const EstateFormModule = () => {
         },
         {} as Record<string, any>,
       );
-      apiCreateEstateModule.createObject(filteredData as FormFieldsType);
+      apiCreateEstateModule.createObject(filteredData as FormFieldsType); //todo: add success/error notification
     };
     createObjectReq();
   };
