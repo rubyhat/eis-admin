@@ -91,6 +91,7 @@ export const LoginForm = () => {
         formatPrice={false}
         placeholder="Логин"
         sx={{ marginBottom: 2, marginTop: 2 }}
+        required
       />
       <CustomInput
         id="password"
@@ -101,6 +102,7 @@ export const LoginForm = () => {
         placeholder="Пароль"
         sx={{ marginBottom: 2 }}
         type="password"
+        required
       />
       <CustomButton fullWidth type="submit" disabled={isLoading}>
         Авторизоваться

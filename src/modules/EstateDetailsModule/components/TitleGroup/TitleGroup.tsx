@@ -7,8 +7,13 @@ import { DrawerDelete } from "../DrawerDelete";
 import { useEstateDetailsStore } from "../../store";
 import { apiEstateDetailsModule } from "../../api/apiEstateDetailsModule";
 import toast from "react-hot-toast";
+import { DisplayEstateObject } from "../../../CreateEstateModule/store";
 
-export const TitleGroup = () => {
+interface TitleGroupProps {
+  estateDetails: DisplayEstateObject;
+}
+
+export const TitleGroup = ({ estateDetails }: TitleGroupProps) => {
   const navigate = useNavigate();
   const { setIsDeleteDrawerOpen } = useEstateDetailsStore((state) => state);
 
@@ -16,11 +21,13 @@ export const TitleGroup = () => {
   const handleClickDeleteButton = () => setIsDeleteDrawerOpen(true);
   const handleDeleteEstateObject = async () => {
     try {
-      await apiEstateDetailsModule.deleteEstate("");
+      await apiEstateDetailsModule.deleteEstate(estateDetails._id);
       setIsDeleteDrawerOpen(false);
       toast.success("Объект успешно удален!");
+      navigate("/catalog");
     } catch (error) {
       console.log(error);
+      setIsDeleteDrawerOpen(false);
       toast.error("Извините, произошла ошибка, попробуйте повторить позднее.");
     }
   };
