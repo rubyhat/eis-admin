@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
+// todo: use real data when it will be received from backend
 export const AgentCard = () => {
   return (
     <Box

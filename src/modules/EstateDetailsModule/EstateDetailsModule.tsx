@@ -71,7 +71,7 @@ export const EstateDetailsModule = () => {
             <CustomHr />
             <AgentCard />
             <Box padding="16px 0">
-              <DetailsList />
+              <DetailsList estateDetails={estateDetails} />
             </Box>
             <Box>
               <Typography variant="textBodyRegular">

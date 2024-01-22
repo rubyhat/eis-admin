@@ -35,7 +35,8 @@ export const TitleGroup = ({ estateDetails }: TitleGroupProps) => {
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <Typography variant="titleLargeRegular" display="block">
-        Проспект Нуркена Абдирова, 124/3а
+        {estateDetails.geoPosition.street},{" "}
+        {estateDetails.geoPosition.houseNumber}
       </Typography>
       <Box marginLeft={2}>
         <IconButton onClick={handleClickEditButton} color="primary">

@@ -1,0 +1,48 @@
+export const estateObjectDictionary = {
+  type: {
+    sell: "Продажа",
+    rent: "Аренда",
+  },
+  category: {
+    apartment: "Квартира",
+    house: "Дом",
+    land: "Земельный участок",
+    cottage: "Дача",
+    business: "Бизнес",
+    factory: "Заводы и фабрики",
+    other: "Другое",
+  },
+  houseCondition: {
+    perfect: "Хорошее",
+    good: "Среднее",
+    bad: "Требует ремонта",
+    free: "Свободная планировка",
+    build: "Черновая отделка",
+  },
+  houseWallMaterial: {
+    brick: "Кирпич",
+    wood: "Дерево",
+    gasSilicateBlock: "Газосиликатный блок",
+    cinderBlock: "Шлакоблок",
+    heatBlock: "Теплоблок",
+    panel: "Каркасно-щитовой",
+    monolith: "Монолит",
+    saman: "Саман",
+    gasConcreteBlock: "Газобетонный блок",
+    foamBlock: "Пеноблок",
+  },
+  houseRoofMaterial: {
+    tile: "Черепица",
+    soft: "Мягкая кровля",
+    metal: "Металл",
+    ondulin: "Ондулин",
+    metalTile: "Металлочерепица",
+    corrugatedSheetRoof: "Профлист",
+    slate: "Шифер",
+  },
+  furniture: {
+    part: "Частично",
+    full: "Полностью",
+    none: "Без мебели",
+  },
+};

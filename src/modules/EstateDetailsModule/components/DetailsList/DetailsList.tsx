@@ -1,8 +1,20 @@
 import { Box } from "@mui/material";
 import React from "react";
 import { DetailsListItem } from "../DetailsListItem";
+import { DisplayEstateObject } from "../../../CreateEstateModule/store";
+import { estateObjectDictionary } from "../../../../shared/dictionaries/EstateObjectDictionary";
 
-export const DetailsList = () => {
+interface DetailsListProps {
+  estateDetails: DisplayEstateObject;
+}
+
+// todo: use usePriceNormalize for display price with discount
+// add accordion to show all properties?
+
+export const DetailsList = ({ estateDetails }: DetailsListProps) => {
+  const squareText = estateDetails.kitchenSquare
+    ? `Общая ${estateDetails.houseSquare} м², кухня — ${estateDetails.kitchenSquare} м²`
+    : `Общая ${estateDetails.houseSquare} м²`;
   return (
     <Box
       component="ul"
@@ -13,24 +25,125 @@ export const DetailsList = () => {
         borderColor: "customColors.labelsQuaternary",
       }}
     >
-      <DetailsListItem title="Продажа" label="Тип услуги" />
-      <DetailsListItem title="Караганда" label="Город" />
       <DetailsListItem
-        title="Проспект Нуркена Абдирова, 124/3а"
+        title={estateObjectDictionary.category[estateDetails.category]}
+        label="Категория"
+      />
+      {estateDetails.isCommercial && (
+        <DetailsListItem title="Да" label="Коммерческий объект?" />
+      )}
+      <DetailsListItem
+        title={estateObjectDictionary.type[estateDetails.type]}
+        label="Тип услуги"
+      />
+      {estateDetails.houseCondition && (
+        <DetailsListItem
+          title={
+            estateObjectDictionary.houseCondition[estateDetails.houseCondition]
+          }
+          label="Состояние"
+        />
+      )}
+      {estateDetails.price && (
+        <DetailsListItem
+          title={estateDetails.price.toLocaleString("ru")}
+          label="Стоимость"
+        />
+      )}
+      <DetailsListItem title={estateDetails.geoPosition.city} label="Город" />
+      <DetailsListItem
+        title={`${estateDetails.geoPosition.street}, ${estateDetails.geoPosition.houseNumber}`}
         label="Адрес"
-        link="https://go.2gis.com/32yh5"
+        link={estateDetails.geoPosition.mapLink}
       />
+      {Boolean(estateDetails.roomCount) && (
+        <DetailsListItem
+          title={String(estateDetails.roomCount)}
+          label="Количество комнат"
+        />
+      )}
+      {estateDetails.furniture && (
+        <DetailsListItem
+          title={estateObjectDictionary.furniture[estateDetails.furniture]}
+          label="Мебелирован?"
+        />
+      )}
+      {Boolean(estateDetails.countFloor) && (
+        <DetailsListItem
+          title={String(estateDetails.countFloor)}
+          label="Этажей в квартире/доме"
+        />
+      )}
+      {Boolean(estateDetails.ceilingHeight) && (
+        <DetailsListItem
+          title={String(estateDetails.ceilingHeight)}
+          label="Высота потолков"
+        />
+      )}
+      {Boolean(estateDetails.toiletCount) && (
+        <DetailsListItem
+          title={String(estateDetails.toiletCount)}
+          label="Количество сан. узлов"
+        />
+      )}
       <DetailsListItem title="Панельный" label="Тип дома" />
-      <DetailsListItem title="1989" label="Год постройки" />
-      <DetailsListItem title="1 из 10" label="Этаж" />
+      {estateDetails.houseWallMaterial && (
+        <DetailsListItem
+          title={
+            estateObjectDictionary.houseWallMaterial[
+              estateDetails.houseWallMaterial
+            ]
+          }
+          label="Стены дома"
+        />
+      )}
+      {estateDetails.houseRoofMaterial && (
+        <DetailsListItem
+          title={
+            estateObjectDictionary.houseRoofMaterial[
+              estateDetails.houseRoofMaterial
+            ]
+          }
+          label="Крыша дома"
+        />
+      )}
+      {estateDetails.houseBuildingYear && (
+        <DetailsListItem
+          title={String(estateDetails.houseBuildingYear)}
+          label="Год постройки"
+        />
+      )}
+      {estateDetails.targetFloor && estateDetails.totalFloor && (
+        <DetailsListItem
+          title={`${estateDetails.targetFloor} из ${estateDetails.totalFloor}`}
+          label="Этаж"
+        />
+      )}
+      {estateDetails.houseSquare && (
+        <DetailsListItem title={squareText} label="Площадь, м²" />
+      )}
       <DetailsListItem
-        title="59.6 м², Площадь кухни — 16.6 м²"
-        label="Площадь, м²"
+        title={
+          estateDetails.isDocumentsGood ? "В порядке" : "Требуется проверка"
+        }
+        label="Документы"
       />
-      <DetailsListItem title="Евроремонт" label="Состояние" />
+      <DetailsListItem
+        title={
+          estateDetails.mortgage
+            ? "Подходит под ипотеку"
+            : "Не подходит под ипотеку"
+        }
+        label="Ипотека"
+      />
+      <DetailsListItem
+        title={estateDetails.hasSwap ? "Есть обмен" : "Нет обмена"}
+        label="Обмен"
+      />
+
       <DetailsListItem
         label="Видео обзор"
-        videoLink="https://www.instagram.com/reel/C0yxbgDt63W/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA=="
+        videoLink={estateDetails.videoLink}
       />
     </Box>
   );
