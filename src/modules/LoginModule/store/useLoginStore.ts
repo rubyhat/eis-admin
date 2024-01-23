@@ -12,9 +12,12 @@ export const useLoginStore = create<LoginStore>((set) => {
   const isAuthFromStorage = localStorage.getItem("isAuth");
   const isAuth = isAuthFromStorage ? JSON.parse(isAuthFromStorage) : false;
 
+  const userFromStorage = localStorage.getItem("user");
+  const initUser = userFromStorage ? JSON.parse(userFromStorage) : null;
+
   return {
     isAuth: isAuth,
-    user: null,
+    user: initUser,
     setIsAuth: (v) => {
       localStorage.setItem("isAuth", JSON.stringify(v));
       set({ isAuth: v });

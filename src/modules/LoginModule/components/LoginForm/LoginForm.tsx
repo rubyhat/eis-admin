@@ -39,6 +39,10 @@ export const LoginForm = () => {
 
     const userData = JSON.parse(jsonPayload);
     setUser({ ...userData, _id: userData.id });
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ ...userData, _id: userData.id }),
+    );
   };
 
   const sendLogin = async (data: LoginProps) => {

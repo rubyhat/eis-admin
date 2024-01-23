@@ -26,12 +26,16 @@ export const UserCard = ({ user }: UserCardProps) => {
         <ListItem>
           <ListItemText primary={user.username} secondary="Никнейм" />
         </ListItem>
-        <ListItem>
-          <ListItemText primary={user.phone} secondary="Номер телефона" />
-        </ListItem>
-        <ListItem>
-          <ListItemText primary={user.email} secondary="Адрес почты" />
-        </ListItem>
+        {user.phone && (
+          <ListItem>
+            <ListItemText primary={user.phone} secondary="Номер телефона" />
+          </ListItem>
+        )}
+        {user.email && (
+          <ListItem>
+            <ListItemText primary={user.email} secondary="Адрес почты" />
+          </ListItem>
+        )}
       </List>
     </Box>
   );
