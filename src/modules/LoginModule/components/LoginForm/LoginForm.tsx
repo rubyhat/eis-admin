@@ -11,7 +11,7 @@ import { useNavigate } from "react-router";
 export const LoginForm = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [errorCode, setErrorCode] = React.useState<number | null>(null);
-  const { setIsAuth } = useLoginStore((state) => state);
+  const { setIsAuth, setUser } = useLoginStore((state) => state);
   const navigate = useNavigate();
 
   const {
@@ -25,10 +25,28 @@ export const LoginForm = () => {
     },
   });
 
+  const parseJWT = (token: string) => {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map((c) => {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join(""),
+    );
+
+    const userData = JSON.parse(jsonPayload);
+    setUser({ ...userData, _id: userData.id });
+  };
+
   const sendLogin = async (data: LoginProps) => {
     setIsLoading(true);
     try {
-      await apiLoginModule.login(data);
+      await apiLoginModule.login(data).then((response) => {
+        if (response && response.accessToken) parseJWT(response.accessToken);
+      });
       toast.success("Авторизация прошла успешно!");
       setIsAuth(true);
       navigate("/");

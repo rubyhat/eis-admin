@@ -26,7 +26,7 @@ export const apiLoginModule = {
           "accessTokenExpiration",
           expirationTime.toString(),
         );
-        return response.data.data;
+        return response.data;
       })
       .catch((error: AxiosError) => {
         // Проверяем наличие ответа и статус ошибки
