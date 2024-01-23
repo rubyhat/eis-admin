@@ -5,6 +5,7 @@ import { useLoginStore } from "../modules/LoginModule/store";
 const ProtectedRoute = React.lazy(() => import("./ProtectedRoute"));
 const Home = React.lazy(() => import("../pages/Home"));
 const Help = React.lazy(() => import("../pages/Help"));
+const User = React.lazy(() => import("../pages/User"));
 const Login = React.lazy(() => import("../pages/Login"));
 const Users = React.lazy(() => import("../pages/Users"));
 const Catalog = React.lazy(() => import("../pages/Catalog"));
@@ -35,6 +36,14 @@ export const RouteList = () => {
         element={
           <ProtectedRoute isAuth={isAuth}>
             <Users />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/users/:id"
+        element={
+          <ProtectedRoute isAuth={isAuth}>
+            <User />
           </ProtectedRoute>
         }
       />

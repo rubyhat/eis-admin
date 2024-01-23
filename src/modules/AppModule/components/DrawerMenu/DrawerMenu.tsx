@@ -41,7 +41,7 @@ export const DrawerMenu = ({
 
   const handleProfileButtonClick = () => {
     setIsHeaderBurgerOpen(false);
-    navigate("/users/" + user?._id);
+    navigate("/users/" + user?.username);
   };
 
   const handleClickAddEstate = () => {
