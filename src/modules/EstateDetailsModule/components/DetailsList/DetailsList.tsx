@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
 import React from "react";
 import { DetailsListItem } from "../DetailsListItem";
-import { DisplayEstateObject } from "../../../CreateEstateModule/store";
 import { estateObjectDictionary } from "../../../../shared/dictionaries/EstateObjectDictionary";
+import { DisplayEstateObject } from "../../../../shared/interfaces/EstateObjectTypes";
 
 interface DetailsListProps {
   estateDetails: DisplayEstateObject;

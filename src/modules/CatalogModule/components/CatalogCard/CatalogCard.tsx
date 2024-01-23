@@ -4,8 +4,8 @@ import { IoIosArrowForward } from "react-icons/io";
 import { TbCurrencyTenge } from "react-icons/tb";
 
 import { usePriceNormalize } from "../../../../hooks/usePriceNormalize";
-import { DisplayEstateObject } from "../../../CreateEstateModule/store";
 import { estateObjectDictionary } from "../../../../shared/dictionaries/EstateObjectDictionary";
+import { DisplayEstateObject } from "../../../../shared/interfaces/EstateObjectTypes";
 
 interface CatalogCardProps {
   item: DisplayEstateObject;

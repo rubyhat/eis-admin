@@ -8,9 +8,9 @@ import { SettingsButtonBar } from "./components/SettingsButtonBar";
 import { CustomHr } from "../../components/CustomHr";
 import { TitleGroup } from "./components/TitleGroup";
 import { useLocation, useParams } from "react-router";
-import { DisplayEstateObject } from "../CreateEstateModule/store";
 import { apiEstateDetailsModule } from "./api/apiEstateDetailsModule";
 import { useQuery } from "@tanstack/react-query";
+import { DisplayEstateObject } from "../../shared/interfaces/EstateObjectTypes";
 
 export const EstateDetailsModule = () => {
   useTitle("Детали объекта недвижимости");

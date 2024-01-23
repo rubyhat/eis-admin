@@ -1,5 +1,5 @@
 import { axiosBaseWrap } from "../../../configs/AxiosConfig";
-import { DisplayEstateObject } from "../../CreateEstateModule/store";
+import { DisplayEstateObject } from "../../../shared/interfaces/EstateObjectTypes";
 
 export const apiEstateDetailsModule = {
   getDetailsById(id: string): Promise<DisplayEstateObject> {

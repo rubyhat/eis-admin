@@ -8,14 +8,7 @@ import {
   useForm,
 } from "react-hook-form";
 import { CustomButton } from "../../components/CustomButton";
-import {
-  Apartment,
-  Flat,
-  FormFieldsType,
-  House,
-  Land,
-  useCreateEstateStore,
-} from "../CreateEstateModule/store";
+import { useCreateEstateStore } from "../CreateEstateModule/store";
 import { BasicFormFields } from "./components/BasicFormFields";
 import { HomeFormFields } from "./components/HomeFormFields";
 import { ApartmentFormFields } from "./components/ApartmentFormFields";
@@ -25,6 +18,13 @@ import { LandFormFields } from "./components/LandFormFields";
 import { RichTextEditorField } from "./components/RichTextEditorField";
 import { CustomHr } from "../../components/CustomHr";
 import { apiCreateEstateModule } from "../CreateEstateModule/api";
+import {
+  Apartment,
+  Flat,
+  FormFieldsType,
+  House,
+  Land,
+} from "../../shared/interfaces/EstateObjectTypes";
 
 const livingSpaces = ["apartment", "house", "cottage"];
 const houseAndCottage = ["house", "cottage"];
@@ -134,7 +134,7 @@ export const EstateFormModule = () => {
     };
 
     const houseData = {
-      plotSquare: Number(plotSquare),
+      plotSquare: plotSquare,
       hasBasement: hasBasement,
       hasMansard: hasMansard,
       houseType: houseType,
