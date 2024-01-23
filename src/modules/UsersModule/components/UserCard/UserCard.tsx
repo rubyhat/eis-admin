@@ -1,10 +1,10 @@
 import React from "react";
-import { User } from "../../interfaces/User";
 import { Box } from "@mui/system";
 import { Chip, List, ListItem, ListItemText, Typography } from "@mui/material";
+import { EstateAgentInfo } from "../../../../shared/interfaces/EstateObjectTypes";
 
 interface UserCardProps {
-  user: User;
+  user: EstateAgentInfo;
 }
 
 export const UserCard = ({ user }: UserCardProps) => {
