@@ -1,8 +1,13 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
+import { EstateAgentInfo } from "../../shared/interfaces/EstateObjectTypes";
 
-// todo: use real data when it will be received from backend
-export const AgentCard = () => {
+interface AgentCardProps {
+  estateAgent: EstateAgentInfo;
+}
+
+export const AgentCard = ({ estateAgent }: AgentCardProps) => {
+  const { name } = estateAgent;
   return (
     <Box
       sx={{
@@ -37,7 +42,7 @@ export const AgentCard = () => {
           display="flex"
           justifyContent="space-between"
         >
-          Артур Розе
+          {name}
           <Typography
             variant="captionFirstRegular"
             color="customColors.labelsSecondary"

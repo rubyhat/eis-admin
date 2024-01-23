@@ -1,5 +1,5 @@
-import { Box } from "@mui/material";
 import React from "react";
+import { Box } from "@mui/material";
 import { DetailsListItem } from "../DetailsListItem";
 import { estateObjectDictionary } from "../../../../shared/dictionaries/EstateObjectDictionary";
 import { DisplayEstateObject } from "../../../../shared/interfaces/EstateObjectTypes";
@@ -48,6 +48,7 @@ export const DetailsList = ({ estateDetails }: DetailsListProps) => {
         <DetailsListItem
           title={estateDetails.price.toLocaleString("ru")}
           label="Стоимость"
+          isPrice
         />
       )}
       <DetailsListItem title={estateDetails.geoPosition.city} label="Город" />

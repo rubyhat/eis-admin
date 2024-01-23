@@ -1,15 +1,17 @@
-import { Box, Typography } from "@mui/material";
 import React from "react";
+import { Box, Typography } from "@mui/material";
+import { TbCurrencyTenge } from "react-icons/tb";
 
 interface DetailsListItemProps {
   label: string;
   title?: string;
   link?: string;
   videoLink?: string;
+  isPrice?: boolean;
 }
 
 export const DetailsListItem = (props: DetailsListItemProps) => {
-  const { label, title, link, videoLink } = props;
+  const { label, title, link, videoLink, isPrice } = props;
   return (
     <Box
       component="li"
@@ -22,8 +24,13 @@ export const DetailsListItem = (props: DetailsListItemProps) => {
         },
       }}
     >
-      <Typography component="p" variant="textBodyRegular">
-        {title && title}
+      <Typography
+        component="p"
+        variant="textBodyRegular"
+        display="flex"
+        alignItems="center"
+      >
+        {title && title} {isPrice && <TbCurrencyTenge />}
         {link && (
           <Typography
             component="a"

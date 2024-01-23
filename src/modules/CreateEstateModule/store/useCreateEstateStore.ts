@@ -53,7 +53,7 @@ const formFieldsDataInitial: FormFieldsType = {
   type: "sell",
   category: "apartment",
   visibilityStatus: "checking",
-  estateAgent: "roze",
+  estateAgent: null,
   geoPosition: {
     city: "krg",
     street: "",

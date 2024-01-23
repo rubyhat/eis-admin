@@ -45,7 +45,7 @@ export interface GeoPositionInfo {
   isInfoHidden: boolean; // Свитчер для сокрытия адреса
   mapLink: string; // Ссылка на 2гис
 }
-
+// todo: need avatar from backend
 export interface EstateAgentInfo {
   email: string;
   name: string;
@@ -73,7 +73,7 @@ export interface BasicObject {
   description: string;
   images?: FileList | [];
   videoLink?: string;
-  estateAgent?: string; // todo: transform to EstateAgentInfo interface
+  estateAgent?: EstateAgentInfo | null; // todo: transform to EstateAgentInfo interface
   mortgage: boolean;
   hasSwap: boolean;
   isCommercial: boolean;
