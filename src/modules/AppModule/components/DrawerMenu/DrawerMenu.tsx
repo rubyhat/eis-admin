@@ -8,6 +8,8 @@ import { MenuList } from "../MenuList";
 import { useHeaderStore } from "../../store/useHeaderStore";
 import { useScreenSize } from "../../../../hooks/useScreenSize";
 import { useNavigate } from "react-router-dom";
+import { useLoginStore } from "../../../LoginModule/store";
+import { CustomHr } from "../../../../components/CustomHr";
 
 interface DrawerMenuProps {
   onClick: () => void;
@@ -21,6 +23,7 @@ export const DrawerMenu = ({
   const { isHeaderBurgerOpen, setIsHeaderBurgerOpen } = useHeaderStore(
     (state) => state,
   );
+  const { user } = useLoginStore((state) => state);
 
   const handleCloseBurgerMenu = (
     event: React.KeyboardEvent | React.MouseEvent,
@@ -36,10 +39,16 @@ export const DrawerMenu = ({
     setIsHeaderBurgerOpen(false);
   };
 
+  const handleProfileButtonClick = () => {
+    setIsHeaderBurgerOpen(false);
+    navigate("/users/" + user?._id);
+  };
+
   const handleClickAddEstate = () => {
     setIsHeaderBurgerOpen(false);
     navigate("/catalog/create");
   };
+
   return (
     <SwipeableDrawer
       anchor={isMobile ? "bottom" : "right"}
@@ -69,6 +78,14 @@ export const DrawerMenu = ({
             <IoClose />
           </IconButton>
         </Box>
+        {user && (
+          <Box padding={1.5} paddingBottom={0}>
+            <CustomButton onClick={handleProfileButtonClick}>
+              Мой профиль
+            </CustomButton>
+            <CustomHr sx={{ marginBottom: 0 }} />
+          </Box>
+        )}
         <Box padding={1.5}>
           <MenuList isVertical onClick={() => setIsHeaderBurgerOpen(false)} />
           <CustomButton
