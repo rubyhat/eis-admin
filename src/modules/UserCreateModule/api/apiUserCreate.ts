@@ -1,10 +1,10 @@
 import { axiosBaseWrap } from "../../../configs/AxiosConfig";
-import { DisplayEstateObject } from "../../../shared/interfaces/EstateObjectTypes";
+import { EstateAgentInfo } from "../../../shared/interfaces/EstateObjectTypes";
 
-export const apiCatalogModule = {
-  fetchCatalog(params: string): Promise<DisplayEstateObject[]> {
+export const apiUserCreate = {
+  createUser(data: EstateAgentInfo): Promise<EstateAgentInfo> {
     return axiosBaseWrap
-      .get(`/catalog?${params}`)
+      .post("/auth/register", data)
       .then((response) => {
         if (response.status >= 500) throw new Error("Ошибка сервера!");
         return response.data.data;

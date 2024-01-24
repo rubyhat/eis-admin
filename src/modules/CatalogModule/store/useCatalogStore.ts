@@ -1,7 +1,9 @@
 import { create } from "zustand";
 import {
   CategoryType,
+  DisplayEstateObject,
   ElectricType,
+  EstateAgentInfo,
   EthernetType,
   FurnitureType,
   GasType,
@@ -17,17 +19,9 @@ import {
   VisibilityStatusType,
   WaterType,
 } from "../../../shared/interfaces/EstateObjectTypes";
-import { DisplayEstateObject } from "../../CreateEstateModule/store";
 
 export type ActiveSortType = "new" | "cheap" | "rich";
 export type AllObjectsType = ObjectItem | Apartment | House | Flat;
-
-export interface EstateAgentInfo {
-  id: string; // uuid?
-  name: string;
-  avatar: string;
-  phone: string;
-}
 
 // Общие характеристики, вне зависимости от категории объекта
 export interface ObjectItem {

@@ -12,6 +12,10 @@ import {
   selectInputProps,
   selectStyles,
 } from "../../../EstateFormModule/assets/styles";
+import { apiUserCreate } from "../../api";
+import { EstateAgentInfo } from "../../../../shared/interfaces/EstateObjectTypes";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 export const UserCreateForm = () => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -26,14 +30,29 @@ export const UserCreateForm = () => {
       username: "",
       phone: "",
       role: "Member",
-      // email: "", // todo: нужена ли почта или создавать всем корпоративную почту?
+      email: "", // todo: нужна ли почта? или создавать всем корпоративную почту?
     },
   });
 
+  const navigate = useNavigate();
+
+  const sendCreaeteUser = async (data: EstateAgentInfo) => {
+    setIsLoading(true);
+    try {
+      await apiUserCreate.createUser(data);
+      toast.success("Пользователь успешно создан!");
+      navigate("/users");
+    } catch (error) {
+      console.log(error);
+      toast.error("Извините, произошла ошибка, попробуйте повторить позднее.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // todo: normalize phone number
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(false);
-    console.log(data);
+    sendCreaeteUser(data as EstateAgentInfo);
   };
 
   return (
