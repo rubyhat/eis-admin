@@ -52,7 +52,7 @@ export interface EstateAgentInfo {
   phone: string;
   role: string;
   username: string;
-  _id: string;
+  _id?: string;
 }
 
 export type FormFieldsType = BasicObject | Apartment | House | Flat | Land;
