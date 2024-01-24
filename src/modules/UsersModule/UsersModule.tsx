@@ -1,5 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
-import { Container } from "@mui/system";
+import { Box, Grid, Typography, Container } from "@mui/material";
 import React from "react";
 import { UserList } from "./components/UserList";
 import { CustomButton } from "../../components/CustomButton";

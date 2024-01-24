@@ -1,6 +1,12 @@
 import React from "react";
-import { Box } from "@mui/system";
-import { Chip, List, ListItem, ListItemText, Typography } from "@mui/material";
+import {
+  Box,
+  Chip,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import { EstateAgentInfo } from "../../../../shared/interfaces/EstateObjectTypes";
 
 interface UserCardProps {
