@@ -46,9 +46,9 @@ export const DetailsList = ({ estateDetails }: DetailsListProps) => {
       )}
       {estateDetails.price && (
         <DetailsListItem
-          title={estateDetails.price.toLocaleString("ru")}
           label="Стоимость"
-          isPrice
+          price={estateDetails.price}
+          discount={estateDetails.discount || 0}
         />
       )}
       <DetailsListItem title={estateDetails.geoPosition.city} label="Город" />

@@ -1,17 +1,20 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { TbCurrencyTenge } from "react-icons/tb";
+import { usePriceNormalize } from "../../../../hooks/usePriceNormalize";
 
 interface DetailsListItemProps {
   label: string;
   title?: string;
   link?: string;
   videoLink?: string;
-  isPrice?: boolean;
+  price?: number;
+  discount?: number;
 }
 
 export const DetailsListItem = (props: DetailsListItemProps) => {
-  const { label, title, link, videoLink, isPrice } = props;
+  const { label, title, link, videoLink, price = 0, discount = 0 } = props;
+  const { totalPrice } = usePriceNormalize(price, discount);
   return (
     <Box
       component="li"
@@ -24,13 +27,46 @@ export const DetailsListItem = (props: DetailsListItemProps) => {
         },
       }}
     >
-      <Typography
-        component="p"
-        variant="textBodyRegular"
-        display="flex"
-        alignItems="center"
-      >
-        {title && title} {isPrice && <TbCurrencyTenge />}
+      <Typography component="p" variant="textBodyRegular">
+        {title && title}
+        {price > 0 ? (
+          <Box component="span" display="flex" alignItems="center">
+            {totalPrice} <TbCurrencyTenge />
+            {discount > 0 && (
+              <>
+                <Typography
+                  variant="textFootnoteRegular"
+                  color="customColors.labelsSecondary"
+                  display="flex"
+                  alignItems="center"
+                  alignSelf="flex-end"
+                  marginBottom={0.25}
+                  marginLeft={0.5}
+                  marginRight={0.5}
+                  sx={{ textDecoration: "line-through" }}
+                >
+                  {price.toLocaleString("ru")} <TbCurrencyTenge size={12} />
+                </Typography>
+                <Box
+                  component="span"
+                  sx={{
+                    padding: "2px 4px",
+                    backgroundColor: "customColors.colorsGreen",
+                    color: "customColors.colorsWhite",
+                    borderRadius: 1,
+                    marginBottom: 0.5,
+                    display: "flex",
+                    width: "fit-content",
+                  }}
+                >
+                  <Typography variant="textFootnoteRegular">
+                    снижение цены
+                  </Typography>
+                </Box>
+              </>
+            )}
+          </Box>
+        ) : null}
         {link && (
           <Typography
             component="a"

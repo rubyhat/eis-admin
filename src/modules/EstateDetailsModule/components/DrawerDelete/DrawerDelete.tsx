@@ -41,14 +41,15 @@ export const DrawerDelete = ({
 
   return (
     <SwipeableDrawer
-      anchor={isMobile ? "bottom" : "right"}
+      anchor={isMobile ? "bottom" : "top"}
       open={isDeleteDrawerOpen}
       onClose={handleCloseDrawer}
       onOpen={handleOpenDrawer}
       PaperProps={{
         sx: {
-          width: isMobile ? "100%" : "400px",
-          borderRadius: isMobile ? "8px 8px 0 0" : "inherit",
+          width: isMobile ? "100%" : "600px",
+          borderRadius: isMobile ? "8px 8px 0 0" : 2,
+          margin: isMobile ? "inherit" : "10% auto",
         },
       }}
     >
