@@ -4,7 +4,7 @@ import {
   HouseConditionType,
   HouseWallMaterialType,
   ServiceType,
-} from "../../CatalogModule/store";
+} from "../../../shared/interfaces/EstateObjectTypes";
 
 export interface FilterState {
   city: string;

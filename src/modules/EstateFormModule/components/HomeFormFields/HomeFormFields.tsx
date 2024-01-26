@@ -320,6 +320,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
             variant="textCalloutRegular"
             marginBottom={0.5}
           >
+            {/* todo: add validation for "." dont use "," */}
             Высота потолков
           </Typography>
           <CustomInput

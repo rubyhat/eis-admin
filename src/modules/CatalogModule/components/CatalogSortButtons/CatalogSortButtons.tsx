@@ -1,9 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import {
-  VisibilityStatusType,
-  useCatalogStore,
-} from "../../store/useCatalogStore";
+import { useCatalogStore } from "../../store/useCatalogStore";
+import { VisibilityStatusType } from "../../../../shared/interfaces/EstateObjectTypes";
 
 const sortWrapperStyles = {
   width: "100%",

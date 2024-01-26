@@ -12,6 +12,8 @@ import { Controller, useFormContext } from "react-hook-form";
 import { selectInputProps, selectStyles } from "../../assets/styles";
 import { useCreateEstateStore } from "../../../CreateEstateModule/store";
 import { CustomInput } from "../../../../components/CustomInput";
+import { useQuery } from "@tanstack/react-query";
+import { apiEstateFormModule } from "../../api/apiEstateFormModule";
 
 interface BasicFormFieldsProps {
   isLoading: boolean;
@@ -22,6 +24,16 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
     (state) => state,
   );
   const { control, register, formState } = useFormContext();
+
+  const {
+    data: usersData,
+    isLoading: isLoadingUsers,
+    isError,
+  } = useQuery({
+    queryFn: () => apiEstateFormModule.fetchAllUsers(),
+    queryKey: ["usersItems"],
+  });
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={3}>
@@ -176,10 +188,37 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
                 displayEmpty
                 sx={selectStyles}
                 inputProps={{ sx: selectInputProps }}
+                onChange={(e) => {
+                  const selectedValue = e.target.value;
+                  field.onChange(selectedValue);
+
+                  setFormFieldsData({
+                    ...formFieldsData,
+                    estateAgent: selectedValue || "", // Используйте пустую строку по умолчанию, если selectedValue равен null или undefined
+                  });
+                }}
               >
-                <MenuItem value="roze">Артур Розе</MenuItem>
-                <MenuItem value="kuzn">Даниил Кузнецов</MenuItem>
-                <MenuItem value="tsay">Владислав Цай</MenuItem>
+                {isLoadingUsers && (
+                  <MenuItem disabled value="">
+                    Загрузка списка пользователей...
+                  </MenuItem>
+                )}
+                {isError && (
+                  <MenuItem
+                    disabled
+                    value=""
+                    sx={{ color: "customColors.colorsRed" }}
+                  >
+                    Произошла ошибка при загрузке данных, пожалуйста, обратитесь
+                    в тех. поддержку
+                  </MenuItem>
+                )}
+                {usersData &&
+                  usersData.map((user) => (
+                    <MenuItem key={user.username} value={user._id || ""}>
+                      {user.name}
+                    </MenuItem>
+                  ))}
               </Select>
             )}
           />

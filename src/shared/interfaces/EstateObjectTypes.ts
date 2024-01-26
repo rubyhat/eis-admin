@@ -56,14 +56,15 @@ export interface EstateAgentInfo {
 }
 
 export type FormFieldsType = BasicObject | Apartment | House | Flat | Land;
-export interface DisplayEstateObject
-  extends FormFieldsData,
-    Apartment,
-    House,
-    Flat,
-    Land {
+
+export interface EstateObject extends Apartment, House, Flat, Land {
   _id: string;
 }
+
+export type DisplayEstateObject = Omit<EstateObject, "estateAgent"> & {
+  estateAgent: EstateAgentInfo | null;
+};
+
 export interface BasicObject {
   category: CategoryType;
   visibilityStatus: VisibilityStatusType;
@@ -73,7 +74,7 @@ export interface BasicObject {
   description: string;
   images?: FileList | [];
   videoLink?: string;
-  estateAgent?: EstateAgentInfo | null; // todo: transform to EstateAgentInfo interface
+  estateAgent?: string;
   mortgage: boolean;
   hasSwap: boolean;
   isCommercial: boolean;

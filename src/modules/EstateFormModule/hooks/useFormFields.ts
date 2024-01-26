@@ -1,8 +1,6 @@
 import { FieldValues, useForm } from "react-hook-form";
-import {
-  FormFieldsData,
-  useCreateEstateStore,
-} from "../../CreateEstateModule/store";
+import { useCreateEstateStore } from "../../CreateEstateModule/store";
+import { FormFieldsData } from "../../../shared/interfaces/EstateObjectTypes";
 
 // todo: remove, deprecated
 export const useFormFields = () => {

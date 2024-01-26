@@ -1,7 +1,7 @@
 import { Box, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import React from "react";
 import { CustomButton } from "../../../../components/CustomButton";
-import { VisibilityStatusType } from "../../../CatalogModule/store";
+import { VisibilityStatusType } from "../../../../shared/interfaces/EstateObjectTypes";
 
 export const SettingsButtonBar = () => {
   const [status, setStatus] = React.useState<VisibilityStatusType>("active");

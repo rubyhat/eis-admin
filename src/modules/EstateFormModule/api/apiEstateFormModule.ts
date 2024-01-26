@@ -1,13 +1,13 @@
 import { axiosBaseWrap } from "../../../configs/AxiosConfig";
-import { FormFieldsType } from "../../../shared/interfaces/EstateObjectTypes";
+import { EstateAgentInfo } from "../../../shared/interfaces/EstateObjectTypes";
 
-export const apiCreateEstateModule = {
-  createObject(data: FormFieldsType) {
+export const apiEstateFormModule = {
+  fetchAllUsers(): Promise<EstateAgentInfo[]> {
     return axiosBaseWrap
-      .post("/catalog", data)
+      .get("/users")
       .then((response) => {
         if (response.status >= 500) throw new Error("Ошибка сервера!");
-        return response.data.data;
+        return response.data;
       })
       .catch((error) => {
         throw error;

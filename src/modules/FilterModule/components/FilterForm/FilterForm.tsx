@@ -193,9 +193,13 @@ export const FilterForm = () => {
                     Например: Караганда
                   </Typography>
                 </MenuItem>
-                <MenuItem value="krg">Караганда</MenuItem>
-                <MenuItem value="ast">Астана</MenuItem>
-                <MenuItem value="alm">Аламата</MenuItem>
+                <MenuItem value="Караганда">Караганда</MenuItem>
+                <MenuItem value="Темиртау">Темиртау</MenuItem>
+                <MenuItem value="Абай">Абай</MenuItem>
+                <MenuItem value="Шахтинск">Шахтинск</MenuItem>
+                <MenuItem value="Пришахтинск">Пришахтинск</MenuItem>
+                <MenuItem value="Астана">Астана</MenuItem>
+                <MenuItem value="Алмата">Алмата</MenuItem>
               </Select>
             )}
           />

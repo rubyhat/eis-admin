@@ -1,6 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import { IoIosArrowForward } from "react-icons/io";
-import { CategoryType, ServiceType } from "../../../CatalogModule/store";
+import {
+  CategoryType,
+  ServiceType,
+} from "../../../../shared/interfaces/EstateObjectTypes";
 
 interface LinkCardProps {
   id: ServiceType | CategoryType;

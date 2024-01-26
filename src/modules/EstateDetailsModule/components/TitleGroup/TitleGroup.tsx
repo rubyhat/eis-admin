@@ -7,7 +7,7 @@ import { DrawerDelete } from "../DrawerDelete";
 import { useEstateDetailsStore } from "../../store";
 import { apiEstateDetailsModule } from "../../api/apiEstateDetailsModule";
 import toast from "react-hot-toast";
-import { DisplayEstateObject } from "../../../CreateEstateModule/store";
+import { DisplayEstateObject } from "../../../../shared/interfaces/EstateObjectTypes";
 
 interface TitleGroupProps {
   estateDetails: DisplayEstateObject;

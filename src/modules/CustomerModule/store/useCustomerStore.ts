@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { HouseConditionType } from "../../CatalogModule/store";
+import { HouseConditionType } from "../../../shared/interfaces/EstateObjectTypes";
 
 export interface CustomerFormFields {
   firstname: string; // Имя

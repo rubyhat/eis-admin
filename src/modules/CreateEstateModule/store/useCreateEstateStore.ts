@@ -38,6 +38,11 @@ const listLinkStepsData: ListLinkSteps = {
   ],
 };
 
+const agentFromLocalStorage = localStorage.getItem("user");
+const agentObjectFromLocalStorage = agentFromLocalStorage
+  ? JSON.parse(agentFromLocalStorage).id
+  : "";
+
 const formFieldsDataInitial: FormFieldsType = {
   // basic values
   description: "",
@@ -53,9 +58,9 @@ const formFieldsDataInitial: FormFieldsType = {
   type: "sell",
   category: "apartment",
   visibilityStatus: "checking",
-  estateAgent: null,
+  estateAgent: agentObjectFromLocalStorage,
   geoPosition: {
-    city: "krg",
+    city: "Караганда",
     street: "",
     houseNumber: null,
     isInfoHidden: false,

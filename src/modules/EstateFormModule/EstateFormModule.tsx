@@ -54,7 +54,7 @@ export const EstateFormModule = () => {
       type,
       category,
       visibilityStatus,
-      // estateAgent, // add data from user info req, need user info req
+      estateAgent,
       geoPosition,
     } = data as FormFieldsType;
 
@@ -113,8 +113,7 @@ export const EstateFormModule = () => {
       type: type,
       category: category,
       visibilityStatus: visibilityStatus,
-      estateAgent: "65a579da338bf8d0b1ef78e5", // todo: remove this hardcode after tests
-      // estateAgent: estateAgent,
+      estateAgent: estateAgent,
       geoPosition: geoPosition,
     };
 
