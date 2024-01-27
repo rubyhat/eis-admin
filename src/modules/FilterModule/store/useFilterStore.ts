@@ -14,6 +14,8 @@ export interface FilterState {
   houseSquare: string;
   kitchenSquare: string;
   houseBuildingYear: string;
+  targetFloor: number | null;
+  totalFloor: number | null;
   mortgage: boolean;
   hasSwap: boolean;
   type: ServiceType;
@@ -36,6 +38,8 @@ export const initialFilterState: FilterState = {
   mortgage: false,
   hasSwap: false,
   type: "sell",
+  targetFloor: null,
+  totalFloor: null,
 };
 
 export interface FilterStore {

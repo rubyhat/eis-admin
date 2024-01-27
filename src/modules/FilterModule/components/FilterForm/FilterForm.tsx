@@ -99,7 +99,9 @@ export const FilterForm = () => {
   const updateUrlParams = (data: FieldValues) => {
     // Очищаем от пустых значений
     const filteredData = Object.fromEntries(
-      Object.entries(data).filter(([, value]) => value !== ""),
+      Object.entries(data).filter(
+        ([, value]) => value !== "" && value !== null,
+      ),
     );
 
     // Сохраняем стейт фильтра
@@ -320,6 +322,61 @@ export const FilterForm = () => {
               </Select>
             )}
           />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1.5,
+            marginBottom: 1.5,
+          }}
+        >
+          <Box>
+            <Typography
+              component="p"
+              color="customColors.labelsSecondary"
+              variant="textFootnoteRegular"
+              marginBottom={0.5}
+            >
+              Этаж
+            </Typography>
+            <CustomInput
+              id="targetFloor"
+              register={register}
+              errors={errors}
+              disabled={isLoading}
+              formatPrice={false}
+              placeholder="2"
+              type="number"
+            />
+          </Box>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginTop={3}
+          >
+            /
+          </Typography>
+          <Box>
+            <Typography
+              component="p"
+              color="customColors.labelsSecondary"
+              variant="textFootnoteRegular"
+              marginBottom={0.5}
+            >
+              Всего
+            </Typography>
+            <CustomInput
+              id="totalFloor"
+              register={register}
+              errors={errors}
+              disabled={isLoading}
+              formatPrice={false}
+              placeholder="5"
+              type="number"
+            />
+          </Box>
         </Box>
         <Box marginBottom={1.5}>
           <Typography
