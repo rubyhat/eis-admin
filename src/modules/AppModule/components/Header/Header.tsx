@@ -13,6 +13,7 @@ import { DrawerMenu } from "../DrawerMenu";
 import { useScreenSize } from "../../../../hooks/useScreenSize";
 import { useNavigate } from "react-router-dom";
 import { useLoginStore } from "../../../LoginModule/store";
+import { LogoutButton } from "../LogoutButton";
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -82,6 +83,7 @@ export const Header = () => {
                 >
                   + Добавить объект
                 </CustomButton>
+                <LogoutButton />
               </React.Fragment>
             )}
           </Grid>

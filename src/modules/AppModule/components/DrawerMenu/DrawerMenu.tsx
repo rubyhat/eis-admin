@@ -10,6 +10,7 @@ import { useScreenSize } from "../../../../hooks/useScreenSize";
 import { useNavigate } from "react-router-dom";
 import { useLoginStore } from "../../../LoginModule/store";
 import { CustomHr } from "../../../../components/CustomHr";
+import { LogoutButton } from "../LogoutButton";
 
 interface DrawerMenuProps {
   onClick: () => void;
@@ -83,6 +84,7 @@ export const DrawerMenu = ({
             <CustomButton onClick={handleProfileButtonClick}>
               Мой профиль
             </CustomButton>
+            <LogoutButton />
             <CustomHr sx={{ marginBottom: 0 }} />
           </Box>
         )}
