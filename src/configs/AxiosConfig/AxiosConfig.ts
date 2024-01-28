@@ -45,7 +45,7 @@ const updateAccessToken = async () => {
     // Очистка данных о сессии пользователя
     tokenUtils.clearAccessToken();
     // Перенаправление пользователя на страницу входа
-    window.location.href = "/login";
+    // window.location.href = "/login";
   }
 };
 
@@ -74,3 +74,68 @@ axiosBaseWrap.interceptors.request.use(
     return Promise.reject(error);
   },
 );
+// Axios response interceptor
+axiosBaseWrap.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+
+    // Check if the error is due to an expired token (status code 401)
+    if (
+      error.response &&
+      error.response.status === 401 &&
+      !originalRequest._retry
+    ) {
+      originalRequest._retry = true;
+
+      try {
+        // Attempt to refresh the access token
+        const response = await updateAccessToken();
+
+        // If the refresh is successful, retry the original request
+        originalRequest.headers["Authorization"] = `Bearer ${response}`;
+        return axiosBaseWrap(originalRequest);
+      } catch (refreshError) {
+        // If the refresh fails, handle the error and redirect the user
+        handleAuthenticationError();
+        return Promise.reject(refreshError);
+      }
+    }
+
+    // Check if the error is due to a forbidden access (status code 403)
+    if (error.response && error.response.status === 403) {
+      // Handle 403 error, e.g., clear localStorage and redirect to login
+      handleForbiddenError();
+      return Promise.reject(error);
+    }
+
+    // If it's not a 401 or 403 error, simply reject the promise with the error
+    return Promise.reject(error);
+  },
+);
+
+// Function to handle authentication errors (e.g., clear localStorage and redirect to login)
+const handleAuthenticationError = () => {
+  toast.error(
+    "Не удалось автоматически обновить сессию. Пожалуйста, авторизуйтесь в системе повторно.",
+    { duration: 5000 },
+  );
+  setTimeout(() => {
+    tokenUtils.clearAccessToken();
+    window.location.href = "/no-auth";
+  }, 5000);
+};
+
+// Function to handle forbidden errors (e.g., clear localStorage and redirect to login)
+const handleForbiddenError = () => {
+  toast.error(
+    "У вас нет доступа к этому ресурсу. Пожалуйста, авторизуйтесь для продолжения.",
+    { duration: 5000 },
+  );
+
+  // Добавляем задержку в 5 секунд перед перенаправлением
+  setTimeout(() => {
+    tokenUtils.clearAccessToken();
+    window.location.href = "/no-auth";
+  }, 5000);
+};
