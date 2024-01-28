@@ -25,6 +25,7 @@ import {
   House,
   Land,
 } from "../../shared/interfaces/EstateObjectTypes";
+import { useScreenSize } from "../../hooks/useScreenSize";
 
 const livingSpaces = ["apartment", "house", "cottage"];
 const houseAndCottage = ["house", "cottage"];
@@ -34,6 +35,7 @@ export const EstateFormModule = () => {
   const { formFieldsData, setFormFieldsData } = useCreateEstateStore(
     (state) => state,
   );
+  const { isMobile } = useScreenSize();
 
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(false);
@@ -199,17 +201,41 @@ export const EstateFormModule = () => {
         <Box component="form" onSubmit={methods.handleSubmit(handleFormSubmit)}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Typography component="h1" variant="titleFirstRegular">
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: { xs: "flex-start", md: "center" },
+                  flexDirection: { xs: "column", md: "row" },
+                }}
+              >
+                <Typography
+                  component="h1"
+                  variant="titleFirstRegular"
+                  width={1}
+                >
                   Добавить новый объект недвижимости
                 </Typography>
-                <CustomButton
-                  type="submit"
-                  size="small"
-                  sx={{ marginLeft: "auto" }}
+                <Box
+                  sx={{
+                    width: { xs: "90%", md: "inherit" },
+                    position: { xs: "fixed", md: "inherit" },
+                    marginLeft: { xs: "inherit", md: "auto" },
+                    margin: { xs: "0 5%", md: 0 },
+                    bottom: 24,
+                    left: 0,
+                    zIndex: 1,
+                  }}
                 >
-                  Сохранить
-                </CustomButton>
+                  <CustomButton
+                    type="submit"
+                    size={isMobile ? "large" : "small"}
+                    sx={{
+                      width: { xs: 1, md: "fit-content" },
+                    }}
+                  >
+                    Сохранить
+                  </CustomButton>
+                </Box>
               </Box>
               <CustomHr />
             </Grid>
