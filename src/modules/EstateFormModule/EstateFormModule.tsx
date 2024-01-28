@@ -29,7 +29,6 @@ import {
 const livingSpaces = ["apartment", "house", "cottage"];
 const houseAndCottage = ["house", "cottage"];
 
-// todo: проверить создание объекта с высотой потолков 2.5 (не целое число)
 export const EstateFormModule = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const { formFieldsData, setFormFieldsData } = useCreateEstateStore(

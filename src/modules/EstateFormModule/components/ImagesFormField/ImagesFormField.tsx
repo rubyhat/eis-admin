@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from "react";
-import { Box, Grid, IconButton, Typography } from "@mui/material";
+import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
 import { IoImagesOutline } from "react-icons/io5";
 import { AiOutlineDelete } from "react-icons/ai";
 
@@ -10,8 +10,7 @@ interface ImagesFormFieldProps {
   onImagesUpload: (files: FileList) => void;
 }
 
-// todo: добавить кнопку "Очистить все"
-// баг: добавили 2 фото - пролистнули на 2 фото и вернулись на 1, удалили 1 = баг со 2 фото
+// todo:  баг - добавили 2 фото - пролистнули на 2 фото и вернулись на 1, удалили 1 = баг со 2 фото
 export const ImagesFormField = ({ onImagesUpload }: ImagesFormFieldProps) => {
   const [selectedImages, setSelectedImages] = React.useState<string[]>([]);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
@@ -37,11 +36,19 @@ export const ImagesFormField = ({ onImagesUpload }: ImagesFormFieldProps) => {
   const handleCustomInputClick = () => {
     fileInputRef.current?.click();
   };
+
   const handleClickDeleteButton = (imageToRemove: string) => {
     setSelectedImages((currentImages) =>
       currentImages.filter((image) => image !== imageToRemove),
     );
     // todo: switch to react-dropzone
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
+  const handleClearImages = () => {
+    setSelectedImages([]);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
@@ -110,6 +117,17 @@ export const ImagesFormField = ({ onImagesUpload }: ImagesFormFieldProps) => {
           <Typography component="p" variant="textCalloutRegular">
             Добавьте фотографии, здесь можно будет их просмотреть
           </Typography>
+        )}
+        {Boolean(selectedImages.length) && (
+          <Button
+            size="small"
+            color="error"
+            variant="contained"
+            sx={{ fontSize: 12, textTransform: "none", marginBottom: 2 }}
+            onClick={handleClearImages}
+          >
+            Очистить все
+          </Button>
         )}
         {Boolean(selectedImages.length) && (
           <Box>

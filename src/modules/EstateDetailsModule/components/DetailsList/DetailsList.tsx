@@ -8,8 +8,7 @@ interface DetailsListProps {
   estateDetails: DisplayEstateObject;
 }
 
-// todo: use usePriceNormalize for display price with discount
-// add accordion to show all properties?
+// todo: add accordion to show all properties?
 
 export const DetailsList = ({ estateDetails }: DetailsListProps) => {
   const squareText = estateDetails.kitchenSquare

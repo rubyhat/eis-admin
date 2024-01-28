@@ -330,6 +330,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
             disabled={isLoading}
             formatPrice={false}
             placeholder="Например: 2.5"
+            type="number"
           />
         </Box>
         <Box marginBottom={1.5}>
