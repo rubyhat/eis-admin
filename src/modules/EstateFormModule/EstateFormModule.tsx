@@ -26,6 +26,8 @@ import {
   Land,
 } from "../../shared/interfaces/EstateObjectTypes";
 import { useScreenSize } from "../../hooks/useScreenSize";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const livingSpaces = ["apartment", "house", "cottage"];
 const houseAndCottage = ["house", "cottage"];
@@ -36,6 +38,7 @@ export const EstateFormModule = () => {
     (state) => state,
   );
   const { isMobile } = useScreenSize();
+  const navigate = useNavigate();
 
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(false);
@@ -168,9 +171,6 @@ export const EstateFormModule = () => {
         ...basicData,
         ...totalData[category],
       };
-      // const filteredData = Object.fromEntries(
-      //   Object.entries(sendData).filter(([, value]) => value !== ""),
-      // );
       const filteredData = Object.entries(sendData).reduce(
         (acc, [key, value]) => {
           if (value !== "" && value !== null) {
@@ -180,7 +180,19 @@ export const EstateFormModule = () => {
         },
         {} as Record<string, any>,
       );
-      apiCreateEstateModule.createObject(filteredData as FormFieldsType); //todo: add success/error notification
+      apiCreateEstateModule
+        .createObject(filteredData as FormFieldsType)
+        .then((response) => {
+          if (response) {
+            toast.success("Объект успешно создан!");
+            navigate("/catalog/" + response._id);
+          }
+        })
+        .catch(() => {
+          toast.error(
+            "Произошла ошибка! Пожалуйста, обратитьесь в тех. поддержку",
+          );
+        });
     };
     createObjectReq();
   };
