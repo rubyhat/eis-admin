@@ -16,8 +16,10 @@ import { apiUserCreate } from "../../api";
 import { EstateAgentInfo } from "../../../../shared/interfaces/EstateObjectTypes";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import { useUserStore } from "../../../UserModule/store/useUserStore";
 
 export const UserCreateForm = () => {
+  const { user } = useUserStore((state) => state);
   const [isLoading, setIsLoading] = React.useState(false);
   const {
     control,
@@ -62,7 +64,14 @@ export const UserCreateForm = () => {
       </Typography>
       <Box padding="8px 0">
         <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
-          Имя и Фамилия
+          Имя и Фамилия{" "}
+          <Typography
+            component="span"
+            color="customColors.colorsRed"
+            marginLeft={0.5}
+          >
+            *
+          </Typography>
         </Typography>
         <CustomInput
           id="name"
@@ -75,7 +84,14 @@ export const UserCreateForm = () => {
       </Box>
       <Box padding="8px 0">
         <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
-          Логин для входа
+          Логин для входа{" "}
+          <Typography
+            component="span"
+            color="customColors.colorsRed"
+            marginLeft={0.5}
+          >
+            *
+          </Typography>
         </Typography>
         <CustomInput
           id="username"
@@ -88,20 +104,14 @@ export const UserCreateForm = () => {
       </Box>
       <Box padding="8px 0">
         <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
-          Почта
-        </Typography>
-        <CustomInput
-          id="email"
-          register={register}
-          errors={errors}
-          disabled={isLoading}
-          placeholder="Артур Розе"
-          required
-        />
-      </Box>
-      <Box padding="8px 0">
-        <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
-          Сотовый телефон с WhatsApp
+          Сотовый телефон с WhatsApp{" "}
+          <Typography
+            component="span"
+            color="customColors.colorsRed"
+            marginLeft={0.5}
+          >
+            *
+          </Typography>
         </Typography>
         <CustomInput
           id="phone"
@@ -112,30 +122,62 @@ export const UserCreateForm = () => {
           required
         />
       </Box>
-      <Box padding="8px 0">
-        <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
-          Роль в системе
-        </Typography>
-        <Alert severity="info" sx={{ marginBottom: 1 }}>
-          В будущем в зависимости от роли будет ограничиваться функционал для
-          сотрудника. Этот параметр в дальнейшем можно будет изменить
-        </Alert>
-        <Controller
-          name="role"
-          control={control}
-          render={({ field }) => (
-            <Select
-              required
-              {...field}
-              sx={selectStyles}
-              inputProps={{ sx: selectInputProps }}
+      {user?.role === "Admin" && (
+        <>
+          <Box padding="8px 0">
+            <Typography
+              component="p"
+              variant="textBodyRegular"
+              marginBottom={0.5}
             >
-              <MenuItem value="Manager">Менеджер</MenuItem>
-              <MenuItem value="Member">Агент</MenuItem>
-            </Select>
-          )}
-        />
-      </Box>
+              Почта
+            </Typography>
+            <CustomInput
+              id="email"
+              register={register}
+              errors={errors}
+              disabled={isLoading}
+              placeholder="Артур Розе"
+              required
+            />
+          </Box>
+          <Box padding="8px 0">
+            <Typography
+              component="p"
+              variant="textBodyRegular"
+              marginBottom={0.5}
+            >
+              Роль в системе{" "}
+              <Typography
+                component="span"
+                color="customColors.colorsRed"
+                marginLeft={0.5}
+              >
+                *
+              </Typography>
+            </Typography>
+            <Alert severity="info" sx={{ marginBottom: 1 }}>
+              В будущем в зависимости от роли будет ограничиваться функционал
+              для сотрудника. Этот параметр в дальнейшем можно будет изменить
+            </Alert>
+            <Controller
+              name="role"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  required
+                  {...field}
+                  sx={selectStyles}
+                  inputProps={{ sx: selectInputProps }}
+                >
+                  <MenuItem value="Manager">Менеджер</MenuItem>
+                  <MenuItem value="Member">Агент</MenuItem>
+                </Select>
+              )}
+            />
+          </Box>
+        </>
+      )}
       <Box padding="8px 0">
         <CustomButton size="large" fullWidth type="submit">
           Создать

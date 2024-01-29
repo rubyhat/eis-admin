@@ -46,11 +46,13 @@ export interface GeoPositionInfo {
   mapLink: string; // Ссылка на 2гис
 }
 // todo: need avatar from backend
+
+export type UserRole = "Admin" | "Manager" | "Member";
 export interface EstateAgentInfo {
   email: string;
   name: string;
   phone: string;
-  role: string;
+  role: UserRole;
   username: string;
   _id?: string;
 }
