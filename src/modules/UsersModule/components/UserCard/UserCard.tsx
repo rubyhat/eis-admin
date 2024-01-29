@@ -12,27 +12,42 @@ import { MdDeleteOutline } from "react-icons/md";
 import { EstateAgentInfo } from "../../../../shared/interfaces/EstateObjectTypes";
 import { apiUsersModule } from "../../api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { UserDeleteDrawer } from "../UserDeleteDrawer";
+import { useUsersStore } from "../../store/useUsersStore";
+import toast from "react-hot-toast";
+import { useUserStore } from "../../../UserModule/store/useUserStore";
 
 interface UserCardProps {
   user: EstateAgentInfo;
 }
 
 export const UserCard = ({ user }: UserCardProps) => {
+  const { setIsDeleteDrawerOpen } = useUsersStore((state) => state);
+  const { user: currentUser } = useUserStore((state) => state);
   const queryClient = useQueryClient();
 
   const deleteUserMutation = useMutation({
     mutationFn: (userId: string) => apiUsersModule.deleteUserById(userId),
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["usersItems"] });
+      toast.success("Пользователь успешно удален!");
+    },
+    onError() {
+      toast.error("Извините, произошла ошибка, обратитесь в тех. поддержку.");
+    },
+    onSettled() {
+      setIsDeleteDrawerOpen(false);
     },
   });
 
-  const handleDeleteButtonClick = () => {
+  const handleDeleteUser = () => {
+    // todo: remove if
     if (user._id) {
-      // todo: remove if
       deleteUserMutation.mutate(user._id);
     }
   };
+
+  const handleClickDeleteButton = () => setIsDeleteDrawerOpen(true);
 
   return (
     <Box
@@ -54,9 +69,17 @@ export const UserCard = ({ user }: UserCardProps) => {
           <Typography component="h6" variant="titleSecondEmphasized">
             {user.name} <Chip label={user.role} color="primary" size="small" />
           </Typography>
-          <IconButton color="error" onClick={handleDeleteButtonClick}>
-            <MdDeleteOutline />
-          </IconButton>
+          {currentUser && currentUser.role === "Admin" && (
+            <>
+              <IconButton color="error" onClick={handleClickDeleteButton}>
+                <MdDeleteOutline />
+              </IconButton>
+              <UserDeleteDrawer
+                onClick={handleClickDeleteButton}
+                onDelete={handleDeleteUser}
+              />
+            </>
+          )}
         </ListItem>
         <ListItem>
           <ListItemText primary={user.username} secondary="Никнейм" />
