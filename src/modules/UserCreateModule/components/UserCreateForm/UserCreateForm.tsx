@@ -61,10 +61,7 @@ export const UserCreateForm = () => {
       if (key !== "avatar") {
         formData.append(key, value);
       } else if (key === "avatar" && value instanceof FileList) {
-        // const avatarBlob = new Blob(value, { type: value.type });
         formData.append(key, value[0], value[0].name);
-        console.log(value);
-        console.log(value[0]);
       }
     });
 

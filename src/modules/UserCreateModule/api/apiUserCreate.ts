@@ -1,8 +1,7 @@
 import { axiosBaseWrap } from "../../../configs/AxiosConfig";
-import { EstateAgentInfo } from "../../../shared/interfaces/EstateObjectTypes";
 
 export const apiUserCreate = {
-  createUser(data: FormData): Promise<EstateAgentInfo> {
+  createUser(data: FormData) {
     return axiosBaseWrap
       .post("/auth/register", data, {
         headers: { "Content-Type": "multipart/form-data" },

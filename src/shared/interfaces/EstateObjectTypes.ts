@@ -55,7 +55,7 @@ export interface EstateAgentInfo {
   username: string;
   _id?: string;
   email?: string;
-  avatar?: File;
+  avatar?: string;
 }
 
 export type FormFieldsType = BasicObject | Apartment | House | Flat | Land;

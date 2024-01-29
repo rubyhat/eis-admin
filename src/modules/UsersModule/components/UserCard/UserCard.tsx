@@ -95,6 +95,14 @@ export const UserCard = ({ user }: UserCardProps) => {
           </ListItem>
         )}
       </List>
+      {user.avatar && (
+        <Box
+          component="img"
+          src={user.avatar as string}
+          alt="Фото сотрудника не загрузилось"
+          sx={{ width: 1, maxWidth: 512, borderRadius: 2 }}
+        />
+      )}
     </Box>
   );
 };
