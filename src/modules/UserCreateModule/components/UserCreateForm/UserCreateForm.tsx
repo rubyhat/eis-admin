@@ -13,7 +13,6 @@ import {
   selectStyles,
 } from "../../../EstateFormModule/assets/styles";
 import { apiUserCreate } from "../../api";
-import { EstateAgentInfo } from "../../../../shared/interfaces/EstateObjectTypes";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { useUserStore } from "../../../UserModule/store/useUserStore";
@@ -32,13 +31,15 @@ export const UserCreateForm = () => {
       username: "",
       phone: "",
       role: "Member",
+      password: "", // todo: добавить инпут "подтверждение пароля"
       email: "", // todo: нужна ли почта? или создавать всем корпоративную почту?
+      avatar: null,
     },
   });
 
   const navigate = useNavigate();
 
-  const sendCreaeteUser = async (data: EstateAgentInfo) => {
+  const sendCreaeteUser = async (data: FormData) => {
     setIsLoading(true);
     try {
       await apiUserCreate.createUser(data);
@@ -54,7 +55,20 @@ export const UserCreateForm = () => {
 
   // todo: normalize phone number
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
-    sendCreaeteUser(data as EstateAgentInfo);
+    const formData = new FormData();
+
+    Object.entries(data).forEach(([key, value]) => {
+      if (key !== "avatar") {
+        formData.append(key, value);
+      } else if (key === "avatar" && value instanceof FileList) {
+        // const avatarBlob = new Blob(value, { type: value.type });
+        formData.append(key, value[0], value[0].name);
+        console.log(value);
+        console.log(value[0]);
+      }
+    });
+
+    sendCreaeteUser(formData);
   };
 
   return (
@@ -104,6 +118,26 @@ export const UserCreateForm = () => {
       </Box>
       <Box padding="8px 0">
         <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
+          Пароль для входа{" "}
+          <Typography
+            component="span"
+            color="customColors.colorsRed"
+            marginLeft={0.5}
+          >
+            *
+          </Typography>
+        </Typography>
+        <CustomInput
+          id="password"
+          register={register}
+          errors={errors}
+          disabled={isLoading}
+          placeholder="roze.agent"
+          required
+        />
+      </Box>
+      <Box padding="8px 0">
+        <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
           Сотовый телефон с WhatsApp{" "}
           <Typography
             component="span"
@@ -119,6 +153,19 @@ export const UserCreateForm = () => {
           errors={errors}
           disabled={isLoading}
           placeholder="+7 705 123 45 67"
+          required
+        />
+      </Box>
+      <Box padding="8px 0">
+        <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
+          Фотография
+        </Typography>
+        <CustomInput
+          id="avatar"
+          type="file"
+          register={register}
+          errors={errors}
+          disabled={isLoading}
           required
         />
       </Box>
@@ -172,6 +219,7 @@ export const UserCreateForm = () => {
                 >
                   <MenuItem value="Manager">Менеджер</MenuItem>
                   <MenuItem value="Member">Агент</MenuItem>
+                  <MenuItem value="Admin">Администратор</MenuItem>
                 </Select>
               )}
             />

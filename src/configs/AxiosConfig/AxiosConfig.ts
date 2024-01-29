@@ -24,6 +24,8 @@ const tokenUtils = {
   clearAccessToken: (): void => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("accessTokenExpiration");
+    localStorage.removeItem("user");
+    localStorage.removeItem("isAuth");
   },
 };
 
@@ -118,24 +120,23 @@ axiosBaseWrap.interceptors.response.use(
 const handleAuthenticationError = () => {
   toast.error(
     "Не удалось автоматически обновить сессию. Пожалуйста, авторизуйтесь в системе повторно.",
-    { duration: 5000 },
+    { duration: 10000 },
   );
   setTimeout(() => {
     tokenUtils.clearAccessToken();
     window.location.href = "/no-auth";
-  }, 5000);
+  }, 10000);
 };
 
 // Function to handle forbidden errors (e.g., clear localStorage and redirect to login)
 const handleForbiddenError = () => {
   toast.error(
     "У вас нет доступа к этому ресурсу. Пожалуйста, авторизуйтесь для продолжения.",
-    { duration: 5000 },
+    { duration: 10000 },
   );
 
-  // Добавляем задержку в 5 секунд перед перенаправлением
   setTimeout(() => {
     tokenUtils.clearAccessToken();
     window.location.href = "/no-auth";
-  }, 5000);
+  }, 10000);
 };

@@ -49,12 +49,13 @@ export interface GeoPositionInfo {
 
 export type UserRole = "Admin" | "Manager" | "Member";
 export interface EstateAgentInfo {
-  email: string;
   name: string;
   phone: string;
   role: UserRole;
   username: string;
   _id?: string;
+  email?: string;
+  avatar?: File;
 }
 
 export type FormFieldsType = BasicObject | Apartment | House | Flat | Land;
