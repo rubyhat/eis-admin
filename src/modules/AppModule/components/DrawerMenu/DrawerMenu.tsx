@@ -8,9 +8,9 @@ import { MenuList } from "../MenuList";
 import { useHeaderStore } from "../../store/useHeaderStore";
 import { useScreenSize } from "../../../../hooks/useScreenSize";
 import { useNavigate } from "react-router-dom";
-import { useLoginStore } from "../../../LoginModule/store";
 import { CustomHr } from "../../../../components/CustomHr";
 import { LogoutButton } from "../LogoutButton";
+import { useUserStore } from "../../../UserModule/store/useUserStore";
 
 interface DrawerMenuProps {
   onClick: () => void;
@@ -24,7 +24,7 @@ export const DrawerMenu = ({
   const { isHeaderBurgerOpen, setIsHeaderBurgerOpen } = useHeaderStore(
     (state) => state,
   );
-  const { user } = useLoginStore((state) => state);
+  const { user } = useUserStore((state) => state);
 
   const handleCloseBurgerMenu = (
     event: React.KeyboardEvent | React.MouseEvent,

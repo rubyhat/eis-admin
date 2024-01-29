@@ -86,7 +86,7 @@ export const UserCreateForm = () => {
           required
         />
       </Box>
-      {/* <Box padding="8px 0">
+      <Box padding="8px 0">
         <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
           Почта
         </Typography>
@@ -98,7 +98,7 @@ export const UserCreateForm = () => {
           placeholder="Артур Розе"
           required
         />
-      </Box> */}
+      </Box>
       <Box padding="8px 0">
         <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
           Сотовый телефон с WhatsApp

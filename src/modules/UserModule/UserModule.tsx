@@ -1,14 +1,14 @@
 import { Alert, Grid, Typography, Container } from "@mui/material";
 import React from "react";
 import { UserCard } from "../UsersModule/components/UserCard";
-import { useLoginStore } from "../LoginModule/store";
 import { useQuery } from "@tanstack/react-query";
 import { apiUserModule } from "./api/apiUserModule";
 import { useParams } from "react-router";
 import { UserCardSkeleton } from "../UsersModule/components/UserCardSkeleton";
+import { useUserStore } from "./store/useUserStore";
 
 export const UserModule = () => {
-  const { user, setUser } = useLoginStore((state) => state);
+  const { user, setUser } = useUserStore((state) => state);
   const [userInfo, setUserInfo] = React.useState(user);
   const { id } = useParams();
 

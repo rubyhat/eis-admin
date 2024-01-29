@@ -7,11 +7,13 @@ import { useLoginStore } from "../../store";
 import { LoginProps, apiLoginModule } from "../../api";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import { useUserStore } from "../../../UserModule/store/useUserStore";
 
 export const LoginForm = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [errorCode, setErrorCode] = React.useState<number | null>(null);
-  const { setIsAuth, setUser } = useLoginStore((state) => state);
+  const { setIsAuth } = useLoginStore((state) => state);
+  const { setUser } = useUserStore((state) => state);
   const navigate = useNavigate();
 
   const {
