@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Alert,
   Box,
   Chip,
   IconButton,
@@ -8,13 +9,15 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
+import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { CiImageOff } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
+
 import { EstateAgentInfo } from "../../../../shared/interfaces/EstateObjectTypes";
 import { apiUsersModule } from "../../api";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { UserDeleteDrawer } from "../UserDeleteDrawer";
 import { useUsersStore } from "../../store/useUsersStore";
-import toast from "react-hot-toast";
 import { useUserStore } from "../../../UserModule/store/useUserStore";
 
 interface UserCardProps {
@@ -95,13 +98,26 @@ export const UserCard = ({ user }: UserCardProps) => {
           </ListItem>
         )}
       </List>
-      {user.avatar && (
+      {user.avatar ? (
         <Box
           component="img"
-          src={user.avatar as string}
+          src={user.avatar}
           alt="Фото сотрудника не загрузилось"
-          sx={{ width: 1, maxWidth: 512, borderRadius: 2 }}
+          sx={{ width: 1, maxWidth: 464, borderRadius: 2 }}
         />
+      ) : (
+        <Box
+          sx={{
+            border: "2px solid",
+            borderRadius: 2,
+            borderColor: "lightgrey",
+          }}
+        >
+          <CiImageOff size="100%" color="lightgrey" />
+          <Alert severity="warning" sx={{ margin: 2 }}>
+            Фото не найдено!
+          </Alert>
+        </Box>
       )}
     </Box>
   );

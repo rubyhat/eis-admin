@@ -7,14 +7,15 @@ import { TbCurrencyTenge } from "react-icons/tb";
 interface CustomInputProps {
   id: string;
   errors: FieldErrors;
-  label?: string;
   register: UseFormRegister<FieldValues>;
+  label?: string;
   type?: string;
   disabled?: boolean;
   formatPrice?: boolean;
   required?: boolean;
   placeholder?: string;
   sx?: SxProps;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const CustomInput = (props: CustomInputProps) => {
@@ -29,6 +30,7 @@ export const CustomInput = (props: CustomInputProps) => {
     required,
     placeholder,
     sx,
+    onChange,
   } = props;
   const theme = useTheme();
 
@@ -54,6 +56,7 @@ export const CustomInput = (props: CustomInputProps) => {
         required={required}
         {...register(id, { required })}
         placeholder={placeholder}
+        onChange={onChange}
         sx={{
           width: "100%",
           border: `1px solid`,

@@ -39,6 +39,14 @@ export const UserCreateForm = () => {
 
   const navigate = useNavigate();
 
+  const [previewUrl, setPreviewUrl] = React.useState("");
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      setPreviewUrl(URL.createObjectURL(file));
+    }
+  };
+
   const sendCreaeteUser = async (data: FormData) => {
     setIsLoading(true);
     try {
@@ -161,10 +169,18 @@ export const UserCreateForm = () => {
           id="avatar"
           type="file"
           register={register}
+          onChange={handleFileChange}
           errors={errors}
           disabled={isLoading}
           required
         />
+        {previewUrl && (
+          <Box
+            component="img"
+            src={previewUrl}
+            sx={{ width: 1, maxWidth: 512, marginTop: 2 }}
+          />
+        )}
       </Box>
       {user?.role === "Admin" && (
         <>
