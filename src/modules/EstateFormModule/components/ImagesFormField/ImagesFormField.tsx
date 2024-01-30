@@ -1,5 +1,12 @@
 import React, { ChangeEvent } from "react";
-import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  Typography,
+} from "@mui/material";
 import { IoImagesOutline } from "react-icons/io5";
 import { AiOutlineDelete } from "react-icons/ai";
 
@@ -65,11 +72,16 @@ export const ImagesFormField = ({ onImagesUpload }: ImagesFormFieldProps) => {
         >
           Фотографии
         </Typography>
+        <Alert severity="info" sx={{ marginBottom: 1 }}>
+          Пожалуйста, загружайте только фотографии! Загрузка документов и других
+          файлов <strong>приведет к ошибке</strong>!
+        </Alert>
         <Box
           ref={fileInputRef}
           data-id="input-files"
           component="input"
           type="file"
+          accept="image/*"
           multiple
           onChange={handleImageChange}
           display="none"

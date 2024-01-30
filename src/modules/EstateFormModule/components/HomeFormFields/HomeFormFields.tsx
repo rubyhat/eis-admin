@@ -223,6 +223,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           </Typography>
           <CustomInput
             id="roomCount"
+            type="number"
             register={register}
             errors={formState.errors}
             disabled={isLoading}
@@ -249,6 +250,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           </Typography>
           <CustomInput
             id="houseSquare"
+            type="number"
             register={register}
             errors={formState.errors}
             disabled={isLoading}
@@ -268,6 +270,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           </Typography>
           <CustomInput
             id="kitchenSquare"
+            type="number"
             register={register}
             errors={formState.errors}
             disabled={isLoading}
@@ -288,6 +291,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           </Typography>
           <CustomInput
             id="houseBuildingYear"
+            type="number"
             register={register}
             errors={formState.errors}
             disabled={isLoading}
@@ -306,6 +310,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           </Typography>
           <CustomInput
             id="countFloor"
+            type="number"
             register={register}
             errors={formState.errors}
             disabled={isLoading}
@@ -344,6 +349,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           </Typography>
           <CustomInput
             id="toiletCount"
+            type="number"
             register={register}
             errors={formState.errors}
             disabled={isLoading}
