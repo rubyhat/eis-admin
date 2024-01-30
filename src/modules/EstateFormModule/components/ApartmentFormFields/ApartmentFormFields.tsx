@@ -13,7 +13,7 @@ export const ApartmentFormFields = ({
   const { register, formState } = useFormContext();
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} md={3}>
+      <Grid item xs={12} md={4}>
         <Box
           sx={{
             display: "flex",
