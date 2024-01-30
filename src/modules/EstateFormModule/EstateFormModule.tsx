@@ -171,6 +171,7 @@ export const EstateFormModule = () => {
         ...basicData,
         ...totalData[category],
       };
+
       const filteredData = Object.entries(sendData).reduce(
         (acc, [key, value]) => {
           if (value !== "" && value !== null) {
@@ -180,8 +181,14 @@ export const EstateFormModule = () => {
         },
         {} as Record<string, any>,
       );
+
+      const formData = new FormData();
+      Object.entries(filteredData).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+
       apiCreateEstateModule
-        .createObject(filteredData as FormFieldsType)
+        .createObject(formData)
         .then((response) => {
           if (response) {
             toast.success("Объект успешно создан!");
@@ -197,15 +204,15 @@ export const EstateFormModule = () => {
     createObjectReq();
   };
 
-  const onImagesUpload = (files: FileList) => {
-    console.log("files", files);
-  };
-
   const methods = useForm<FieldValues>({
     defaultValues: {
       ...formFieldsData,
     },
   });
+
+  const onImagesUpload = (files: FileList) => {
+    methods.setValue("images", files);
+  };
 
   return (
     <Container>
