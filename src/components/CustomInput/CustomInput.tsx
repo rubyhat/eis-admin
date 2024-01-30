@@ -16,6 +16,7 @@ interface CustomInputProps {
   placeholder?: string;
   sx?: SxProps;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  multiple?: boolean;
 }
 
 export const CustomInput = (props: CustomInputProps) => {
@@ -31,6 +32,7 @@ export const CustomInput = (props: CustomInputProps) => {
     placeholder,
     sx,
     onChange,
+    multiple,
   } = props;
   const theme = useTheme();
 
@@ -57,6 +59,7 @@ export const CustomInput = (props: CustomInputProps) => {
         {...register(id, { required })}
         placeholder={placeholder}
         onChange={onChange}
+        multiple={multiple}
         sx={{
           width: "100%",
           border: `1px solid`,

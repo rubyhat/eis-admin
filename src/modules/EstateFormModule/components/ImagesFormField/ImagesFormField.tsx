@@ -54,9 +54,6 @@ export const ImagesFormField = ({ onImagesUpload }: ImagesFormFieldProps) => {
     }
   };
 
-  //todo: remove before build
-  React.useEffect(() => console.log(selectedImages), [selectedImages]);
-
   return (
     <>
       <Grid item xs={12} md={6}>

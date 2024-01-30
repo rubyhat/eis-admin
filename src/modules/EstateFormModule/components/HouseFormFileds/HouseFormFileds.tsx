@@ -152,12 +152,12 @@ export const HouseFormFileds = ({ isLoading }: HouseFormFiledsProps) => {
                     variant="textCalloutRegular"
                     color="customColors.labelsSecondary"
                   >
-                    Например: Центральное
+                    Например: Центральный
                   </Typography>
                 </MenuItem>
                 <MenuItem value="">Не указывать</MenuItem>
-                <MenuItem value="central">Центральное</MenuItem>
-                <MenuItem value="auto">Автономное</MenuItem>
+                <MenuItem value="central">Центральный</MenuItem>
+                <MenuItem value="auto">Автономный</MenuItem>
                 <MenuItem value="canConnect">Можно подключить</MenuItem>
                 <MenuItem value="none">Нет</MenuItem>
               </Select>
