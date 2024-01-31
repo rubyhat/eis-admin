@@ -55,7 +55,7 @@ export const UserCard = ({ user }: UserCardProps) => {
 
   const handleClickDeleteButton = () => setIsDeleteDrawerOpen(true);
   const handleClickEditButton = () =>
-    navigate("/users/edit", { state: { user } });
+    navigate("/users/edit", { state: { editUserData: user } });
 
   return (
     <Box

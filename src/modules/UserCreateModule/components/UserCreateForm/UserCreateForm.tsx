@@ -16,8 +16,14 @@ import { apiUserCreate } from "../../api";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { useUserStore } from "../../../UserModule/store/useUserStore";
+import { EstateAgentInfo } from "../../../../shared/interfaces/EstateObjectTypes";
 
-export const UserCreateForm = () => {
+interface UserCreateFormProps {
+  editUserData?: EstateAgentInfo;
+}
+
+export const UserCreateForm = ({ editUserData }: UserCreateFormProps) => {
+  console.log("editUserData", editUserData);
   const { user } = useUserStore((state) => state);
   const [isLoading, setIsLoading] = React.useState(false);
   const {
@@ -78,9 +84,6 @@ export const UserCreateForm = () => {
 
   return (
     <Box component="form" onSubmit={handleSubmit(handleFormSubmit)}>
-      <Typography variant="titleSecondRegular">
-        Создание нового сотрудника
-      </Typography>
       <Box padding="8px 0">
         <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
           Имя и Фамилия{" "}
