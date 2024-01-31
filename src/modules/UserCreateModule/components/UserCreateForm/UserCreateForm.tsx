@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { useUserStore } from "../../../UserModule/store/useUserStore";
 import { EstateAgentInfo } from "../../../../shared/interfaces/EstateObjectTypes";
+import { apiUserEdit } from "../../../UserEditModule/api";
 
 const initialFormFieldData = {
   name: "",
@@ -31,6 +32,8 @@ interface UserCreateFormProps {
   editUserData?: EstateAgentInfo;
 }
 
+// todo: нужно разделить логику редактирования и создания на два компонента,
+// вынести поля формы в отдельные компоненты для переиспользования
 export const UserCreateForm = ({ editUserData }: UserCreateFormProps) => {
   const { user } = useUserStore((state) => state);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -69,6 +72,22 @@ export const UserCreateForm = ({ editUserData }: UserCreateFormProps) => {
     }
   };
 
+  const sendEditUser = async (data: FormData) => {
+    setIsLoading(true);
+    try {
+      editUserData?._id
+        ? await apiUserEdit.editUser(data, editUserData._id)
+        : toast.error("Произошла ошибка, попробуйте повторить позднее.");
+      toast.success("Пользователь успешно обновлен!");
+      navigate("/users");
+    } catch (error) {
+      console.log(error);
+      toast.error("Извините, произошла ошибка, попробуйте повторить позднее.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // todo: normalize phone number
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
     const formData = new FormData();
@@ -80,7 +99,7 @@ export const UserCreateForm = ({ editUserData }: UserCreateFormProps) => {
         formData.append(key, value[0], value[0].name);
       }
     });
-    sendCreaeteUser(formData);
+    editUserData ? sendEditUser(formData) : sendCreaeteUser(formData);
   };
 
   return (
