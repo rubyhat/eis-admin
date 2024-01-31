@@ -18,12 +18,20 @@ import { useNavigate } from "react-router";
 import { useUserStore } from "../../../UserModule/store/useUserStore";
 import { EstateAgentInfo } from "../../../../shared/interfaces/EstateObjectTypes";
 
+const initialFormFieldData = {
+  name: "",
+  username: "",
+  phone: "",
+  role: "Member",
+  password: "", // todo: добавить инпут "подтверждение пароля"
+  email: "", // todo: нужна ли почта? или создавать всем корпоративную почту?
+  avatar: null,
+};
 interface UserCreateFormProps {
   editUserData?: EstateAgentInfo;
 }
 
 export const UserCreateForm = ({ editUserData }: UserCreateFormProps) => {
-  console.log("editUserData", editUserData);
   const { user } = useUserStore((state) => state);
   const [isLoading, setIsLoading] = React.useState(false);
   const {
@@ -32,15 +40,9 @@ export const UserCreateForm = ({ editUserData }: UserCreateFormProps) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FieldValues>({
-    defaultValues: {
-      name: "",
-      username: "",
-      phone: "",
-      role: "Member",
-      password: "", // todo: добавить инпут "подтверждение пароля"
-      email: "", // todo: нужна ли почта? или создавать всем корпоративную почту?
-      avatar: null,
-    },
+    defaultValues: editUserData
+      ? { ...editUserData }
+      : { ...initialFormFieldData },
   });
 
   const navigate = useNavigate();
@@ -78,7 +80,6 @@ export const UserCreateForm = ({ editUserData }: UserCreateFormProps) => {
         formData.append(key, value[0], value[0].name);
       }
     });
-
     sendCreaeteUser(formData);
   };
 
@@ -140,7 +141,7 @@ export const UserCreateForm = ({ editUserData }: UserCreateFormProps) => {
           register={register}
           errors={errors}
           disabled={isLoading}
-          placeholder="roze.agent"
+          placeholder="Придумайте надеждный пароль"
           required
         />
       </Box>
@@ -175,13 +176,19 @@ export const UserCreateForm = ({ editUserData }: UserCreateFormProps) => {
           onChange={handleFileChange}
           errors={errors}
           disabled={isLoading}
-          required
         />
         {previewUrl && (
           <Box
             component="img"
             src={previewUrl}
-            sx={{ width: 1, maxWidth: 512, marginTop: 2 }}
+            sx={{ width: 1, maxWidth: 512, marginTop: 2, borderRadius: 2 }}
+          />
+        )}
+        {!previewUrl && editUserData?.avatar && (
+          <Box
+            component="img"
+            src={editUserData?.avatar}
+            sx={{ width: 1, maxWidth: 512, marginTop: 2, borderRadius: 2 }}
           />
         )}
       </Box>
@@ -201,7 +208,6 @@ export const UserCreateForm = ({ editUserData }: UserCreateFormProps) => {
               errors={errors}
               disabled={isLoading}
               placeholder="Артур Розе"
-              required
             />
           </Box>
           <Box padding="8px 0">
@@ -244,7 +250,7 @@ export const UserCreateForm = ({ editUserData }: UserCreateFormProps) => {
       )}
       <Box padding="8px 0">
         <CustomButton size="large" fullWidth type="submit">
-          Создать
+          {editUserData ? "Обновить" : "Создать"}
         </CustomButton>
       </Box>
     </Box>
