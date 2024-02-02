@@ -37,6 +37,9 @@ export const EstateFormModule = () => {
   const { formFieldsData, setFormFieldsData } = useCreateEstateStore(
     (state) => state,
   );
+  const [descriptionTempText, setDescriptionTempText] = React.useState(
+    formFieldsData.description || "",
+  );
   const { isMobile } = useScreenSize();
   const navigate = useNavigate();
 
@@ -340,7 +343,9 @@ export const EstateFormModule = () => {
             </Grid>
             <ImagesFormField onImagesUpload={onImagesUpload} />
             <Grid item xs={12} md={6}>
-              <RichTextEditorField />
+              <RichTextEditorField
+                setDescriptionTempText={setDescriptionTempText}
+              />
             </Grid>
             <Grid item xs={12} md={6}>
               <Typography
@@ -355,10 +360,10 @@ export const EstateFormModule = () => {
                 component="div"
                 color="black"
                 dangerouslySetInnerHTML={{
-                  __html: formFieldsData.description,
+                  __html: descriptionTempText,
                 }} // add styles for data
               ></Typography>
-              {formFieldsData.description === "" && (
+              {descriptionTempText === "" && (
                 <Typography variant="textCalloutRegular">
                   Начните писать текст...
                 </Typography>

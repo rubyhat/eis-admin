@@ -4,15 +4,16 @@ import ReactQuill from "react-quill";
 
 import "react-quill/dist/quill.snow.css";
 import { Controller, useFormContext } from "react-hook-form";
-import { useCreateEstateStore } from "../../../CreateEstateModule/store";
 
-export const RichTextEditorField = () => {
+interface RichTextEditorFieldProps {
+  setDescriptionTempText: (v: string) => void;
+}
+
+export const RichTextEditorField = ({
+  setDescriptionTempText,
+}: RichTextEditorFieldProps) => {
   const { control } = useFormContext();
-  const { formFieldsData, setFormFieldsData } = useCreateEstateStore(
-    (state) => state,
-  );
-  // todo: баг в текстовом редакторе, когда начинаем писать, то первый символ игнорируется,
-  // onChange={onChange} если вернуть старый обработчик, то все ок
+
   return (
     <Box
       sx={{
@@ -45,11 +46,7 @@ export const RichTextEditorField = () => {
             value={value || ""}
             onChange={(e) => {
               onChange(e); // вызов обработчика из react-hooks-form
-
-              setFormFieldsData({
-                ...formFieldsData,
-                description: e,
-              });
+              setDescriptionTempText(e);
             }}
             onBlur={onBlur}
             ref={ref}
