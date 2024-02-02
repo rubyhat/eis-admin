@@ -178,50 +178,59 @@ export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
               *
             </Typography>
           </Typography>
-          <Controller
-            name="estateAgent"
-            control={control}
-            render={({ field }) => (
-              <Select
-                required
-                {...field}
-                displayEmpty
-                sx={selectStyles}
-                inputProps={{ sx: selectInputProps }}
-                onChange={(e) => {
-                  const selectedValue = e.target.value;
-                  field.onChange(selectedValue);
+          {isLoadingUsers ? (
+            <Select
+              disabled
+              displayEmpty
+              sx={selectStyles}
+              inputProps={{ sx: selectInputProps }}
+            >
+              <MenuItem disabled>Загрузка пользователей...</MenuItem>
+            </Select>
+          ) : (
+            <Controller
+              name="estateAgent"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  required
+                  {...field}
+                  displayEmpty
+                  sx={selectStyles}
+                  inputProps={{ sx: selectInputProps }}
+                  onChange={(e) => {
+                    const selectedValue = e.target.value;
+                    field.onChange(selectedValue);
 
-                  setFormFieldsData({
-                    ...formFieldsData,
-                    estateAgent: selectedValue || "", // Используйте пустую строку по умолчанию, если selectedValue равен null или undefined
-                  });
-                }}
-              >
-                {isLoadingUsers && (
+                    setFormFieldsData({
+                      ...formFieldsData,
+                      estateAgent: selectedValue || "", // Используйте пустую строку по умолчанию, если selectedValue равен null или undefined
+                    });
+                  }}
+                >
                   <MenuItem disabled value="">
-                    Загрузка списка пользователей...
+                    Выберите агента
                   </MenuItem>
-                )}
-                {isError && (
-                  <MenuItem
-                    disabled
-                    value=""
-                    sx={{ color: "customColors.colorsRed" }}
-                  >
-                    Произошла ошибка при загрузке данных, пожалуйста, обратитесь
-                    в тех. поддержку
-                  </MenuItem>
-                )}
-                {usersData &&
-                  usersData.map((user) => (
-                    <MenuItem key={user.username} value={user._id || ""}>
-                      {user.name}
+                  {isError && (
+                    <MenuItem
+                      disabled
+                      value=""
+                      sx={{ color: "customColors.colorsRed" }}
+                    >
+                      Произошла ошибка при загрузке данных, пожалуйста,
+                      обратитесь в тех. поддержку
                     </MenuItem>
-                  ))}
-              </Select>
-            )}
-          />
+                  )}
+                  {usersData &&
+                    usersData.map((user) => (
+                      <MenuItem key={user.username} value={user._id}>
+                        {user.name}
+                      </MenuItem>
+                    ))}
+                </Select>
+              )}
+            />
+          )}
         </Box>
       </Grid>
       <Grid item xs={12} md={3}>
