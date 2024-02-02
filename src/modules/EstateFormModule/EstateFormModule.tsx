@@ -184,7 +184,15 @@ export const EstateFormModule = () => {
 
       const formData = new FormData();
       Object.entries(filteredData).forEach(([key, value]) => {
-        formData.append(key, value);
+        if (key === "geoPosition") {
+          formData.append(key, JSON.stringify(value));
+        } else if (key === "images" && value instanceof FileList) {
+          for (const file of value) {
+            formData.append("images", file);
+          }
+        } else {
+          formData.append(key, value);
+        }
       });
 
       apiCreateEstateModule
