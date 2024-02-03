@@ -38,6 +38,12 @@ export type HouseRoofMaterialType =
   | "corrugatedSheetRoof" // Профлист
   | "slate"; // Шифер
 
+export interface ObjectImages {
+  _id: string;
+  imageUrl: string;
+  thumbnailUrl: string;
+}
+
 export interface GeoPositionInfo {
   city: string; // Город
   street: string; // Улица
@@ -64,8 +70,12 @@ export interface EstateObject extends Apartment, House, Flat, Land {
   _id: string;
 }
 
-export type DisplayEstateObject = Omit<EstateObject, "estateAgent"> & {
+export type DisplayEstateObject = Omit<
+  EstateObject,
+  "estateAgent" | "images"
+> & {
   estateAgent: EstateAgentInfo | null;
+  images: ObjectImages[];
 };
 
 export interface BasicObject {

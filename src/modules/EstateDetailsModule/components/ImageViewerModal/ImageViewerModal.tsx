@@ -10,9 +10,17 @@ import "swiper/scss";
 import { IoClose } from "react-icons/io5";
 
 export const ImageViewerModal = () => {
-  const { isViewerModalOpen, activeImageIndex, images, setIsViewerModalOpen } =
-    useEstateDetailsStore((state) => state);
+  const {
+    isViewerModalOpen,
+    activeImageIndex,
+    setIsViewerModalOpen,
+    estateDetails,
+  } = useEstateDetailsStore((state) => state);
   const { isMobile } = useScreenSize();
+
+  const images = estateDetails?.images;
+  const initialSlide =
+    images && images.findIndex((image) => image._id === activeImageIndex);
 
   const handleCloseViewer = (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
@@ -28,6 +36,8 @@ export const ImageViewerModal = () => {
 
   const handleOpenViewer = () => setIsViewerModalOpen(true);
 
+  // todo: пересмотреть отображение с реальными фото
+  // todo: добавить кнопки пагинации в слайдер
   return (
     <SwipeableDrawer
       anchor={isMobile ? "bottom" : "top"}
@@ -37,13 +47,13 @@ export const ImageViewerModal = () => {
       PaperProps={{
         sx: {
           width: "100%",
-          maxWidth: "1236px",
+          // maxWidth: "1236px",
           borderRadius: isMobile ? "8px 8px 0 0" : 4,
           margin: {
             sx: "none",
-            sm: "10% auto",
+            // sm: "10% auto",
           },
-          // height: "min-content",
+          // height: "90vh",
         },
       }}
     >
@@ -93,24 +103,26 @@ export const ImageViewerModal = () => {
           <Swiper
             slidesPerView={1.1}
             spaceBetween={8}
-            initialSlide={activeImageIndex}
+            initialSlide={initialSlide || 0}
             speed={666}
           >
-            {images.map((image, index) => (
-              <SwiperSlide key={index} className="slide">
-                <Box
-                  component="img"
-                  src={image}
-                  sx={{
-                    borderRadius: 3,
-                    width: 1, // занимает 100% ширины контейнера
-                    height: "auto", // автоматическая высота для сохранения пропорций
-                    maxWidth: "100%", // максимальная ширина ограничена шириной контейнера
-                    objectFit: "contain", // сохраняет пропорции изображения
-                  }}
-                />
-              </SwiperSlide>
-            ))}
+            {images &&
+              images.map((image, index) => (
+                <SwiperSlide key={index} className="slide">
+                  <Box
+                    component="img"
+                    src={image.imageUrl}
+                    sx={{
+                      borderRadius: 3,
+                      width: 1, // занимает 100% ширины контейнера
+                      height: "auto", // автоматическая высота для сохранения пропорций
+                      maxHeight: "90vh",
+                      maxWidth: "100%", // максимальная ширина ограничена шириной контейнера
+                      objectFit: "contain", // сохраняет пропорции изображения
+                    }}
+                  />
+                </SwiperSlide>
+              ))}
           </Swiper>
         </Box>
         {isMobile && (

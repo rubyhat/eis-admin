@@ -1,9 +1,10 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Skeleton, Typography } from "@mui/material";
 import React from "react";
 import { FiShare } from "react-icons/fi";
 import { useEstateDetailsStore } from "../../store/useEstateDetailsStore";
 import { ImageViewerModal } from "../ImageViewerModal/ImageViewerModal";
 
+// todo: сделать скелетон на изображение, пока оно не загрузилось
 export const ImagePreview = () => {
   const { activeImage, isViewerModalOpen, setIsViewerModalOpen } =
     useEstateDetailsStore((state) => state);
@@ -68,21 +69,33 @@ export const ImagePreview = () => {
           </Box>
         </Box>
       </Box>
-      <Box padding="0 4px">
-        <Box
-          onClick={handleOpenViewer}
-          component="img"
-          src={activeImage}
-          alt="Фото объекта"
-          sx={{
-            // todo: turn on with real images
-            // border: "1px solid",
-            // borderColor: "customColors.labelsSecondary",
-            cursor: "pointer",
-            borderRadius: 1.5,
-            width: "100%",
-          }}
-        />
+      <Box padding="0 4px" display="flex">
+        {activeImage ? (
+          <Box
+            onClick={handleOpenViewer}
+            component="img"
+            src={activeImage}
+            alt="Фото объекта"
+            sx={{
+              border: "1px solid",
+              borderColor: "customColors.labelsSecondary",
+              cursor: "pointer",
+              borderRadius: 2,
+              width: "100%",
+            }}
+          />
+        ) : (
+          <Skeleton
+            variant="rectangular"
+            component="div"
+            sx={{
+              width: 1,
+              height: 304,
+              borderRadius: 2,
+              margin: 1,
+            }}
+          />
+        )}
       </Box>
     </Box>
   );

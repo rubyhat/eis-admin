@@ -4,10 +4,11 @@ import { useEstateDetailsStore } from "../../store/useEstateDetailsStore";
 
 interface ImageThumbsItemProps {
   thumb: string;
+  _id: string;
 }
-export const ImageThumbsItem = ({ thumb }: ImageThumbsItemProps) => {
-  const { activeImage } = useEstateDetailsStore((state) => state);
-  const activeThumbStyles = thumb === activeImage && {
+export const ImageThumbsItem = ({ thumb, _id }: ImageThumbsItemProps) => {
+  const { activeImageIndex } = useEstateDetailsStore((state) => state);
+  const activeThumbStyles = _id === activeImageIndex && {
     border: "2px solid",
     borderColor: "customColors.colorsBlue",
   };

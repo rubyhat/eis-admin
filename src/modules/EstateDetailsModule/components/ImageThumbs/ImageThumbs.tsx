@@ -4,9 +4,11 @@ import { ImageThumbsItem } from "../ImageThumbsItem/ImageThumbsItem";
 import { useEstateDetailsStore } from "../../store/useEstateDetailsStore";
 
 export const ImageThumbs = () => {
-  const { images, setActiveImage } = useEstateDetailsStore((state) => state);
+  const { estateDetails, setActiveImage } = useEstateDetailsStore(
+    (state) => state,
+  );
 
-  const handleClickThumb = (img: string, index: number) =>
+  const handleClickThumb = (img: string, index: string) =>
     setActiveImage(img, index);
 
   return (
@@ -21,11 +23,13 @@ export const ImageThumbs = () => {
         gap: 1,
       }}
     >
-      {images.map((thumb, index) => (
-        <Box key={index} onClick={() => handleClickThumb(thumb, index)}>
-          <ImageThumbsItem thumb={thumb} />
-        </Box>
-      ))}
+      {estateDetails &&
+        estateDetails.images &&
+        estateDetails.images.map(({ thumbnailUrl, _id }) => (
+          <Box key={_id} onClick={() => handleClickThumb(thumbnailUrl, _id)}>
+            <ImageThumbsItem thumb={thumbnailUrl} _id={_id} />
+          </Box>
+        ))}
     </Box>
   );
 };
