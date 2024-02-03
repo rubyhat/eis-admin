@@ -42,8 +42,8 @@ export const EstateDetailsModule = () => {
 
   React.useEffect(() => {
     const images = estateDetails?.images;
-    const activeImage = images ? images[0].imageUrl : null;
-    const activeImageId = images ? images[0]._id : null;
+    const activeImage = images && images.length > 0 ? images[0].imageUrl : null;
+    const activeImageId = images && images.length > 0 ? images[0]._id : null;
     setActiveImage(activeImage, activeImageId);
   }, [estateDetails?.images, setActiveImage]);
 
