@@ -112,13 +112,13 @@ export const DetailsList = ({ estateDetails }: DetailsListProps) => {
           label="Крыша дома"
         />
       )}
-      {estateDetails.houseBuildingYear && (
+      {Boolean(estateDetails.houseBuildingYear) && (
         <DetailsListItem
           title={String(estateDetails.houseBuildingYear)}
           label="Год постройки"
         />
       )}
-      {estateDetails.targetFloor && estateDetails.totalFloor && (
+      {Boolean(estateDetails.targetFloor && estateDetails.totalFloor) && (
         <DetailsListItem
           title={`${estateDetails.targetFloor} из ${estateDetails.totalFloor}`}
           label="Этаж"
