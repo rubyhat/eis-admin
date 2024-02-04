@@ -58,7 +58,12 @@ axiosBaseWrap.interceptors.request.use(
     const expiration = tokenUtils.getAccessTokenExpiration();
 
     // Проверяем есть ли токен в локальном сторе
-    if (token && expiration && config.url !== "/auth/refresh") {
+    if (
+      token &&
+      expiration &&
+      config.url !== "/auth/refresh" &&
+      config.url !== "/auth/login"
+    ) {
       const now = new Date().getTime();
       // Если токен протух, то обновляем его
       if (now > parseInt(expiration)) {
