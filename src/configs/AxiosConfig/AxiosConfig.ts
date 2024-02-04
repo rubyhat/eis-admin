@@ -81,6 +81,7 @@ axiosBaseWrap.interceptors.request.use(
     return Promise.reject(error);
   },
 );
+
 // Axios response interceptor
 axiosBaseWrap.interceptors.response.use(
   (response) => response,
@@ -91,6 +92,8 @@ axiosBaseWrap.interceptors.response.use(
     if (
       error.response &&
       error.response.status === 401 &&
+      error.config.url !== "/auth/login" &&
+      error.config.url !== "/auth/refresh" &&
       !originalRequest._retry
     ) {
       originalRequest._retry = true;
