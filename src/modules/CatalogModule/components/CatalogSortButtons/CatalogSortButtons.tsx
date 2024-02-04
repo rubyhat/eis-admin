@@ -44,12 +44,27 @@ const sortOptions = [
 ];
 
 export const CatalogSortButtons = () => {
-  const { activeSortType, setActiveSortType } = useCatalogStore(
-    (state) => state,
-  );
+  const { activeSortType, estateObjects, setActiveSortType, setEstateObjects } =
+    useCatalogStore((state) => state);
 
+  // todo: нужно ли мутировать исходный estateObjects?
   const handleButtonClick = (type: VisibilityStatusType) => {
     setActiveSortType(type);
+    const filteredData = estateObjects.slice().sort((a, b) => {
+      if (a.visibilityStatus === type && b.visibilityStatus !== type) {
+        // Если статус a соответствует выбранному, но статус b - нет,
+        // a должен идти перед b, возвращаем -1
+        return -1;
+      } else if (a.visibilityStatus !== type && b.visibilityStatus === type) {
+        // Если статус b соответствует выбранному, но статус a - нет,
+        // b должен идти перед a, возвращаем 1
+        return 1;
+      }
+      // Если статусы обоих объектов одинаково соответствуют или не соответствуют
+      // выбранному статусу, порядок остается неизменным
+      return 0;
+    });
+    setEstateObjects(filteredData);
   };
 
   // todo: сделать гибко, сейчас hardcode на четыре кнопки, если кнопок будет больше, то уже не будет работать
