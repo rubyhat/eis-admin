@@ -10,10 +10,12 @@ export const LogoutButton = () => {
     try {
       await apiAppModule.logout();
       toast.success("Вы успешно вышли из аккаунта!");
-      navigate("/login");
+      navigate("/login?from=logout");
     } catch (error) {
       console.log(error);
       toast.error("Произошла ошибка, пожалуйста, обратитесь в тех. поддержку");
+    } finally {
+      localStorage.clear();
     }
   };
 
