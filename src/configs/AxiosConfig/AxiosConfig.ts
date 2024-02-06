@@ -132,7 +132,7 @@ const handleAuthenticationError = () => {
   );
   setTimeout(() => {
     tokenUtils.clearAccessToken();
-    window.location.href = "/no-auth";
+    window.location.href = "/login";
   }, 10000);
 };
 
@@ -145,6 +145,6 @@ const handleForbiddenError = () => {
 
   setTimeout(() => {
     tokenUtils.clearAccessToken();
-    window.location.href = "/no-auth";
+    window.location.href = "/login";
   }, 10000);
 };
