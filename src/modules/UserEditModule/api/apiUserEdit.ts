@@ -3,7 +3,7 @@ import { axiosBaseWrap } from "../../../configs/AxiosConfig";
 export const apiUserEdit = {
   editUser(data: FormData, id: string) {
     return axiosBaseWrap
-      .patch("/users/" + id, data, {
+      .put("/users/" + id, data, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((response) => {
