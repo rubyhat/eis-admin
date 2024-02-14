@@ -247,13 +247,8 @@ export const EstateFormModule = () => {
                 </Typography>
                 <Box
                   sx={{
-                    width: { xs: "90%", md: "inherit" },
-                    position: { xs: "fixed", md: "inherit" },
-                    marginLeft: { xs: "inherit", md: "auto" },
-                    margin: { xs: "0 5%", md: 0 },
-                    bottom: 24,
-                    left: 0,
-                    zIndex: 1,
+                    display: { xs: "none", md: "inherit" },
+                    marginLeft: "auto",
                   }}
                 >
                   <CustomButton
@@ -262,8 +257,9 @@ export const EstateFormModule = () => {
                     sx={{
                       width: { xs: 1, md: "fit-content" },
                     }}
+                    disabled={isLoading}
                   >
-                    Сохранить
+                    {isLoading ? "Загрузка..." : "Сохранить"}
                   </CustomButton>
                 </Box>
               </Box>
@@ -368,6 +364,23 @@ export const EstateFormModule = () => {
                   Начните писать текст...
                 </Typography>
               )}
+            </Grid>
+            <Grid item xs={12}>
+              <CustomHr />
+              <Box
+                sx={{ width: 1, display: "flex", justifyContent: "flex-end" }}
+              >
+                <CustomButton
+                  type="submit"
+                  size={isMobile ? "large" : "small"}
+                  sx={{
+                    width: { xs: 1, md: "fit-content" },
+                  }}
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Загрузка..." : "Сохранить"}
+                </CustomButton>
+              </Box>
             </Grid>
           </Grid>
         </Box>
