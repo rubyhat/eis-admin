@@ -27,7 +27,7 @@ import {
 } from "../../shared/interfaces/EstateObjectTypes";
 import { useScreenSize } from "../../hooks/useScreenSize";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const livingSpaces = ["apartment", "house", "cottage"];
 const houseAndCottage = ["house", "cottage"];
@@ -42,6 +42,12 @@ export const EstateFormModule = () => {
   );
   const { isMobile } = useScreenSize();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // todo: create edit object
+  React.useEffect(() => {
+    if (location.state?.estateDetails) console.log(location.state);
+  }, [location]);
 
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(false);

@@ -1,14 +1,8 @@
-import { Container, Grid } from "@mui/material";
 import React from "react";
+import useTitle from "../../hooks/useTitle";
+import { EstateFormModule } from "../EstateFormModule";
 
 export const EditEstateModule = () => {
-  return (
-    <Container>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          Estate edit
-        </Grid>
-      </Grid>
-    </Container>
-  );
+  useTitle("Редактирование объекта");
+  return <EstateFormModule />;
 };

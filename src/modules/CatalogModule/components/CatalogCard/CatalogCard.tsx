@@ -59,7 +59,15 @@ export const CatalogCard = ({ item }: CatalogCardProps) => {
             {usePriceNormalize(item.price || 0, item.discount || 0).totalPrice}
           </Typography>
         </Box>
-        <Box display="flex" alignItems="center" marginLeft={1}>
+        <Box
+          component={Link}
+          to={{ pathname: `/catalog/${item._id}` }}
+          state={{ estateDetails: item }}
+          display="flex"
+          alignItems="center"
+          marginLeft={1}
+          // todo: create edit button
+        >
           <Typography
             component="p"
             variant="textSubheadlineRegular"

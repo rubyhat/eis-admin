@@ -17,7 +17,9 @@ export const TitleGroup = ({ estateDetails }: TitleGroupProps) => {
   const navigate = useNavigate();
   const { setIsDeleteDrawerOpen } = useEstateDetailsStore((state) => state);
 
-  const handleClickEditButton = () => navigate("/catalog/123/edit");
+  const handleClickEditButton = () => {
+    navigate("/estate/edit", { state: { estateDetails } });
+  };
   const handleClickDeleteButton = () => setIsDeleteDrawerOpen(true);
   const handleDeleteEstateObject = async () => {
     try {
