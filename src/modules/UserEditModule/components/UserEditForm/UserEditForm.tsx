@@ -13,6 +13,7 @@ import {
   FieldValues,
   SubmitHandler,
   useForm,
+  useWatch,
 } from "react-hook-form";
 import { CustomInput } from "../../../../components/CustomInput";
 import { CustomButton } from "../../../../components/CustomButton";
@@ -40,18 +41,20 @@ export const UserEditForm = ({ editUserData }: UserCreateFormProps) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FieldValues>({
-    defaultValues: { ...editUserData },
+    defaultValues: { ...editUserData, avatar: editUserData.avatar || "" },
   });
 
   const navigate = useNavigate();
 
-  const [previewUrl, setPreviewUrl] = React.useState("");
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      setPreviewUrl(URL.createObjectURL(file));
-    }
-  };
+  const avatar = useWatch({
+    control,
+    name: "avatar",
+  });
+
+  const previewUrl =
+    typeof avatar !== "string" && avatar.length > 0
+      ? URL.createObjectURL(avatar[0])
+      : avatar;
 
   const sendEditUser = async (data: FormData) => {
     setIsLoading(true);
@@ -149,14 +152,22 @@ export const UserEditForm = ({ editUserData }: UserCreateFormProps) => {
         <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
           Фотография
         </Typography>
-        <CustomInput
-          id="avatar"
-          type="file"
-          register={register}
-          onChange={handleFileChange}
-          errors={errors}
-          disabled={isLoading}
+        <Controller
+          name="avatar"
+          control={control}
+          defaultValue={[]}
+          render={({ field }) => (
+            <CustomInput
+              id="avatar"
+              type="file"
+              register={register}
+              onChange={(e) => field.onChange(e.target.files)}
+              errors={errors}
+              disabled={isLoading}
+            />
+          )}
         />
+
         {previewUrl && (
           <Box
             component="img"
@@ -164,6 +175,7 @@ export const UserEditForm = ({ editUserData }: UserCreateFormProps) => {
             sx={{ width: 1, maxWidth: 512, marginTop: 2, borderRadius: 2 }}
           />
         )}
+
         {!previewUrl && editUserData?.avatar && (
           <Box
             component="img"
@@ -172,6 +184,7 @@ export const UserEditForm = ({ editUserData }: UserCreateFormProps) => {
           />
         )}
       </Box>
+
       {user?.role === "Admin" && (
         <>
           <Box padding="8px 0">
@@ -265,8 +278,8 @@ export const UserEditForm = ({ editUserData }: UserCreateFormProps) => {
         </>
       )}
       <Box padding="8px 0">
-        <CustomButton size="large" fullWidth type="submit">
-          Обновить
+        <CustomButton size="large" fullWidth type="submit" disabled={isLoading}>
+          {isLoading ? "Загрузка..." : "Обновить"}
         </CustomButton>
       </Box>
     </Box>

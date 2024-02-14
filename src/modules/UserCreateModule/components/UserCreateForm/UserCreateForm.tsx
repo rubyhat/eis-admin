@@ -5,6 +5,7 @@ import {
   FieldValues,
   SubmitHandler,
   useForm,
+  useWatch,
 } from "react-hook-form";
 import { CustomInput } from "../../../../components/CustomInput";
 import { CustomButton } from "../../../../components/CustomButton";
@@ -24,7 +25,7 @@ const initialFormFieldData = {
   role: "Member",
   password: "", // todo: добавить инпут "подтверждение пароля"
   email: "", // todo: нужна ли почта? или создавать всем корпоративную почту?
-  avatar: null,
+  avatar: "",
 };
 
 export const UserCreateForm = () => {
@@ -41,13 +42,15 @@ export const UserCreateForm = () => {
 
   const navigate = useNavigate();
 
-  const [previewUrl, setPreviewUrl] = React.useState("");
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      setPreviewUrl(URL.createObjectURL(file));
-    }
-  };
+  const avatar = useWatch({
+    control,
+    name: "avatar",
+  });
+
+  const previewUrl =
+    typeof avatar !== "string" && avatar.length > 0
+      ? URL.createObjectURL(avatar[0])
+      : avatar;
 
   const sendCreaeteUser = async (data: FormData) => {
     setIsLoading(true);
@@ -69,7 +72,7 @@ export const UserCreateForm = () => {
 
     Object.entries(data).forEach(([key, value]) => {
       if (key !== "avatar") {
-        formData.append(key, value);
+        if (value !== "" && value !== null) formData.append(key, value);
       } else if (key === "avatar" && value instanceof FileList) {
         formData.append(key, value[0], value[0].name);
       }
@@ -163,13 +166,20 @@ export const UserCreateForm = () => {
         <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
           Фотография
         </Typography>
-        <CustomInput
-          id="avatar"
-          type="file"
-          register={register}
-          onChange={handleFileChange}
-          errors={errors}
-          disabled={isLoading}
+        <Controller
+          name="avatar"
+          control={control}
+          defaultValue={[]}
+          render={({ field }) => (
+            <CustomInput
+              id="avatar"
+              type="file"
+              register={register}
+              onChange={(e) => field.onChange(e.target.files)}
+              errors={errors}
+              disabled={isLoading}
+            />
+          )}
         />
         {previewUrl && (
           <Box
@@ -187,7 +197,14 @@ export const UserCreateForm = () => {
               variant="textBodyRegular"
               marginBottom={0.5}
             >
-              Почта
+              Почта{" "}
+              <Typography
+                component="span"
+                color="customColors.colorsRed"
+                marginLeft={0.5}
+              >
+                *
+              </Typography>
             </Typography>
             <CustomInput
               id="email"
@@ -195,6 +212,7 @@ export const UserCreateForm = () => {
               errors={errors}
               disabled={isLoading}
               placeholder="agent-mail@eis.com"
+              required
             />
           </Box>
           <Box padding="8px 0">
@@ -236,7 +254,7 @@ export const UserCreateForm = () => {
         </>
       )}
       <Box padding="8px 0">
-        <CustomButton size="large" fullWidth type="submit">
+        <CustomButton size="large" fullWidth type="submit" disabled={isLoading}>
           Создать
         </CustomButton>
       </Box>
