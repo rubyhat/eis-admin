@@ -1,7 +1,7 @@
-import { Alert, Box, Container, Grid, Typography } from "@mui/material";
 import React from "react";
-import { UserCreateForm } from "../UserCreateModule/components/UserCreateForm";
+import { Alert, Box, Container, Grid, Typography } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
+import { UserEditForm } from "./components/UserEditForm";
 
 export const UserEditModule = () => {
   const location = useLocation();
@@ -13,9 +13,7 @@ export const UserEditModule = () => {
             <Typography variant="titleSecondRegular">
               Редактирование сотрудника
             </Typography>
-            <UserCreateForm
-              editUserData={location.state?.editUserData || null}
-            />
+            <UserEditForm editUserData={location.state?.editUserData || null} />
           </Grid>
         ) : (
           <Grid item xs={12} md={6}>

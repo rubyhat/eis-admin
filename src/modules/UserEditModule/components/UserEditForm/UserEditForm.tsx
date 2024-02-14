@@ -1,4 +1,12 @@
-import { Alert, Box, MenuItem, Select, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Checkbox,
+  FormControlLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import {
   Controller,
@@ -12,31 +20,27 @@ import {
   selectInputProps,
   selectStyles,
 } from "../../../EstateFormModule/assets/styles";
-import { apiUserCreate } from "../../api";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { useUserStore } from "../../../UserModule/store/useUserStore";
+import { EstateAgentInfo } from "../../../../shared/interfaces/EstateObjectTypes";
+import { apiUserEdit } from "../../../UserEditModule/api";
 
-const initialFormFieldData = {
-  name: "",
-  username: "",
-  phone: "",
-  role: "Member",
-  password: "", // todo: добавить инпут "подтверждение пароля"
-  email: "", // todo: нужна ли почта? или создавать всем корпоративную почту?
-  avatar: null,
-};
+interface UserCreateFormProps {
+  editUserData: EstateAgentInfo;
+}
 
-export const UserCreateForm = () => {
+export const UserEditForm = ({ editUserData }: UserCreateFormProps) => {
   const { user } = useUserStore((state) => state);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [changePassword, setChangePassword] = React.useState(false);
   const {
     control,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FieldValues>({
-    defaultValues: { ...initialFormFieldData },
+    defaultValues: { ...editUserData },
   });
 
   const navigate = useNavigate();
@@ -49,11 +53,13 @@ export const UserCreateForm = () => {
     }
   };
 
-  const sendCreaeteUser = async (data: FormData) => {
+  const sendEditUser = async (data: FormData) => {
     setIsLoading(true);
     try {
-      await apiUserCreate.createUser(data);
-      toast.success("Пользователь успешно создан!");
+      editUserData?._id
+        ? await apiUserEdit.editUser(data, editUserData._id)
+        : toast.error("Произошла ошибка, попробуйте повторить позднее.");
+      toast.success("Пользователь успешно обновлен!");
       navigate("/users");
     } catch (error) {
       console.log(error);
@@ -69,12 +75,12 @@ export const UserCreateForm = () => {
 
     Object.entries(data).forEach(([key, value]) => {
       if (key !== "avatar") {
-        formData.append(key, value);
+        if (value !== "" && value !== null) formData.append(key, value);
       } else if (key === "avatar" && value instanceof FileList) {
         formData.append(key, value[0], value[0].name);
       }
     });
-    sendCreaeteUser(formData);
+    sendEditUser(formData);
   };
 
   return (
@@ -121,26 +127,6 @@ export const UserCreateForm = () => {
       </Box>
       <Box padding="8px 0">
         <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
-          Пароль для входа{" "}
-          <Typography
-            component="span"
-            color="customColors.colorsRed"
-            marginLeft={0.5}
-          >
-            *
-          </Typography>
-        </Typography>
-        <CustomInput
-          id="password"
-          register={register}
-          errors={errors}
-          disabled={isLoading}
-          placeholder="Придумайте надеждный пароль"
-          required
-        />
-      </Box>
-      <Box padding="8px 0">
-        <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
           Сотовый телефон с WhatsApp{" "}
           <Typography
             component="span"
@@ -175,6 +161,13 @@ export const UserCreateForm = () => {
           <Box
             component="img"
             src={previewUrl}
+            sx={{ width: 1, maxWidth: 512, marginTop: 2, borderRadius: 2 }}
+          />
+        )}
+        {!previewUrl && editUserData?.avatar && (
+          <Box
+            component="img"
+            src={editUserData?.avatar}
             sx={{ width: 1, maxWidth: 512, marginTop: 2, borderRadius: 2 }}
           />
         )}
@@ -233,11 +226,47 @@ export const UserCreateForm = () => {
               )}
             />
           </Box>
+          <FormControlLabel
+            control={
+              <Checkbox onChange={(e) => setChangePassword(e.target.checked)} />
+            }
+            label={
+              <Typography component="p" variant="textCalloutRegular">
+                Изменить пароль
+              </Typography>
+            }
+          />
+          {changePassword && (
+            <Box padding="8px 0">
+              <Typography
+                component="p"
+                variant="textBodyRegular"
+                marginBottom={0.5}
+              >
+                Пароль для входа{" "}
+                <Typography
+                  component="span"
+                  color="customColors.colorsRed"
+                  marginLeft={0.5}
+                >
+                  *
+                </Typography>
+              </Typography>
+              <CustomInput
+                id="password"
+                register={register}
+                errors={errors}
+                disabled={isLoading}
+                placeholder="Придумайте надеждный пароль"
+                required
+              />
+            </Box>
+          )}
         </>
       )}
       <Box padding="8px 0">
         <CustomButton size="large" fullWidth type="submit">
-          Создать
+          Обновить
         </CustomButton>
       </Box>
     </Box>
