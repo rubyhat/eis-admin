@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { apiUsersModule } from "../../api";
 import { UserCard } from "../UserCard";
 import { Alert, Grid } from "@mui/material";
 import { UserCardSkeleton } from "../UserCardSkeleton";
+import { FetchAllUsers } from "../../../../shared/api/apiFetchAllUsers";
 
 export const UserList = () => {
   const {
@@ -12,7 +12,7 @@ export const UserList = () => {
     isSuccess,
     isError,
   } = useQuery({
-    queryFn: () => apiUsersModule.fetchAllUsers(),
+    queryFn: () => FetchAllUsers(),
     queryKey: ["usersItems"],
   });
 

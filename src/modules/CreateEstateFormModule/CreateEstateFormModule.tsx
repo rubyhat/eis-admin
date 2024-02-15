@@ -7,17 +7,7 @@ import {
   SubmitHandler,
   useForm,
 } from "react-hook-form";
-import { CustomButton } from "../../components/CustomButton";
-import { useCreateEstateStore } from "../CreateEstateModule/store";
-import { BasicFormFields } from "./components/BasicFormFields";
-import { HomeFormFields } from "./components/HomeFormFields";
-import { ApartmentFormFields } from "./components/ApartmentFormFields";
-import { HouseFormFileds } from "./components/HouseFormFileds";
-import { ImagesFormField } from "./components/ImagesFormField";
-import { LandFormFields } from "./components/LandFormFields";
-import { RichTextEditorField } from "./components/RichTextEditorField";
-import { CustomHr } from "../../components/CustomHr";
-import { apiCreateEstateModule } from "../CreateEstateModule/api";
+
 import {
   Apartment,
   Flat,
@@ -28,11 +18,24 @@ import {
 import { useScreenSize } from "../../hooks/useScreenSize";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
+import { CustomButton } from "../../components/CustomButton";
+import { CustomHr } from "../../components/CustomHr";
+import {
+  ApartmentFormFields,
+  BasicFormFields,
+  HomeFormFields,
+  HouseFormFileds,
+  ImagesFormField,
+  LandFormFields,
+  RichTextEditorField,
+} from "../../components/EstateFormFields";
+import { apiCreateEstateFormModule } from "./api";
+import { useCreateEstateStore } from "../CreateEstateModule/store";
 
 const livingSpaces = ["apartment", "house", "cottage"];
 const houseAndCottage = ["house", "cottage"];
 
-export const EstateFormModule = () => {
+export const CreateEstateFormModule = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const { formFieldsData, setFormFieldsData } = useCreateEstateStore(
     (state) => state,
@@ -44,7 +47,7 @@ export const EstateFormModule = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // todo: deprecated component, delete it after tests
+  // todo: create edit object
   React.useEffect(() => {
     if (location.state?.estateDetails) console.log(location.state);
   }, [location]);
@@ -204,7 +207,7 @@ export const EstateFormModule = () => {
         }
       });
 
-      apiCreateEstateModule
+      apiCreateEstateFormModule
         .createObject(formData)
         .then((response) => {
           if (response) {

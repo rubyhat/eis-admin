@@ -2,12 +2,12 @@ import { Box, Container, Grid } from "@mui/material";
 import React from "react";
 import { ListLinkStep } from "./components/ListLinkStep";
 import { useCreateEstateStore } from "./store";
-import { EstateFormModule } from "../EstateFormModule";
 import useTitle from "../../hooks/useTitle";
 import {
   CategoryType,
   ServiceType,
 } from "../../shared/interfaces/EstateObjectTypes";
+import { CreateEstateFormModule } from "../CreateEstateFormModule";
 
 export const CreateEstateModule = () => {
   useTitle("Добавление нового объекта");
@@ -25,7 +25,7 @@ export const CreateEstateModule = () => {
   };
   const handleListStepCancel = () => setStep(step - 1);
 
-  if (step === 3) return <EstateFormModule />;
+  if (step === 3) return <CreateEstateFormModule />;
 
   return (
     <Container>
