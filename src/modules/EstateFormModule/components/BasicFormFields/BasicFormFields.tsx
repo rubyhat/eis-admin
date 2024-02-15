@@ -10,19 +10,30 @@ import {
 } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
 import { selectInputProps, selectStyles } from "../../assets/styles";
-import { useCreateEstateStore } from "../../../CreateEstateModule/store";
 import { CustomInput } from "../../../../components/CustomInput";
 import { useQuery } from "@tanstack/react-query";
 import { apiEstateFormModule } from "../../api/apiEstateFormModule";
+import {
+  Apartment,
+  Flat,
+  FormFieldsData,
+  House,
+  Land,
+} from "../../../../shared/interfaces/EstateObjectTypes";
 
 interface BasicFormFieldsProps {
   isLoading: boolean;
+  formFieldsData: FormFieldsData | Apartment | House | Flat | Land;
+  setFormFieldsData: (
+    v: FormFieldsData | Apartment | House | Flat | Land,
+  ) => void;
 }
 
-export const BasicFormFields = ({ isLoading }: BasicFormFieldsProps) => {
-  const { formFieldsData, setFormFieldsData } = useCreateEstateStore(
-    (state) => state,
-  );
+export const BasicFormFields = ({
+  isLoading,
+  formFieldsData,
+  setFormFieldsData,
+}: BasicFormFieldsProps) => {
   const { control, register, formState } = useFormContext();
 
   const {

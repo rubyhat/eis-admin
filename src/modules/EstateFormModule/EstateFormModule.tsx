@@ -279,7 +279,11 @@ export const EstateFormModule = () => {
           >
             Базовые свойства
           </Typography>
-          <BasicFormFields isLoading={isLoading} />
+          <BasicFormFields
+            isLoading={isLoading}
+            formFieldsData={formFieldsData}
+            setFormFieldsData={setFormFieldsData}
+          />
           <CustomHr />
           {livingSpaces.includes(formFieldsData.category) && (
             <>
