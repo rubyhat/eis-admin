@@ -30,14 +30,14 @@ import {
   RichTextEditorField,
 } from "../../components/EstateFormFields";
 import { apiCreateEstateFormModule } from "./api";
-import { useCreateEstateStore } from "../CreateEstateModule/store";
+import { useCreateEstateFormStore } from "./store/useCreateEstateFormStore";
 
 const livingSpaces = ["apartment", "house", "cottage"];
 const houseAndCottage = ["house", "cottage"];
 
 export const CreateEstateFormModule = () => {
   const [isLoading, setIsLoading] = React.useState(false);
-  const { formFieldsData, setFormFieldsData } = useCreateEstateStore(
+  const { formFieldsData, setFormFieldsData } = useCreateEstateFormStore(
     (state) => state,
   );
   const [descriptionTempText, setDescriptionTempText] = React.useState(
