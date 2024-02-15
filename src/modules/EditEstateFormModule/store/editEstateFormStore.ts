@@ -8,14 +8,14 @@ import {
 } from "../../../shared/interfaces/EstateObjectTypes";
 import { FormFieldsDataInitial } from "../../../shared/constants/FormFieldsDataInitital";
 
-interface CreateEstateForm {
+interface EditEstateForm {
   formFieldsData: FormFieldsData | Apartment | House | Flat | Land;
   setFormFieldsData: (
     v: FormFieldsData | Apartment | House | Flat | Land,
   ) => void;
 }
 
-export const useCreateEstateFormStore = create<CreateEstateForm>((set) => ({
+export const useEditEstateFormStore = create<EditEstateForm>((set) => ({
   formFieldsData: FormFieldsDataInitial,
   setFormFieldsData: (v) => set({ formFieldsData: v }),
 }));

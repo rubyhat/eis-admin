@@ -15,12 +15,21 @@ import "swiper/scss";
 
 interface ImagesFormFieldProps {
   onImagesUpload: (files: FileList) => void;
+  currentImages?: string[];
 }
 
+// todo: при редактировании, есть два фото, добавили новое фото, удалили одно старое фото = новые тоже удалились
 // todo:  баг - добавили 2 фото - пролистнули на 2 фото и вернулись на 1, удалили 1 = баг со 2 фото
-export const ImagesFormField = ({ onImagesUpload }: ImagesFormFieldProps) => {
+export const ImagesFormField = ({
+  onImagesUpload,
+  currentImages,
+}: ImagesFormFieldProps) => {
   const [selectedImages, setSelectedImages] = React.useState<string[]>([]);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+  React.useEffect(() => {
+    if (currentImages) setSelectedImages(currentImages);
+  }, [currentImages]);
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {

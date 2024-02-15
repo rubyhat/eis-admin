@@ -1,4 +1,4 @@
-import { FormFieldsType } from "../../../shared/interfaces/EstateObjectTypes";
+import { FormFieldsType } from "../interfaces/EstateObjectTypes";
 
 const agentFromLocalStorage = localStorage.getItem("user");
 const agentObjectFromLocalStorage = agentFromLocalStorage
@@ -62,3 +62,6 @@ export const FormFieldsDataInitial: FormFieldsType = {
   // Land
   landSquare: "",
 };
+
+export const livingSpaces = ["apartment", "house", "cottage"];
+export const houseAndCottage = ["house", "cottage"];

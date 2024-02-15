@@ -17,7 +17,7 @@ import {
 } from "../../shared/interfaces/EstateObjectTypes";
 import { useScreenSize } from "../../hooks/useScreenSize";
 import toast from "react-hot-toast";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CustomButton } from "../../components/CustomButton";
 import { CustomHr } from "../../components/CustomHr";
 import {
@@ -31,9 +31,10 @@ import {
 } from "../../components/EstateFormFields";
 import { apiCreateEstateFormModule } from "./api";
 import { useCreateEstateFormStore } from "./store/useCreateEstateFormStore";
-
-const livingSpaces = ["apartment", "house", "cottage"];
-const houseAndCottage = ["house", "cottage"];
+import {
+  houseAndCottage,
+  livingSpaces,
+} from "../../shared/constants/FormFieldsDataInitital";
 
 export const CreateEstateFormModule = () => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -45,12 +46,6 @@ export const CreateEstateFormModule = () => {
   );
   const { isMobile } = useScreenSize();
   const navigate = useNavigate();
-  const location = useLocation();
-
-  // todo: create edit object
-  React.useEffect(() => {
-    if (location.state?.estateDetails) console.log(location.state);
-  }, [location]);
 
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(false);
@@ -119,7 +114,7 @@ export const CreateEstateFormModule = () => {
       description: description,
       price: Number(price),
       discount: Number(discount),
-      images: images, // add images
+      images: images,
       videoLink: videoLink,
       mortgage: mortgage,
       hasSwap: hasSwap,
@@ -347,7 +342,7 @@ export const CreateEstateFormModule = () => {
                 variant="titleThirdRegular"
                 marginBottom={-1}
               >
-                Cвойства дома и дачи
+                Фотографии и описание
               </Typography>
             </Grid>
             <ImagesFormField onImagesUpload={onImagesUpload} />
