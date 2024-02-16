@@ -74,7 +74,11 @@ export const EstateDetailsModule = () => {
       <Container>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <SettingsButtonBar _id={estateDetails._id} />
+            <SettingsButtonBar
+              key={estateDetails._id}
+              _id={estateDetails._id}
+              currentStatus={estateDetails.visibilityStatus}
+            />
           </Grid>
           <Grid item xs={12} md={5} lg={6}>
             <TitleGroup estateDetails={estateDetails} />

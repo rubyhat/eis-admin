@@ -15,15 +15,27 @@ import { useEstateDetailsStore } from "../../store";
 import { CustomButton } from "../../../../components/CustomButton";
 import { apiEstateDetailsModule } from "../../api/apiEstateDetailsModule";
 import { VisibilityStatusType } from "../../../../shared/interfaces/EstateObjectTypes";
+import { apiEditEstateFormModule } from "../../../EditEstateFormModule/api/apiEditEstateFormModule";
 
 interface SettingsButtonBarProps {
   _id: string;
+  currentStatus: VisibilityStatusType;
 }
 
-export const SettingsButtonBar = ({ _id }: SettingsButtonBarProps) => {
+export const SettingsButtonBar = ({
+  _id,
+  currentStatus,
+}: SettingsButtonBarProps) => {
   const navigate = useNavigate();
   const { setIsDeleteDrawerOpen } = useEstateDetailsStore((state) => state);
-  const [status, setStatus] = React.useState<VisibilityStatusType>("active");
+  const [status, setStatus] =
+    React.useState<VisibilityStatusType>(currentStatus);
+
+  // React.useLayoutEffect(() => {
+  //   if (currentStatus) setStatus(currentStatus);
+  // }, [currentStatus]);
+
+  console.log(currentStatus, status);
 
   const handleClickDeleteButton = () => setIsDeleteDrawerOpen(true);
   const handleDeleteEstateObject = async () => {
@@ -40,58 +52,62 @@ export const SettingsButtonBar = ({ _id }: SettingsButtonBarProps) => {
   };
 
   const handleChangeStatus = (event: SelectChangeEvent) => {
-    setStatus(event.target.value as VisibilityStatusType);
+    const inputStatus = event.target.value as VisibilityStatusType;
+    setStatus(inputStatus);
   };
 
-  const handleClickChangeStatusButton = () => {};
+  const handleClickChangeStatusButton = () => {
+    apiEditEstateFormModule.editObjecStatus(status, _id);
+  };
 
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        width: 1,
-      }}
-    >
-      <Box sx={{ display: "flex", alignItems: "center", width: 1 }}>
-        <Select
-          id="status-select"
-          value={status}
-          onChange={handleChangeStatus}
-          sx={{
-            padding: 0,
-            height: "36px",
-            fontSize: "15px",
-            width: "140px",
-            marginRight: 2,
-            "& fieldset": {
-              borderColor: "customColors.labelsQuaternary",
-            },
-          }}
-          inputProps={{ padding: 1, fontSize: 16 }}
-        >
-          <MenuItem value={"active"}>Активный</MenuItem>
-          <MenuItem value={"sold"}>Проданный</MenuItem>
-          <MenuItem value={"checking"}>На проверке</MenuItem>
-          <MenuItem value={"canceled"}>Отмененный</MenuItem>
-        </Select>
-        <CustomButton size="small" onClick={handleClickChangeStatusButton}>
-          Сохранить
-        </CustomButton>
-        <Box sx={{ display: { xs: "inherit", md: "none" }, marginLeft: 2 }}>
-          <IconButton
-            onClick={handleClickDeleteButton}
-            sx={{ marginLeft: 1 }}
-            color="error"
+  if (currentStatus)
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          width: 1,
+        }}
+      >
+        <Box sx={{ display: "flex", alignItems: "center", width: 1 }}>
+          <Select
+            id="status-select"
+            value={status}
+            onChange={(e) => handleChangeStatus(e)}
+            sx={{
+              padding: 0,
+              height: "36px",
+              fontSize: "15px",
+              width: "140px",
+              marginRight: 2,
+              "& fieldset": {
+                borderColor: "customColors.labelsQuaternary",
+              },
+            }}
+            inputProps={{ padding: 1, fontSize: 16 }}
           >
-            <AiOutlineDelete size={20} />
-          </IconButton>
-          <DrawerDelete
-            onClick={handleClickDeleteButton}
-            onDelete={handleDeleteEstateObject}
-          />
+            <MenuItem value={"active"}>Активный</MenuItem>
+            <MenuItem value={"sold"}>Проданный</MenuItem>
+            <MenuItem value={"checking"}>На проверке</MenuItem>
+            <MenuItem value={"canceled"}>Отмененный</MenuItem>
+          </Select>
+          <CustomButton size="small" onClick={handleClickChangeStatusButton}>
+            Сохранить
+          </CustomButton>
+          <Box sx={{ display: { xs: "inherit", md: "none" }, marginLeft: 2 }}>
+            <IconButton
+              onClick={handleClickDeleteButton}
+              sx={{ marginLeft: 1 }}
+              color="error"
+            >
+              <AiOutlineDelete size={20} />
+            </IconButton>
+            <DrawerDelete
+              onClick={handleClickDeleteButton}
+              onDelete={handleDeleteEstateObject}
+            />
+          </Box>
         </Box>
       </Box>
-    </Box>
-  );
+    );
 };
