@@ -7,14 +7,16 @@ import { CatalogSortGroup } from "./components/CatalogSortGroup";
 import { FilterMobileWrapper } from "../FilterModule/components/FilterMobileWrapper";
 import { FilterModule } from "../FilterModule";
 import useTitle from "../../hooks/useTitle";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useCatalogStore } from "./store";
 import { CatalogCardSkeleton } from "./components/CatalogCardSkeleton";
+import { CustomButton } from "../../components/CustomButton";
 
 export const CatalogModule = () => {
   useTitle("Каталог");
 
   const location = useLocation();
+  const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
   const { estateObjects, setEstateObjects } = useCatalogStore((state) => state);
 
@@ -99,6 +101,27 @@ export const CatalogModule = () => {
           </Box>
         </Grid>
       </Grid>
+      <Box
+        sx={{
+          display: {
+            xs: "inherit",
+            md: "none",
+          },
+          position: "fixed",
+          bottom: 16,
+          left: 0,
+          width: 1,
+          padding: 2,
+        }}
+      >
+        <CustomButton
+          fullWidth
+          size="large"
+          onClick={() => navigate("/catalog/create")}
+        >
+          + Добавить объект
+        </CustomButton>
+      </Box>
     </Container>
   );
 };
