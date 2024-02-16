@@ -35,7 +35,7 @@ export const CatalogCard = ({ item }: CatalogCardProps) => {
           alignItems: "center",
           padding: 2,
         }}
-        component={Link}
+        component={Link} // todo: ссылка внутри ссылки, нужно убрать и сделать кнопки
         to={{ pathname: `/catalog/${item._id}` }}
         state={{ estateDetails: item }}
       >

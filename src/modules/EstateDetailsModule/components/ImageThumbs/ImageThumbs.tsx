@@ -26,7 +26,10 @@ export const ImageThumbs = () => {
       {estateDetails &&
         estateDetails.images &&
         estateDetails.images.map(({ thumbnailUrl, _id }) => (
-          <Box key={_id} onClick={() => handleClickThumb(thumbnailUrl, _id)}>
+          <Box
+            key={_id || 0}
+            onClick={() => handleClickThumb(thumbnailUrl, _id)}
+          >
             <ImageThumbsItem thumb={thumbnailUrl} _id={_id} />
           </Box>
         ))}

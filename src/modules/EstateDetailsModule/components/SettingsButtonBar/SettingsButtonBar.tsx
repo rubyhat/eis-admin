@@ -31,12 +31,6 @@ export const SettingsButtonBar = ({
   const [status, setStatus] =
     React.useState<VisibilityStatusType>(currentStatus);
 
-  // React.useLayoutEffect(() => {
-  //   if (currentStatus) setStatus(currentStatus);
-  // }, [currentStatus]);
-
-  console.log(currentStatus, status);
-
   const handleClickDeleteButton = () => setIsDeleteDrawerOpen(true);
   const handleDeleteEstateObject = async () => {
     try {
@@ -56,8 +50,16 @@ export const SettingsButtonBar = ({
     setStatus(inputStatus);
   };
 
-  const handleClickChangeStatusButton = () => {
-    apiEditEstateFormModule.editObjecStatus(status, _id);
+  const handleClickChangeStatusButton = async () => {
+    try {
+      await apiEditEstateFormModule.editObjecStatus(status, _id);
+      toast.success("Статус успешно изменен!");
+    } catch (error) {
+      toast.error(
+        "Извините, произошла ошибка, попробуйте повторить позднее или обратитесь в тех. поддержку.",
+        { duration: 5000 },
+      );
+    }
   };
 
   if (currentStatus)
