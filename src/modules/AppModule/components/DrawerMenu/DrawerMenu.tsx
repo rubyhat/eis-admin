@@ -89,7 +89,11 @@ export const DrawerMenu = ({
           </Box>
         )}
         <Box padding={1.5}>
-          <MenuList isVertical onClick={() => setIsHeaderBurgerOpen(false)} />
+          <MenuList
+            isVertical
+            showIcon
+            onClick={() => setIsHeaderBurgerOpen(false)}
+          />
           <CustomButton
             variant="contained"
             size="large"

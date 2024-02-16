@@ -35,7 +35,10 @@ export const CatalogCard = ({ item }: CatalogCardProps) => {
           alignItems: "center",
           padding: 2,
         }}
-        component="div" // todo: ссылка внутри ссылки, нужно убрать и сделать кнопки
+        component={Link}
+        to={{ pathname: `/catalog/${item._id}` }}
+        state={{ estateDetails: item }}
+        // component="div" // todo: ссылка внутри ссылки, нужно убрать и сделать кнопки
         // to={{ pathname: `/catalog/${item._id}` }}
         // state={{ estateDetails: item }}
       >
@@ -69,9 +72,6 @@ export const CatalogCard = ({ item }: CatalogCardProps) => {
           </Typography>
         </Box>
         <Box
-          component={Link}
-          to={{ pathname: `/catalog/${item._id}` }}
-          state={{ estateDetails: item }}
           display="flex"
           alignItems="center"
           marginLeft={1}

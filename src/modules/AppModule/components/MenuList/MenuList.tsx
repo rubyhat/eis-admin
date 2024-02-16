@@ -1,34 +1,40 @@
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 
-const verticalStyles = {
-  width: 1,
-  paddingBottom: 0.75,
-  marginBottom: 0.75,
-  borderBottom: "1px solid",
-  borderColor: "customColors.labelsQuaternary",
-};
-
-const horizontalStyles = { marginRight: 2 };
+import { IoHomeOutline } from "react-icons/io5";
+// import { IoDocumentTextOutline } from "react-icons/io5";
+import { AiOutlineUser } from "react-icons/ai";
+import { BsBook } from "react-icons/bs";
+import { IconButton } from "@mui/material";
 interface LinkObject {
   title: string;
   to: string;
+  icon?: React.ReactNode;
 }
 
 const links: LinkObject[] = [
-  { title: "Объекты", to: "/catalog" },
-  { title: "Заявки", to: "/" },
-  { title: "Сотрудники", to: "/users" },
-  { title: "Обучение", to: "/" },
-  { title: "Помощь", to: "/help" },
+  { title: "Объекты", to: "/catalog", icon: <IoHomeOutline color="#007aff" /> },
+  // {
+  //   title: "Заявки",
+  //   to: "/",
+  //   icon: <IoDocumentTextOutline color="#007aff" />,
+  // },
+  {
+    title: "Сотрудники",
+    to: "/users",
+    icon: <AiOutlineUser color="#007aff" />,
+  },
+  // { title: "Обучение", to: "/" },
+  { title: "Помощь", to: "/help", icon: <BsBook color="#007aff" /> },
 ];
 
 interface MenuListProps {
   isVertical?: boolean;
+  showIcon?: boolean;
   onClick?: () => void;
 }
 
-export const MenuList = ({ isVertical, onClick }: MenuListProps) => {
+export const MenuList = ({ isVertical, showIcon, onClick }: MenuListProps) => {
   return (
     <Box
       component="ul"
@@ -42,7 +48,11 @@ export const MenuList = ({ isVertical, onClick }: MenuListProps) => {
         <Box
           component="li"
           key={index}
-          sx={isVertical ? verticalStyles : horizontalStyles}
+          sx={
+            isVertical
+              ? { marginBottom: 0.75, width: 1 }
+              : { marginRight: 2, width: 1 }
+          }
         >
           <Box
             component={Link}
@@ -50,6 +60,8 @@ export const MenuList = ({ isVertical, onClick }: MenuListProps) => {
             onClick={onClick && onClick}
             className="text-callout-regular"
             sx={{
+              width: 1,
+              display: "inline-block",
               color: "customColors.labelsPrimary",
               "&:hover": {
                 color: "customColors.colorsBlue",
@@ -57,6 +69,7 @@ export const MenuList = ({ isVertical, onClick }: MenuListProps) => {
               },
             }}
           >
+            {showIcon && <IconButton>{link.icon}</IconButton>}
             {link.title}
           </Box>
         </Box>
