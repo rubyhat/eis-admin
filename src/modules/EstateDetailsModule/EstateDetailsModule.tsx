@@ -11,10 +11,13 @@ import { useLocation, useParams } from "react-router";
 import { apiEstateDetailsModule } from "./api/apiEstateDetailsModule";
 import { useQuery } from "@tanstack/react-query";
 import { useEstateDetailsStore } from "./store";
+import { ButtonStickyBottom } from "../../components/ButtonStickyBottom";
+import { useNavigate } from "react-router-dom";
 
 export const EstateDetailsModule = () => {
   useTitle("Детали объекта недвижимости");
   const location = useLocation();
+  const navigate = useNavigate();
   const { id } = useParams();
   const { estateDetails, setEstateDetails, setActiveImage } =
     useEstateDetailsStore((state) => state);
@@ -95,6 +98,11 @@ export const EstateDetailsModule = () => {
             <ImageViewer />
           </Grid>
         </Grid>
+        <ButtonStickyBottom
+          onClick={() => navigate("/estate/edit", { state: { estateDetails } })}
+        >
+          Редактировать объект
+        </ButtonStickyBottom>
       </Container>
     );
   }

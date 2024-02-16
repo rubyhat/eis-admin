@@ -10,7 +10,7 @@ import useTitle from "../../hooks/useTitle";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCatalogStore } from "./store";
 import { CatalogCardSkeleton } from "./components/CatalogCardSkeleton";
-import { CustomButton } from "../../components/CustomButton";
+import { ButtonStickyBottom } from "../../components/ButtonStickyBottom";
 
 export const CatalogModule = () => {
   useTitle("Каталог");
@@ -101,27 +101,9 @@ export const CatalogModule = () => {
           </Box>
         </Grid>
       </Grid>
-      <Box
-        sx={{
-          display: {
-            xs: "inherit",
-            md: "none",
-          },
-          position: "fixed",
-          bottom: 16,
-          left: 0,
-          width: 1,
-          padding: 2,
-        }}
-      >
-        <CustomButton
-          fullWidth
-          size="large"
-          onClick={() => navigate("/catalog/create")}
-        >
-          + Добавить объект
-        </CustomButton>
-      </Box>
+      <ButtonStickyBottom onClick={() => navigate("/catalog/create")}>
+        + Добавить объект
+      </ButtonStickyBottom>
     </Container>
   );
 };
