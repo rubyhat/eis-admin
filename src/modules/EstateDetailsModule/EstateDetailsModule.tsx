@@ -74,10 +74,10 @@ export const EstateDetailsModule = () => {
       <Container>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <TitleGroup estateDetails={estateDetails} />
+            <SettingsButtonBar _id={estateDetails._id} />
           </Grid>
           <Grid item xs={12} md={5} lg={6}>
-            <SettingsButtonBar />
+            <TitleGroup estateDetails={estateDetails} />
             <CustomHr />
             {estateDetails.estateAgent && (
               <AgentCard estateAgent={estateDetails.estateAgent} />

@@ -40,7 +40,7 @@ export const TitleGroup = ({ estateDetails }: TitleGroupProps) => {
         {estateDetails.geoPosition.street},{" "}
         {estateDetails.geoPosition.houseNumber}
       </Typography>
-      <Box marginLeft={2}>
+      <Box sx={{ display: { xs: "none", md: "inherit" }, marginLeft: 2 }}>
         <IconButton onClick={handleClickEditButton} color="primary">
           <FiEdit2 size={20} />
         </IconButton>
