@@ -35,9 +35,9 @@ export const CatalogCard = ({ item }: CatalogCardProps) => {
           alignItems: "center",
           padding: 2,
         }}
-        component={Link} // todo: ссылка внутри ссылки, нужно убрать и сделать кнопки
-        to={{ pathname: `/catalog/${item._id}` }}
-        state={{ estateDetails: item }}
+        component="div" // todo: ссылка внутри ссылки, нужно убрать и сделать кнопки
+        // to={{ pathname: `/catalog/${item._id}` }}
+        // state={{ estateDetails: item }}
       >
         <Box>
           <Typography
@@ -51,12 +51,21 @@ export const CatalogCard = ({ item }: CatalogCardProps) => {
             component="p"
             variant="textSubheadlineRegular"
             color="customColors.labelsSecondary"
-            sx={{ display: "flex", alignItems: "center" }}
+            sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
           >
             {estateObjectDictionary.category[item.category]} | Комнат:{" "}
             {item.roomCount} | Площадь: {item.houseSquare} м² |{" "}
             <TbCurrencyTenge size={16} />{" "}
             {usePriceNormalize(item.price || 0, item.discount || 0).totalPrice}
+          </Typography>
+          <Typography
+            component="p"
+            variant="textSubheadlineRegular"
+            color="customColors.labelsSecondary"
+            sx={{ display: { xs: "flex", md: "none" }, alignItems: "center" }}
+          >
+            {estateObjectDictionary.category[item.category]} | Комнат:{" "}
+            {item.roomCount} | Площадь: {item.houseSquare} м²
           </Typography>
         </Box>
         <Box
@@ -66,7 +75,7 @@ export const CatalogCard = ({ item }: CatalogCardProps) => {
           display="flex"
           alignItems="center"
           marginLeft={1}
-          // todo: create edit button
+          padding="8px 0 8px"
         >
           <Typography
             component="p"

@@ -94,7 +94,7 @@ export const SettingsButtonBar = ({
             <MenuItem value={"canceled"}>Отмененный</MenuItem>
           </Select>
           <CustomButton size="small" onClick={handleClickChangeStatusButton}>
-            Сохранить
+            Сохранить статус
           </CustomButton>
           <Box sx={{ display: { xs: "inherit", md: "none" }, marginLeft: 2 }}>
             <IconButton
