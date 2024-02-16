@@ -47,7 +47,7 @@ const updateAccessToken = async () => {
     // Очистка данных о сессии пользователя
     tokenUtils.clearAccessToken();
     // Перенаправление пользователя на страницу входа
-    // window.location.href = "/login";
+    window.location.href = "/login";
   }
 };
 
@@ -130,10 +130,9 @@ const handleAuthenticationError = () => {
     "Не удалось автоматически обновить сессию. Пожалуйста, авторизуйтесь в системе повторно.",
     { duration: 10000 },
   );
-  setTimeout(() => {
-    tokenUtils.clearAccessToken();
-    window.location.href = "/login";
-  }, 10000);
+
+  tokenUtils.clearAccessToken();
+  window.location.href = "/login";
 };
 
 // Function to handle forbidden errors (e.g., clear localStorage and redirect to login)
@@ -143,8 +142,6 @@ const handleForbiddenError = () => {
     { duration: 10000 },
   );
 
-  setTimeout(() => {
-    tokenUtils.clearAccessToken();
-    window.location.href = "/login";
-  }, 10000);
+  tokenUtils.clearAccessToken();
+  window.location.href = "/login";
 };
