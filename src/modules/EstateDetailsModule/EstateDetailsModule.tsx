@@ -1,6 +1,13 @@
 import React from "react";
 import useTitle from "../../hooks/useTitle";
-import { Alert, Box, Container, Grid, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  CircularProgress,
+  Container,
+  Grid,
+  Typography,
+} from "@mui/material";
 import { AgentCard } from "../../components/AgentCard/AgentCard";
 import { DetailsList } from "./components/DetailsList/DetailsList";
 import { ImageViewer } from "./components/ImageViewer/ImageViewer";
@@ -27,6 +34,7 @@ export const EstateDetailsModule = () => {
     isLoading,
     isError,
     isSuccess,
+    error,
   } = useQuery({
     queryFn: () =>
       id
@@ -51,7 +59,15 @@ export const EstateDetailsModule = () => {
   }, [estateDetails?.images, setActiveImage]);
 
   if (isLoading) {
-    return <Box>Загрузка...</Box>;
+    return (
+      <Container>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <CircularProgress />
+          </Grid>
+        </Grid>
+      </Container>
+    );
   }
 
   if (isError) {
@@ -60,8 +76,9 @@ export const EstateDetailsModule = () => {
         <Grid container spacing={2}>
           <Grid item xs={12} md={4}>
             <Alert severity="error">
-              Произошла ошибка при получении данных с сервера! Проверьте адрес
-              или обратитесь в тех. поддержку
+              {error.message.includes("404")
+                ? "Данный объект не найден. Возможно он был удален! Проверьте ссылку или обратитесь в тех. поддержку."
+                : "Произошла ошибка при получении данных с сервера! Проверьте ссылку или обратитесь в тех. поддержку."}
             </Alert>
           </Grid>
         </Grid>
