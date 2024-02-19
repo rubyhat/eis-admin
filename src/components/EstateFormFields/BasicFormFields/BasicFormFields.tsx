@@ -287,12 +287,52 @@ export const BasicFormFields = ({
                 <MenuItem value="Пришахтинск">Пришахтинск</MenuItem>
                 <MenuItem value="Абай">Абай</MenuItem>
                 <MenuItem value="Сарань">Сарань</MenuItem>
-                {/* <MenuItem value="Темиртау">Темиртау</MenuItem>
-                <MenuItem value="Абай">Абай</MenuItem>
-                <MenuItem value="Шахтинск">Шахтинск</MenuItem>
-                <MenuItem value="Пришахтинск">Пришахтинск</MenuItem>
-                <MenuItem value="Астана">Астана</MenuItem>
-                <MenuItem value="Алмата">Алмата</MenuItem> */}
+              </Select>
+            )}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Район города
+            <Typography
+              component="span"
+              color="customColors.colorsRed"
+              variant="textCalloutRegular"
+              marginLeft={0.5}
+            >
+              *
+            </Typography>
+          </Typography>
+          <Controller
+            name="geoPosition.cityRegion"
+            control={control}
+            render={({ field }) => (
+              <Select
+                required
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem disabled value="">
+                  <Typography
+                    variant="textCalloutRegular"
+                    color="customColors.labelsSecondary"
+                  >
+                    Например: Город
+                  </Typography>
+                </MenuItem>
+                <MenuItem value="Город">Город</MenuItem>
+                <MenuItem value="Югово-Восток">Югово-Восток</MenuItem>
+                <MenuItem value="Михайловка">Михайловка</MenuItem>
+                <MenuItem value="Майкудук">Майкудук</MenuItem>
+                <MenuItem value="Федоровка">Федоровка</MenuItem>
+                <MenuItem value="Кунгей">Кунгей</MenuItem>
               </Select>
             )}
           />
@@ -340,24 +380,6 @@ export const BasicFormFields = ({
             disabled={isLoading}
             formatPrice={false}
             placeholder="Например: 42"
-          />
-        </Box>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textCalloutRegular"
-            marginBottom={0.5}
-          >
-            Ссылка на карту 2gis
-          </Typography>
-          <CustomInput
-            id="geoPosition.mapLink"
-            register={register}
-            errors={formState.errors}
-            disabled={isLoading}
-            formatPrice={false}
-            placeholder="Например: https://2gis.kz/..."
           />
         </Box>
       </Grid>
@@ -425,6 +447,24 @@ export const BasicFormFields = ({
             disabled={isLoading}
             formatPrice={false}
             placeholder="Например: https://instagram.com/..."
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Ссылка на карту 2gis
+          </Typography>
+          <CustomInput
+            id="geoPosition.mapLink"
+            register={register}
+            errors={formState.errors}
+            disabled={isLoading}
+            formatPrice={false}
+            placeholder="Например: https://2gis.kz/..."
           />
         </Box>
       </Grid>

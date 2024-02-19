@@ -84,7 +84,10 @@ export const DrawerMenu = ({
             <CustomButton onClick={handleProfileButtonClick}>
               Мой профиль
             </CustomButton>
-            <LogoutButton />
+
+            <Box display="inline" onClick={() => setIsHeaderBurgerOpen(false)}>
+              <LogoutButton />
+            </Box>
             <CustomHr sx={{ marginBottom: 0 }} />
           </Box>
         )}

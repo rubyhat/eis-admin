@@ -27,6 +27,7 @@ export const FormFieldsDataInitial: FormFieldsType = {
     houseNumber: null,
     isInfoHidden: false,
     mapLink: "",
+    cityRegion: "",
   },
 
   // Apartment

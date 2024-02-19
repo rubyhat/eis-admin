@@ -37,6 +37,7 @@ import {
   houseAndCottage,
   livingSpaces,
 } from "../../shared/constants/FormFieldsDataInitital";
+import { LoadingSplashScreen } from "../../components/LoadingSplashScreen";
 
 interface EditEstateFormModuleProps {
   editEstateData: FormFieldsData | Apartment | House | Flat | Land;
@@ -70,7 +71,7 @@ export const EditEstateFormModule = ({
   };
 
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(false);
+    setIsLoading(true);
     setFormFieldsData(data as FormFieldsType);
     const {
       // basic values
@@ -236,7 +237,8 @@ export const EditEstateFormModule = ({
           toast.error(
             "Произошла ошибка! Пожалуйста, обратитьесь в тех. поддержку",
           );
-        });
+        })
+        .finally(() => setIsLoading(false));
     };
     editObjectReq();
   };
@@ -436,6 +438,7 @@ export const EditEstateFormModule = ({
           </Grid>
         </Box>
       </FormProvider>
+      <LoadingSplashScreen isLoading={isLoading} />
     </Container>
   );
 };

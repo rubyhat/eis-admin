@@ -50,6 +50,7 @@ export interface GeoPositionInfo {
   houseNumber: number | null; // Номер дома
   isInfoHidden: boolean; // Свитчер для сокрытия адреса
   mapLink: string; // Ссылка на 2гис
+  cityRegion?: string;
 }
 // todo: need avatar from backend
 

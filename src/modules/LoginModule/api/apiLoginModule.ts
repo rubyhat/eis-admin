@@ -19,6 +19,7 @@ export const apiLoginModule = {
       .then((response) => {
         if (response.status >= 422) throw new Error("Ошибка сервера!");
         const expiresIn = response.data.accessTokenExpiration; // Продолжительность жизни токена
+        // todo: переделать проверку, убрать сопоставление по времени и ходить за рефреш токеном только при получении ошибки, что рефреш токен протух?
         const expirationTime = new Date().getTime() + expiresIn;
         // const expirationTime = new Date().getTime() + 3000;
         localStorage.setItem("accessToken", response.data.accessToken);

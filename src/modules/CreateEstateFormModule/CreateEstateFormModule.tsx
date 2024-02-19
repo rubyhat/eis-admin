@@ -35,6 +35,7 @@ import {
   houseAndCottage,
   livingSpaces,
 } from "../../shared/constants/FormFieldsDataInitital";
+import { LoadingSplashScreen } from "../../components/LoadingSplashScreen";
 
 export const CreateEstateFormModule = () => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -48,7 +49,7 @@ export const CreateEstateFormModule = () => {
   const navigate = useNavigate();
 
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(false);
+    setIsLoading(true);
     setFormFieldsData(data as FormFieldsType);
     const {
       // basic values
@@ -214,7 +215,8 @@ export const CreateEstateFormModule = () => {
           toast.error(
             "Произошла ошибка! Пожалуйста, обратитьесь в тех. поддержку",
           );
-        });
+        })
+        .finally(() => setIsLoading(false));
     };
     createObjectReq();
   };
@@ -392,6 +394,7 @@ export const CreateEstateFormModule = () => {
           </Grid>
         </Box>
       </FormProvider>
+      <LoadingSplashScreen isLoading={isLoading} />
     </Container>
   );
 };

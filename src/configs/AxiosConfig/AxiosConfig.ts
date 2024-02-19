@@ -33,10 +33,10 @@ const tokenUtils = {
 const updateAccessToken = async () => {
   try {
     const response = await axiosBaseWrap.post("/auth/refresh");
-    tokenUtils.setAccessToken(
-      response.data.accessToken,
-      response.data.accessTokenExpiration,
-    );
+    // todo: переделать проверку, убрать сопоставление по времени и ходить за рефреш токеном только при получении ошибки, что рефреш токен протух?
+    const expirationTime =
+      new Date().getTime() + response.data.accessTokenExpiration;
+    tokenUtils.setAccessToken(response.data.accessToken, expirationTime);
 
     return response.data.accessToken;
   } catch (error) {
