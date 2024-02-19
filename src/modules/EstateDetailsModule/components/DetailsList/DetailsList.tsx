@@ -51,6 +51,12 @@ export const DetailsList = ({ estateDetails }: DetailsListProps) => {
         />
       )}
       <DetailsListItem title={estateDetails.geoPosition.city} label="Город" />
+      {estateDetails.geoPosition.cityRegion && (
+        <DetailsListItem
+          title={estateDetails.geoPosition.cityRegion}
+          label="Район"
+        />
+      )}
       <DetailsListItem
         title={`${estateDetails.geoPosition.street}, ${estateDetails.geoPosition.houseNumber}`}
         label="Адрес"
