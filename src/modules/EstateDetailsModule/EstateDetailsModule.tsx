@@ -1,13 +1,6 @@
 import React from "react";
 import useTitle from "../../hooks/useTitle";
-import {
-  Alert,
-  Box,
-  CircularProgress,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Alert, Box, CircularProgress, Container, Grid } from "@mui/material";
 import { AgentCard } from "../../components/AgentCard/AgentCard";
 import { DetailsList } from "./components/DetailsList/DetailsList";
 import { ImageViewer } from "./components/ImageViewer/ImageViewer";
@@ -107,12 +100,12 @@ export const EstateDetailsModule = () => {
               <DetailsList estateDetails={estateDetails} />
             </Box>
             <Box>
-              <Typography
-                variant="textBodyRegular"
+              <Box
+                className="description-text-block"
                 dangerouslySetInnerHTML={{
                   __html: estateDetails.description,
-                }} // add styles for data
-              ></Typography>
+                }}
+              ></Box>
             </Box>
           </Grid>
           <Grid item xs={12} md={7} lg={6}>

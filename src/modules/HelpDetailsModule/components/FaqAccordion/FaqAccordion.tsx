@@ -43,7 +43,10 @@ export const FaqAccordion = ({ faqItems }: FaqAccordionProps) => {
             )}
           </AccordionSummary>
           <AccordionDetails>
-            <Typography dangerouslySetInnerHTML={{ __html: text }}></Typography>
+            <Box
+              className="description-text-block"
+              dangerouslySetInnerHTML={{ __html: text }}
+            ></Box>
           </AccordionDetails>
         </Accordion>
       ))}

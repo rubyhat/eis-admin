@@ -242,3 +242,40 @@ h6 {
   @include text-callout;
   font-weight: 600;
 }
+
+.description-text-block {
+  h1 {
+    @include title-first;
+    font-weight: 400;
+  }
+  h2 {
+    @include title-second;
+    font-weight: 400;
+  }
+  h3 {
+    @include title-third;
+    font-weight: 400;
+  }
+  p {
+    @include text-body;
+    font-weight: 400;
+  }
+  ol,
+  ul {
+    li {
+      @include text-body;
+      font-weight: 400;
+      list-style: inherit;
+    }
+  }
+  a {
+    color: var(--colors-blue);
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  ul {
+    padding-inline-start: 40px;
+  }
+}

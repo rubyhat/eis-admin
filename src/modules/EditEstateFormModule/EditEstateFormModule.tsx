@@ -404,13 +404,12 @@ export const EditEstateFormModule = ({
               >
                 Превью описания
               </Typography>
-              <Typography
-                component="div"
-                color="black"
+              <Box
+                className="description-text-block"
                 dangerouslySetInnerHTML={{
                   __html: descriptionTempText,
-                }} // add styles for data
-              ></Typography>
+                }}
+              ></Box>
               {descriptionTempText === "" && (
                 <Typography variant="textCalloutRegular">
                   Начните писать текст...
