@@ -47,7 +47,7 @@ export const DrawerMenu = ({
 
   const handleClickAddEstate = () => {
     setIsHeaderBurgerOpen(false);
-    navigate("/catalog/create");
+    navigate("/estate/create");
   };
 
   return (

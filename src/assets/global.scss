@@ -247,14 +247,17 @@ h6 {
   h1 {
     @include title-first;
     font-weight: 400;
+    padding: 8px 0;
   }
   h2 {
     @include title-second;
     font-weight: 400;
+    padding: 6px 0;
   }
   h3 {
     @include title-third;
     font-weight: 400;
+    padding: 4px 0;
   }
   p {
     @include text-body;
@@ -266,6 +269,9 @@ h6 {
       @include text-body;
       font-weight: 400;
       list-style: inherit;
+    }
+    li::marker {
+      color: var(--colors-blue);
     }
   }
   a {

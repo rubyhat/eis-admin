@@ -109,7 +109,7 @@ export const RouteList = () => {
         }
       />
       <Route
-        path="/catalog/create"
+        path="/estate/create"
         element={
           <ProtectedRoute isAuth={isAuth}>
             <CreateEstate />

@@ -24,7 +24,7 @@ export const ListLinkStep = (props: ListLinkStepProps) => {
       >
         {title}
       </Typography>
-      <Box sx={{ padding: "32px 0" }}>
+      <Box sx={{ padding: { xs: "16px 0", md: "32px 0" } }}>
         {data.map(({ id, title, subtitle }) => (
           <Box
             key={id}

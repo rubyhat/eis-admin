@@ -123,7 +123,7 @@ export interface CreateEstate {
 }
 
 export const useCreateEstateStore = create<CreateEstate>((set) => ({
-  step: 3,
+  step: 1,
   setStep: (v) => set({ step: v }),
   listLinkSteps: listLinkStepsData,
   formFieldsData: formFieldsDataInitial,

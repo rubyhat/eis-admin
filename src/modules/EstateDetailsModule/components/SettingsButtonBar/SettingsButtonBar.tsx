@@ -96,12 +96,13 @@ export const SettingsButtonBar = ({
           <CustomButton size="small" onClick={handleClickChangeStatusButton}>
             Сохранить статус
           </CustomButton>
-          <Box sx={{ display: { xs: "inherit", md: "none" }, marginLeft: 2 }}>
-            <IconButton
-              onClick={handleClickDeleteButton}
-              sx={{ marginLeft: 1 }}
-              color="error"
-            >
+          <Box
+            sx={{
+              display: { xs: "inherit", md: "none" },
+              marginLeft: { xs: "auto", md: 2 },
+            }}
+          >
+            <IconButton onClick={handleClickDeleteButton} color="error">
               <AiOutlineDelete size={20} />
             </IconButton>
             <DrawerDelete

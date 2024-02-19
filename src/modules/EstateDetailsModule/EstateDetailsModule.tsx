@@ -5,7 +5,6 @@ import { AgentCard } from "../../components/AgentCard/AgentCard";
 import { DetailsList } from "./components/DetailsList/DetailsList";
 import { ImageViewer } from "./components/ImageViewer/ImageViewer";
 import { SettingsButtonBar } from "./components/SettingsButtonBar";
-import { CustomHr } from "../../components/CustomHr";
 import { TitleGroup } from "./components/TitleGroup";
 import { useLocation, useParams } from "react-router";
 import { apiEstateDetailsModule } from "./api/apiEstateDetailsModule";
@@ -13,12 +12,14 @@ import { useQuery } from "@tanstack/react-query";
 import { useEstateDetailsStore } from "./store";
 import { ButtonStickyBottom } from "../../components/ButtonStickyBottom";
 import { useNavigate } from "react-router-dom";
+import { useScreenSize } from "../../hooks/useScreenSize";
 
 export const EstateDetailsModule = () => {
   useTitle("Детали объекта недвижимости");
   const location = useLocation();
   const navigate = useNavigate();
   const { id } = useParams();
+  const { isMobile } = useScreenSize();
   const { estateDetails, setEstateDetails, setActiveImage } =
     useEstateDetailsStore((state) => state);
 
@@ -90,9 +91,15 @@ export const EstateDetailsModule = () => {
               currentStatus={estateDetails.visibilityStatus}
             />
           </Grid>
-          <Grid item xs={12} md={5} lg={6}>
+          <Grid item xs={12}>
             <TitleGroup estateDetails={estateDetails} />
-            <CustomHr />
+          </Grid>
+          {isMobile && (
+            <Grid item xs={12}>
+              <ImageViewer />
+            </Grid>
+          )}
+          <Grid item xs={12} md={5} lg={6}>
             {estateDetails.estateAgent && (
               <AgentCard estateAgent={estateDetails.estateAgent} />
             )}
@@ -108,9 +115,11 @@ export const EstateDetailsModule = () => {
               ></Box>
             </Box>
           </Grid>
-          <Grid item xs={12} md={7} lg={6}>
-            <ImageViewer />
-          </Grid>
+          {!isMobile && (
+            <Grid item md={7} lg={6}>
+              <ImageViewer />
+            </Grid>
+          )}
         </Grid>
         <ButtonStickyBottom
           onClick={() => navigate("/estate/edit", { state: { estateDetails } })}

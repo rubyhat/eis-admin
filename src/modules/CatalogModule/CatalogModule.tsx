@@ -101,7 +101,7 @@ export const CatalogModule = () => {
           </Box>
         </Grid>
       </Grid>
-      <ButtonStickyBottom onClick={() => navigate("/catalog/create")}>
+      <ButtonStickyBottom onClick={() => navigate("/estate/create")}>
         + Добавить объект
       </ButtonStickyBottom>
     </Container>

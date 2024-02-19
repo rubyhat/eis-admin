@@ -79,7 +79,7 @@ export const Header = () => {
                 <CustomButton
                   variant="contained"
                   size="medium"
-                  onClick={() => navigate("/catalog/create")}
+                  onClick={() => navigate("/estate/create")}
                 >
                   + Добавить объект
                 </CustomButton>

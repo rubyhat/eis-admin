@@ -23,6 +23,7 @@ export const ImageThumbsItem = ({ thumb, _id }: ImageThumbsItemProps) => {
         height: "64px",
         cursor: "pointer",
         borderRadius: 2,
+        objectFit: "cover",
         ...activeThumbStyles,
       }}
     />

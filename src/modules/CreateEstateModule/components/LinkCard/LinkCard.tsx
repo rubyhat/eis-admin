@@ -22,17 +22,17 @@ export const LinkCard = (props: LinkCardProps) => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        border: "1px solid",
+        border: "2px solid",
         borderColor:
           selected === id
-            ? "customColors.labelsSecondary"
+            ? "customColors.colorsBlue"
             : "customColors.labelsQuaternary",
         borderRadius: 1,
         padding: 2,
         cursor: "pointer",
         transition: "all 333ms ease",
         "&:hover": {
-          borderColor: "customColors.labelsSecondary",
+          borderColor: "customColors.colorsBlue",
         },
       }}
     >
