@@ -299,21 +299,12 @@ export const BasicFormFields = ({
             marginBottom={0.5}
           >
             Район города
-            <Typography
-              component="span"
-              color="customColors.colorsRed"
-              variant="textCalloutRegular"
-              marginLeft={0.5}
-            >
-              *
-            </Typography>
           </Typography>
           <Controller
             name="geoPosition.cityRegion"
             control={control}
             render={({ field }) => (
               <Select
-                required
                 {...field}
                 displayEmpty
                 sx={selectStyles}
@@ -328,7 +319,7 @@ export const BasicFormFields = ({
                   </Typography>
                 </MenuItem>
                 <MenuItem value="Город">Город</MenuItem>
-                <MenuItem value="Югово-Восток">Югово-Восток</MenuItem>
+                <MenuItem value="Юго-Восток">Юго-Восток</MenuItem>
                 <MenuItem value="Михайловка">Михайловка</MenuItem>
                 <MenuItem value="Майкудук">Майкудук</MenuItem>
                 <MenuItem value="Федоровка">Федоровка</MenuItem>
