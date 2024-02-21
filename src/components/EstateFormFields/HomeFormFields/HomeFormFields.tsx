@@ -358,6 +358,62 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           />
         </Box>
       </Grid>
+      <Grid item xs={12} md={3}>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Гараж
+          </Typography>
+          <Controller
+            name="garage"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem disabled value="">
+                  <Typography
+                    variant="textCalloutRegular"
+                    color="customColors.labelsSecondary"
+                  >
+                    Например: Есть
+                  </Typography>
+                </MenuItem>
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="other">Есть</MenuItem>
+                <MenuItem value="oneCar">На одну машину</MenuItem>
+                <MenuItem value="towCar">На две машины</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Количество парковочных мест
+          </Typography>
+          <CustomInput
+            id="parkingSeat"
+            type="number"
+            register={register}
+            errors={formState.errors}
+            disabled={isLoading}
+            formatPrice={false}
+            placeholder="Например: 1"
+          />
+        </Box>
+      </Grid>
     </Grid>
   );
 };

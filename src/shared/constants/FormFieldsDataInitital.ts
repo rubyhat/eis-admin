@@ -43,6 +43,8 @@ export const FormFieldsDataInitial: FormFieldsType = {
   houseRoofMaterial: "",
   furniture: "",
   ethernet: "",
+  garage: "",
+  parkingSeat: null,
 
   // House
   plotSquare: null,

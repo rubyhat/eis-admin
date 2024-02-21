@@ -17,7 +17,8 @@ export type GasType = "central" | "auto" | "canConnect" | "none"; // Газ: ц�
 export type SewerType = "central" | "septik" | "canConnect" | "none"; // Канализация: центральная, септик, можно подключить, нет
 export type ToiletType = "in" | "out" | "none"; // Туалет: в доме, на улице, нет
 export type WaterType = "central" | "borehole" | "canConnect" | "none"; // Вода: центральная, скважина, можно подключить, нет
-export type EthernetType = "connected" | "toConnect" | "none";
+export type EthernetType = "connected" | "toConnect" | "none"; // Интернет: Подключен, Можно подключить, Нет
+export type GarageType = "oneCar" | "towCar" | "other"; // Гараж: На одну машину, На две машины, Есть
 export type HouseWallMaterialType =
   | "brick" // Кирпич
   | "wood" // Дерево
@@ -110,6 +111,8 @@ export interface Apartment extends BasicObject {
   houseRoofMaterial?: HouseRoofMaterialType | ""; // Материал крыши
   furniture?: FurnitureType | ""; // Мебелирован ли?
   ethernet?: EthernetType | ""; // Интернет
+  garage?: GarageType | ""; // Гараж: На одну машину, На две машины, Есть
+  parkingSeat: number | null; // Количество парковочных мест
 }
 
 // Только в доме
