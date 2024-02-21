@@ -1,5 +1,7 @@
-import { Alert, Box, MenuItem, Select, Typography } from "@mui/material";
 import React from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
+import { Alert, Box, MenuItem, Select, Typography } from "@mui/material";
 import {
   Controller,
   FieldValues,
@@ -7,16 +9,15 @@ import {
   useForm,
   useWatch,
 } from "react-hook-form";
+
 import { CustomInput } from "../../../../components/CustomInput";
 import { CustomButton } from "../../../../components/CustomButton";
+import { apiUserCreate } from "../../api";
+import { useUserStore } from "../../../UserModule/store/useUserStore";
 import {
   selectInputProps,
   selectStyles,
-} from "../../../EstateFormModule/assets/styles";
-import { apiUserCreate } from "../../api";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router";
-import { useUserStore } from "../../../UserModule/store/useUserStore";
+} from "../../../../components/EstateFormFields/assets/styles";
 
 const initialFormFieldData = {
   name: "",
@@ -174,6 +175,7 @@ export const UserCreateForm = () => {
             <CustomInput
               id="avatar"
               type="file"
+              accept="image/*"
               register={register}
               onChange={(e) => field.onChange(e.target.files)}
               errors={errors}

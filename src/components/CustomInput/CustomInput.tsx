@@ -17,6 +17,7 @@ interface CustomInputProps {
   sx?: SxProps;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   multiple?: boolean;
+  accept?: string;
 }
 
 export const CustomInput = (props: CustomInputProps) => {
@@ -33,6 +34,7 @@ export const CustomInput = (props: CustomInputProps) => {
     sx,
     onChange,
     multiple,
+    accept,
   } = props;
   const theme = useTheme();
 
@@ -54,6 +56,7 @@ export const CustomInput = (props: CustomInputProps) => {
         component="input"
         id={id}
         type={type}
+        accept={accept}
         disabled={disabled}
         required={required}
         {...register(id, { required })}

@@ -1,3 +1,6 @@
+import React from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 import {
   Alert,
   Box,
@@ -7,7 +10,6 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import React from "react";
 import {
   Controller,
   FieldValues,
@@ -15,17 +17,16 @@ import {
   useForm,
   useWatch,
 } from "react-hook-form";
+
 import { CustomInput } from "../../../../components/CustomInput";
 import { CustomButton } from "../../../../components/CustomButton";
-import {
-  selectInputProps,
-  selectStyles,
-} from "../../../EstateFormModule/assets/styles";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router";
 import { useUserStore } from "../../../UserModule/store/useUserStore";
 import { EstateAgentInfo } from "../../../../shared/interfaces/EstateObjectTypes";
 import { apiUserEdit } from "../../../UserEditModule/api";
+import {
+  selectInputProps,
+  selectStyles,
+} from "../../../../components/EstateFormFields/assets/styles";
 
 interface UserCreateFormProps {
   editUserData: EstateAgentInfo;
@@ -160,6 +161,7 @@ export const UserEditForm = ({ editUserData }: UserCreateFormProps) => {
             <CustomInput
               id="avatar"
               type="file"
+              accept="image/*"
               register={register}
               onChange={(e) => field.onChange(e.target.files)}
               errors={errors}
