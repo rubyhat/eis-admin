@@ -18,6 +18,7 @@ interface CustomInputProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   multiple?: boolean;
   accept?: string;
+  step?: number;
 }
 
 export const CustomInput = (props: CustomInputProps) => {
@@ -35,6 +36,7 @@ export const CustomInput = (props: CustomInputProps) => {
     onChange,
     multiple,
     accept,
+    step,
   } = props;
   const theme = useTheme();
 
@@ -56,6 +58,7 @@ export const CustomInput = (props: CustomInputProps) => {
         component="input"
         id={id}
         type={type}
+        step={step}
         accept={accept}
         disabled={disabled}
         required={required}

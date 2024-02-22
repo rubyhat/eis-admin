@@ -251,6 +251,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           <CustomInput
             id="houseSquare"
             type="number"
+            step={0.1}
             register={register}
             errors={formState.errors}
             disabled={isLoading}
@@ -271,6 +272,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           <CustomInput
             id="kitchenSquare"
             type="number"
+            step={0.1}
             register={register}
             errors={formState.errors}
             disabled={isLoading}
@@ -336,6 +338,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
             formatPrice={false}
             placeholder="Например: 2.5"
             type="number"
+            step={0.1}
           />
         </Box>
         <Box marginBottom={1.5}>

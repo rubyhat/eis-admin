@@ -84,6 +84,8 @@ export const CreateEstateFormModule = () => {
       houseRoofMaterial,
       furniture,
       ethernet,
+      garage,
+      parkingSeat,
     } = data as Apartment;
 
     const {
@@ -127,6 +129,8 @@ export const CreateEstateFormModule = () => {
       visibilityStatus: visibilityStatus,
       estateAgent: estateAgent,
       geoPosition: geoPosition,
+      garage: garage,
+      parkingSeat: parkingSeat,
     };
 
     const apartmentData = {

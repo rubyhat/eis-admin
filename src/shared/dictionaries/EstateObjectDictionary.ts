@@ -70,7 +70,7 @@ export const estateObjectDictionary = {
   },
   sewerType: {
     central: "Центральная",
-    septik: "Септик",
+    septic: "Септик",
     canConnect: "Можно подключить",
     none: "Нет",
   },

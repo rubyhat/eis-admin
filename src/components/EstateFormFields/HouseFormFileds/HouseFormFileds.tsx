@@ -195,7 +195,7 @@ export const HouseFormFileds = ({ isLoading }: HouseFormFiledsProps) => {
                 </MenuItem>
                 <MenuItem value="">Не указывать</MenuItem>
                 <MenuItem value="central">Центральная</MenuItem>
-                <MenuItem value="septik">Септик</MenuItem>
+                <MenuItem value="septic">Септик</MenuItem>
                 <MenuItem value="canConnect">Можно подключить</MenuItem>
                 <MenuItem value="none">Нет</MenuItem>
               </Select>
