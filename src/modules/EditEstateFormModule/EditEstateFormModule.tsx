@@ -106,6 +106,8 @@ export const EditEstateFormModule = ({
       houseRoofMaterial,
       furniture,
       ethernet,
+      garage,
+      parkingSeat,
     } = data as Apartment;
 
     const {
@@ -164,6 +166,8 @@ export const EditEstateFormModule = ({
       houseRoofMaterial: houseRoofMaterial,
       furniture: furniture,
       ethernet: ethernet,
+      garage: garage,
+      parkingSeat: parkingSeat,
     };
 
     const houseData = {

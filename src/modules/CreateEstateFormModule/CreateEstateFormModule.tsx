@@ -129,8 +129,6 @@ export const CreateEstateFormModule = () => {
       visibilityStatus: visibilityStatus,
       estateAgent: estateAgent,
       geoPosition: geoPosition,
-      garage: garage,
-      parkingSeat: parkingSeat,
     };
 
     const apartmentData = {
@@ -146,6 +144,8 @@ export const CreateEstateFormModule = () => {
       houseRoofMaterial: houseRoofMaterial,
       furniture: furniture,
       ethernet: ethernet,
+      garage: garage,
+      parkingSeat: parkingSeat,
     };
 
     const houseData = {
