@@ -8,11 +8,16 @@ import {
   ServiceType,
 } from "../../shared/interfaces/EstateObjectTypes";
 import { CreateEstateFormModule } from "../CreateEstateFormModule";
+import { useCreateEstateFormStore } from "../CreateEstateFormModule/store/useCreateEstateFormStore";
 
 export const CreateEstateModule = () => {
   useTitle("Добавление нового объекта");
-  const { step, listLinkSteps, formFieldsData, setStep, setFormFieldsData } =
-    useCreateEstateStore((state) => state);
+  const { step, listLinkSteps, setStep } = useCreateEstateStore(
+    (state) => state,
+  );
+  const { formFieldsData, setFormFieldsData } = useCreateEstateFormStore(
+    (state) => state,
+  );
 
   const handleCategoryListStepSubmit = (v: string) => {
     setStep(step + 1);

@@ -1,12 +1,6 @@
 import { create } from "zustand";
 import {
-  Apartment,
   CategoryType,
-  Flat,
-  FormFieldsData,
-  FormFieldsType,
-  House,
-  Land,
   ServiceType,
 } from "../../../shared/interfaces/EstateObjectTypes";
 
@@ -38,70 +32,6 @@ const listLinkStepsData: ListLinkSteps = {
   ],
 };
 
-const agentFromLocalStorage = localStorage.getItem("user");
-const agentObjectFromLocalStorage = agentFromLocalStorage
-  ? JSON.parse(agentFromLocalStorage).id
-  : "";
-
-const formFieldsDataInitial: FormFieldsType = {
-  // basic values
-  description: "",
-  price: null,
-  discount: null,
-  images: [],
-  videoLink: "",
-  mortgage: false,
-  hasSwap: false,
-  isCommercial: false,
-  isPledge: false,
-  isDocumentsGood: true,
-  type: "sell",
-  category: "apartment",
-  visibilityStatus: "checking",
-  estateAgent: agentObjectFromLocalStorage,
-  geoPosition: {
-    city: "Караганда",
-    street: "",
-    houseNumber: null,
-    isInfoHidden: false,
-    mapLink: "",
-    cityRegion: "",
-  },
-
-  // Apartment
-  roomCount: null,
-  houseBuildingYear: null,
-  houseSquare: null,
-  kitchenSquare: null,
-  countFloor: null,
-  ceilingHeight: null,
-  toiletCount: null,
-  houseCondition: "",
-  houseWallMaterial: "",
-  houseRoofMaterial: "",
-  furniture: "",
-  ethernet: "",
-
-  // House
-  plotSquare: null,
-  hasBasement: false,
-  hasMansard: false,
-  houseType: "",
-  electricType: "",
-  heatingType: "",
-  gasType: "",
-  sewerType: "",
-  toiletType: "",
-  waterType: "",
-
-  // Flat
-  targetFloor: null,
-  totalFloor: null,
-
-  // Land
-  landSquare: "",
-};
-
 export interface ListLinkSteps {
   service: StepData[];
   category: StepData[];
@@ -117,16 +47,10 @@ export interface CreateEstate {
   step: number;
   setStep: (v: number) => void;
   listLinkSteps: ListLinkSteps;
-  formFieldsData: FormFieldsData | Apartment | House | Flat | Land;
-  setFormFieldsData: (
-    v: FormFieldsData | Apartment | House | Flat | Land,
-  ) => void;
 }
 
 export const useCreateEstateStore = create<CreateEstate>((set) => ({
   step: 1,
   setStep: (v) => set({ step: v }),
   listLinkSteps: listLinkStepsData,
-  formFieldsData: formFieldsDataInitial,
-  setFormFieldsData: (v) => set({ formFieldsData: v }),
 }));

@@ -32,22 +32,26 @@ import {
 import { apiCreateEstateFormModule } from "./api";
 import { useCreateEstateFormStore } from "./store/useCreateEstateFormStore";
 import {
+  FormFieldsDataInitial,
   houseAndCottage,
   livingSpaces,
 } from "../../shared/constants/FormFieldsDataInitital";
 import { LoadingSplashScreen } from "../../components/LoadingSplashScreen";
+import { useCreateEstateStore } from "../CreateEstateModule/store";
 
 export const CreateEstateFormModule = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const { formFieldsData, setFormFieldsData } = useCreateEstateFormStore(
     (state) => state,
   );
+  const { setStep } = useCreateEstateStore((state) => state);
   const [descriptionTempText, setDescriptionTempText] = React.useState(
     formFieldsData.description || "",
   );
   const { isMobile } = useScreenSize();
   const navigate = useNavigate();
 
+  // Перечисление всех свойств это дичь, нужно будет подумать как переделать
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
     setFormFieldsData(data as FormFieldsType);
@@ -213,6 +217,9 @@ export const CreateEstateFormModule = () => {
           if (response) {
             toast.success("Объект успешно создан!");
             navigate("/catalog/" + response._id);
+            // Сбравсываем состояние формы
+            setStep(1);
+            setFormFieldsData(FormFieldsDataInitial);
           }
         })
         .catch(() => {
