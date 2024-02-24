@@ -1,13 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 import { EstateAgentInfo } from "../../shared/interfaces/EstateObjectTypes";
+import { AiFillStar } from "react-icons/ai";
 
 interface AgentCardProps {
   estateAgent: EstateAgentInfo;
 }
 
 export const AgentCard = ({ estateAgent }: AgentCardProps) => {
-  const { name } = estateAgent;
+  const { name, avatar } = estateAgent;
   return (
     <Box
       sx={{
@@ -27,10 +28,14 @@ export const AgentCard = ({ estateAgent }: AgentCardProps) => {
       <Box>
         <Box
           component="img"
-          src="/static/images/temp-agent-avatar.webp"
+          src={avatar ? avatar : "/static/images/temp-agent-avatar.webp"}
           alt="Риэлтор"
-          width="60px"
-          borderRadius={2}
+          sx={{
+            borderRadius: 2,
+            objectFit: "cover",
+            width: "60px",
+            height: "60px",
+          }}
         />
       </Box>
       <Box>
@@ -46,7 +51,10 @@ export const AgentCard = ({ estateAgent }: AgentCardProps) => {
           <Typography
             variant="captionFirstRegular"
             color="customColors.labelsSecondary"
+            display="flex"
+            alignItems="center"
           >
+            <AiFillStar color="#ffcc00" />
             5.0
           </Typography>
         </Typography>
