@@ -224,6 +224,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           <CustomInput
             id="roomCount"
             type="number"
+            min="0"
             register={register}
             errors={formState.errors}
             disabled={isLoading}
@@ -251,6 +252,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           <CustomInput
             id="houseSquare"
             type="number"
+            min="0"
             step={0.1}
             register={register}
             errors={formState.errors}
@@ -272,6 +274,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           <CustomInput
             id="kitchenSquare"
             type="number"
+            min="0"
             step={0.1}
             register={register}
             errors={formState.errors}
@@ -294,6 +297,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           <CustomInput
             id="houseBuildingYear"
             type="number"
+            min="0"
             register={register}
             errors={formState.errors}
             disabled={isLoading}
@@ -313,6 +317,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           <CustomInput
             id="countFloor"
             type="number"
+            min="0"
             register={register}
             errors={formState.errors}
             disabled={isLoading}
@@ -338,6 +343,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
             formatPrice={false}
             placeholder="Например: 2.5"
             type="number"
+            min="0"
             step={0.1}
           />
         </Box>
@@ -353,6 +359,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           <CustomInput
             id="toiletCount"
             type="number"
+            min="0"
             register={register}
             errors={formState.errors}
             disabled={isLoading}
@@ -409,6 +416,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
           <CustomInput
             id="parkingSeat"
             type="number"
+            min="0"
             register={register}
             errors={formState.errors}
             disabled={isLoading}

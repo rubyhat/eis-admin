@@ -401,6 +401,7 @@ export const BasicFormFields = ({
             formatPrice={false}
             placeholder="Например: 42 000 000"
             type="number"
+            min="0"
           />
         </Box>
         <Box marginBottom={1.5}>
@@ -420,6 +421,7 @@ export const BasicFormFields = ({
             formatPrice={false}
             placeholder="Например: 2 000 000"
             type="number"
+            min="0"
           />
         </Box>
         <Box marginBottom={1.5}>

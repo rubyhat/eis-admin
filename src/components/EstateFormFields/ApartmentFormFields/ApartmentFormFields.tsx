@@ -34,6 +34,7 @@ export const ApartmentFormFields = ({
             <CustomInput
               id="targetFloor"
               type="number"
+              min="0"
               register={register}
               errors={formState.errors}
               disabled={isLoading}
@@ -61,6 +62,7 @@ export const ApartmentFormFields = ({
             <CustomInput
               id="totalFloor"
               type="number"
+              min="0"
               register={register}
               errors={formState.errors}
               disabled={isLoading}

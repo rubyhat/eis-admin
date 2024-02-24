@@ -351,6 +351,7 @@ export const FilterForm = () => {
               formatPrice={false}
               placeholder="2"
               type="number"
+              min="0"
             />
           </Box>
           <Typography
@@ -378,6 +379,7 @@ export const FilterForm = () => {
               formatPrice={false}
               placeholder="5"
               type="number"
+              min="0"
             />
           </Box>
         </Box>

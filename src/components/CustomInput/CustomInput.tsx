@@ -19,6 +19,7 @@ interface CustomInputProps {
   multiple?: boolean;
   accept?: string;
   step?: number;
+  min?: string;
 }
 
 export const CustomInput = (props: CustomInputProps) => {
@@ -37,6 +38,7 @@ export const CustomInput = (props: CustomInputProps) => {
     multiple,
     accept,
     step,
+    min,
   } = props;
   const theme = useTheme();
 
@@ -57,6 +59,7 @@ export const CustomInput = (props: CustomInputProps) => {
       <Box
         component="input"
         id={id}
+        min={min}
         type={type}
         step={step}
         accept={accept}
