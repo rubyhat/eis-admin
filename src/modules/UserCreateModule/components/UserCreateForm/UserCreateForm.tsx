@@ -18,6 +18,7 @@ import {
   selectInputProps,
   selectStyles,
 } from "../../../../components/EstateFormFields/assets/styles";
+import { LoadingSplashScreen } from "../../../../components/LoadingSplashScreen";
 
 const initialFormFieldData = {
   name: "",
@@ -260,6 +261,7 @@ export const UserCreateForm = () => {
           Создать
         </CustomButton>
       </Box>
+      <LoadingSplashScreen isLoading={isLoading} />
     </Box>
   );
 };
