@@ -78,6 +78,7 @@ export type DisplayEstateObject = Omit<
 > & {
   estateAgent: EstateAgentInfo | null;
   images: ObjectImages[];
+  updatedAt: string;
 };
 
 export interface BasicObject {

@@ -1,6 +1,13 @@
 import React from "react";
 import useTitle from "../../hooks/useTitle";
-import { Alert, Box, CircularProgress, Container, Grid } from "@mui/material";
+import {
+  Alert,
+  Box,
+  CircularProgress,
+  Container,
+  Grid,
+  Typography,
+} from "@mui/material";
 import { AgentCard } from "../../components/AgentCard/AgentCard";
 import { DetailsList } from "./components/DetailsList/DetailsList";
 import { ImageViewer } from "./components/ImageViewer/ImageViewer";
@@ -13,6 +20,7 @@ import { useEstateDetailsStore } from "./store";
 import { ButtonStickyBottom } from "../../components/ButtonStickyBottom";
 import { useNavigate } from "react-router-dom";
 import { useScreenSize } from "../../hooks/useScreenSize";
+import { useFormatDate } from "../../shared/hooks/useFormatDate";
 
 export const EstateDetailsModule = () => {
   useTitle("Детали объекта недвижимости");
@@ -22,6 +30,9 @@ export const EstateDetailsModule = () => {
   const { isMobile } = useScreenSize();
   const { estateDetails, setEstateDetails, setActiveImage } =
     useEstateDetailsStore((state) => state);
+  const { dayAndMonth, time } = useFormatDate(
+    estateDetails ? estateDetails.updatedAt : "",
+  );
 
   const {
     data: estateDetailsData,
@@ -106,14 +117,21 @@ export const EstateDetailsModule = () => {
             <Box padding="16px 0">
               <DetailsList estateDetails={estateDetails} />
             </Box>
-            <Box>
-              <Box
-                className="description-text-block"
-                dangerouslySetInnerHTML={{
-                  __html: estateDetails.description,
-                }}
-              ></Box>
-            </Box>
+            <Box
+              className="description-text-block"
+              dangerouslySetInnerHTML={{
+                __html: estateDetails.description,
+              }}
+            ></Box>
+            <Typography
+              component="p"
+              variant="textFootnoteRegular"
+              color="customColors.labelsSecondary"
+              marginTop={2}
+              textAlign="right"
+            >
+              Обновлено: {dayAndMonth} в {time}
+            </Typography>
           </Grid>
           {!isMobile && (
             <Grid item md={7} lg={6}>
