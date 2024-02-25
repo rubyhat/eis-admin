@@ -22,6 +22,7 @@ export const LoadingSplashScreen = ({
         width: 1,
         height: "100%",
         position: "fixed",
+        zIndex: 2,
         left: 0,
         top: 0,
         bottom: 0,

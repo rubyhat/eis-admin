@@ -18,8 +18,7 @@ export const ImageThumbsItem = ({ thumb, _id }: ImageThumbsItemProps) => {
       src={thumb}
       alt="Фото Объекта"
       sx={{
-        width: 1,
-        maxWidth: "64px",
+        width: "64px",
         height: "64px",
         cursor: "pointer",
         borderRadius: 2,
