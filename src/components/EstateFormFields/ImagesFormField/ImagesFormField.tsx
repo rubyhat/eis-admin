@@ -83,6 +83,14 @@ export const ImagesFormField = ({
       prev.filter((image) => image._id !== imageToRemove),
     );
 
+    // Удаляем фото из списка существующих, если оно там есть
+    if (currentImages && setExistingImages) {
+      const updatedImages = currentImages.filter(
+        (image) => image._id !== imageToRemove,
+      );
+      setExistingImages(updatedImages);
+    }
+
     // todo: switch to react-dropzone
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
