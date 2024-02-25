@@ -99,6 +99,7 @@ export const ImagesFormField = ({
 
   const handleClearImages = () => {
     setSelectedImages([]);
+    if (setExistingImages) setExistingImages([]);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }

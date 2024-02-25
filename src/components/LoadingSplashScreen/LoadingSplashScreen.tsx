@@ -10,12 +10,6 @@ export const LoadingSplashScreen = ({
   isLoading,
   text = "Загрузка... Пожалуйста, подождите",
 }: LoadingSplashScreenProps) => {
-  React.useEffect(() => {
-    isLoading
-      ? (document.body.style.overflow = "hidden")
-      : (document.body.style.overflow = "inherit");
-  }, [isLoading]);
-
   return (
     <Box
       sx={{
