@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from "react";
+import { v4 as uuidv4 } from "uuid";
 import {
   Alert,
   Box,
@@ -13,9 +14,17 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/scss";
 
+import { ObjectImages } from "../../../shared/interfaces/EstateObjectTypes";
+
 interface ImagesFormFieldProps {
   onImagesUpload: (files: FileList) => void;
-  currentImages?: string[];
+  currentImages?: ObjectImages[];
+  setExistingImages?: (v: ObjectImages[]) => void;
+}
+
+interface SelectedImage {
+  img: string;
+  _id: string;
 }
 
 // todo: при редактировании, есть два фото, добавили новое фото, удалили одно старое фото = новые тоже удалились
@@ -23,19 +32,34 @@ interface ImagesFormFieldProps {
 export const ImagesFormField = ({
   onImagesUpload,
   currentImages,
+  setExistingImages,
 }: ImagesFormFieldProps) => {
-  const [selectedImages, setSelectedImages] = React.useState<string[]>([]);
+  const [selectedImages, setSelectedImages] = React.useState<SelectedImage[]>(
+    [],
+  );
+
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
-    if (currentImages) setSelectedImages(currentImages);
-  }, [currentImages]);
+    if (currentImages && setExistingImages) {
+      setExistingImages(currentImages); // При редактировании сетаем уже существующие фото
 
+      // Приводим их к нужному виду для отображения превью в интерфейсе и сетаем в стейт
+      const temp: SelectedImage[] = [];
+      if (currentImages)
+        currentImages.forEach((image) => {
+          temp.push({ img: image.imageUrl, _id: image._id });
+        });
+      setSelectedImages(temp);
+    }
+  }, [currentImages, setExistingImages]);
+
+  // Сетаем загруженные фото в стейт для превью и в стейт для реквеста
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      const filesArray = Array.from(e.target.files).map((file) =>
-        URL.createObjectURL(file),
-      );
+      const filesArray = Array.from(e.target.files).map((file) => {
+        return { img: URL.createObjectURL(file), _id: uuidv4() };
+      });
 
       setSelectedImages((prevImages) => [...prevImages, ...filesArray]);
       onImagesUpload(e.target.files);
@@ -45,7 +69,7 @@ export const ImagesFormField = ({
   React.useEffect(() => {
     // Очистка URL-ов для освобождения памяти при размонтировании компонента
     return () => {
-      selectedImages.forEach((fileURL) => URL.revokeObjectURL(fileURL));
+      selectedImages.forEach(({ img }) => URL.revokeObjectURL(img));
     };
   }, [selectedImages]);
 
@@ -53,10 +77,12 @@ export const ImagesFormField = ({
     fileInputRef.current?.click();
   };
 
+  // Удаляем фото из стейта превью и из списка существующих фото, которое пойдет в реквест
   const handleClickDeleteButton = (imageToRemove: string) => {
-    setSelectedImages((currentImages) =>
-      currentImages.filter((image) => image !== imageToRemove),
+    setSelectedImages((prev) =>
+      prev.filter((image) => image._id !== imageToRemove),
     );
+
     // todo: switch to react-dropzone
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -151,11 +177,11 @@ export const ImagesFormField = ({
           <Box>
             <Box>
               <Swiper slidesPerView={1.05} spaceBetween={8} speed={666}>
-                {selectedImages.map((image, index) => (
-                  <SwiperSlide key={index} className="slide">
+                {selectedImages.map(({ _id, img }) => (
+                  <SwiperSlide key={_id} className="slide">
                     <Box sx={{ position: "relative" }}>
                       <IconButton
-                        onClick={() => handleClickDeleteButton(image)}
+                        onClick={() => handleClickDeleteButton(_id)}
                         sx={{
                           position: "absolute",
                           right: 8,
@@ -175,8 +201,8 @@ export const ImagesFormField = ({
                           objectFit: "cover", // сохраняет пропорции изображения
                         }}
                         component="img"
-                        src={image}
-                        alt={image}
+                        src={img}
+                        alt={img}
                       />
                     </Box>
                   </SwiperSlide>

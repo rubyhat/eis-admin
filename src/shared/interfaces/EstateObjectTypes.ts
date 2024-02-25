@@ -88,6 +88,7 @@ export interface BasicObject {
   discount?: number | null;
   description: string;
   images?: FileList | [];
+  existingImages?: ObjectImages[];
   videoLink?: string;
   estateAgent?: string;
   mortgage: boolean;

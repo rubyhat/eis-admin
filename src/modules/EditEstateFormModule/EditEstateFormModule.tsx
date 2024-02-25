@@ -63,9 +63,14 @@ export const EditEstateFormModule = ({
   const methods = useForm<FieldValues>({
     defaultValues: {
       ...editEstateData,
+      images: null,
     },
   });
 
+  // Стейт для уже существующих фото, редактируем его если нужно удалить старое фото
+  const [existingImages, setExistingImages] = React.useState<ObjectImages[]>(
+    [],
+  );
   const onImagesUpload = (files: FileList) => {
     methods.setValue("images", files);
   };
@@ -139,7 +144,9 @@ export const EditEstateFormModule = ({
       description: description,
       price: Number(price),
       discount: Number(discount),
-      images: images, // add images
+      images: images,
+      existingImages:
+        existingImages.length > 0 ? JSON.stringify(existingImages) : null,
       videoLink: videoLink,
       mortgage: mortgage,
       hasSwap: hasSwap,
@@ -246,19 +253,6 @@ export const EditEstateFormModule = ({
     };
     editObjectReq();
   };
-
-  const [clearCurrentImages, setClearCurrentImages] = React.useState<string[]>(
-    [],
-  );
-
-  React.useEffect(() => {
-    const temp: string[] = [];
-    if (currentImages)
-      currentImages.forEach((image) => {
-        temp.push(image.imageUrl);
-      });
-    setClearCurrentImages(temp);
-  }, [currentImages]);
 
   if (!editEstateData) {
     return (
@@ -394,7 +388,8 @@ export const EditEstateFormModule = ({
             </Grid>
             <ImagesFormField
               onImagesUpload={onImagesUpload}
-              currentImages={clearCurrentImages}
+              currentImages={currentImages}
+              setExistingImages={setExistingImages}
             />
             <Grid item xs={12} md={6}>
               <RichTextEditorField
