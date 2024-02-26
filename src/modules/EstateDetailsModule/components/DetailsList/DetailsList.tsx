@@ -14,6 +14,13 @@ export const DetailsList = ({ estateDetails }: DetailsListProps) => {
   const squareText = estateDetails.kitchenSquare
     ? `Общая ${estateDetails.houseSquare} м², кухня — ${estateDetails.kitchenSquare} м²`
     : `Общая ${estateDetails.houseSquare} м²`;
+
+  const priceForSquare =
+    estateDetails.price &&
+    estateDetails.houseSquare &&
+    Math.round(estateDetails.price / estateDetails.houseSquare);
+
+  const hideAddressInfo = estateDetails.geoPosition.isInfoHidden;
   return (
     <Box
       component="ul"
@@ -50,6 +57,9 @@ export const DetailsList = ({ estateDetails }: DetailsListProps) => {
           discount={estateDetails.discount || 0}
         />
       )}
+      {priceForSquare && priceForSquare > 0 && (
+        <DetailsListItem label="Цена за м²" price={priceForSquare} />
+      )}
       <DetailsListItem title={estateDetails.geoPosition.city} label="Город" />
       {estateDetails.geoPosition.cityRegion && (
         <DetailsListItem
@@ -58,9 +68,13 @@ export const DetailsList = ({ estateDetails }: DetailsListProps) => {
         />
       )}
       <DetailsListItem
-        title={`${estateDetails.geoPosition.street}, ${estateDetails.geoPosition.houseNumber}`}
+        title={
+          hideAddressInfo
+            ? `${estateDetails.geoPosition.street}`
+            : `${estateDetails.geoPosition.street}, ${estateDetails.geoPosition.houseNumber}`
+        }
         label="Адрес"
-        link={estateDetails.geoPosition.mapLink}
+        link={hideAddressInfo ? "" : estateDetails.geoPosition.mapLink}
       />
       {Boolean(estateDetails.roomCount) && (
         <DetailsListItem
