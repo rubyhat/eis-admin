@@ -69,7 +69,7 @@ export const ImagePreview = () => {
           </Box>
         </Box>
       </Box>
-      <Box padding="0 4px" display="flex">
+      <Box padding="0 4px 4px" display="flex">
         {activeImage ? (
           <Box
             onClick={handleOpenViewer}
@@ -78,7 +78,7 @@ export const ImagePreview = () => {
             alt="Фото объекта"
             sx={{
               border: "1px solid",
-              borderColor: "customColors.labelsSecondary",
+              borderColor: "customColors.labelsQuaternary",
               cursor: "pointer",
               borderRadius: 2,
               width: "100%",
