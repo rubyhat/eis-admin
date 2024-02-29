@@ -1,13 +1,15 @@
-import { Box, IconButton, Skeleton, Typography } from "@mui/material";
+import { Box, CircularProgress, IconButton, Typography } from "@mui/material";
 import React from "react";
 import { FiShare } from "react-icons/fi";
 import { useEstateDetailsStore } from "../../store/useEstateDetailsStore";
 import { ImageViewerModal } from "../ImageViewerModal/ImageViewerModal";
 
-// todo: сделать скелетон на изображение, пока оно не загрузилось
 export const ImagePreview = () => {
   const { activeImage, isViewerModalOpen, setIsViewerModalOpen } =
     useEstateDetailsStore((state) => state);
+  const [imgLoading, setImgLoading] = React.useState(true);
+
+  const handleImageLoad = () => setImgLoading(false);
   const handleOpenViewer = () => setIsViewerModalOpen(true);
   const handleSharePage = () => {};
   return (
@@ -71,32 +73,52 @@ export const ImagePreview = () => {
       </Box>
       <Box padding="0 4px 4px" display="flex">
         {activeImage ? (
-          <Box
-            onClick={handleOpenViewer}
-            component="img"
-            src={activeImage}
-            alt="Фото объекта"
-            sx={{
-              border: "1px solid",
-              borderColor: "customColors.labelsQuaternary",
-              cursor: "pointer",
-              borderRadius: 2,
-              width: "100%",
-              height: "420px",
-              objectFit: "cover",
-            }}
-          />
+          <>
+            <Box
+              sx={{
+                display: imgLoading ? "flex" : "none",
+                width: "100%",
+                height: "420px",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <CircularProgress />
+            </Box>
+            <Box
+              onClick={handleOpenViewer}
+              component="img"
+              src={activeImage}
+              alt="Фото объекта"
+              onLoad={handleImageLoad}
+              sx={{
+                display: imgLoading ? "none" : "inherit",
+                border: "1px solid",
+                borderColor: "customColors.labelsQuaternary",
+                cursor: "pointer",
+                borderRadius: 2,
+                width: "100%",
+                height: "420px",
+                objectFit: "cover",
+              }}
+            />
+          </>
         ) : (
-          <Skeleton
-            variant="rectangular"
-            component="div"
+          <Box
             sx={{
               width: 1,
-              height: 304,
+              height: 420,
               borderRadius: 2,
               margin: 1,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "customColors.labelsQuaternary",
+              color: "customColors.colorsRed",
             }}
-          />
+          >
+            Фото не загружено
+          </Box>
         )}
       </Box>
     </Box>
