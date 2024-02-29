@@ -99,6 +99,7 @@ export const EstateDetailsModule = () => {
             <SettingsButtonBar
               key={estateDetails._id}
               _id={estateDetails._id}
+              tempImages={estateDetails.images}
               currentStatus={estateDetails.visibilityStatus}
             />
           </Grid>

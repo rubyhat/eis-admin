@@ -19,6 +19,7 @@ import { CustomInput } from "../../../../components/CustomInput";
 import { FilterState, initialFilterState, useFilterStore } from "../../store";
 import { useQueryClient } from "@tanstack/react-query";
 import { apiCatalogModule } from "../../../CatalogModule/api/apiCatalogModule";
+import { useNavigate } from "react-router-dom";
 
 const selectStyles = {
   height: "36px",
@@ -44,6 +45,7 @@ const selectInputProps = {
 // в зависимости от урла
 export const FilterForm = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState(false);
   const { filterState, setIsMobileFilterModalOpen, setFilterState } =
     useFilterStore((state) => state);
@@ -132,7 +134,8 @@ export const FilterForm = () => {
     reset(initialFilterState);
     setFilterState(initialFilterState);
     setIsMobileFilterModalOpen(false);
-    updateUrlParams(initialFilterState);
+    navigate(""); // Очищаем урл параметры
+    fetchData(""); // Делаем новый запрос без параметров
   };
 
   return (

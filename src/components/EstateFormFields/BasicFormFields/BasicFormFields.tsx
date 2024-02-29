@@ -480,7 +480,7 @@ export const BasicFormFields = ({
                 control={
                   <Switch
                     {...field}
-                    checked={field.value === "true"}
+                    checked={String(field.value) === "true"}
                     onChange={(e) =>
                       field.onChange(e.target.checked.toString())
                     }
@@ -499,7 +499,7 @@ export const BasicFormFields = ({
                 control={
                   <Switch
                     {...field}
-                    checked={field.value === "true"}
+                    checked={String(field.value) === "true"}
                     onChange={(e) =>
                       field.onChange(e.target.checked.toString())
                     }
@@ -518,7 +518,7 @@ export const BasicFormFields = ({
                 control={
                   <Switch
                     {...field}
-                    checked={field.value === "true"}
+                    checked={String(field.value) === "true"}
                     onChange={(e) =>
                       field.onChange(e.target.checked.toString())
                     }
@@ -537,7 +537,7 @@ export const BasicFormFields = ({
                 control={
                   <Switch
                     {...field}
-                    checked={field.value === "true"}
+                    checked={String(field.value) === "true"}
                     onChange={(e) =>
                       field.onChange(e.target.checked.toString())
                     }
@@ -555,7 +555,7 @@ export const BasicFormFields = ({
                 control={
                   <Switch
                     {...field}
-                    checked={field.value === "true"} // todo: проверить, почему состояне не чекнутое при открытии формы, когда в стейте true
+                    checked={String(field.value) === "true"}
                     onChange={(e) =>
                       field.onChange(e.target.checked.toString())
                     }
@@ -574,7 +574,7 @@ export const BasicFormFields = ({
                 control={
                   <Switch
                     {...field}
-                    checked={field.value === "true"}
+                    checked={String(field.value) === "true"}
                     onChange={(e) =>
                       field.onChange(e.target.checked.toString())
                     }
