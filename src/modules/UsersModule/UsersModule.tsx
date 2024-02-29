@@ -3,9 +3,11 @@ import React from "react";
 import { UserList } from "./components/UserList";
 import { CustomButton } from "../../components/CustomButton";
 import { useNavigate } from "react-router";
+import { useUserStore } from "../UserModule/store/useUserStore";
 
 export const UsersModule = () => {
   const navigate = useNavigate();
+  const { isAdmin } = useUserStore();
 
   const handleClickNewUserButton = () => navigate("/users/create");
   return (
@@ -16,13 +18,15 @@ export const UsersModule = () => {
             <Typography component="h1" variant="titleFirstRegular">
               Сотрудники
             </Typography>
-            <CustomButton
-              size="small"
-              sx={{ marginLeft: 2 }}
-              onClick={handleClickNewUserButton}
-            >
-              + Новый
-            </CustomButton>
+            {isAdmin && (
+              <CustomButton
+                size="small"
+                sx={{ marginLeft: 2 }}
+                onClick={handleClickNewUserButton}
+              >
+                + Новый
+              </CustomButton>
+            )}
           </Box>
         </Grid>
         <UserList />

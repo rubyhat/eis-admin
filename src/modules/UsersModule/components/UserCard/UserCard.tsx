@@ -70,39 +70,54 @@ export const UserCard = ({ user }: UserCardProps) => {
         <ListItem
           sx={{
             display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
+            alignItems: "flex-start",
+            flexDirection: "column",
           }}
         >
           <Typography component="h6" variant="titleSecondEmphasized">
-            {user.name} <Chip label={user.role} color="primary" size="small" />
+            {user.name}
           </Typography>
-          {currentUser && currentUser.role === "Admin" && (
-            <Box>
-              <IconButton onClick={handleClickEditButton} color="primary">
-                <FiEdit2 size={20} />
-              </IconButton>
-              <IconButton color="error" onClick={handleClickDeleteButton}>
-                <MdDeleteOutline />
-              </IconButton>
-              <UserDeleteDrawer
-                onClick={handleClickDeleteButton}
-                onDelete={handleDeleteUser}
-              />
-            </Box>
-          )}
+          <Box paddingTop={1}>
+            <Chip label={user.role} color="primary" size="small" />
+            {currentUser && currentUser.role === "Admin" && (
+              <>
+                <IconButton onClick={handleClickEditButton} color="primary">
+                  <FiEdit2 size={20} />
+                </IconButton>
+                <IconButton color="error" onClick={handleClickDeleteButton}>
+                  <MdDeleteOutline />
+                </IconButton>
+                <UserDeleteDrawer
+                  onClick={handleClickDeleteButton}
+                  onDelete={handleDeleteUser}
+                />
+              </>
+            )}
+          </Box>
         </ListItem>
         <ListItem>
-          <ListItemText primary={user.username} secondary="Никнейм" />
+          <ListItemText
+            sx={{ margin: 0 }}
+            primary={user.username}
+            secondary="Никнейм"
+          />
         </ListItem>
         {user.phone && (
           <ListItem>
-            <ListItemText primary={user.phone} secondary="Номер телефона" />
+            <ListItemText
+              sx={{ margin: 0 }}
+              primary={user.phone}
+              secondary="Номер телефона"
+            />
           </ListItem>
         )}
         {user.email && (
           <ListItem>
-            <ListItemText primary={user.email} secondary="Адрес почты" />
+            <ListItemText
+              sx={{ margin: 0 }}
+              primary={user.email}
+              secondary="Адрес почты"
+            />
           </ListItem>
         )}
       </List>

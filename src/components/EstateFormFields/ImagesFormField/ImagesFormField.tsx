@@ -118,7 +118,8 @@ export const ImagesFormField = ({
         </Typography>
         <Alert severity="info" sx={{ marginBottom: 1 }}>
           Пожалуйста, загружайте только фотографии! Загрузка документов и других
-          файлов <strong>приведет к ошибке</strong>!
+          файлов{" "}
+          <strong>приведет к ошибке! Загружайте не более 30 фотографий!</strong>
         </Alert>
         <Box
           ref={fileInputRef}
