@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   IconButton,
   MenuItem,
@@ -19,6 +20,7 @@ import {
   VisibilityStatusType,
 } from "../../../../shared/interfaces/EstateObjectTypes";
 import { apiEditEstateFormModule } from "../../../EditEstateFormModule/api/apiEditEstateFormModule";
+import { useUserStore } from "../../../UserModule/store/useUserStore";
 
 interface SettingsButtonBarProps {
   _id: string;
@@ -33,6 +35,7 @@ export const SettingsButtonBar = ({
 }: SettingsButtonBarProps) => {
   const navigate = useNavigate();
   const { setIsDeleteDrawerOpen } = useEstateDetailsStore((state) => state);
+  const { isAdmin } = useUserStore((state) => state);
   const [status, setStatus] =
     React.useState<VisibilityStatusType>(currentStatus);
 
@@ -72,10 +75,16 @@ export const SettingsButtonBar = ({
       <Box
         sx={{
           display: "flex",
-          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
           width: 1,
         }}
       >
+        {!isAdmin && (
+          <Alert severity="info" sx={{ width: "fit-content", marginBottom: 2 }}>
+            Сменить статус может только <strong>Администратор</strong>
+          </Alert>
+        )}
         <Box sx={{ display: "flex", alignItems: "center", width: 1 }}>
           <Select
             id="status-select"
@@ -92,14 +101,19 @@ export const SettingsButtonBar = ({
               },
             }}
             inputProps={{ padding: 1, fontSize: 16 }}
+            disabled={!isAdmin}
           >
             <MenuItem value={"active"}>Активный</MenuItem>
             <MenuItem value={"sold"}>Проданный</MenuItem>
             <MenuItem value={"checking"}>На проверке</MenuItem>
             <MenuItem value={"canceled"}>Отмененный</MenuItem>
           </Select>
-          <CustomButton size="small" onClick={handleClickChangeStatusButton}>
-            Сохранить статус
+          <CustomButton
+            disabled={!isAdmin}
+            size="small"
+            onClick={handleClickChangeStatusButton}
+          >
+            Сменить статус
           </CustomButton>
           <Box
             sx={{

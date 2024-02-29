@@ -22,6 +22,7 @@ import {
 } from "../../../shared/interfaces/EstateObjectTypes";
 import { selectInputProps, selectStyles } from "../assets/styles";
 import { FetchAllUsers } from "../../../shared/api/apiFetchAllUsers";
+import { useUserStore } from "../../../modules/UserModule/store/useUserStore";
 
 interface BasicFormFieldsProps {
   isLoading: boolean;
@@ -37,6 +38,7 @@ export const BasicFormFields = ({
   setFormFieldsData,
 }: BasicFormFieldsProps) => {
   const { control, register, formState } = useFormContext();
+  const { isAdmin } = useUserStore((state) => state);
 
   const {
     data: usersData,
@@ -165,6 +167,7 @@ export const BasicFormFields = ({
                 {...field}
                 sx={selectStyles}
                 inputProps={{ sx: selectInputProps }}
+                disabled={!isAdmin}
               >
                 <MenuItem value="checking">На проверке</MenuItem>
                 <MenuItem value="active">Активный</MenuItem>
