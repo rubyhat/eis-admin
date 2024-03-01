@@ -21,6 +21,7 @@ import { ButtonStickyBottom } from "../../components/ButtonStickyBottom";
 import { useNavigate } from "react-router-dom";
 import { useScreenSize } from "../../hooks/useScreenSize";
 import { useFormatDate } from "../../shared/hooks/useFormatDate";
+import { useUserStore } from "../UserModule/store/useUserStore";
 
 export const EstateDetailsModule = () => {
   useTitle("Детали объекта недвижимости");
@@ -28,6 +29,7 @@ export const EstateDetailsModule = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { isMobile } = useScreenSize();
+  const { isAdmin, user: currentUser } = useUserStore();
   const { estateDetails, setEstateDetails, setActiveImage } =
     useEstateDetailsStore((state) => state);
   const { dayAndMonth, time } = useFormatDate(
@@ -140,11 +142,15 @@ export const EstateDetailsModule = () => {
             </Grid>
           )}
         </Grid>
-        <ButtonStickyBottom
-          onClick={() => navigate("/estate/edit", { state: { estateDetails } })}
-        >
-          Редактировать объект
-        </ButtonStickyBottom>
+        {(isAdmin || currentUser?._id === estateDetails.estateAgent?._id) && (
+          <ButtonStickyBottom
+            onClick={() =>
+              navigate("/estate/edit", { state: { estateDetails } })
+            }
+          >
+            Редактировать объект
+          </ButtonStickyBottom>
+        )}
       </Container>
     );
   }

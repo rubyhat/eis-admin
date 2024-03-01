@@ -28,7 +28,7 @@ interface UserCardProps {
 
 export const UserCard = ({ user }: UserCardProps) => {
   const { setIsDeleteDrawerOpen } = useUsersStore((state) => state);
-  const { user: currentUser } = useUserStore((state) => state);
+  const { user: currentUser, isAdmin } = useUserStore((state) => state);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -79,7 +79,7 @@ export const UserCard = ({ user }: UserCardProps) => {
           </Typography>
           <Box paddingTop={1}>
             <Chip label={user.role} color="primary" size="small" />
-            {currentUser && currentUser.role === "Admin" && (
+            {(isAdmin || currentUser?._id === user._id) && (
               <>
                 <IconButton onClick={handleClickEditButton} color="primary">
                   <FiEdit2 size={20} />

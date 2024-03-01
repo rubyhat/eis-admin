@@ -312,7 +312,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
             variant="textCalloutRegular"
             marginBottom={0.5}
           >
-            Количество этажей у недвижимости
+            Количество уровней у недвижимости
           </Typography>
           <CustomInput
             id="countFloor"

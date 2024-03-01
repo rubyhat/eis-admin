@@ -12,6 +12,7 @@ export const axiosBaseWrap = axios.create({
   },
 });
 
+const redirectToLoginPage = () => (window.location.href = "/login");
 // Утилиты для управления токенами
 const tokenUtils = {
   getAccessToken: (): string | null => localStorage.getItem("accessToken"),
@@ -47,7 +48,7 @@ const updateAccessToken = async () => {
     // Очистка данных о сессии пользователя
     tokenUtils.clearAccessToken();
     // Перенаправление пользователя на страницу входа
-    window.location.href = "/login";
+    redirectToLoginPage();
   }
 };
 
@@ -132,7 +133,7 @@ const handleAuthenticationError = () => {
   );
 
   tokenUtils.clearAccessToken();
-  window.location.href = "/login";
+  redirectToLoginPage();
 };
 
 // Function to handle forbidden errors (e.g., clear localStorage and redirect to login)
@@ -143,5 +144,5 @@ const handleForbiddenError = () => {
   );
 
   tokenUtils.clearAccessToken();
-  window.location.href = "/login";
+  redirectToLoginPage();
 };

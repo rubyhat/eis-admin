@@ -32,8 +32,10 @@ interface UserCreateFormProps {
   editUserData: EstateAgentInfo;
 }
 
+// todo: надо подумать, давать ли сотрудникам возможность самостоятельно изменять сотовый номер
+// что если сменят его на свой личный, а не на корпоративный?
 export const UserEditForm = ({ editUserData }: UserCreateFormProps) => {
-  const { user } = useUserStore((state) => state);
+  const { user, isAdmin } = useUserStore((state) => state);
   const [isLoading, setIsLoading] = React.useState(false);
   const [changePassword, setChangePassword] = React.useState(false);
   const {
@@ -187,7 +189,7 @@ export const UserEditForm = ({ editUserData }: UserCreateFormProps) => {
         )}
       </Box>
 
-      {user?.role === "Admin" && (
+      {isAdmin && (
         <>
           <Box padding="8px 0">
             <Typography
@@ -241,6 +243,10 @@ export const UserEditForm = ({ editUserData }: UserCreateFormProps) => {
               )}
             />
           </Box>
+        </>
+      )}
+      {(isAdmin || user?._id === editUserData._id) && (
+        <>
           <FormControlLabel
             control={
               <Checkbox onChange={(e) => setChangePassword(e.target.checked)} />
