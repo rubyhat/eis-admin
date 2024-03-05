@@ -1,7 +1,6 @@
 import { axiosBaseWrap } from "../../../configs/AxiosConfig";
 import {
   DisplayEstateObject,
-  ObjectImages,
   VisibilityStatusType,
 } from "../../../shared/interfaces/EstateObjectTypes";
 
@@ -21,13 +20,12 @@ export const apiEditEstateFormModule = {
   },
   editObjecStatus(
     visibilityStatus: VisibilityStatusType,
-    tempImages: ObjectImages[],
     _id: string,
   ): Promise<DisplayEstateObject> {
     return axiosBaseWrap
       .put(
         "/catalog/" + _id,
-        { visibilityStatus, images: tempImages },
+        { visibilityStatus },
         {
           headers: { "Content-Type": "multipart/form-data" },
         },

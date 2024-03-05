@@ -17,8 +17,9 @@ export const EditEstateModule = () => {
         ...FormFieldsDataInitial.geoPosition,
         ...location.state.estateDetails.geoPosition,
       },
-      estateAgent: location.state.estateDetails.estateAgent._id,
-      images: null, // todo: create images_current for old images, new images will set in "image" key
+      estateAgent: location.state.estateDetails.estateAgent?._id,
+      existingImages: location.state.estateDetails.images,
+      images: null,
     };
 
     return (

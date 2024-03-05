@@ -15,23 +15,18 @@ import { DrawerDelete } from "../DrawerDelete";
 import { useEstateDetailsStore } from "../../store";
 import { CustomButton } from "../../../../components/CustomButton";
 import { apiEstateDetailsModule } from "../../api/apiEstateDetailsModule";
-import {
-  ObjectImages,
-  VisibilityStatusType,
-} from "../../../../shared/interfaces/EstateObjectTypes";
+import { VisibilityStatusType } from "../../../../shared/interfaces/EstateObjectTypes";
 import { apiEditEstateFormModule } from "../../../EditEstateFormModule/api/apiEditEstateFormModule";
 import { useUserStore } from "../../../UserModule/store/useUserStore";
 
 interface SettingsButtonBarProps {
   _id: string;
   currentStatus: VisibilityStatusType;
-  tempImages: ObjectImages[];
 }
 
 export const SettingsButtonBar = ({
   _id,
   currentStatus,
-  tempImages,
 }: SettingsButtonBarProps) => {
   const navigate = useNavigate();
   const { setIsDeleteDrawerOpen } = useEstateDetailsStore((state) => state);
@@ -60,7 +55,7 @@ export const SettingsButtonBar = ({
 
   const handleClickChangeStatusButton = async () => {
     try {
-      await apiEditEstateFormModule.editObjecStatus(status, tempImages, _id);
+      await apiEditEstateFormModule.editObjecStatus(status, _id);
       toast.success("Статус успешно изменен!");
     } catch (error) {
       toast.error(
