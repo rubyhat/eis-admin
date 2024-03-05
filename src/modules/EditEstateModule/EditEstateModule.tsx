@@ -17,6 +17,10 @@ export const EditEstateModule = () => {
         ...FormFieldsDataInitial.geoPosition,
         ...location.state.estateDetails.geoPosition,
       },
+      ownerInfo: {
+        ...FormFieldsDataInitial.ownerInfo,
+        ...location.state.estateDetails.ownerInfo,
+      },
       estateAgent: location.state.estateDetails.estateAgent?._id,
       existingImages: location.state.estateDetails.images,
       images: null,

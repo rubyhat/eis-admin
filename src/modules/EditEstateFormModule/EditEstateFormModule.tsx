@@ -38,6 +38,7 @@ import {
   livingSpaces,
 } from "../../shared/constants/FormFieldsDataInitital";
 import { LoadingSplashScreen } from "../../components/LoadingSplashScreen";
+import { OwnerFormFields } from "../../components/EstateFormFields/OwnerFormFields";
 
 interface EditEstateFormModuleProps {
   editEstateData: FormFieldsData | Apartment | House | Flat | Land;
@@ -95,6 +96,7 @@ export const EditEstateFormModule = ({
       visibilityStatus,
       estateAgent,
       geoPosition,
+      ownerInfo,
     } = data as FormFieldsType;
 
     const {
@@ -158,6 +160,7 @@ export const EditEstateFormModule = ({
       visibilityStatus: visibilityStatus,
       estateAgent: estateAgent,
       geoPosition: geoPosition,
+      ownerInfo: ownerInfo,
     };
 
     const apartmentData = {
@@ -225,7 +228,7 @@ export const EditEstateFormModule = ({
 
       const formData = new FormData();
       Object.entries(filteredData).forEach(([key, value]) => {
-        if (key === "geoPosition") {
+        if (key === "geoPosition" || key === "ownerInfo") {
           formData.append(key, JSON.stringify(value));
         } else if (key === "images" && value instanceof FileList) {
           for (const file of value) {
@@ -311,6 +314,15 @@ export const EditEstateFormModule = ({
               <CustomHr />
             </Grid>
           </Grid>
+          <Typography
+            component="h6"
+            variant="titleThirdRegular"
+            marginBottom={1}
+          >
+            Данные собственника
+          </Typography>
+          <OwnerFormFields isLoading={isLoading} />
+          <CustomHr />
           <Typography
             component="h6"
             variant="titleThirdRegular"

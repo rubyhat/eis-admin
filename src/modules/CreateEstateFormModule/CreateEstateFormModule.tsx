@@ -38,6 +38,7 @@ import {
 } from "../../shared/constants/FormFieldsDataInitital";
 import { LoadingSplashScreen } from "../../components/LoadingSplashScreen";
 import { useCreateEstateStore } from "../CreateEstateModule/store";
+import { OwnerFormFields } from "../../components/EstateFormFields/OwnerFormFields";
 
 export const CreateEstateFormModule = () => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -72,6 +73,7 @@ export const CreateEstateFormModule = () => {
       visibilityStatus,
       estateAgent,
       geoPosition,
+      ownerInfo,
     } = data as FormFieldsType;
 
     const {
@@ -133,6 +135,7 @@ export const CreateEstateFormModule = () => {
       visibilityStatus: visibilityStatus,
       estateAgent: estateAgent,
       geoPosition: geoPosition,
+      ownerInfo: ownerInfo,
     };
 
     const apartmentData = {
@@ -200,7 +203,7 @@ export const CreateEstateFormModule = () => {
 
       const formData = new FormData();
       Object.entries(filteredData).forEach(([key, value]) => {
-        if (key === "geoPosition") {
+        if (key === "geoPosition" || key === "ownerInfo") {
           formData.append(key, JSON.stringify(value));
         } else if (key === "images" && value instanceof FileList) {
           for (const file of value) {
@@ -283,6 +286,15 @@ export const CreateEstateFormModule = () => {
               <CustomHr />
             </Grid>
           </Grid>
+          <Typography
+            component="h6"
+            variant="titleThirdRegular"
+            marginBottom={1}
+          >
+            Данные собственника
+          </Typography>
+          <OwnerFormFields isLoading={isLoading} />
+          <CustomHr />
           <Typography
             component="h6"
             variant="titleThirdRegular"

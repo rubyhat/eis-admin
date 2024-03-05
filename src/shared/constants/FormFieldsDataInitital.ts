@@ -29,6 +29,11 @@ export const FormFieldsDataInitial: FormFieldsType = {
     mapLink: "",
     cityRegion: "",
   },
+  ownerInfo: {
+    ownerName: "",
+    ownerPhone: "",
+    description: "",
+  },
 
   // Apartment
   roomCount: null,

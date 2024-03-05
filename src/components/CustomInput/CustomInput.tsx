@@ -70,14 +70,14 @@ export const CustomInput = (props: CustomInputProps) => {
         onChange={onChange}
         multiple={multiple}
         sx={{
-          width: "100%",
+          width: 1,
           border: `1px solid`,
           borderColor: errors[id]
             ? theme.palette.customColors?.colorsRed
             : theme.palette.customColors?.labelsQuaternary,
           borderRadius: "5px",
-          fontSize: "16px",
-          padding: "8px",
+          fontSize: 16,
+          padding: 1,
           outlineColor: "customColors.colorsBlue",
           "&::placeholder": {
             fontSize: 16,

@@ -66,6 +66,13 @@ export interface EstateAgentInfo {
   avatar?: string;
 }
 
+// Информация о собтвеннике объекта, нужна только для сотрудников
+export interface OwnerInfo {
+  ownerName: string;
+  ownerPhone: string;
+  description?: string;
+}
+
 export type FormFieldsType = BasicObject | Apartment | House | Flat | Land;
 
 export interface EstateObject extends Apartment, House, Flat, Land {
@@ -97,7 +104,8 @@ export interface BasicObject {
   isCommercial: boolean;
   isPledge: boolean;
   isDocumentsGood: boolean;
-  geoPosition: GeoPositionInfo; // Данные об объекте недвижимости, где она
+  geoPosition: GeoPositionInfo;
+  ownerInfo: OwnerInfo;
 }
 
 export interface Apartment extends BasicObject {
