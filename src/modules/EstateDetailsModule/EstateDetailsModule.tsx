@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 import { useScreenSize } from "../../hooks/useScreenSize";
 import { useFormatDate } from "../../shared/hooks/useFormatDate";
 import { useUserStore } from "../UserModule/store/useUserStore";
-import { CustomButton } from "../../components/CustomButton";
+import { OwnerInfoBlock } from "./components/OwnerInfoBlock";
 
 export const EstateDetailsModule = () => {
   useTitle("Детали объекта недвижимости");
@@ -105,81 +105,11 @@ export const EstateDetailsModule = () => {
               currentStatus={estateDetails.visibilityStatus}
             />
           </Grid>
-          <Grid item xs={12}>
-            <Box
-              sx={{
-                border: "1px solid",
-                borderRadius: 1,
-                borderColor: "customColors.labelsQuaternary",
-                padding: 1,
-              }}
-            >
-              <Typography component="p" variant="textBodyEmphasized">
-                Имя собственника:
-              </Typography>
-              <Typography
-                component="p"
-                variant="textBodyRegular"
-                marginBottom={1}
-              >
-                {estateDetails.ownerInfo.ownerName}
-              </Typography>
-              <Typography component="p" variant="textBodyEmphasized">
-                Телефон собственника:
-              </Typography>
-              <Typography
-                component="a"
-                href={`tel:${estateDetails.ownerInfo.ownerPhone}`}
-                sx={{
-                  display: "inline-block",
-                  color: "customColors.colorsBlue",
-                  textDecoration: "underline",
-                  padding: 0.25,
-                  marginBottom: 1,
-                }}
-              >
-                {estateDetails.ownerInfo.ownerPhone}
-              </Typography>
-              <Typography component="p" variant="textBodyEmphasized">
-                Заметка:
-              </Typography>
-              <Typography
-                component="p"
-                variant="textBodyRegular"
-                marginBottom={1}
-              >
-                {estateDetails.ownerInfo.description}
-              </Typography>
-              <Box
-                sx={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: 2,
-                }}
-              >
-                <Box
-                  component="a"
-                  href={`tel:${estateDetails.ownerInfo.ownerPhone}`}
-                >
-                  <CustomButton size="medium" fullWidth>
-                    Позвонить
-                  </CustomButton>
-                </Box>
-                <Box
-                  component="a"
-                  href={`https://api.whatsapp.com/send?phone=${estateDetails.ownerInfo.ownerPhone.slice(
-                    1,
-                  )}&text=Здравствуйте, меня интересует недвижимость на Вашем сайте.`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <CustomButton fullWidth size="medium" isGreenButton>
-                    {isMobile ? "Написать" : "Написать в WhatsApp"}
-                  </CustomButton>
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
+          {estateDetails.ownerInfo && (
+            <Grid item xs={12} md={6}>
+              <OwnerInfoBlock estateDetails={estateDetails} />
+            </Grid>
+          )}
           <Grid item xs={12}>
             <TitleGroup estateDetails={estateDetails} />
           </Grid>

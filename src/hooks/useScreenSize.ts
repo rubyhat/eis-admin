@@ -7,5 +7,10 @@ export const useScreenSize = () => {
   const isLaptop = useMediaQuery(theme.breakpoints.between("md", "lg"));
   const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
 
-  return { isMobile, isTablet, isLaptop, isDesktop };
+  const isMobileDevice =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent,
+    );
+
+  return { isMobile, isTablet, isLaptop, isDesktop, isMobileDevice };
 };
