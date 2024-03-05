@@ -9,6 +9,7 @@ export const axiosBaseWrap = axios.create({
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
+    "X-Service-Id": "admin",
   },
 });
 
