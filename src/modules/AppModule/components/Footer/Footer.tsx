@@ -2,6 +2,7 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import { Logotype } from "../../../../components/Logotype";
 import { useLocation } from "react-router-dom";
 import { useScreenSize } from "../../../../hooks/useScreenSize";
+import { version } from "../../../../../package.json";
 
 export const Footer = () => {
   const location = useLocation();
@@ -28,7 +29,7 @@ export const Footer = () => {
                 variant="textCalloutRegular"
                 color="customColors.labelsSecondary"
               >
-                © 2019–2024 Все права защищены
+                Версия платформы: Beta v{version}
               </Typography>
             </Box>
           </Grid>
