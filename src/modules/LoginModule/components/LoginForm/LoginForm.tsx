@@ -13,7 +13,7 @@ export const LoginForm = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [errorCode, setErrorCode] = React.useState<number | null>(null);
   const { setIsAuth } = useLoginStore((state) => state);
-  const { setUser } = useUserStore((state) => state);
+  const { setUser, setIsAdmin } = useUserStore((state) => state);
   const navigate = useNavigate();
 
   const {
@@ -41,6 +41,7 @@ export const LoginForm = () => {
 
     const userData = JSON.parse(jsonPayload);
     setUser({ ...userData, _id: userData.id });
+    setIsAdmin(userData.role === "Admin");
     localStorage.setItem(
       "user",
       JSON.stringify({ ...userData, _id: userData.id }),

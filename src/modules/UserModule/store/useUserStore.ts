@@ -5,6 +5,7 @@ export interface UserStore {
   user: EstateAgentInfo | null;
   isAdmin: boolean;
   setUser: (v: EstateAgentInfo) => void;
+  setIsAdmin: (v: boolean) => void;
 }
 
 export const useUserStore = create<UserStore>((set) => {
@@ -18,5 +19,6 @@ export const useUserStore = create<UserStore>((set) => {
     user: initUser,
     isAdmin: isAdmin,
     setUser: (v) => set({ user: v }),
+    setIsAdmin: (v) => set({ isAdmin: v }),
   };
 });
