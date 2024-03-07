@@ -1,7 +1,7 @@
 import React from "react";
 import { IoHomeOutline } from "react-icons/io5";
 import { AiOutlineUser } from "react-icons/ai";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { BsBook } from "react-icons/bs";
 // import { IoDocumentTextOutline } from "react-icons/io5";
@@ -12,6 +12,7 @@ const list = [
     icon: <IoHomeOutline size={128} color="#DCDCDD" />,
     link: "/catalog",
     disabled: false,
+    title: "Объекты",
   },
   // {
   //   icon: <IoDocumentTextOutline size={128} color="#DCDCDD" />,
@@ -22,6 +23,7 @@ const list = [
     icon: <AiOutlineUser size={128} color="#DCDCDD" />,
     link: "/users",
     disabled: false,
+    title: "Сотрудники",
   },
   // {
   //   icon: <GoGraph size={128} color="#DCDCDD" />,
@@ -32,6 +34,7 @@ const list = [
     icon: <BsBook size={128} color="#DCDCDD" />,
     link: "/help",
     disabled: true,
+    title: "Гайды",
   },
 ];
 
@@ -47,6 +50,7 @@ export const MenuList = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              flexDirection: "column",
               width: 1,
               height: 270,
               border: "4px solid",
@@ -63,6 +67,14 @@ export const MenuList = () => {
             }}
           >
             {item.icon}
+            <Typography
+              component="h6"
+              variant="titleThirdRegular"
+              color="customColors.colorsBlue"
+              marginTop={1}
+            >
+              {item.title}
+            </Typography>
           </Box>
         </Grid>
       ))}
