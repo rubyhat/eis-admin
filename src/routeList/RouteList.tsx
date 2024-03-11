@@ -15,6 +15,7 @@ const EditEstate = React.lazy(() => import("../pages/EditEstate"));
 const HelpDetails = React.lazy(() => import("../pages/HelpDetails"));
 const CreateEstate = React.lazy(() => import("../pages/CreateEstate"));
 const EstateDetails = React.lazy(() => import("../pages/EstateDetails"));
+const FeedbackOrders = React.lazy(() => import("../pages/Orders/Feedback"));
 
 const NoAuth = React.lazy(() => import("../pages/System/NoAuth"));
 const AccessDenied = React.lazy(() => import("../pages/System/AccessDenied"));
@@ -113,6 +114,15 @@ export const RouteList = () => {
         element={
           <ProtectedRoute isAuth={isAuth}>
             <CreateEstate />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/orders/feedback"
+        element={
+          <ProtectedRoute isAuth={isAuth}>
+            <FeedbackOrders />
           </ProtectedRoute>
         }
       />
