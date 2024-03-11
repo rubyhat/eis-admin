@@ -85,8 +85,8 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
         sx={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
-          gap: 2,
-          marginBottom: 2,
+          gap: 1,
+          marginBottom: 1,
         }}
       >
         <Box component="a" href={`tel:${order.phone}`}>
@@ -114,7 +114,7 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
         sx={{
           display: "grid",
           gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
-          gap: 2,
+          gap: 1,
         }}
       >
         <CustomButton fullWidth onClick={handleClickEditOrderButton}>

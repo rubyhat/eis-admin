@@ -13,6 +13,8 @@ export interface FeedbackOrder {
 
 interface FeedbackOrdersStore {
   orders: FeedbackOrder[];
+  isMobileFilterModalOpen: boolean;
+  setIsMobileFilterModalOpen: (v: boolean) => void;
   setOrders: (v: FeedbackOrder[]) => void;
 }
 
@@ -45,5 +47,7 @@ const tempOrders: FeedbackOrder[] = [
 
 export const useFeedbackOrdersStore = create<FeedbackOrdersStore>((set) => ({
   orders: tempOrders, // todo: remove temp
+  isMobileFilterModalOpen: false,
+  setIsMobileFilterModalOpen: (v) => set({ isMobileFilterModalOpen: v }),
   setOrders: (v) => set({ orders: v }),
 }));
