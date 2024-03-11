@@ -8,6 +8,7 @@ const Help = React.lazy(() => import("../pages/Help"));
 const User = React.lazy(() => import("../pages/User"));
 const Login = React.lazy(() => import("../pages/Login"));
 const Users = React.lazy(() => import("../pages/Users"));
+const Orders = React.lazy(() => import("../pages/Orders"));
 const Catalog = React.lazy(() => import("../pages/Catalog"));
 const UserEdit = React.lazy(() => import("../pages/UserEdit"));
 const UserCreate = React.lazy(() => import("../pages/UserCreate"));
@@ -118,6 +119,14 @@ export const RouteList = () => {
         }
       />
 
+      <Route
+        path="/orders"
+        element={
+          <ProtectedRoute isAuth={isAuth}>
+            <Orders />
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/orders/feedback"
         element={

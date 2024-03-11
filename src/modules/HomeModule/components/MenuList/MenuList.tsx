@@ -4,7 +4,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { Box, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { BsBook } from "react-icons/bs";
-// import { IoDocumentTextOutline } from "react-icons/io5";
+import { IoDocumentTextOutline } from "react-icons/io5";
 // import { GoGraph } from "react-icons/go";
 
 const list = [
@@ -14,11 +14,12 @@ const list = [
     disabled: false,
     title: "Объекты",
   },
-  // {
-  //   icon: <IoDocumentTextOutline size={128} color="#DCDCDD" />,
-  //   link: "#",
-  //   disabled: true,
-  // },
+  {
+    icon: <IoDocumentTextOutline size={128} color="#DCDCDD" />,
+    link: "/orders",
+    disabled: true,
+    title: "Заявки",
+  },
   {
     icon: <AiOutlineUser size={128} color="#DCDCDD" />,
     link: "/users",
@@ -45,7 +46,7 @@ export const MenuList = () => {
         <Grid item xs={12} sm={6} md={3} key={index}>
           <Box
             component={Link}
-            to={item.link}
+            to={item.disabled ? "" : item.link}
             sx={{
               display: "flex",
               alignItems: "center",

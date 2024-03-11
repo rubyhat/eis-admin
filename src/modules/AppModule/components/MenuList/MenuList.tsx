@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 
 import { IoHomeOutline } from "react-icons/io5";
-// import { IoDocumentTextOutline } from "react-icons/io5";
+import { IoDocumentTextOutline } from "react-icons/io5";
 import { AiOutlineUser } from "react-icons/ai";
 import { BsBook } from "react-icons/bs";
 import { IconButton } from "@mui/material";
@@ -14,11 +14,11 @@ interface LinkObject {
 
 const links: LinkObject[] = [
   { title: "Объекты", to: "/catalog", icon: <IoHomeOutline color="#007aff" /> },
-  // {
-  //   title: "Заявки",
-  //   to: "/",
-  //   icon: <IoDocumentTextOutline color="#007aff" />,
-  // },
+  {
+    title: "Заявки",
+    to: "/orders",
+    icon: <IoDocumentTextOutline color="#007aff" />,
+  },
   {
     title: "Сотрудники",
     to: "/users",
