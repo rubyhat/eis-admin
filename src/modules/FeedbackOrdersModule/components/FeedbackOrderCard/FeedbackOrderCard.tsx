@@ -14,7 +14,7 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
 
   const handleClickOpenEstateButton = () => navigate(`/catalog/${order._id}`);
   const handleClickEditOrderButton = () =>
-    navigate(`/orders/feedback/edit`, { state: order });
+    navigate(`/orders/feedback/edit`, { state: { order } });
 
   return (
     <Box
