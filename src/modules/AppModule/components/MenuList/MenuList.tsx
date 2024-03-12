@@ -64,7 +64,7 @@ export const MenuList = ({ isVertical, showIcon, onClick }: MenuListProps) => {
               display: "inline-block",
               color: "customColors.labelsPrimary",
               "&:hover": {
-                color: "customColors.colorsBlue",
+                color: "customColors.colorsOrange",
                 transition: "all 333ms ease",
               },
             }}

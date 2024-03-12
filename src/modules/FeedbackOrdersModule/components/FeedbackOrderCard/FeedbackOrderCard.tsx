@@ -48,7 +48,7 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
                   href={`tel:${order.phone}`}
                   sx={{
                     textDecoration: "underline",
-                    color: "customColors.colorsBlue",
+                    color: "customColors.colorsOrange",
                   }}
                 >
                   {order.phone}

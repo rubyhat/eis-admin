@@ -89,7 +89,7 @@ export const UserDeleteDrawer = ({
               component={Link}
               to="/help/estate"
               sx={{
-                color: "customColors.colorsBlue",
+                color: "customColors.colorsOrange",
                 textDecoration: "underline",
               }}
             >

@@ -36,7 +36,7 @@ export const OrderCard = ({ card }: OrderCardProps) => {
       <Typography
         component="h6"
         variant="titleThirdRegular"
-        color="customColors.colorsBlue"
+        color="customColors.colorsOrange"
         marginTop={1}
       >
         {card.title}

@@ -13,7 +13,7 @@ export const ImageThumbsItem = ({ thumb, _id }: ImageThumbsItemProps) => {
 
   const activeThumbStyles = _id === activeImageIndex && {
     border: "2px solid",
-    borderColor: "customColors.colorsBlue",
+    borderColor: "customColors.colorsOrange",
   };
 
   const handleImageLoad = () => setImgLoading(false);

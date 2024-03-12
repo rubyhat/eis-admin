@@ -40,7 +40,7 @@ export const NoAuth = () => {
                 Для просмотра данной страницы необходимо{" "}
                 <Typography
                   variant="textBodyRegular"
-                  color="customColors.colorsBlue"
+                  color="customColors.colorsOrange"
                   sx={{ textDecoration: "underline" }}
                   component={Link}
                   to="/login"

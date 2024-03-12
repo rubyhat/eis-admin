@@ -26,7 +26,7 @@ export const UserEditModule = () => {
                 to="/users"
                 sx={{
                   display: "flex",
-                  color: "customColors.colorsBlue",
+                  color: "customColors.colorsOrange",
                   fontWeight: 500,
                   marginTop: 1,
                   textDecoration: "underline",

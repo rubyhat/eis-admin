@@ -74,7 +74,7 @@ export const DetailsListItem = (props: DetailsListItemProps) => {
             href={link}
             target="_blank"
             rel="noreferrer"
-            color="customColors.colorsBlue"
+            color="customColors.colorsOrange"
             sx={{
               textDecoration: "underline",
               marginLeft: 2,
@@ -92,7 +92,7 @@ export const DetailsListItem = (props: DetailsListItemProps) => {
             href={videoLink}
             target="_blank"
             rel="noreferrer"
-            color="customColors.colorsBlue"
+            color="customColors.colorsOrange"
             sx={{
               textDecoration: "underline",
               "&:hover": {

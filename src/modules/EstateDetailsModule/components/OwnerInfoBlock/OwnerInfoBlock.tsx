@@ -70,7 +70,7 @@ export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
         href={`tel:${estateDetails.ownerInfo.ownerPhone}`}
         sx={{
           display: "inline-block",
-          color: "customColors.colorsBlue",
+          color: "customColors.colorsOrange",
           textDecoration: "underline",
           padding: 0.25,
           marginBottom: 1,

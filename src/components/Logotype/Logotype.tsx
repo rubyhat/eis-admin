@@ -13,7 +13,7 @@ export const Logotype = () => {
       alignItems="center"
     >
       Roze
-      <Typography color="customColors.colorsBlue" marginLeft={0.5}>
+      <Typography color="customColors.colorsOrange" marginLeft={0.5}>
         Agency
       </Typography>
       <Typography marginLeft={0.5} color="customColors.colorsGreen">

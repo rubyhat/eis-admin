@@ -92,7 +92,7 @@ export const OwnerFormFields = ({ isLoading }: OwnerFormFieldsProps) => {
                 : "customColors.labelsQuaternary",
               borderRadius: "5px",
               fontSize: "16px",
-              outlineColor: "customColors.colorsBlue",
+              outlineColor: "customColors.colorsOrange",
               "&::placeholder": {
                 fontSize: 16,
                 color: "customColors.labelsTertiary",

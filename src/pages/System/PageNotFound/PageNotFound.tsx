@@ -61,7 +61,7 @@ export const PageNotFound = () => {
                   component={Link}
                   to="/"
                   variant="textBodyRegular"
-                  color="customColors.colorsBlue"
+                  color="customColors.colorsOrange"
                   sx={{ textDecoration: "underline" }}
                 >
                   главную страницу
@@ -73,7 +73,7 @@ export const PageNotFound = () => {
                   component="a"
                   href="mailto:support@roze.kz"
                   variant="textBodyRegular"
-                  color="customColors.colorsBlue"
+                  color="customColors.colorsOrange"
                   sx={{ textDecoration: "underline" }}
                 >
                   службу поддержки

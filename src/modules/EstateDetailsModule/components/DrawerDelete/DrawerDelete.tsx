@@ -92,7 +92,7 @@ export const DrawerDelete = ({
               component={Link}
               to="/help/estate"
               sx={{
-                color: "customColors.colorsBlue",
+                color: "customColors.colorsOrange",
                 textDecoration: "underline",
               }}
             >

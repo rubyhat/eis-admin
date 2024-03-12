@@ -180,7 +180,9 @@ appTheme = createTheme(
     },
     palette: {
       primary: {
-        main: "hsla(211, 100%, 50%, 1)",
+        // main: "hsla(211, 100%, 50%, 1)",
+        main: "hsla(29, 100%, 50%, 1)",
+        contrastText: "#fff",
       },
 
       customColors: {
@@ -206,11 +208,11 @@ appTheme = createTheme(
         labelsQuaternary: "hsla(240, 6%, 25%, 0.18)",
 
         gradientPrimary:
-          "linear-gradient(180deg, hsla(0, 0%, 100%, 0.17) 0%, hsla(0, 0%, 100%, 0) 100%) ,hsla(211, 100%, 50%, 1)",
+          "linear-gradient(180deg, hsla(0, 0%, 100%, 0.17) 0%, hsla(0, 0%, 100%, 0) 100%) ,hsla(29, 100%, 50%, 1)",
         gradientGreen:
           "linear-gradient(180deg, hsla(0, 0%, 100%, 0.17) 0%, hsla(0, 0%, 100%, 0) 100%), hsla(135, 59%, 49%, 1)",
       },
     },
   },
-  ruRU
+  ruRU,
 );

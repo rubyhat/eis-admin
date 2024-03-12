@@ -63,7 +63,7 @@ export const AccessDenied = () => {
                   component="a"
                   href="mailto:support@roze.kz"
                   variant="textBodyRegular"
-                  color="customColors.colorsBlue"
+                  color="customColors.colorsOrange"
                   sx={{ textDecoration: "underline" }}
                 >
                   службу поддержки

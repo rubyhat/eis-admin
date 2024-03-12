@@ -205,7 +205,7 @@ export const EditOrderFeedbackForm = ({
               borderRadius: "5px",
               fontSize: 16,
               padding: 1,
-              outlineColor: "customColors.colorsBlue",
+              outlineColor: "customColors.colorsOrange",
               "&::placeholder": {
                 fontSize: 14,
                 color: "customColors.labelsTertiary",

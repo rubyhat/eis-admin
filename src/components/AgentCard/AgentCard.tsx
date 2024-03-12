@@ -42,7 +42,7 @@ export const AgentCard = ({ estateAgent }: AgentCardProps) => {
         <Typography
           component="h6"
           variant="textBodyEmphasized"
-          color="customColors.colorsBlue"
+          color="customColors.colorsOrange"
           width={1}
           display="flex"
           justifyContent="space-between"
