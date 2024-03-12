@@ -17,7 +17,7 @@ const list = [
   {
     icon: <IoDocumentTextOutline size={128} color="#DCDCDD" />,
     link: "/orders",
-    disabled: true,
+    disabled: false,
     title: "Заявки",
   },
   {
