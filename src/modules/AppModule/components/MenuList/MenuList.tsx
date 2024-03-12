@@ -13,19 +13,27 @@ interface LinkObject {
 }
 
 const links: LinkObject[] = [
-  { title: "Объекты", to: "/catalog", icon: <IoHomeOutline color="#007aff" /> },
+  {
+    title: "Объекты",
+    to: "/catalog",
+    icon: <IoHomeOutline color="hsla(29, 100%, 50%, 1)" />,
+  },
   {
     title: "Заявки",
     to: "/orders",
-    icon: <IoDocumentTextOutline color="#007aff" />,
+    icon: <IoDocumentTextOutline color="hsla(29, 100%, 50%, 1)" />,
   },
   {
     title: "Сотрудники",
     to: "/users",
-    icon: <AiOutlineUser color="#007aff" />,
+    icon: <AiOutlineUser color="hsla(29, 100%, 50%, 1)" />,
   },
   // { title: "Обучение", to: "/" },
-  { title: "Помощь", to: "/help", icon: <BsBook color="#007aff" /> },
+  {
+    title: "Помощь",
+    to: "/help",
+    icon: <BsBook color="hsla(29, 100%, 50%, 1)" />,
+  },
 ];
 
 interface MenuListProps {
