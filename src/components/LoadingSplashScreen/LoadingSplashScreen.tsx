@@ -20,7 +20,7 @@ export const LoadingSplashScreen = ({
         left: 0,
         top: 0,
         bottom: 0,
-        backgroundColor: "rgba(0, 123, 255, .15)",
+        backgroundColor: "hsla(29, 100%, 50%, .15)",
         display: isLoading ? "flex" : "none",
         alignItems: "center",
         justifyContent: "center",
@@ -38,7 +38,7 @@ export const LoadingSplashScreen = ({
         <Typography
           sx={{
             fontWeight: 700,
-            background: "rgba(0, 123, 255, .75)",
+            background: "hsla(29, 100%, 50%, .75)",
             color: "white",
             padding: 1,
             borderRadius: 2,

@@ -16,7 +16,7 @@ export interface OrdersCard {
 
 const list: OrdersCard[] = [
   {
-    icon: <IoHomeOutline size={128} color="#DCDCDD" />,
+    icon: <IoHomeOutline size={128} color="#FF9500" />,
     link: "/orders/feedback",
     disabled: false,
     title: "Заявки на недвижимость",
