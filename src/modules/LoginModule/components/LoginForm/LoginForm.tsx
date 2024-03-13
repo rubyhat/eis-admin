@@ -1,16 +1,20 @@
-import { Alert, Box, Typography } from "@mui/material";
 import React from "react";
-import { CustomInput } from "../../../../components/CustomInput";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { CustomButton } from "../../../../components/CustomButton";
-import { useLoginStore } from "../../store";
-import { LoginProps, apiLoginModule } from "../../api";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import { Alert, Box, Typography } from "@mui/material";
+import { IoEyeOutline } from "react-icons/io5";
+import { IoEyeOffOutline } from "react-icons/io5";
+
+import { useLoginStore } from "../../store";
+import { LoginProps, apiLoginModule } from "../../api";
+import { CustomInput } from "../../../../components/CustomInput";
+import { CustomButton } from "../../../../components/CustomButton";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useUserStore } from "../../../UserModule/store/useUserStore";
 
 export const LoginForm = () => {
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isShowPassword, setIsShowPassword] = React.useState(false);
   const [errorCode, setErrorCode] = React.useState<number | null>(null);
   const { setIsAuth } = useLoginStore((state) => state);
   const { setUser, setIsAdmin } = useUserStore((state) => state);
@@ -118,17 +122,30 @@ export const LoginForm = () => {
         sx={{ marginBottom: 2, marginTop: 2 }}
         required
       />
-      <CustomInput
-        id="password"
-        register={register}
-        errors={errors}
-        disabled={isLoading}
-        formatPrice={false}
-        placeholder="Пароль"
-        sx={{ marginBottom: 2 }}
-        type="password"
-        required
-      />
+      <Box sx={{ display: "flex", width: 1, marginBottom: 2 }}>
+        <CustomInput
+          id="password"
+          register={register}
+          errors={errors}
+          disabled={isLoading}
+          formatPrice={false}
+          placeholder="Пароль"
+          sx={{ width: 1 }}
+          type={isShowPassword ? "text" : "password"}
+          required
+        />
+        <CustomButton
+          size="small"
+          sx={{ marginLeft: 1 }}
+          onClick={() => setIsShowPassword((prev) => !prev)}
+        >
+          {isShowPassword ? (
+            <IoEyeOffOutline size={20} />
+          ) : (
+            <IoEyeOutline size={20} />
+          )}
+        </CustomButton>
+      </Box>
       <CustomButton fullWidth type="submit" disabled={isLoading}>
         Авторизоваться
       </CustomButton>
