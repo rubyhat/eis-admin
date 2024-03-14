@@ -271,11 +271,11 @@ h6 {
       list-style: inherit;
     }
     li::marker {
-      color: var(--colors-blue);
+      color: var(--colors-orange);
     }
   }
   a {
-    color: var(--colors-blue);
+    color: var(--colors-orange);
     text-decoration: underline;
     &:hover {
       text-decoration: none;

@@ -43,7 +43,9 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
                 <MenuItem value="">Не указывать</MenuItem>
                 <MenuItem value="perfect">Евроремонт</MenuItem>
                 <MenuItem value="good">Косметический ремонт</MenuItem>
+                <MenuItem value="medium">Средней ремонт</MenuItem>
                 <MenuItem value="bad">Без ремонта</MenuItem>
+                <MenuItem value="clean">Предчистовая отделка</MenuItem>
                 <MenuItem value="free">Свободная планировка</MenuItem>
                 <MenuItem value="build">Черновая отделка</MenuItem>
               </Select>
@@ -87,7 +89,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
                 <MenuItem value="cinderBlock">Шлакоблок</MenuItem>
                 <MenuItem value="heatBlock">Теплоблок</MenuItem>
                 <MenuItem value="foamBlock">Пеноблок</MenuItem>
-                <MenuItem value="panel">Каркасно-щитовой</MenuItem>
+                <MenuItem value="panel">Панельный</MenuItem>
                 <MenuItem value="monolith">Монолит</MenuItem>
                 <MenuItem value="saman">Саман</MenuItem>
               </Select>
@@ -393,13 +395,13 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
                     variant="textCalloutRegular"
                     color="customColors.labelsSecondary"
                   >
-                    Например: Есть
+                    Например: Есть, входит в стоимость
                   </Typography>
                 </MenuItem>
                 <MenuItem value="">Не указывать</MenuItem>
-                <MenuItem value="other">Есть</MenuItem>
-                <MenuItem value="oneCar">На одну машину</MenuItem>
-                <MenuItem value="towCar">На две машины</MenuItem>
+                <MenuItem value="full">Есть, входит в стоимость</MenuItem>
+                <MenuItem value="part">Есть, обсуждается отдельно</MenuItem>
+                <MenuItem value="none">Нет</MenuItem>
               </Select>
             )}
           />

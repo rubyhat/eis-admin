@@ -90,4 +90,9 @@ export const estateObjectDictionary = {
     toConnect: "Можно подключить",
     none: "Нет",
   },
+  garage: {
+    full: "Есть, входит в стоимость",
+    part: "Есть, обсуждается отдельно",
+    none: "Нет",
+  },
 };

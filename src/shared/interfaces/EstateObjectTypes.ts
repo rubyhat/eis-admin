@@ -18,14 +18,14 @@ export type SewerType = "central" | "septic" | "canConnect" | "none"; // Кан�
 export type ToiletType = "in" | "out" | "none"; // Туалет: в доме, на улице, нет
 export type WaterType = "central" | "borehole" | "canConnect" | "none"; // Вода: центральная, скважина, можно подключить, нет
 export type EthernetType = "connected" | "toConnect" | "none"; // Интернет: Подключен, Можно подключить, Нет
-export type GarageType = "oneCar" | "towCar" | "other"; // Гараж: На одну машину, На две машины, Есть
+export type GarageType = "full" | "part" | "none"; // Гараж: входит в стоимость, есть, обсуждается отдельно, нет
 export type HouseWallMaterialType =
   | "brick" // Кирпич
   | "wood" // Дерево
   | "gasSilicateBlock" // Газосиликатный блок
   | "cinderBlock" // Шлакоблок
   | "heatBlock" // Теплоблок
-  | "panel" // Каркасно-щитовой
+  | "panel" // Панельный
   | "monolith" // Монолит
   | "saman" // Саман
   | "gasConcreteBlock" // Газобетонный блок
