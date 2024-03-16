@@ -62,6 +62,13 @@ export const FilterForm = () => {
     },
   });
 
+  // новое требование от заказчика, сбрасывать состояние формы при каждом рендере
+  React.useEffect(() => {
+    reset(initialFilterState); // Сбрасываем форму к исходным значениям
+    setFilterState(initialFilterState); // Сбрасываем стейт фильтра к исходному состоянию
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location, reset, setFilterState]);
+
   React.useEffect(() => {
     const updateFilterState = async () => {
       // Получаем параметры из URL
@@ -218,14 +225,15 @@ export const FilterForm = () => {
                 sx={selectStyles}
                 inputProps={{ sx: selectInputProps }}
               >
-                <MenuItem disabled value="">
+                {/* <MenuItem disabled value="empty">
                   <Typography
                     variant="textCalloutRegular"
                     color="customColors.labelsSecondary"
                   >
                     Например: Караганда
                   </Typography>
-                </MenuItem>
+                </MenuItem> */}
+                <MenuItem value="">Не указывать</MenuItem>
                 <MenuItem value="Караганда">Караганда</MenuItem>
                 <MenuItem value="Пришахтинск">Пришахтинск</MenuItem>
                 <MenuItem value="Абай">Абай</MenuItem>
@@ -259,14 +267,15 @@ export const FilterForm = () => {
                 sx={selectStyles}
                 inputProps={{ sx: selectInputProps }}
               >
-                <MenuItem disabled value="">
+                {/* <MenuItem disabled value="">
                   <Typography
                     variant="textCalloutRegular"
                     color="customColors.labelsSecondary"
                   >
                     Например: Квартира
                   </Typography>
-                </MenuItem>
+                </MenuItem> */}
+                <MenuItem value="">Не указывать</MenuItem>
                 <MenuItem value="apartment">Квартира</MenuItem>
                 <MenuItem value="house">Дом</MenuItem>
                 <MenuItem value="townhouse">Таунхаус</MenuItem>
@@ -298,14 +307,15 @@ export const FilterForm = () => {
                 sx={selectStyles}
                 inputProps={{ sx: selectInputProps }}
               >
-                <MenuItem disabled value="">
+                {/* <MenuItem disabled value="">
                   <Typography
                     variant="textCalloutRegular"
                     color="customColors.labelsSecondary"
                   >
                     Например: Кирпич
                   </Typography>
-                </MenuItem>
+                </MenuItem> */}
+                <MenuItem value="">Не указывать</MenuItem>
                 <MenuItem value="brick">Кирпич</MenuItem>
                 <MenuItem value="wood">Дерево</MenuItem>
                 <MenuItem value="gasSilicateBlock">
@@ -341,14 +351,15 @@ export const FilterForm = () => {
                 sx={selectStyles}
                 inputProps={{ sx: selectInputProps }}
               >
-                <MenuItem disabled value="">
+                {/* <MenuItem disabled value="">
                   <Typography
                     variant="textCalloutRegular"
                     color="customColors.labelsSecondary"
                   >
                     Например: Евроремонт
                   </Typography>
-                </MenuItem>
+                </MenuItem> */}
+                <MenuItem value="">Не указывать</MenuItem>
                 <MenuItem value="perfect">Евроремонт</MenuItem>
                 <MenuItem value="good">Косметический ремонт</MenuItem>
                 <MenuItem value="bad">Без ремонта</MenuItem>
@@ -434,14 +445,15 @@ export const FilterForm = () => {
                 sx={selectStyles}
                 inputProps={{ sx: selectInputProps }}
               >
-                <MenuItem disabled value="">
+                {/* <MenuItem disabled value="">
                   <Typography
                     variant="textCalloutRegular"
                     color="customColors.labelsSecondary"
                   >
                     Например: 1 ком.
                   </Typography>
-                </MenuItem>
+                </MenuItem> */}
+                <MenuItem value="">Не указывать</MenuItem>
                 <MenuItem value="1">1 ком.</MenuItem>
                 <MenuItem value="2">2-х ком.</MenuItem>
                 <MenuItem value="3">3-х ком.</MenuItem>

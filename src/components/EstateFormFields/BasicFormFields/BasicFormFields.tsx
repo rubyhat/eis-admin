@@ -314,14 +314,15 @@ export const BasicFormFields = ({
                 sx={selectStyles}
                 inputProps={{ sx: selectInputProps }}
               >
-                <MenuItem disabled value="">
+                {/* <MenuItem disabled value="">
                   <Typography
                     variant="textCalloutRegular"
                     color="customColors.labelsSecondary"
                   >
                     Например: Город
                   </Typography>
-                </MenuItem>
+                </MenuItem> */}
+                <MenuItem value="">Не указывать</MenuItem>
                 <MenuItem value="Город">Город</MenuItem>
                 <MenuItem value="Юго-Восток">Юго-Восток</MenuItem>
                 <MenuItem value="Михайловка">Михайловка</MenuItem>
