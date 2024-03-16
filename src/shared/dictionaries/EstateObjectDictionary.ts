@@ -101,4 +101,9 @@ export const estateObjectDictionary = {
     bank: "Да, у банка",
     police: "Да, арест",
   },
+  documents: {
+    good: "В порядке",
+    needUpdate: "Нужна корректировка",
+    bad: "Есть проблемы",
+  },
 };

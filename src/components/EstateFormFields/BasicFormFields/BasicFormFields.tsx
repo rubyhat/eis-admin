@@ -405,6 +405,33 @@ export const BasicFormFields = ({
             placeholder="Например: 42"
           />
         </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Документы
+          </Typography>
+          <Controller
+            name="documents"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="good">В порядке</MenuItem>
+                <MenuItem value="needUpdate">Нужна корректировка</MenuItem>
+                <MenuItem value="bad">Есть проблемы</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
       </Grid>
       <Grid item xs={12} md={3}>
         <Box marginBottom={1.5}>
@@ -557,24 +584,6 @@ export const BasicFormFields = ({
                   />
                 }
                 label="Коммерческая недвижимость"
-              />
-            )}
-          />
-          <Controller
-            name="isDocumentsGood"
-            control={control}
-            render={({ field }) => (
-              <FormControlLabel
-                control={
-                  <Switch
-                    {...field}
-                    checked={String(field.value) === "true"}
-                    onChange={(e) =>
-                      field.onChange(e.target.checked.toString())
-                    }
-                  />
-                }
-                label="Документы в порядке"
               />
             )}
           />
