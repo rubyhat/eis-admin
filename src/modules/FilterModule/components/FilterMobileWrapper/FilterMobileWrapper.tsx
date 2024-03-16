@@ -33,13 +33,12 @@ export const FilterMobileWrapper = () => {
       <CustomButton
         onClick={handleFilterButtonClick}
         fullWidth
-        size="small"
+        size="medium"
         sx={{
           maxWidth: {
             xs: 1,
             sm: 120,
           },
-          height: 34,
         }}
       >
         Фильтры

@@ -206,6 +206,7 @@ export const EditEstateFormModule = ({
       cottage: { ...apartmentData, ...houseData },
       house: { ...apartmentData, ...houseData },
       land: { ...landData },
+      townhouse: {},
       business: {},
       factory: {},
       other: {},

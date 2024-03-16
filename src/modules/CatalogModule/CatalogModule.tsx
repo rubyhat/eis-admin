@@ -3,7 +3,6 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { apiCatalogModule } from "./api/apiCatalogModule";
 import { CatalogObjectives } from "./components/CatalogObjectives";
-import { CatalogSortGroup } from "./components/CatalogSortGroup";
 import { FilterMobileWrapper } from "../FilterModule/components/FilterMobileWrapper";
 import { FilterModule } from "../FilterModule";
 import useTitle from "../../hooks/useTitle";
@@ -59,11 +58,12 @@ export const CatalogModule = () => {
               <Typography
                 component="h2"
                 variant="titleFirstRegular"
-                marginBottom={2}
+                marginBottom={0}
               >
                 Список всех объектов
               </Typography>
-              <CatalogSortGroup />
+              {/* todo: refactor sort buttons */}
+              {/* <CatalogSortGroup /> */}
             </Box>
             <FilterMobileWrapper />
           </Box>

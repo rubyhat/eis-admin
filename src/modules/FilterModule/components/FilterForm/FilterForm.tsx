@@ -153,6 +153,34 @@ export const FilterForm = () => {
             variant="textFootnoteRegular"
             marginBottom={0.5}
           >
+            Статус
+          </Typography>
+          <Controller
+            name="visibilityStatus"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="">Все</MenuItem>
+                <MenuItem value="active">Активные</MenuItem>
+                <MenuItem value="checking">На проверке</MenuItem>
+                <MenuItem value="sold">Проданные</MenuItem>
+                <MenuItem value="canceled">Отмененные</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textFootnoteRegular"
+            marginBottom={0.5}
+          >
             Тип
           </Typography>
           <Controller

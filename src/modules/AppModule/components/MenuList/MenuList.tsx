@@ -30,7 +30,7 @@ const links: LinkObject[] = [
   },
   // { title: "Обучение", to: "/" },
   {
-    title: "Помощь",
+    title: "Центр знаний",
     to: "/help",
     icon: <BsBook color="hsla(29, 100%, 50%, 1)" />,
   },
@@ -69,6 +69,7 @@ export const MenuList = ({ isVertical, showIcon, onClick }: MenuListProps) => {
             className="text-callout-regular"
             sx={{
               width: 1,
+              minWidth: "max-content",
               display: "inline-block",
               color: "customColors.labelsPrimary",
               "&:hover": {

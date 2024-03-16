@@ -11,11 +11,12 @@ export const HelpCard = ({ link }: HelpCardProps) => {
   return (
     <Box
       component={Link}
-      to={link.to}
+      to={link.disabled ? "" : link.to}
       sx={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        flexDirection: "column",
         width: 1,
         height: 270,
         border: "4px solid",
@@ -31,10 +32,12 @@ export const HelpCard = ({ link }: HelpCardProps) => {
             },
       }}
     >
+      {link.icon}
       <Typography
         component="h6"
-        color="customColors.labelsSecondary"
-        variant="titleSecondRegular"
+        variant="titleThirdRegular"
+        color="customColors.labelsPrimary"
+        marginTop={1}
       >
         {link.title}
       </Typography>

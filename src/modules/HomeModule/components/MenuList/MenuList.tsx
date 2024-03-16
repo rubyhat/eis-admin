@@ -9,19 +9,19 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 
 const list = [
   {
-    icon: <IoHomeOutline size={128} color="#DCDCDD" />,
+    icon: <IoHomeOutline size={128} color="#FF9500" />,
     link: "/catalog",
     disabled: false,
     title: "Объекты",
   },
   {
-    icon: <IoDocumentTextOutline size={128} color="#DCDCDD" />,
+    icon: <IoDocumentTextOutline size={128} color="#FF9500" />,
     link: "/orders",
     disabled: false,
     title: "Заявки",
   },
   {
-    icon: <AiOutlineUser size={128} color="#DCDCDD" />,
+    icon: <AiOutlineUser size={128} color="#FF9500" />,
     link: "/users",
     disabled: false,
     title: "Сотрудники",
@@ -32,10 +32,10 @@ const list = [
   //   disabled: true,
   // },
   {
-    icon: <BsBook size={128} color="#DCDCDD" />,
+    icon: <BsBook size={128} color="#FF9500" />,
     link: "/help",
-    disabled: true,
-    title: "Гайды",
+    disabled: false,
+    title: "Центр знаний",
   },
 ];
 
@@ -71,7 +71,7 @@ export const MenuList = () => {
             <Typography
               component="h6"
               variant="titleThirdRegular"
-              color="customColors.colorsOrange"
+              color="customColors.labelsPrimary"
               marginTop={1}
             >
               {item.title}
