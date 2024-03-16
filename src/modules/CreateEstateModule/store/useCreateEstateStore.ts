@@ -13,21 +13,26 @@ const listLinkStepsData: ListLinkSteps = {
     { id: "apartment", title: "Квартира", subtitle: "Квартиры и апартаменты" },
     { id: "house", title: "Дом", subtitle: "Частные дома" },
     {
+      id: "townhouse",
+      title: "Таунхаус",
+      subtitle: "Продажа недвижимости",
+    },
+    {
       id: "land",
       title: "Земельный участок",
       subtitle: "Продажа недвижимости",
     },
-    { id: "cottage", title: "Дачи", subtitle: "Продажа недвижимости" },
     {
       id: "business",
-      title: "Бизнес",
+      title: "Коммерческая недвижимость",
       subtitle: "Помещения для бизнеса",
     },
-    {
-      id: "factory",
-      title: "Предприятия",
-      subtitle: "Промбазы и заводы",
-    },
+    // { id: "cottage", title: "Дачи", subtitle: "Продажа недвижимости" },
+    // {
+    //   id: "factory",
+    //   title: "Предприятия",
+    //   subtitle: "Промбазы и заводы",
+    // },
     { id: "other", title: "Другое", subtitle: "Что-то не стандартное" },
   ],
 };

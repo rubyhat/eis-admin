@@ -147,8 +147,9 @@ export const EditEstateFormModule = ({
       price: Number(price),
       discount: Number(discount),
       images: images,
-      existingImages:
-        existingImages.length > 0 ? JSON.stringify(existingImages) : null,
+      existingImages: JSON.stringify(
+        existingImages.length > 0 ? existingImages : [],
+      ),
       videoLink: videoLink,
       mortgage: mortgage,
       hasSwap: hasSwap,

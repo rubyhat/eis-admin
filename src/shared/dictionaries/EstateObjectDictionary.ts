@@ -6,9 +6,10 @@ export const estateObjectDictionary = {
   category: {
     apartment: "Квартира",
     house: "Дом",
+    townhouse: "Таунхаус",
     land: "Земельный участок",
     cottage: "Дача",
-    business: "Бизнес",
+    business: "Коммерческая недвижимость",
     factory: "Заводы и фабрики",
     other: "Другое",
   },

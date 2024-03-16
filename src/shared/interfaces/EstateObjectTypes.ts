@@ -5,6 +5,7 @@ export type CategoryType =
   | "cottage"
   | "business"
   | "factory"
+  | "townhouse"
   | "other"; // Категория: квартира, дом, земельный участок, коммерческая недвижимость, бизнес, завод, другое
 export type ServiceType = "sell" | "rent"; // Продажа или аренда
 export type VisibilityStatusType = "active" | "sold" | "canceled" | "checking"; // Активен, Продан, Отменен, На проверке, на клиенте показываем только Активные

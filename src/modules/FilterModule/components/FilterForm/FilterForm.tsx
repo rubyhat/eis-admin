@@ -241,9 +241,10 @@ export const FilterForm = () => {
                 </MenuItem>
                 <MenuItem value="apartment">Квартира</MenuItem>
                 <MenuItem value="house">Дом</MenuItem>
-                {/* <MenuItem value="cottage">Дача</MenuItem> */}
+                <MenuItem value="townhouse">Таунхаус</MenuItem>
                 <MenuItem value="land">Земельный участок</MenuItem>
                 <MenuItem value="business">Коммерческая недвижимость</MenuItem>
+                {/* <MenuItem value="cottage">Дача</MenuItem> */}
                 {/* <MenuItem value="factory">Заводы, фабрики</MenuItem> */}
                 {/* <MenuItem value="other">Другое</MenuItem> */}
               </Select>

@@ -32,7 +32,7 @@ export const LinkCard = (props: LinkCardProps) => {
         cursor: "pointer",
         transition: "all 333ms ease",
         "&:hover": {
-          borderColor: "customColors.colorsOrange",
+          borderColor: "hsla(29, 100%, 50%, .15)",
         },
       }}
     >
