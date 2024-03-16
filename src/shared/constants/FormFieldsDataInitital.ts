@@ -15,7 +15,7 @@ export const FormFieldsDataInitial: FormFieldsType = {
   mortgage: false,
   hasSwap: false,
   isCommercial: false,
-  isPledge: false,
+  pledge: "",
   isDocumentsGood: true,
   type: "sell",
   category: "apartment",

@@ -249,6 +249,33 @@ export const BasicFormFields = ({
             />
           )}
         </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Залог
+          </Typography>
+          <Controller
+            name="pledge"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="none">Нет</MenuItem>
+                <MenuItem value="bank">Да, у банка</MenuItem>
+                <MenuItem value="police">Да, арест</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
       </Grid>
       <Grid item xs={12} md={3}>
         <Box marginBottom={1.5}>
@@ -530,25 +557,6 @@ export const BasicFormFields = ({
                   />
                 }
                 label="Коммерческая недвижимость"
-              />
-            )}
-          />
-          <Controller
-            name="isPledge"
-            control={control}
-            render={({ field }) => (
-              <FormControlLabel
-                {...field}
-                control={
-                  <Switch
-                    {...field}
-                    checked={String(field.value) === "true"}
-                    onChange={(e) =>
-                      field.onChange(e.target.checked.toString())
-                    }
-                  />
-                }
-                label="В залоге"
               />
             )}
           />

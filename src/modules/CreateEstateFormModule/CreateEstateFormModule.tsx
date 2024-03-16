@@ -54,7 +54,7 @@ export const CreateEstateFormModule = () => {
 
   // Перечисление всех свойств это дичь, нужно будет подумать как переделать
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(true);
+    // setIsLoading(true);
     setFormFieldsData(data as FormFieldsType);
     const {
       // basic values
@@ -66,7 +66,7 @@ export const CreateEstateFormModule = () => {
       mortgage,
       hasSwap,
       isCommercial,
-      isPledge,
+      pledge,
       isDocumentsGood,
       type,
       category,
@@ -128,7 +128,7 @@ export const CreateEstateFormModule = () => {
       mortgage: mortgage,
       hasSwap: hasSwap,
       isCommercial: isCommercial,
-      isPledge: isPledge,
+      pledge: pledge,
       isDocumentsGood: isDocumentsGood,
       type: type,
       category: category,

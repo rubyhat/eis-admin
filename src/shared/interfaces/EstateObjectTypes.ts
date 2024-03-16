@@ -20,6 +20,7 @@ export type ToiletType = "in" | "out" | "none"; // Туалет: в доме, н
 export type WaterType = "central" | "borehole" | "canConnect" | "none"; // Вода: центральная, скважина, можно подключить, нет
 export type EthernetType = "connected" | "toConnect" | "none"; // Интернет: Подключен, Можно подключить, Нет
 export type GarageType = "full" | "part" | "none"; // Гараж: входит в стоимость, есть, обсуждается отдельно, нет
+export type PledgeType = "none" | "bank" | "police"; // Залог: нет, да у банка, да арест
 export type HouseWallMaterialType =
   | "brick" // Кирпич
   | "wood" // Дерево
@@ -103,7 +104,7 @@ export interface BasicObject {
   mortgage: boolean;
   hasSwap: boolean;
   isCommercial: boolean;
-  isPledge: boolean;
+  pledge: PledgeType | "";
   isDocumentsGood: boolean;
   geoPosition: GeoPositionInfo;
   ownerInfo: OwnerInfo;

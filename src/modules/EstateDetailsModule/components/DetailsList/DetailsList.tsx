@@ -211,6 +211,12 @@ export const DetailsList = ({ estateDetails }: DetailsListProps) => {
         }
         label="Ипотека"
       />
+      {estateDetails.pledge && (
+        <DetailsListItem
+          title={estateObjectDictionary.pledge[estateDetails.pledge]}
+          label="Залог"
+        />
+      )}
       <DetailsListItem
         title={estateDetails.hasSwap ? "Есть обмен" : "Нет обмена"}
         label="Обмен"

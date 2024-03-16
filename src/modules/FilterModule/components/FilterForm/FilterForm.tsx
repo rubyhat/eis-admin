@@ -548,6 +548,33 @@ export const FilterForm = () => {
           />
         </Box>
         <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Залог
+          </Typography>
+          <Controller
+            name="pledge"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="none">Нет</MenuItem>
+                <MenuItem value="bank">Да, у банка</MenuItem>
+                <MenuItem value="police">Да, арест</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
           <Controller
             name="mortgage"
             control={control}

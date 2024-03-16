@@ -96,4 +96,9 @@ export const estateObjectDictionary = {
     part: "Есть, обсуждается отдельно",
     none: "Нет",
   },
+  pledge: {
+    none: "Нет",
+    bank: "Да, у банка",
+    police: "Да, арест",
+  },
 };

@@ -3,6 +3,7 @@ import {
   CategoryType,
   HouseConditionType,
   HouseWallMaterialType,
+  PledgeType,
   ServiceType,
   VisibilityStatusType,
 } from "../../../shared/interfaces/EstateObjectTypes";
@@ -24,6 +25,7 @@ export interface FilterState {
   houseWallMaterial: HouseWallMaterialType | "";
   houseCondition: HouseConditionType | "";
   visibilityStatus: VisibilityStatusType | "";
+  pledge: PledgeType | "";
 }
 
 export const initialFilterState: FilterState = {
@@ -38,6 +40,7 @@ export const initialFilterState: FilterState = {
   kitchenSquare: "",
   houseBuildingYear: "",
   visibilityStatus: "",
+  pledge: "",
   mortgage: false,
   hasSwap: false,
   type: "sell",
