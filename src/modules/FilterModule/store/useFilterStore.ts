@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import {
   CategoryType,
+  DocumentsType,
   HouseConditionType,
   HouseWallMaterialType,
   PledgeType,
@@ -26,6 +27,7 @@ export interface FilterState {
   houseCondition: HouseConditionType | "";
   visibilityStatus: VisibilityStatusType | "";
   pledge: PledgeType | "";
+  documents: DocumentsType | "";
 }
 
 export const initialFilterState: FilterState = {
@@ -41,6 +43,7 @@ export const initialFilterState: FilterState = {
   houseBuildingYear: "",
   visibilityStatus: "",
   pledge: "",
+  documents: "",
   mortgage: false,
   hasSwap: false,
   type: "sell",

@@ -554,6 +554,33 @@ export const FilterForm = () => {
             variant="textCalloutRegular"
             marginBottom={0.5}
           >
+            Документы
+          </Typography>
+          <Controller
+            name="documents"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="good">В порядке</MenuItem>
+                <MenuItem value="needUpdate">Нужна корректировка</MenuItem>
+                <MenuItem value="bad">Есть проблемы</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
             Залог
           </Typography>
           <Controller
