@@ -104,11 +104,27 @@ h6 {
   white-space: pre-line;
 }
 
-.estate-details__swiper-wrapper .slide {
-  &:first-child {
-    margin-left: 16px;
+.estate-details__swiper-wrapper {
+  .swiper-pagination-bullet {
+    background-color: hsla(29, 100%, 50%, 1);
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: hsla(29, 100%, 50%, 1);
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    background-color: hsla(29, 100%, 50%, 1);
+    width: 44px;
+    border-radius: 50%;
+    &::after {
+      font-size: 16px;
+      color: #fff;
+    }
   }
 }
+
 .slide {
   position: relative;
 }
