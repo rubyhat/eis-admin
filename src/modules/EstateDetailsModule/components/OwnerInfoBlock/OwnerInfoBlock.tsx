@@ -78,6 +78,53 @@ export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
       >
         {estateDetails.ownerInfo.ownerPhone}
       </Typography>
+
+      <Box sx={{ display: "flex", gap: 3 }}>
+        {estateDetails.ownerInfo.apartmentNumber && (
+          <Box>
+            <Typography component="p" variant="textBodyEmphasized">
+              Квартира:
+            </Typography>
+            <Typography
+              component="p"
+              variant="textBodyRegular"
+              marginBottom={1}
+            >
+              {estateDetails.ownerInfo.apartmentNumber}
+            </Typography>
+          </Box>
+        )}
+        {estateDetails.ownerInfo.intercomNumber && (
+          <Box>
+            <Typography component="p" variant="textBodyEmphasized">
+              Домофон:
+            </Typography>
+            <Typography
+              component="p"
+              variant="textBodyRegular"
+              marginBottom={1}
+            >
+              {estateDetails.ownerInfo.intercomNumber}
+            </Typography>
+          </Box>
+        )}
+
+        {estateDetails.ownerInfo.entranceNumber && (
+          <Box>
+            <Typography component="p" variant="textBodyEmphasized">
+              Подъезд:
+            </Typography>
+            <Typography
+              component="p"
+              variant="textBodyRegular"
+              marginBottom={1}
+            >
+              {estateDetails.ownerInfo.entranceNumber}
+            </Typography>
+          </Box>
+        )}
+      </Box>
+
       <Typography component="p" variant="textBodyEmphasized">
         Заметка:
       </Typography>

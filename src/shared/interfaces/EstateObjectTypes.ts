@@ -74,6 +74,9 @@ export interface OwnerInfo {
   ownerName: string;
   ownerPhone: string;
   description?: string;
+  apartmentNumber?: string; // номер квартиры
+  entranceNumber?: string; // номер подъезда
+  intercomNumber?: string; // номер домофона
 }
 
 export type FormFieldsType = BasicObject | Apartment | House | Flat | Land;

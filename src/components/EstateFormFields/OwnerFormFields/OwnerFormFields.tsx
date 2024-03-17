@@ -67,7 +67,65 @@ export const OwnerFormFields = ({ isLoading }: OwnerFormFieldsProps) => {
           />
         </Box>
       </Grid>
-      <Grid item xs={12} md={8} lg={6}>
+      <Grid item xs={12} md={2}>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Номер квартиры
+          </Typography>
+          <CustomInput
+            id="ownerInfo.apartmentNumber"
+            register={register}
+            errors={formState.errors}
+            disabled={isLoading}
+            formatPrice={false}
+            placeholder="Например: 42"
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Номер домофона
+          </Typography>
+          <CustomInput
+            id="ownerInfo.intercomNumber"
+            register={register}
+            errors={formState.errors}
+            disabled={isLoading}
+            formatPrice={false}
+            placeholder="Например: 2"
+          />
+        </Box>
+      </Grid>
+      <Grid item xs={12} md={2}>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Номер подъезда
+          </Typography>
+          <CustomInput
+            id="ownerInfo.entranceNumber"
+            register={register}
+            errors={formState.errors}
+            disabled={isLoading}
+            formatPrice={false}
+            placeholder="Например: 2"
+          />
+        </Box>
+      </Grid>
+      <Grid item xs={12} md={4}>
         <Box marginBottom={1.5} height={1}>
           <Typography
             component="p"
@@ -75,17 +133,17 @@ export const OwnerFormFields = ({ isLoading }: OwnerFormFieldsProps) => {
             variant="textCalloutRegular"
             marginBottom={0.5}
           >
-            Заметка
+            Заметка(хозяева, КСК, соседи, брак, долги)
           </Typography>
           <Box
             component="textarea"
             id="ownerInfo.description"
             {...register("ownerInfo.description", { required: false })}
             disabled={isLoading}
-            placeholder="Запишите заметки по объекту и собственнику для других сотрудников"
+            placeholder={`Имена всех хозяев - ?\nКск - ?\nСоседи - ?\nПродавец в браке сейчас/ранее - ?\nДолги по коммунальным платежам - ?`}
             sx={{
               width: 1,
-              minHeight: 110,
+              minHeight: { xs: 150, sm: 110 },
               padding: 1,
               borderColor: formState.errors["ownerInfo.description"]
                 ? "customColors.colorsRed"
@@ -94,7 +152,7 @@ export const OwnerFormFields = ({ isLoading }: OwnerFormFieldsProps) => {
               fontSize: "16px",
               outlineColor: "customColors.colorsOrange",
               "&::placeholder": {
-                fontSize: 16,
+                fontSize: 14,
                 color: "customColors.labelsTertiary",
               },
             }}
