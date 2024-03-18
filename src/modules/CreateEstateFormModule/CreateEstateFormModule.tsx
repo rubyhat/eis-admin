@@ -54,7 +54,7 @@ export const CreateEstateFormModule = () => {
 
   // Перечисление всех свойств это дичь, нужно будет подумать как переделать
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
-    // setIsLoading(true);
+    setIsLoading(true);
     setFormFieldsData(data as FormFieldsType);
     const {
       // basic values

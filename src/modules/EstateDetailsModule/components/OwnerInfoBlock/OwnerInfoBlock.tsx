@@ -80,6 +80,20 @@ export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
       </Typography>
 
       <Box sx={{ display: "flex", gap: 3 }}>
+        {estateDetails.ownerInfo.entranceNumber && (
+          <Box>
+            <Typography component="p" variant="textBodyEmphasized">
+              Подъезд:
+            </Typography>
+            <Typography
+              component="p"
+              variant="textBodyRegular"
+              marginBottom={1}
+            >
+              {estateDetails.ownerInfo.entranceNumber}
+            </Typography>
+          </Box>
+        )}
         {estateDetails.ownerInfo.apartmentNumber && (
           <Box>
             <Typography component="p" variant="textBodyEmphasized">
@@ -105,21 +119,6 @@ export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
               marginBottom={1}
             >
               {estateDetails.ownerInfo.intercomNumber}
-            </Typography>
-          </Box>
-        )}
-
-        {estateDetails.ownerInfo.entranceNumber && (
-          <Box>
-            <Typography component="p" variant="textBodyEmphasized">
-              Подъезд:
-            </Typography>
-            <Typography
-              component="p"
-              variant="textBodyRegular"
-              marginBottom={1}
-            >
-              {estateDetails.ownerInfo.entranceNumber}
             </Typography>
           </Box>
         )}

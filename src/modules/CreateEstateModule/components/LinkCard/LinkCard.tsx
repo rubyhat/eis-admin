@@ -15,6 +15,7 @@ interface LinkCardProps {
 
 export const LinkCard = (props: LinkCardProps) => {
   const { id, title, subtitle, selected, onClick } = props;
+
   return (
     <Box
       onClick={onClick && onClick}

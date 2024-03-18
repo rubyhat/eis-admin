@@ -40,7 +40,10 @@ export const ListLinkStep = (props: ListLinkStepProps) => {
               title={title}
               subtitle={subtitle}
               selected={selected}
-              onClick={() => setSelected(id)}
+              onClick={() => {
+                setSelected(id); // todo: remove after tests
+                onSubmit(id);
+              }}
             />
           </Box>
         ))}

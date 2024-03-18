@@ -23,6 +23,7 @@ import {
 import { selectInputProps, selectStyles } from "../assets/styles";
 import { FetchAllUsers } from "../../../shared/api/apiFetchAllUsers";
 import { useUserStore } from "../../../modules/UserModule/store/useUserStore";
+import { useScreenSize } from "../../../hooks/useScreenSize";
 
 interface BasicFormFieldsProps {
   isLoading: boolean;
@@ -39,6 +40,7 @@ export const BasicFormFields = ({
 }: BasicFormFieldsProps) => {
   const { control, register, formState } = useFormContext();
   const { isAdmin } = useUserStore((state) => state);
+  const { isMobile } = useScreenSize();
 
   const {
     data: usersData,
@@ -249,33 +251,6 @@ export const BasicFormFields = ({
             />
           )}
         </Box>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textCalloutRegular"
-            marginBottom={0.5}
-          >
-            Залог
-          </Typography>
-          <Controller
-            name="pledge"
-            control={control}
-            render={({ field }) => (
-              <Select
-                {...field}
-                displayEmpty
-                sx={selectStyles}
-                inputProps={{ sx: selectInputProps }}
-              >
-                <MenuItem value="">Не указывать</MenuItem>
-                <MenuItem value="none">Нет</MenuItem>
-                <MenuItem value="bank">Да, у банка</MenuItem>
-                <MenuItem value="police">Да, арест</MenuItem>
-              </Select>
-            )}
-          />
-        </Box>
       </Grid>
       <Grid item xs={12} md={3}>
         <Box marginBottom={1.5}>
@@ -404,6 +379,27 @@ export const BasicFormFields = ({
             formatPrice={false}
             placeholder="Например: 42"
           />
+          {isMobile && (
+            <Controller
+              name="geoPosition.isInfoHidden"
+              control={control}
+              render={({ field }) => (
+                <FormControlLabel
+                  {...field}
+                  control={
+                    <Switch
+                      {...field}
+                      checked={String(field.value) === "true"}
+                      onChange={(e) =>
+                        field.onChange(e.target.checked.toString())
+                      }
+                    />
+                  }
+                  label="Скрыть номер дома"
+                />
+              )}
+            />
+          )}
         </Box>
         <Box marginBottom={1.5}>
           <Typography
@@ -428,6 +424,33 @@ export const BasicFormFields = ({
                 <MenuItem value="good">В порядке</MenuItem>
                 <MenuItem value="needUpdate">Нужна корректировка</MenuItem>
                 <MenuItem value="bad">Есть проблемы</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Залог
+          </Typography>
+          <Controller
+            name="pledge"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="none">Нет</MenuItem>
+                <MenuItem value="bank">Да, у банка</MenuItem>
+                <MenuItem value="police">Да, арест</MenuItem>
               </Select>
             )}
           />
@@ -587,25 +610,27 @@ export const BasicFormFields = ({
               />
             )}
           />
-          <Controller
-            name="geoPosition.isInfoHidden"
-            control={control}
-            render={({ field }) => (
-              <FormControlLabel
-                {...field}
-                control={
-                  <Switch
-                    {...field}
-                    checked={String(field.value) === "true"}
-                    onChange={(e) =>
-                      field.onChange(e.target.checked.toString())
-                    }
-                  />
-                }
-                label="Скрыть адрес"
-              />
-            )}
-          />
+          {!isMobile && (
+            <Controller
+              name="geoPosition.isInfoHidden"
+              control={control}
+              render={({ field }) => (
+                <FormControlLabel
+                  {...field}
+                  control={
+                    <Switch
+                      {...field}
+                      checked={String(field.value) === "true"}
+                      onChange={(e) =>
+                        field.onChange(e.target.checked.toString())
+                      }
+                    />
+                  }
+                  label="Скрыть номер дома"
+                />
+              )}
+            />
+          )}
         </Box>
       </Grid>
     </Grid>

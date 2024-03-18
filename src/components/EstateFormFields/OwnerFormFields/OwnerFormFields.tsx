@@ -143,7 +143,7 @@ export const OwnerFormFields = ({ isLoading }: OwnerFormFieldsProps) => {
             placeholder={`Имена всех хозяев - ?\nКск - ?\nСоседи - ?\nПродавец в браке сейчас/ранее - ?\nДолги по коммунальным платежам - ?`}
             sx={{
               width: 1,
-              minHeight: { xs: 150, sm: 110 },
+              minHeight: { xs: 250, sm: 110 },
               padding: 1,
               borderColor: formState.errors["ownerInfo.description"]
                 ? "customColors.colorsRed"
