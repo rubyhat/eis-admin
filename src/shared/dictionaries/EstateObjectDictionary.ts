@@ -106,4 +106,9 @@ export const estateObjectDictionary = {
     needUpdate: "Нужна корректировка",
     bad: "Есть проблемы",
   },
+  mortgage: {
+    accepted: "Есть",
+    declined: "Нет",
+    possibly: "Зависит от банка",
+  },
 };

@@ -4,6 +4,7 @@ import {
   DocumentsType,
   HouseConditionType,
   HouseWallMaterialType,
+  MortgageType,
   PledgeType,
   ServiceType,
   VisibilityStatusType,
@@ -19,9 +20,9 @@ export interface FilterState {
   houseBuildingYear: string;
   targetFloor: number | null;
   totalFloor: number | null;
-  mortgage: boolean;
   hasSwap: boolean;
   type: ServiceType;
+  mortgage: MortgageType | "";
   category: CategoryType | "";
   houseWallMaterial: HouseWallMaterialType | "";
   houseCondition: HouseConditionType | "";
@@ -44,7 +45,7 @@ export const initialFilterState: FilterState = {
   visibilityStatus: "",
   pledge: "",
   documents: "",
-  mortgage: false,
+  mortgage: "",
   hasSwap: false,
   type: "sell",
   targetFloor: null,

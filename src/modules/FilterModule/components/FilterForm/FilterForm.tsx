@@ -602,24 +602,33 @@ export const FilterForm = () => {
           />
         </Box>
         <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Ипотека
+          </Typography>
           <Controller
             name="mortgage"
             control={control}
             render={({ field }) => (
-              <FormControlLabel
-                control={
-                  <Switch
-                    {...field}
-                    checked={field.value === "true"}
-                    onChange={(e) =>
-                      field.onChange(e.target.checked.toString())
-                    }
-                  />
-                }
-                label="Есть ипотека"
-              />
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="accepted">Есть</MenuItem>
+                <MenuItem value="declined">Нет</MenuItem>
+                <MenuItem value="possibly">Под вопросом</MenuItem>
+              </Select>
             )}
           />
+        </Box>
+        <Box marginBottom={1.5}>
           <Controller
             name="hasSwap"
             control={control}

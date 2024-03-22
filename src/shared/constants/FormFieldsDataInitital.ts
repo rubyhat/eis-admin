@@ -12,7 +12,7 @@ export const FormFieldsDataInitial: FormFieldsType = {
   discount: null,
   images: [],
   videoLink: "",
-  mortgage: false,
+  mortgage: "",
   hasSwap: false,
   isCommercial: false,
   pledge: "",

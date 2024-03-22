@@ -207,14 +207,12 @@ export const DetailsList = ({ estateDetails }: DetailsListProps) => {
           label="Документы"
         />
       )}
-      <DetailsListItem
-        title={
-          estateDetails.mortgage
-            ? "Подходит под ипотеку"
-            : "Не подходит под ипотеку"
-        }
-        label="Ипотека"
-      />
+      {estateDetails.mortgage && (
+        <DetailsListItem
+          title={estateObjectDictionary.mortgage[estateDetails.mortgage]}
+          label="Ипотека"
+        />
+      )}
       {estateDetails.pledge && (
         <DetailsListItem
           title={estateObjectDictionary.pledge[estateDetails.pledge]}

@@ -41,6 +41,7 @@ export type HouseRoofMaterialType =
   | "metalTile" // Металлочерепица
   | "corrugatedSheetRoof" // Профлист
   | "slate"; // Шифер
+export type MortgageType = "accepted" | "declined" | "possibly";
 
 export interface ObjectImages {
   _id: string;
@@ -105,9 +106,9 @@ export interface BasicObject {
   existingImages?: ObjectImages[];
   videoLink?: string;
   estateAgent?: string;
-  mortgage: boolean;
   hasSwap: boolean;
   isCommercial: boolean;
+  mortgage: MortgageType | "";
   pledge: PledgeType | "";
   documents: DocumentsType | "";
   geoPosition: GeoPositionInfo;
