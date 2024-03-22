@@ -43,7 +43,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
                 <MenuItem value="">Не указывать</MenuItem>
                 <MenuItem value="perfect">Евроремонт</MenuItem>
                 <MenuItem value="good">Косметический ремонт</MenuItem>
-                <MenuItem value="medium">Средней ремонт</MenuItem>
+                <MenuItem value="medium">Средний ремонт</MenuItem>
                 <MenuItem value="bad">Без ремонта</MenuItem>
                 <MenuItem value="clean">Предчистовая отделка</MenuItem>
                 <MenuItem value="free">Свободная планировка</MenuItem>

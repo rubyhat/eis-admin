@@ -110,7 +110,10 @@ export const ImageViewerModal = () => {
             initialSlide={initialSlide || 0}
             speed={666}
             navigation={!isMobile}
-            pagination={{ clickable: true }}
+            pagination={{
+              clickable: true,
+              dynamicBullets: true,
+            }}
           >
             {images &&
               images.map((image, index) => (

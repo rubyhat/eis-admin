@@ -104,6 +104,7 @@ export const estateObjectDictionary = {
   documents: {
     good: "В порядке",
     needUpdate: "Нужна корректировка",
+    needCheck: "Нужна проверка",
     bad: "Есть проблемы",
   },
   mortgage: {

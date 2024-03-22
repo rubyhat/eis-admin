@@ -21,7 +21,7 @@ export type WaterType = "central" | "borehole" | "canConnect" | "none"; // Во�
 export type EthernetType = "connected" | "toConnect" | "none"; // Интернет: Подключен, Можно подключить, Нет
 export type GarageType = "full" | "part" | "none"; // Гараж: входит в стоимость, есть, обсуждается отдельно, нет
 export type PledgeType = "none" | "bank" | "police"; // Залог: нет, да у банка, да арест
-export type DocumentsType = "good" | "needUpdate" | "bad"; // Документы: В порядке, нужна корректировка, Есть проблемы
+export type DocumentsType = "good" | "needUpdate" | "needCheck" | "bad"; // Документы: В порядке, нужна корректировка, Есть проблемы
 export type HouseWallMaterialType =
   | "brick" // Кирпич
   | "wood" // Дерево

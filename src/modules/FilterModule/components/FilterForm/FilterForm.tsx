@@ -384,6 +384,7 @@ export const FilterForm = () => {
                 <MenuItem value="">Не указывать</MenuItem>
                 <MenuItem value="good">В порядке</MenuItem>
                 <MenuItem value="needUpdate">Нужна корректировка</MenuItem>
+                <MenuItem value="needCheck">Нужна проверка</MenuItem>
                 <MenuItem value="bad">Есть проблемы</MenuItem>
               </Select>
             )}
