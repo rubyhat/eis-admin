@@ -42,6 +42,7 @@ export type HouseRoofMaterialType =
   | "corrugatedSheetRoof" // Профлист
   | "slate"; // Шифер
 export type MortgageType = "accepted" | "declined" | "possibly";
+export type ExchangeType = "yes" | "no";
 
 export interface ObjectImages {
   _id: string;
@@ -106,8 +107,8 @@ export interface BasicObject {
   existingImages?: ObjectImages[];
   videoLink?: string;
   estateAgent?: string;
-  hasSwap: boolean;
   isCommercial: boolean;
+  exchange: ExchangeType | "";
   mortgage: MortgageType | "";
   pledge: PledgeType | "";
   documents: DocumentsType | "";

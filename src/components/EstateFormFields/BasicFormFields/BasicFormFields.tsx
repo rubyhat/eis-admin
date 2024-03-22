@@ -401,87 +401,6 @@ export const BasicFormFields = ({
             />
           )}
         </Box>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textCalloutRegular"
-            marginBottom={0.5}
-          >
-            Документы
-          </Typography>
-          <Controller
-            name="documents"
-            control={control}
-            render={({ field }) => (
-              <Select
-                {...field}
-                displayEmpty
-                sx={selectStyles}
-                inputProps={{ sx: selectInputProps }}
-              >
-                <MenuItem value="">Не указывать</MenuItem>
-                <MenuItem value="good">В порядке</MenuItem>
-                <MenuItem value="needUpdate">Нужна корректировка</MenuItem>
-                <MenuItem value="bad">Есть проблемы</MenuItem>
-              </Select>
-            )}
-          />
-        </Box>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textCalloutRegular"
-            marginBottom={0.5}
-          >
-            Залог
-          </Typography>
-          <Controller
-            name="pledge"
-            control={control}
-            render={({ field }) => (
-              <Select
-                {...field}
-                displayEmpty
-                sx={selectStyles}
-                inputProps={{ sx: selectInputProps }}
-              >
-                <MenuItem value="">Не указывать</MenuItem>
-                <MenuItem value="none">Нет</MenuItem>
-                <MenuItem value="bank">Да, у банка</MenuItem>
-                <MenuItem value="police">Да, арест</MenuItem>
-              </Select>
-            )}
-          />
-        </Box>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textCalloutRegular"
-            marginBottom={0.5}
-          >
-            Ипотека
-          </Typography>
-          <Controller
-            name="mortgage"
-            control={control}
-            render={({ field }) => (
-              <Select
-                {...field}
-                displayEmpty
-                sx={selectStyles}
-                inputProps={{ sx: selectInputProps }}
-              >
-                <MenuItem value="">Не указывать</MenuItem>
-                <MenuItem value="accepted">Есть</MenuItem>
-                <MenuItem value="declined">Нет</MenuItem>
-                <MenuItem value="possibly">Под вопросом</MenuItem>
-              </Select>
-            )}
-          />
-        </Box>
       </Grid>
       <Grid item xs={12} md={3}>
         <Box marginBottom={1.5}>
@@ -571,6 +490,115 @@ export const BasicFormFields = ({
         </Box>
       </Grid>
       <Grid item xs={12} md={3}>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Документы
+          </Typography>
+          <Controller
+            name="documents"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="good">В порядке</MenuItem>
+                <MenuItem value="needUpdate">Нужна корректировка</MenuItem>
+                <MenuItem value="bad">Есть проблемы</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Залог
+          </Typography>
+          <Controller
+            name="pledge"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="none">Нет</MenuItem>
+                <MenuItem value="bank">Да, у банка</MenuItem>
+                <MenuItem value="police">Да, арест</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Ипотека
+          </Typography>
+          <Controller
+            name="mortgage"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="accepted">Есть</MenuItem>
+                <MenuItem value="declined">Нет</MenuItem>
+                <MenuItem value="possibly">Под вопросом</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Обмен
+          </Typography>
+          <Controller
+            name="exchange"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="yes">Есть</MenuItem>
+                <MenuItem value="no">Нет</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
+      </Grid>
+      <Grid item xs={12} md={3}>
         <Typography
           component="p"
           color="customColors.labelsSecondary"
@@ -580,25 +608,6 @@ export const BasicFormFields = ({
           Выберите нужное
         </Typography>
         <Box marginBottom={1.5}>
-          <Controller
-            name="hasSwap"
-            control={control}
-            render={({ field }) => (
-              <FormControlLabel
-                {...field}
-                control={
-                  <Switch
-                    {...field}
-                    checked={String(field.value) === "true"}
-                    onChange={(e) =>
-                      field.onChange(e.target.checked.toString())
-                    }
-                  />
-                }
-                label="Есть обмен"
-              />
-            )}
-          />
           <Controller
             name="isCommercial"
             control={control}

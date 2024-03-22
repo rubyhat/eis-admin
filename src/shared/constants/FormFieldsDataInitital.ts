@@ -7,14 +7,14 @@ const agentObjectFromLocalStorage = agentFromLocalStorage
 
 export const FormFieldsDataInitial: FormFieldsType = {
   // basic values
-  description: "",
   price: null,
   discount: null,
+  isCommercial: false,
   images: [],
+  description: "",
   videoLink: "",
   mortgage: "",
-  hasSwap: false,
-  isCommercial: false,
+  exchange: "",
   pledge: "",
   documents: "good",
   type: "sell",

@@ -1,11 +1,4 @@
-import {
-  Box,
-  FormControlLabel,
-  MenuItem,
-  Select,
-  Switch,
-  Typography,
-} from "@mui/material";
+import { Box, MenuItem, Select, Typography } from "@mui/material";
 import React from "react";
 import {
   Controller,
@@ -157,7 +150,7 @@ export const FilterForm = () => {
           <Typography
             component="p"
             color="customColors.labelsSecondary"
-            variant="textFootnoteRegular"
+            variant="textCalloutRegular"
             marginBottom={0.5}
           >
             Статус
@@ -185,7 +178,7 @@ export const FilterForm = () => {
           <Typography
             component="p"
             color="customColors.labelsSecondary"
-            variant="textFootnoteRegular"
+            variant="textCalloutRegular"
             marginBottom={0.5}
           >
             Тип
@@ -210,7 +203,7 @@ export const FilterForm = () => {
           <Typography
             component="p"
             color="customColors.labelsSecondary"
-            variant="textFootnoteRegular"
+            variant="textCalloutRegular"
             marginBottom={0.5}
           >
             Город
@@ -252,7 +245,7 @@ export const FilterForm = () => {
           <Typography
             component="p"
             color="customColors.labelsSecondary"
-            variant="textFootnoteRegular"
+            variant="textCalloutRegular"
             marginBottom={0.5}
           >
             Категория
@@ -292,7 +285,7 @@ export const FilterForm = () => {
           <Typography
             component="p"
             color="customColors.labelsSecondary"
-            variant="textFootnoteRegular"
+            variant="textCalloutRegular"
             marginBottom={0.5}
           >
             Материал стен
@@ -335,7 +328,7 @@ export const FilterForm = () => {
           <Typography
             component="p"
             color="customColors.labelsSecondary"
-            variant="textFootnoteRegular"
+            variant="textCalloutRegular"
             marginBottom={0.5}
           >
             Состояние
@@ -367,184 +360,6 @@ export const FilterForm = () => {
                 <MenuItem value="build">Черновая отделка</MenuItem>
               </Select>
             )}
-          />
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1.5,
-            marginBottom: 1.5,
-          }}
-        >
-          <Box>
-            <Typography
-              component="p"
-              color="customColors.labelsSecondary"
-              variant="textFootnoteRegular"
-              marginBottom={0.5}
-            >
-              Этаж
-            </Typography>
-            <CustomInput
-              id="targetFloor"
-              register={register}
-              errors={errors}
-              disabled={isLoading}
-              formatPrice={false}
-              placeholder="2"
-              type="number"
-              min="0"
-            />
-          </Box>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textCalloutRegular"
-            marginTop={3}
-          >
-            /
-          </Typography>
-          <Box>
-            <Typography
-              component="p"
-              color="customColors.labelsSecondary"
-              variant="textFootnoteRegular"
-              marginBottom={0.5}
-            >
-              Всего
-            </Typography>
-            <CustomInput
-              id="totalFloor"
-              register={register}
-              errors={errors}
-              disabled={isLoading}
-              formatPrice={false}
-              placeholder="5"
-              type="number"
-              min="0"
-            />
-          </Box>
-        </Box>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textFootnoteRegular"
-            marginBottom={0.5}
-          >
-            Количество комнат
-          </Typography>
-          <Controller
-            name="roomCount"
-            control={control}
-            render={({ field }) => (
-              <Select
-                {...field}
-                displayEmpty
-                sx={selectStyles}
-                inputProps={{ sx: selectInputProps }}
-              >
-                {/* <MenuItem disabled value="">
-                  <Typography
-                    variant="textCalloutRegular"
-                    color="customColors.labelsSecondary"
-                  >
-                    Например: 1 ком.
-                  </Typography>
-                </MenuItem> */}
-                <MenuItem value="">Не указывать</MenuItem>
-                <MenuItem value="1">1 ком.</MenuItem>
-                <MenuItem value="2">2-х ком.</MenuItem>
-                <MenuItem value="3">3-х ком.</MenuItem>
-                <MenuItem value="4">4-х ком.</MenuItem>
-                <MenuItem value="5">5 и более</MenuItem>
-              </Select>
-            )}
-          />
-        </Box>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textFootnoteRegular"
-            marginBottom={0.5}
-          >
-            Стоимость
-          </Typography>
-          <CustomInput
-            id="priceStart"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-            formatPrice={false}
-            placeholder="цена от"
-            sx={{ marginBottom: 1.5 }}
-          />
-          <CustomInput
-            id="priceEnd"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-            formatPrice={false}
-            placeholder="цена до"
-          />
-        </Box>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textFootnoteRegular"
-            marginBottom={0.5}
-          >
-            Площадь общая, от м²
-          </Typography>
-          <CustomInput
-            id="houseSquare"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-            formatPrice={false}
-            placeholder="Например: 42"
-            sx={{ marginBottom: 1.5 }}
-          />
-        </Box>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textFootnoteRegular"
-            marginBottom={0.5}
-          >
-            Площадь кухни, от м²
-          </Typography>
-          <CustomInput
-            id="kitchenSquare"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-            formatPrice={false}
-            placeholder="Например: 15"
-            sx={{ marginBottom: 1.5 }}
-          />
-        </Box>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textFootnoteRegular"
-            marginBottom={0.5}
-          >
-            Год постройки от
-          </Typography>
-          <CustomInput
-            id="houseBuildingYear"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-            formatPrice={false}
-            placeholder="Например: 2023"
-            sx={{ marginBottom: 1.5 }}
           />
         </Box>
         <Box marginBottom={1.5}>
@@ -629,23 +444,207 @@ export const FilterForm = () => {
           />
         </Box>
         <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Обмен
+          </Typography>
           <Controller
-            name="hasSwap"
+            name="exchange"
             control={control}
             render={({ field }) => (
-              <FormControlLabel
-                control={
-                  <Switch
-                    {...field}
-                    checked={field.value === "true"}
-                    onChange={(e) =>
-                      field.onChange(e.target.checked.toString())
-                    }
-                  />
-                }
-                label="Есть обмен"
-              />
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="yes">Есть</MenuItem>
+                <MenuItem value="no">Нет</MenuItem>
+              </Select>
             )}
+          />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1.5,
+            marginBottom: 1.5,
+          }}
+        >
+          <Box>
+            <Typography
+              component="p"
+              color="customColors.labelsSecondary"
+              variant="textCalloutRegular"
+              marginBottom={0.5}
+            >
+              Этаж
+            </Typography>
+            <CustomInput
+              id="targetFloor"
+              register={register}
+              errors={errors}
+              disabled={isLoading}
+              formatPrice={false}
+              placeholder="2"
+              type="number"
+              min="0"
+            />
+          </Box>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginTop={3}
+          >
+            /
+          </Typography>
+          <Box>
+            <Typography
+              component="p"
+              color="customColors.labelsSecondary"
+              variant="textCalloutRegular"
+              marginBottom={0.5}
+            >
+              Всего
+            </Typography>
+            <CustomInput
+              id="totalFloor"
+              register={register}
+              errors={errors}
+              disabled={isLoading}
+              formatPrice={false}
+              placeholder="5"
+              type="number"
+              min="0"
+            />
+          </Box>
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Количество комнат
+          </Typography>
+          <Controller
+            name="roomCount"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                {/* <MenuItem disabled value="">
+                  <Typography
+                    variant="textCalloutRegular"
+                    color="customColors.labelsSecondary"
+                  >
+                    Например: 1 ком.
+                  </Typography>
+                </MenuItem> */}
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="1">1 ком.</MenuItem>
+                <MenuItem value="2">2-х ком.</MenuItem>
+                <MenuItem value="3">3-х ком.</MenuItem>
+                <MenuItem value="4">4-х ком.</MenuItem>
+                <MenuItem value="5">5 и более</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Стоимость
+          </Typography>
+          <CustomInput
+            id="priceStart"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            formatPrice={false}
+            placeholder="цена от"
+            sx={{ marginBottom: 1.5 }}
+          />
+          <CustomInput
+            id="priceEnd"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            formatPrice={false}
+            placeholder="цена до"
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Площадь общая, от м²
+          </Typography>
+          <CustomInput
+            id="houseSquare"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            formatPrice={false}
+            placeholder="Например: 42"
+            sx={{ marginBottom: 1.5 }}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Площадь кухни, от м²
+          </Typography>
+          <CustomInput
+            id="kitchenSquare"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            formatPrice={false}
+            placeholder="Например: 15"
+            sx={{ marginBottom: 1.5 }}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Год постройки от
+          </Typography>
+          <CustomInput
+            id="houseBuildingYear"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            formatPrice={false}
+            placeholder="Например: 2023"
+            sx={{ marginBottom: 1.5 }}
           />
         </Box>
       </Box>

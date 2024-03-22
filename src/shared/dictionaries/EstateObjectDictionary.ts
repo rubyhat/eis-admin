@@ -111,4 +111,8 @@ export const estateObjectDictionary = {
     declined: "Нет",
     possibly: "Зависит от банка",
   },
+  exchange: {
+    yes: "Есть",
+    no: "Нет",
+  },
 };

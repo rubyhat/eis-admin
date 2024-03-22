@@ -2,6 +2,7 @@ import { create } from "zustand";
 import {
   CategoryType,
   DocumentsType,
+  ExchangeType,
   HouseConditionType,
   HouseWallMaterialType,
   MortgageType,
@@ -20,8 +21,8 @@ export interface FilterState {
   houseBuildingYear: string;
   targetFloor: number | null;
   totalFloor: number | null;
-  hasSwap: boolean;
   type: ServiceType;
+  exchange: ExchangeType | "";
   mortgage: MortgageType | "";
   category: CategoryType | "";
   houseWallMaterial: HouseWallMaterialType | "";
@@ -46,7 +47,7 @@ export const initialFilterState: FilterState = {
   pledge: "",
   documents: "",
   mortgage: "",
-  hasSwap: false,
+  exchange: "",
   type: "sell",
   targetFloor: null,
   totalFloor: null,
