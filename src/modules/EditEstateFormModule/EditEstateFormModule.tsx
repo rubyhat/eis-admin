@@ -64,7 +64,7 @@ export const EditEstateFormModule = ({
   const methods = useForm<FieldValues>({
     defaultValues: {
       ...editEstateData,
-      images: null,
+      images: [],
     },
   });
 
@@ -72,8 +72,32 @@ export const EditEstateFormModule = ({
   const [existingImages, setExistingImages] = React.useState<ObjectImages[]>(
     [],
   );
+
+  // Кейс:
+  // 1. юзер первый раз нажал на инпут и выбрал фотографию, затем закрыл системное окно загрузки фотографии
+  // 2. не отправляя формы, снова нажал на инпут и добавил еще фотографий
+  // для этого кейса нам нужно проверять и сохранять фото, которые он грузит при помощи uploadedEarlyImages ,
+  // иначе новые фото будут перезаписывать старые фото в стейте реакт хук формы
   const onImagesUpload = (files: FileList) => {
-    methods.setValue("images", files);
+    const uploadedEarlyImages = methods.getValues().images;
+
+    methods.setValue("images", [...uploadedEarlyImages, ...Array.from(files)]);
+  };
+
+  // Кейс:
+  // 1. юзер нажал на инпут и выбрал фото
+  // 2. не отправляя формы, юзер удалил только что загруженное фото
+  // в этом случае нам нужно удалить фото не только из превью (это происходит в <ImagesFormField />)
+  // но и в стейте реакт хук формы
+  // а также очищать стейт реакт хук формы при клике на кнопку "Очистить все"
+  const onImagesDelete = (fileName: string, clearAll?: boolean) => {
+    const stateImages = methods.getValues().images;
+
+    const filteredStateImages = stateImages.filter(
+      (file: File) => file.name !== fileName,
+    );
+
+    methods.setValue("images", clearAll ? [] : filteredStateImages);
   };
 
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
@@ -232,7 +256,7 @@ export const EditEstateFormModule = ({
       Object.entries(filteredData).forEach(([key, value]) => {
         if (key === "geoPosition" || key === "ownerInfo") {
           formData.append(key, JSON.stringify(value));
-        } else if (key === "images" && value instanceof FileList) {
+        } else if (key === "images") {
           for (const file of value) {
             formData.append("images", file);
           }
@@ -402,6 +426,7 @@ export const EditEstateFormModule = ({
             </Grid>
             <ImagesFormField
               onImagesUpload={onImagesUpload}
+              onImagesDelete={onImagesDelete}
               currentImages={currentImages}
               setExistingImages={setExistingImages}
             />

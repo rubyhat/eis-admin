@@ -18,6 +18,7 @@ import { ObjectImages } from "../../../shared/interfaces/EstateObjectTypes";
 
 interface ImagesFormFieldProps {
   onImagesUpload: (files: FileList) => void;
+  onImagesDelete: (fileName: string, clearAll?: boolean) => void;
   currentImages?: ObjectImages[];
   setExistingImages?: (v: ObjectImages[]) => void;
 }
@@ -25,12 +26,12 @@ interface ImagesFormFieldProps {
 interface SelectedImage {
   img: string;
   _id: string;
+  name?: string;
 }
 
-// todo: при редактировании, есть два фото, добавили новое фото, удалили одно старое фото = новые тоже удалились
-// todo:  баг - добавили 2 фото - пролистнули на 2 фото и вернулись на 1, удалили 1 = баг со 2 фото
 export const ImagesFormField = ({
   onImagesUpload,
+  onImagesDelete,
   currentImages,
   setExistingImages,
 }: ImagesFormFieldProps) => {
@@ -58,7 +59,11 @@ export const ImagesFormField = ({
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const filesArray = Array.from(e.target.files).map((file) => {
-        return { img: URL.createObjectURL(file), _id: uuidv4() };
+        return {
+          img: URL.createObjectURL(file),
+          _id: uuidv4(),
+          name: file.name,
+        };
       });
 
       setSelectedImages((prevImages) => [...prevImages, ...filesArray]);
@@ -78,10 +83,15 @@ export const ImagesFormField = ({
   };
 
   // Удаляем фото из стейта превью и из списка существующих фото, которое пойдет в реквест
-  const handleClickDeleteButton = (imageToRemove: string) => {
+  const handleClickDeleteButton = (
+    imageToRemove: string,
+    fileName: string | undefined,
+  ) => {
     setSelectedImages((prev) =>
       prev.filter((image) => image._id !== imageToRemove),
     );
+    // удалить фото из стейта реакт хука, если оно там есть,
+    if (fileName) onImagesDelete(fileName);
 
     // Удаляем фото из списка существующих, если оно там есть
     if (currentImages && setExistingImages) {
@@ -99,6 +109,7 @@ export const ImagesFormField = ({
 
   const handleClearImages = () => {
     setSelectedImages([]);
+    onImagesDelete("", true); // При клике на "очистить все", также чистим и стейт реакт хук формы
     if (setExistingImages) setExistingImages([]);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -187,11 +198,11 @@ export const ImagesFormField = ({
           <Box>
             <Box>
               <Swiper slidesPerView={1.05} spaceBetween={8} speed={666}>
-                {selectedImages.map(({ _id, img }) => (
+                {selectedImages.map(({ _id, img, name }) => (
                   <SwiperSlide key={_id} className="slide">
                     <Box sx={{ position: "relative" }}>
                       <IconButton
-                        onClick={() => handleClickDeleteButton(_id)}
+                        onClick={() => handleClickDeleteButton(_id, name)}
                         sx={{
                           position: "absolute",
                           right: 8,
