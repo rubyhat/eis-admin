@@ -248,6 +248,36 @@ export const FilterForm = () => {
             variant="textCalloutRegular"
             marginBottom={0.5}
           >
+            Район
+          </Typography>
+          <Controller
+            name="cityRegion"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="Город">Город</MenuItem>
+                <MenuItem value="Юго-Восток">Юго-Восток</MenuItem>
+                <MenuItem value="Михайловка">Михайловка</MenuItem>
+                <MenuItem value="Майкудук">Майкудук</MenuItem>
+                <MenuItem value="Федоровка">Федоровка</MenuItem>
+                <MenuItem value="Кунгей">Кунгей</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
             Категория
           </Typography>
           <Controller
