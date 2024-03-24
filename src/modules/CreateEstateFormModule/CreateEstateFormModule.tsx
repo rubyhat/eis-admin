@@ -52,6 +52,39 @@ export const CreateEstateFormModule = () => {
   const { isMobile } = useScreenSize();
   const navigate = useNavigate();
 
+  const methods = useForm<FieldValues>({
+    defaultValues: {
+      ...formFieldsData,
+    },
+  });
+
+  // Кейс:
+  // 1. юзер первый раз нажал на инпут и выбрал фотографию, затем закрыл системное окно загрузки фотографии
+  // 2. не отправляя формы, снова нажал на инпут и добавил еще фотографий
+  // для этого кейса нам нужно проверять и сохранять фото, которые он грузит при помощи uploadedEarlyImages ,
+  // иначе новые фото будут перезаписывать старые фото в стейте реакт хук формы
+  const onImagesUpload = (files: FileList) => {
+    const uploadedEarlyImages = methods.getValues().images;
+
+    methods.setValue("images", [...uploadedEarlyImages, ...Array.from(files)]);
+  };
+
+  // Кейс:
+  // 1. юзер нажал на инпут и выбрал фото
+  // 2. не отправляя формы, юзер удалил только что загруженное фото
+  // в этом случае нам нужно удалить фото не только из превью (это происходит в <ImagesFormField />)
+  // но и в стейте реакт хук формы
+  // а также очищать стейт реакт хук формы при клике на кнопку "Очистить все"
+  const onImagesDelete = (fileName: string, clearAll?: boolean) => {
+    const stateImages = methods.getValues().images;
+
+    const filteredStateImages = stateImages.filter(
+      (file: File) => file.name !== fileName,
+    );
+
+    methods.setValue("images", clearAll ? [] : filteredStateImages);
+  };
+
   // Перечисление всех свойств это дичь, нужно будет подумать как переделать
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
@@ -206,7 +239,7 @@ export const CreateEstateFormModule = () => {
       Object.entries(filteredData).forEach(([key, value]) => {
         if (key === "geoPosition" || key === "ownerInfo") {
           formData.append(key, JSON.stringify(value));
-        } else if (key === "images" && value instanceof FileList) {
+        } else if (key === "images") {
           for (const file of value) {
             formData.append("images", file);
           }
@@ -234,16 +267,6 @@ export const CreateEstateFormModule = () => {
         .finally(() => setIsLoading(false));
     };
     createObjectReq();
-  };
-
-  const methods = useForm<FieldValues>({
-    defaultValues: {
-      ...formFieldsData,
-    },
-  });
-
-  const onImagesUpload = (files: FileList) => {
-    methods.setValue("images", files);
   };
 
   return (
@@ -371,7 +394,10 @@ export const CreateEstateFormModule = () => {
                 Фотографии и описание
               </Typography>
             </Grid>
-            <ImagesFormField onImagesUpload={onImagesUpload} />
+            <ImagesFormField
+              onImagesUpload={onImagesUpload}
+              onImagesDelete={onImagesDelete}
+            />
             <Grid item xs={12} md={6}>
               <RichTextEditorField
                 setDescriptionTempText={setDescriptionTempText}
