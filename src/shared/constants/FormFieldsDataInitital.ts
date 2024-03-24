@@ -71,5 +71,5 @@ export const FormFieldsDataInitial: FormFieldsType = {
   landSquare: "",
 };
 
-export const livingSpaces = ["apartment", "house", "cottage"];
+export const livingSpaces = ["apartment", "house", "cottage", "townhouse"];
 export const houseAndCottage = ["house", "cottage"];

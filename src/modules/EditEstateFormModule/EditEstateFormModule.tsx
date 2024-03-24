@@ -61,6 +61,12 @@ export const EditEstateFormModule = ({
   const { isMobile } = useScreenSize();
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    if (editEstateData) {
+      setFormFieldsData(editEstateData);
+    }
+  }, [editEstateData, setFormFieldsData]);
+
   const methods = useForm<FieldValues>({
     defaultValues: {
       ...editEstateData,
@@ -230,7 +236,7 @@ export const EditEstateFormModule = ({
       cottage: { ...apartmentData, ...houseData },
       house: { ...apartmentData, ...houseData },
       land: { ...landData },
-      townhouse: {},
+      townhouse: { ...apartmentData },
       business: {},
       factory: {},
       other: {},

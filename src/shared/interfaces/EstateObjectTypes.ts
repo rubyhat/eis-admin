@@ -156,6 +156,7 @@ export interface Land extends BasicObject {
   landSquare: string; // Площадь земли
 }
 
+export interface Townhouse extends BasicObject {}
 export interface Commercial extends BasicObject {}
 export interface Business extends BasicObject {}
 export interface Factory extends BasicObject {}

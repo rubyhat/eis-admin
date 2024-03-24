@@ -213,7 +213,7 @@ export const CreateEstateFormModule = () => {
       cottage: { ...apartmentData, ...houseData },
       house: { ...apartmentData, ...houseData },
       land: { ...landData },
-      townhouse: {},
+      townhouse: { ...apartmentData },
       business: {},
       factory: {},
       other: {},
