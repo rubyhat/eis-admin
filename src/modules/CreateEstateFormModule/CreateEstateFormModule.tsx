@@ -39,6 +39,7 @@ import {
 import { LoadingSplashScreen } from "../../components/LoadingSplashScreen";
 import { useCreateEstateStore } from "../CreateEstateModule/store";
 import { OwnerFormFields } from "../../components/EstateFormFields/OwnerFormFields";
+import { ApartmentComplexFormFields } from "../../components/EstateFormFields/ApartmentComplexFormFields";
 
 export const CreateEstateFormModule = () => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -96,6 +97,7 @@ export const CreateEstateFormModule = () => {
       discount,
       images,
       videoLink,
+      tiktokLink,
       mortgage,
       exchange,
       isCommercial,
@@ -158,6 +160,7 @@ export const CreateEstateFormModule = () => {
       discount: Number(discount),
       images: images,
       videoLink: videoLink,
+      tiktokLink: tiktokLink,
       mortgage: mortgage,
       exchange: exchange,
       isCommercial: isCommercial,
@@ -343,6 +346,12 @@ export const CreateEstateFormModule = () => {
               </Typography>
               <HomeFormFields isLoading={isLoading} />
               <CustomHr />
+              {livingSpaces.includes(formFieldsData.category) && (
+                <>
+                  <ApartmentComplexFormFields />
+                  <CustomHr />
+                </>
+              )}
               {formFieldsData.category === "apartment" && (
                 <>
                   <Typography
@@ -350,7 +359,7 @@ export const CreateEstateFormModule = () => {
                     variant="titleThirdRegular"
                     marginBottom={1}
                   >
-                    Cвойства квартиры
+                    Свойства квартиры
                   </Typography>
                   <ApartmentFormFields isLoading={isLoading} />
                   <CustomHr />
@@ -363,7 +372,7 @@ export const CreateEstateFormModule = () => {
                     variant="titleThirdRegular"
                     marginBottom={1}
                   >
-                    Cвойства дома и дачи
+                    Свойства дома и дачи
                   </Typography>
                   <HouseFormFileds isLoading={isLoading} />
                   <CustomHr />
@@ -378,7 +387,7 @@ export const CreateEstateFormModule = () => {
                 variant="titleThirdRegular"
                 marginBottom={1}
               >
-                Cвойства земельного участка
+                Свойства земельного участка
               </Typography>
               <LandFormFields isLoading={isLoading} />
               <CustomHr />

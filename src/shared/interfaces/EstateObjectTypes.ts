@@ -81,6 +81,10 @@ export interface OwnerInfo {
   intercomNumber?: string; // номер домофона
 }
 
+export interface ApartmentComplex {
+  title: string;
+}
+
 export type FormFieldsType = BasicObject | Apartment | House | Flat | Land;
 
 export interface EstateObject extends Apartment, House, Flat, Land {
@@ -106,6 +110,7 @@ export interface BasicObject {
   images?: FileList | [];
   existingImages?: ObjectImages[];
   videoLink?: string;
+  tiktokLink?: string;
   estateAgent?: string;
   isCommercial: boolean;
   exchange: ExchangeType | "";
@@ -114,6 +119,7 @@ export interface BasicObject {
   documents: DocumentsType | "";
   geoPosition: GeoPositionInfo;
   ownerInfo: OwnerInfo;
+  apartmentComplex?: ApartmentComplex;
 }
 
 export interface Apartment extends BasicObject {

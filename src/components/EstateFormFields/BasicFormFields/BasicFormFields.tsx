@@ -459,7 +459,25 @@ export const BasicFormFields = ({
             variant="textCalloutRegular"
             marginBottom={0.5}
           >
-            Ссылка на видео обзор
+            Ссылка на TikTok
+          </Typography>
+          <CustomInput
+            id="tiktokLink"
+            register={register}
+            errors={formState.errors}
+            disabled={isLoading}
+            formatPrice={false}
+            placeholder="Например: https://tiktok.com/..."
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Ссылка на видео обзор Instagram
           </Typography>
           <CustomInput
             id="videoLink"

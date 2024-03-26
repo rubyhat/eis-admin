@@ -116,6 +116,7 @@ export const EditEstateFormModule = ({
       discount,
       images,
       videoLink,
+      tiktokLink,
       mortgage,
       exchange,
       isCommercial,
@@ -181,6 +182,7 @@ export const EditEstateFormModule = ({
         existingImages.length > 0 ? existingImages : [],
       ),
       videoLink: videoLink,
+      tiktokLink: tiktokLink,
       mortgage: mortgage,
       exchange: exchange,
       isCommercial: isCommercial,
@@ -386,7 +388,7 @@ export const EditEstateFormModule = ({
                     variant="titleThirdRegular"
                     marginBottom={1}
                   >
-                    Cвойства квартиры
+                    Свойства квартиры
                   </Typography>
                   <ApartmentFormFields isLoading={isLoading} />
                   <CustomHr />
@@ -399,7 +401,7 @@ export const EditEstateFormModule = ({
                     variant="titleThirdRegular"
                     marginBottom={1}
                   >
-                    Cвойства дома и дачи
+                    Свойства дома и дачи
                   </Typography>
                   <HouseFormFileds isLoading={isLoading} />
                   <CustomHr />
@@ -414,7 +416,7 @@ export const EditEstateFormModule = ({
                 variant="titleThirdRegular"
                 marginBottom={1}
               >
-                Cвойства земельного участка
+                Свойства земельного участка
               </Typography>
               <LandFormFields isLoading={isLoading} />
               <CustomHr />
