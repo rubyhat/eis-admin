@@ -5,6 +5,7 @@ import { CustomButton } from "../../../../components/CustomButton";
 import { DisplayEstateObject } from "../../../../shared/interfaces/EstateObjectTypes";
 import { useCopySharingLink } from "../../../../hooks/useCopySharingLink";
 import { useScreenSize } from "../../../../hooks/useScreenSize";
+import { CustomHr } from "../../../../components/CustomHr";
 
 interface OwnerInfoBlockProps {
   estateDetails: DisplayEstateObject;
@@ -124,12 +125,57 @@ export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
         )}
       </Box>
 
-      <Typography component="p" variant="textBodyEmphasized">
-        Заметка:
-      </Typography>
-      <Typography component="p" variant="textBodyRegular" marginBottom={1}>
-        {estateDetails.ownerInfo.description}
-      </Typography>
+      {estateDetails.ownerInfo.description && (
+        <>
+          <Typography component="p" variant="textBodyEmphasized">
+            Заметка:
+          </Typography>
+          <Typography component="p" variant="textBodyRegular" marginBottom={1}>
+            {estateDetails.ownerInfo.description}
+          </Typography>
+        </>
+      )}
+
+      {estateDetails.tiktokLink && (
+        <>
+          <Typography component="p" variant="textBodyEmphasized">
+            Ссылка на ТикТок:
+          </Typography>
+          <Typography component="p" variant="textBodyRegular" marginBottom={1}>
+            <Typography
+              sx={{
+                display: "inline-block",
+                color: "customColors.colorsOrange",
+                textDecoration: "underline",
+                padding: 0.25,
+              }}
+              component="a"
+              href={estateDetails.tiktokLink}
+              target="_blank"
+            >
+              {estateDetails.tiktokLink}
+            </Typography>
+          </Typography>
+        </>
+      )}
+      {estateDetails.apartmentComplex && (
+        <>
+          <CustomHr />
+          <Typography
+            component="p"
+            variant="textBodyEmphasized"
+            marginBottom={1}
+          >
+            Жилой комплекс
+          </Typography>
+          <Typography component="p" variant="textBodyEmphasized">
+            Название:
+          </Typography>
+          <Typography component="p" variant="textBodyRegular" marginBottom={1}>
+            {estateDetails.apartmentComplex.title}
+          </Typography>
+        </>
+      )}
       <Box
         sx={{
           display: "grid",

@@ -109,6 +109,7 @@ export const CreateEstateFormModule = () => {
       estateAgent,
       geoPosition,
       ownerInfo,
+      apartmentComplex,
     } = data as FormFieldsType;
 
     const {
@@ -172,6 +173,7 @@ export const CreateEstateFormModule = () => {
       estateAgent: estateAgent,
       geoPosition: geoPosition,
       ownerInfo: ownerInfo,
+      apartmentComplex: apartmentComplex,
     };
 
     const apartmentData = {
@@ -240,7 +242,11 @@ export const CreateEstateFormModule = () => {
 
       const formData = new FormData();
       Object.entries(filteredData).forEach(([key, value]) => {
-        if (key === "geoPosition" || key === "ownerInfo") {
+        if (
+          key === "geoPosition" ||
+          key === "ownerInfo" ||
+          key === "apartmentComplex"
+        ) {
           formData.append(key, JSON.stringify(value));
         } else if (key === "images") {
           for (const file of value) {
@@ -348,7 +354,14 @@ export const CreateEstateFormModule = () => {
               <CustomHr />
               {livingSpaces.includes(formFieldsData.category) && (
                 <>
-                  <ApartmentComplexFormFields />
+                  <Typography
+                    component="h6"
+                    variant="titleThirdRegular"
+                    marginBottom={1}
+                  >
+                    Жилой комплекс
+                  </Typography>
+                  <ApartmentComplexFormFields isLoading={isLoading} />
                   <CustomHr />
                 </>
               )}

@@ -39,6 +39,7 @@ import {
 } from "../../shared/constants/FormFieldsDataInitital";
 import { LoadingSplashScreen } from "../../components/LoadingSplashScreen";
 import { OwnerFormFields } from "../../components/EstateFormFields/OwnerFormFields";
+import { ApartmentComplexFormFields } from "../../components/EstateFormFields/ApartmentComplexFormFields";
 
 interface EditEstateFormModuleProps {
   editEstateData: FormFieldsData | Apartment | House | Flat | Land;
@@ -128,6 +129,7 @@ export const EditEstateFormModule = ({
       estateAgent,
       geoPosition,
       ownerInfo,
+      apartmentComplex,
     } = data as FormFieldsType;
 
     const {
@@ -194,6 +196,7 @@ export const EditEstateFormModule = ({
       estateAgent: estateAgent,
       geoPosition: geoPosition,
       ownerInfo: ownerInfo,
+      apartmentComplex: apartmentComplex,
     };
 
     const apartmentData = {
@@ -262,7 +265,11 @@ export const EditEstateFormModule = ({
 
       const formData = new FormData();
       Object.entries(filteredData).forEach(([key, value]) => {
-        if (key === "geoPosition" || key === "ownerInfo") {
+        if (
+          key === "geoPosition" ||
+          key === "ownerInfo" ||
+          key === "apartmentComplex"
+        ) {
           formData.append(key, JSON.stringify(value));
         } else if (key === "images") {
           for (const file of value) {
@@ -381,6 +388,19 @@ export const EditEstateFormModule = ({
               </Typography>
               <HomeFormFields isLoading={isLoading} />
               <CustomHr />
+              {livingSpaces.includes(formFieldsData.category) && (
+                <>
+                  <Typography
+                    component="h6"
+                    variant="titleThirdRegular"
+                    marginBottom={1}
+                  >
+                    Жилой комплекс
+                  </Typography>
+                  <ApartmentComplexFormFields isLoading={isLoading} />
+                  <CustomHr />
+                </>
+              )}
               {formFieldsData.category === "apartment" && (
                 <>
                   <Typography
