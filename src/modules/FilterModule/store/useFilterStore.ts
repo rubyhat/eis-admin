@@ -18,6 +18,7 @@ export interface FilterState {
   priceStart: string;
   priceEnd: string;
   houseSquare: string;
+  houseSquareEnd: string;
   kitchenSquare: string;
   houseBuildingYear: string;
   targetFloor: number | null;
@@ -43,6 +44,7 @@ export const initialFilterState: FilterState = {
   priceStart: "",
   priceEnd: "",
   houseSquare: "",
+  houseSquareEnd: "",
   kitchenSquare: "",
   houseBuildingYear: "",
   visibilityStatus: "",
