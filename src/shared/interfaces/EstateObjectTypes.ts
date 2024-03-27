@@ -156,6 +156,8 @@ export interface House extends Apartment {
 export interface Flat extends Apartment {
   targetFloor?: number | null; // Этаж, на котором находится объект
   totalFloor?: number | null; // Общее количество этажей в здании
+  notFirstFloor?: boolean;
+  notLastFloor?: boolean;
 }
 
 export interface Land extends BasicObject {

@@ -23,6 +23,8 @@ export interface FilterState {
   houseBuildingYear: string;
   targetFloor: number | null;
   totalFloor: number | null;
+  notFirstFloor: boolean;
+  notLastFloor: boolean;
   type: ServiceType;
   exchange: ExchangeType | "";
   mortgage: MortgageType | "";
@@ -55,6 +57,8 @@ export const initialFilterState: FilterState = {
   type: "sell",
   targetFloor: null,
   totalFloor: null,
+  notFirstFloor: false,
+  notLastFloor: false,
 };
 
 export interface FilterStore {

@@ -1,4 +1,11 @@
-import { Box, MenuItem, Select, Typography } from "@mui/material";
+import {
+  Box,
+  FormControlLabel,
+  MenuItem,
+  Select,
+  Switch,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import {
   Controller,
@@ -621,6 +628,46 @@ export const FilterForm = () => {
               min="0"
             />
           </Box>
+        </Box>
+        <Box>
+          <Controller
+            name="notFirstFloor"
+            control={control}
+            render={({ field }) => (
+              <FormControlLabel
+                {...field}
+                control={
+                  <Switch
+                    {...field}
+                    checked={String(field.value) === "true"}
+                    onChange={(e) =>
+                      field.onChange(e.target.checked.toString())
+                    }
+                  />
+                }
+                label="Не первый этаж"
+              />
+            )}
+          />
+          <Controller
+            name="notLastFloor"
+            control={control}
+            render={({ field }) => (
+              <FormControlLabel
+                {...field}
+                control={
+                  <Switch
+                    {...field}
+                    checked={String(field.value) === "true"}
+                    onChange={(e) =>
+                      field.onChange(e.target.checked.toString())
+                    }
+                  />
+                }
+                label="Не последний этаж"
+              />
+            )}
+          />
         </Box>
         <Box
           sx={{

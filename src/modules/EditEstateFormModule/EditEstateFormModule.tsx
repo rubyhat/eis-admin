@@ -232,6 +232,8 @@ export const EditEstateFormModule = ({
     const flatData = {
       targetFloor: Number(targetFloor),
       totalFloor: Number(totalFloor),
+      notFirstFloor: Number(targetFloor) !== 1,
+      notLastFloor: Number(targetFloor) !== Number(totalFloor),
     };
 
     const landData = { landSquare: Number(landSquare) };
