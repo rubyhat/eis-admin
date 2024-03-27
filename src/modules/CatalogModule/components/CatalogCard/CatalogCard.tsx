@@ -70,14 +70,14 @@ export const CatalogCard = ({ item }: CatalogCardProps) => {
             {estateObjectDictionary.category[item.category]} | Комнат:{" "}
             {item.roomCount} | Площадь: {item.houseSquare} м²
           </Typography>
-          {item.apartmentComplex && (
+          {item.apartmentComplex && item.apartmentComplex.title && (
             <Typography
               component="p"
               variant="textSubheadlineRegular"
               color="customColors.labelsSecondary"
               sx={{ display: "flex", alignItems: "center" }}
             >
-              Жилой Комплекс: {item.apartmentComplex?.title}
+              Жилой Комплекс: {item.apartmentComplex.title}
             </Typography>
           )}
         </Box>

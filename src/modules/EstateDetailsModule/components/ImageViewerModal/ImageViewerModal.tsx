@@ -89,7 +89,7 @@ export const ImageViewerModal = () => {
             Просмотр фотографий
           </Typography>
           <IconButton onClick={handleCloseViewer}>
-            <IoClose color="hsla(29, 100%, 50%, 1)" />
+            <IoClose color="hsla(32, 100%, 55%, 1)" />
           </IconButton>
         </Box>
       )}

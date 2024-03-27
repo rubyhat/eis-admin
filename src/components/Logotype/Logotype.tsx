@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Typography } from "@mui/material";
+import { Chip, Typography } from "@mui/material";
 
 export const Logotype = () => {
   return (
@@ -12,13 +12,16 @@ export const Logotype = () => {
       display="flex"
       alignItems="center"
     >
-      Roze
-      <Typography color="customColors.colorsOrange" marginLeft={0.5}>
-        Agency
+      <Typography color="customColors.colorsOrange" marginRight={0.5}>
+        Roze
       </Typography>
-      <Typography marginLeft={0.5} color="customColors.colorsGreen">
-        [ Admin Panel ]
-      </Typography>
+      Agency
+      <Chip
+        size="small"
+        label="Admin Panel"
+        color="primary"
+        sx={{ marginLeft: 1, backgroundColor: "customColors.colorsGreen" }}
+      />
     </Typography>
   );
 };

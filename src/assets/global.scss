@@ -15,7 +15,8 @@
   // --colors-purple-dark: #bf5af2;
   --colors-red: hsla(1, 100%, 56%, 1);
   --colors-red-dark: hsla(3, 100%, 59%, 1);
-  --colors-orange: hsla(29, 100%, 50%, 1);
+  // --colors-orange: hsla(29, 100%, 50%, 1);
+  --colors-orange: hsla(32, 100%, 55%, 1);
   --colors-orange-dark: hsla(30, 100%, 54%, 1);
   --colors-yellow: hsla(48, 100%, 50%, 1);
   --colors-yellow-dark: hsla(49, 100%, 54%, 1);
@@ -33,12 +34,18 @@
   --labels-tertiary: hsla(240, 6%, 25%, 0.3);
   --labels-quaternary: hsla(240, 6%, 25%, 0.18);
 
-  --button-gradient-primary: linear-gradient(
+  --button-gradient-primary: linear-gradient(180deg, #ff9218 0%, #ff6800 100%),
+    linear-gradient(
       180deg,
-      hsla(0, 0%, 100%, 0.17) 0%,
-      hsla(0, 0%, 100%, 0) 100%
-    ),
-    hsla(211, 100%, 50%, 1);
+      rgba(255, 255, 255, 0.17) 0%,
+      rgba(255, 255, 255, 0.17) 100%
+    );
+  // --button-gradient-primary: linear-gradient(
+  //     180deg,
+  //     hsla(0, 0%, 100%, 0.17) 0%,
+  //     hsla(0, 0%, 100%, 0) 100%
+  //   ),
+  //   hsla(211, 100%, 50%, 1);
 }
 
 body {
@@ -106,16 +113,16 @@ h6 {
 
 .estate-details__swiper-wrapper {
   .swiper-pagination-bullet {
-    background-color: hsla(29, 100%, 50%, 1);
+    background-color: var(--colors-orange);
   }
 
   .swiper-pagination-bullet-active {
-    background-color: hsla(29, 100%, 50%, 1);
+    background-color: var(--colors-orange);
   }
 
   .swiper-button-prev,
   .swiper-button-next {
-    background-color: hsla(29, 100%, 50%, 1);
+    background-color: var(--colors-orange);
     width: 44px;
     border-radius: 50%;
     &::after {

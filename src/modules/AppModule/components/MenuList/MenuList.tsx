@@ -16,23 +16,23 @@ const links: LinkObject[] = [
   {
     title: "Объекты",
     to: "/catalog",
-    icon: <IoHomeOutline color="hsla(29, 100%, 50%, 1)" />,
+    icon: <IoHomeOutline color="hsla(32, 100%, 55%, 1)" />,
   },
   {
     title: "Заявки",
     to: "/orders",
-    icon: <IoDocumentTextOutline color="hsla(29, 100%, 50%, 1)" />,
+    icon: <IoDocumentTextOutline color="hsla(32, 100%, 55%, 1)" />,
   },
   {
     title: "Сотрудники",
     to: "/users",
-    icon: <AiOutlineUser color="hsla(29, 100%, 50%, 1)" />,
+    icon: <AiOutlineUser color="hsla(32, 100%, 55%, 1)" />,
   },
   // { title: "Обучение", to: "/" },
   {
     title: "Центр знаний",
     to: "/help",
-    icon: <BsBook color="hsla(29, 100%, 50%, 1)" />,
+    icon: <BsBook color="hsla(32, 100%, 55%, 1)" />,
   },
 ];
 

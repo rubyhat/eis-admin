@@ -12,9 +12,10 @@ export interface HelpCardLink {
   disabled: boolean;
 }
 
+const iconColor = "hsla(32, 100%, 55%, 1)";
 const links: HelpCardLink[] = [
   {
-    icon: <IoHomeOutline size={128} color="#FF9500" />,
+    icon: <IoHomeOutline size={128} color={iconColor} />,
     title: "Объекты",
     to: "/help/estate",
     disabled: false,

@@ -14,9 +14,10 @@ export interface OrdersCard {
   disabled: boolean;
 }
 
+const iconColor = "hsla(32, 100%, 55%, 1)";
 const list: OrdersCard[] = [
   {
-    icon: <IoHomeOutline size={128} color="#FF9500" />,
+    icon: <IoHomeOutline size={128} color={iconColor} />,
     link: "/orders/feedback",
     disabled: false,
     title: "Заявки на недвижимость",

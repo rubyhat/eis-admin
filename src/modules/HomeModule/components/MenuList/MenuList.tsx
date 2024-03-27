@@ -7,21 +7,22 @@ import { BsBook } from "react-icons/bs";
 import { IoDocumentTextOutline } from "react-icons/io5";
 // import { GoGraph } from "react-icons/go";
 
+const iconColor = "hsla(32, 100%, 55%, 1)";
 const list = [
   {
-    icon: <IoHomeOutline size={128} color="#FF9500" />,
+    icon: <IoHomeOutline size={128} color={iconColor} />,
     link: "/catalog",
     disabled: false,
     title: "Объекты",
   },
   {
-    icon: <IoDocumentTextOutline size={128} color="#FF9500" />,
+    icon: <IoDocumentTextOutline size={128} color={iconColor} />,
     link: "/orders",
     disabled: false,
     title: "Заявки",
   },
   {
-    icon: <AiOutlineUser size={128} color="#FF9500" />,
+    icon: <AiOutlineUser size={128} color={iconColor} />,
     link: "/users",
     disabled: false,
     title: "Сотрудники",
@@ -32,7 +33,7 @@ const list = [
   //   disabled: true,
   // },
   {
-    icon: <BsBook size={128} color="#FF9500" />,
+    icon: <BsBook size={128} color={iconColor} />,
     link: "/help",
     disabled: false,
     title: "Центр знаний",
