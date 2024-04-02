@@ -379,7 +379,7 @@ export const FilterForm = () => {
                   Газосиликатный блок
                 </MenuItem>
                 <MenuItem value="heatBlock">Теплоблок</MenuItem>
-                <MenuItem value="panel">Каркасно-щитовой</MenuItem>
+                <MenuItem value="panel">Панельный</MenuItem>
                 <MenuItem value="monolith">Монолит</MenuItem>
                 <MenuItem value="saman">Саман</MenuItem>
                 <MenuItem value="gasConcreteBlock">Газобетонный блок</MenuItem>

@@ -26,7 +26,7 @@ export const estateObjectDictionary = {
     gasSilicateBlock: "Газосиликатный блок",
     cinderBlock: "Шлакоблок",
     heatBlock: "Теплоблок",
-    panel: "Каркасно-щитовой",
+    panel: "Панельный",
     monolith: "Монолит",
     saman: "Саман",
     gasConcreteBlock: "Газобетонный блок",

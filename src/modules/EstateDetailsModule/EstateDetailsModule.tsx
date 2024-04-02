@@ -1,5 +1,4 @@
 import React from "react";
-import useTitle from "../../hooks/useTitle";
 import {
   Alert,
   Box,
@@ -8,17 +7,20 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import { v4 as uuidv4 } from "uuid";
+import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import { useLocation, useParams } from "react-router";
+
+import useTitle from "../../hooks/useTitle";
 import { AgentCard } from "../../components/AgentCard/AgentCard";
 import { DetailsList } from "./components/DetailsList/DetailsList";
 import { ImageViewer } from "./components/ImageViewer/ImageViewer";
 import { SettingsButtonBar } from "./components/SettingsButtonBar";
 import { TitleGroup } from "./components/TitleGroup";
-import { useLocation, useParams } from "react-router";
 import { apiEstateDetailsModule } from "./api/apiEstateDetailsModule";
-import { useQuery } from "@tanstack/react-query";
 import { useEstateDetailsStore } from "./store";
 import { ButtonStickyBottom } from "../../components/ButtonStickyBottom";
-import { useNavigate } from "react-router-dom";
 import { useScreenSize } from "../../hooks/useScreenSize";
 import { useFormatDate } from "../../shared/hooks/useFormatDate";
 import { useUserStore } from "../UserModule/store/useUserStore";
@@ -100,7 +102,7 @@ export const EstateDetailsModule = () => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <SettingsButtonBar
-              key={estateDetails._id}
+              key={uuidv4()}
               _id={estateDetails._id}
               currentStatus={estateDetails.visibilityStatus}
             />
