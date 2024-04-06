@@ -13,6 +13,8 @@ import { ToasterProvider } from "../../providers/ToasterProvider";
 const client = new QueryClient();
 
 export const App = () => {
+  // eslint-disable-next-line no-console
+  console.log(`Mode: ${import.meta.env.MODE}`);
   return (
     <Router>
       <QueryClientProvider client={client}>
