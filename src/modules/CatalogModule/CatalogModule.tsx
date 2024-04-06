@@ -1,6 +1,7 @@
-import { Box, Container, Grid, Typography, Alert } from "@mui/material";
 import React from "react";
+import { Box, Container, Grid, Typography, Alert } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
+
 import { apiCatalogModule } from "./api/apiCatalogModule";
 import { CatalogObjectives } from "./components/CatalogObjectives";
 import { FilterMobileWrapper } from "../FilterModule/components/FilterMobileWrapper";
