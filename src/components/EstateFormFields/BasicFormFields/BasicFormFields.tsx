@@ -176,6 +176,7 @@ export const BasicFormFields = ({
                 <MenuItem value="active">Активный</MenuItem>
                 <MenuItem value="sold">Продано</MenuItem>
                 <MenuItem value="canceled">Отменено</MenuItem>
+                <MenuItem value="rented">Сдан в аренду</MenuItem>
               </Select>
             )}
           />

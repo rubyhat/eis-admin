@@ -98,10 +98,11 @@ export const SettingsButtonBar = ({
             inputProps={{ padding: 1, fontSize: 16 }}
             disabled={!isAdmin}
           >
-            <MenuItem value={"active"}>Активный</MenuItem>
-            <MenuItem value={"sold"}>Проданный</MenuItem>
-            <MenuItem value={"checking"}>На проверке</MenuItem>
-            <MenuItem value={"canceled"}>Отмененный</MenuItem>
+            <MenuItem value="active">Активный</MenuItem>
+            <MenuItem value="sold">Проданный</MenuItem>
+            <MenuItem value="checking">На проверке</MenuItem>
+            <MenuItem value="canceled">Отмененный</MenuItem>
+            <MenuItem value="rented">Сдан в аренду</MenuItem>
           </Select>
           <CustomButton
             disabled={!isAdmin}

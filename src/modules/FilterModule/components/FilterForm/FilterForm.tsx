@@ -177,6 +177,7 @@ export const FilterForm = () => {
                 <MenuItem value="checking">На проверке</MenuItem>
                 <MenuItem value="sold">Проданные</MenuItem>
                 <MenuItem value="canceled">Отмененные</MenuItem>
+                <MenuItem value="rented">Сдан в аренду</MenuItem>
               </Select>
             )}
           />
