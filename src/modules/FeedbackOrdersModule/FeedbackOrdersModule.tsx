@@ -42,7 +42,7 @@ export const FeedbackOrdersModule = () => {
         <Grid item xs={12} lg={8}>
           {isSuccess && Boolean(!FeedbacksData.length) && (
             <Alert severity="info">
-              Список заявок пуст. Если так быть не должноЮ проверьте фильтры или
+              Список заявок пуст. Если так быть не должно, проверьте фильтры или
               обратитесь в техническую поддержку!
             </Alert>
           )}

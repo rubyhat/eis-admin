@@ -10,21 +10,28 @@ import { IoClose } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { CustomHr } from "../../../../components/CustomHr";
 import { useScreenSize } from "../../../../hooks/useScreenSize";
-import { useUsersStore } from "../../store/useUsersStore";
+import { useFeedbackOrdersStore } from "../../store";
+
 interface UserDeleteDrawerProps {
   onClick: () => void;
   onDelete: () => void;
+  orderId: string;
 }
 
 // todo: need create one drawer for deleting user and object and feedback orders?
-export const UserDeleteDrawer = ({
+export const FeedbackOrderDeleteDrawer = ({
   onClick: handleOpenDrawer,
   onDelete,
+  orderId,
 }: UserDeleteDrawerProps) => {
   const { isMobile } = useScreenSize();
-  const { isDeleteDrawerOpen, setIsDeleteDrawerOpen } = useUsersStore(
-    (state) => state,
-  );
+  const { isDeleteDrawerOpen, deleteOrderId, setIsDeleteDrawerOpen } =
+    useFeedbackOrdersStore((state) => state);
+
+  if (orderId !== deleteOrderId) {
+    return null;
+  }
+
   const handleCloseDrawer = (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
       event &&
@@ -36,6 +43,7 @@ export const UserDeleteDrawer = ({
     }
     setIsDeleteDrawerOpen(false);
   };
+
   return (
     <SwipeableDrawer
       anchor={isMobile ? "bottom" : "top"}
@@ -60,7 +68,7 @@ export const UserDeleteDrawer = ({
             }}
           >
             <Typography component="h6" variant="titleThirdRegular">
-              Удалить данного пользователя?
+              Удалить данную заявку пользователя?
             </Typography>
             <IconButton onClick={handleCloseDrawer}>
               <IoClose />
@@ -73,21 +81,13 @@ export const UserDeleteDrawer = ({
             color="customColors.colorsRed"
             sx={{ marginBottom: 1 }}
           >
-            После удаления восстановить данного пользователя будет невозможно!
-          </Typography>
-          <Typography
-            component="p"
-            variant="textBodyRegular"
-            sx={{ marginBottom: 1 }}
-          >
-            Перед удалением пользователя, необходимо для всех объектов данного
-            пользователя назначить нового агента!
+            После удаления восстановить данную заявку будет невозможно!
           </Typography>
           <Typography component="p" variant="textBodyRegular">
-            Подробнее о пользователях можно ознакомиться на{" "}
+            Подробнее о заявках можно ознакомиться на{" "}
             <Box
               component={Link}
-              to="/help/estate"
+              to="/help/orders"
               sx={{
                 color: "customColors.colorsOrange",
                 textDecoration: "underline",

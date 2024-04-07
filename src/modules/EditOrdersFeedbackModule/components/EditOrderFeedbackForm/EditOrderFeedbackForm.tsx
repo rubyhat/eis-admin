@@ -7,11 +7,17 @@ import {
 } from "react-hook-form";
 
 import { Box, MenuItem, Select, Typography } from "@mui/material";
-import { FeedbackOrder } from "../../../FeedbackOrdersModule/store";
+import {
+  FeedbackOrder,
+  FeedbackOrderDisplay,
+} from "../../../FeedbackOrdersModule/store";
 import { CustomInput } from "../../../../components/CustomInput";
 import { CustomButton } from "../../../../components/CustomButton";
 import { useQuery } from "@tanstack/react-query";
 import { FetchAllUsers } from "../../../../shared/api/apiFetchAllUsers";
+import { apiFeedbackOrdersModule } from "../../../FeedbackOrdersModule/api";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const selectStyles = {
   height: "36px",
@@ -33,12 +39,14 @@ const selectInputProps = {
 };
 
 interface EditOrderFeedbackFormProps {
-  order: FeedbackOrder;
+  order: FeedbackOrderDisplay;
 }
 
 export const EditOrderFeedbackForm = ({
   order,
 }: EditOrderFeedbackFormProps) => {
+  const navigate = useNavigate();
+
   const [isLoading, setIsLoading] = React.useState(false);
 
   const {
@@ -46,13 +54,16 @@ export const EditOrderFeedbackForm = ({
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<FieldValues>({
     defaultValues: {
-      phone: order?.phone || "",
-      estateId: order?.estateId,
-      estateAgent: order?.estateAgent,
-      description: order?.description,
-      title: order?.title,
+      _id: order._id,
+      phone: order.phone,
+      name: order.name,
+      estateId: order.estateId || "",
+      estateAgent: order.estateAgent?._id || "",
+      description: order.description || "",
+      title: order.title || "",
     },
   });
 
@@ -65,9 +76,35 @@ export const EditOrderFeedbackForm = ({
     queryKey: ["usersItems"],
   });
 
+  React.useEffect(() => {
+    const userFromStorage = localStorage.getItem("user");
+    const user = userFromStorage ? JSON.parse(userFromStorage) : null;
+
+    if (usersData) {
+      setValue("estateAgent", user.id);
+    }
+  }, [setValue, usersData]);
+
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-    console.log(data);
+    const feedback = { ...order, ...data, estateAgent: data.estateAgent };
+
+    const filteredData = Object.fromEntries(
+      Object.entries(feedback).filter(
+        ([, value]) => value !== "" && value !== null,
+      ),
+    );
+
+    try {
+      apiFeedbackOrdersModule.updateFeedback(filteredData as FeedbackOrder);
+      setTimeout(() => navigate("/orders/feedback"), 100); // из-за быстрой загрузки и редиректа, на странице всех заявок приходит еще не обновленная заявка
+      toast.success("Заявка успешно обновлена!");
+    } catch (error) {
+      toast.success("Произошла ошибка!");
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -104,6 +141,24 @@ export const EditOrderFeedbackForm = ({
             disabled
             formatPrice={false}
             placeholder="Введите уникальный ID объекта"
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textFootnoteRegular"
+            marginBottom={0.5}
+          >
+            Имя клиента
+          </Typography>
+          <CustomInput
+            id="name"
+            register={register}
+            errors={errors}
+            disabled
+            formatPrice={false}
+            placeholder="Введите имя клиента"
           />
         </Box>
         <Box marginBottom={1.5}>

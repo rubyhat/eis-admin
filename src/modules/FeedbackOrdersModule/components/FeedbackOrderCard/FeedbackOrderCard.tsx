@@ -1,20 +1,60 @@
 import React from "react";
-import { FeedbackOrder } from "../../store";
-import { Box, List, ListItem, ListItemText, Typography } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+import toast from "react-hot-toast";
+import { FiEdit2 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import { CustomButton } from "../../../../components/CustomButton";
+import { MdDeleteOutline } from "react-icons/md";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import { FeedbackOrderDisplay, useFeedbackOrdersStore } from "../../store";
+import { apiFeedbackOrdersModule } from "../../api";
 import { CustomHr } from "../../../../components/CustomHr";
+import { CustomButton } from "../../../../components/CustomButton";
+import { useUserStore } from "../../../UserModule/store/useUserStore";
+import { FeedbackOrderDeleteDrawer } from "../FeedbackOrderDeleteDrawer";
 
 interface FeedbackOrderCardProps {
-  order: FeedbackOrder;
+  order: FeedbackOrderDisplay;
 }
 
 export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  const handleClickOpenEstateButton = () => navigate(`/catalog/${order._id}`);
-  const handleClickEditOrderButton = () =>
+  const { isAdmin } = useUserStore((state) => state);
+  const { setIsDeleteDrawerOpen } = useFeedbackOrdersStore((state) => state);
+
+  const deleteFeedbackMutation = useMutation({
+    mutationFn: () =>
+      apiFeedbackOrdersModule.deleteFeedbackOrderById(order._id),
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ["feedbackOrders"] });
+      toast.success("Заявка успешно удалена!");
+    },
+    onError() {
+      toast.error("Извините, произошла ошибка, обратитесь в тех. поддержку.");
+    },
+    onSettled() {
+      setIsDeleteDrawerOpen(false);
+    },
+  });
+
+  const handleClickOpenEstateButton = () =>
+    navigate(`/catalog/${order.estateId}`);
+  const handleEditFeedbackorder = () =>
     navigate(`/orders/feedback/edit`, { state: { order } });
+
+  const handleClickDeleteButton = () => setIsDeleteDrawerOpen(true, order._id);
+  const handleDeleteFeedbackOrder = () => {
+    deleteFeedbackMutation.mutate();
+  };
 
   return (
     <Box
@@ -27,8 +67,11 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
         borderRadius: 2,
       }}
     >
-      <Typography component="h6" variant="titleThirdRegular">
+      <Typography component="h6" variant="titleThirdRegular" marginBottom={2}>
         {order.title}
+      </Typography>
+      <Typography component="h6" variant="textBodyRegular" fontWeight={500}>
+        Информация от пользователя
       </Typography>
       <List>
         <ListItem dense sx={{ padding: 0, paddingBottom: 1 }}>
@@ -60,6 +103,34 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
         </ListItem>
       </List>
       <CustomHr sx={{ margin: "8px 0" }} />
+
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography component="h6" variant="textBodyRegular" fontWeight={500}>
+          Информация от сотрудника
+        </Typography>
+        {isAdmin && (
+          <Box>
+            <IconButton onClick={handleEditFeedbackorder} color="primary">
+              <FiEdit2 size={20} />
+            </IconButton>
+            <IconButton color="error" onClick={handleClickDeleteButton}>
+              <MdDeleteOutline />
+            </IconButton>
+            <FeedbackOrderDeleteDrawer
+              onClick={handleClickDeleteButton}
+              onDelete={handleDeleteFeedbackOrder}
+              orderId={order._id}
+            />
+          </Box>
+        )}
+      </Box>
+
       <List>
         <ListItem dense sx={{ padding: 0, paddingBottom: 1 }}>
           <ListItemText
@@ -113,15 +184,12 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
+          gridTemplateColumns: "1fr",
           gap: 1,
         }}
       >
-        <CustomButton fullWidth onClick={handleClickEditOrderButton}>
-          Редактировать
-        </CustomButton>
         <CustomButton fullWidth onClick={handleClickOpenEstateButton}>
-          Открыть
+          Посмотреть Объект
         </CustomButton>
       </Box>
     </Box>
