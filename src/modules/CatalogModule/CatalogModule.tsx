@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Container, Grid, Typography, Alert } from "@mui/material";
+import { Box, Container, Grid, Typography, Alert, Badge } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 
 import { apiCatalogModule } from "./api/apiCatalogModule";
@@ -55,7 +55,7 @@ export const CatalogModule = () => {
               },
             }}
           >
-            <Box width={1}>
+            <Box sx={{ width: 1, display: "flex", alignItems: "ceter" }}>
               <Typography
                 component="h2"
                 variant="titleFirstRegular"
@@ -63,6 +63,11 @@ export const CatalogModule = () => {
               >
                 Список всех объектов
               </Typography>
+              <Badge
+                badgeContent={catalogData?.length || 0}
+                color="primary"
+                sx={{ marginLeft: 2, marginTop: 1 }}
+              />
               {/* todo: refactor sort buttons */}
               {/* <CatalogSortGroup /> */}
             </Box>
