@@ -15,6 +15,7 @@ export interface FeedbackOrder {
 }
 
 interface FeedbackOrdersStore {
+  filterState: FilterState;
   isDeleteDrawerOpen: boolean;
   deleteOrderId: string | null;
   orders: FeedbackOrderDisplay[];
@@ -22,14 +23,31 @@ interface FeedbackOrdersStore {
   setIsMobileFilterModalOpen: (v: boolean) => void;
   setIsDeleteDrawerOpen: (v: boolean, orderId?: string) => void;
   setOrders: (v: FeedbackOrderDisplay[]) => void;
+  setFilterState: (v: FilterState) => void;
 }
 
+export interface FilterState {
+  name?: string;
+  phone?: string;
+  estateId?: string;
+  estateAgent?: string;
+}
+
+export const initialFilterState: FilterState = {
+  name: "",
+  phone: "",
+  estateId: "",
+  estateAgent: "",
+};
+
 export const useFeedbackOrdersStore = create<FeedbackOrdersStore>((set) => ({
+  filterState: initialFilterState,
   orders: [],
   deleteOrderId: null,
   isDeleteDrawerOpen: false,
   isMobileFilterModalOpen: false,
   setOrders: (v) => set({ orders: v }),
+  setFilterState: (v) => set({ filterState: v }),
   setIsDeleteDrawerOpen: (v, orderId) =>
     set({ isDeleteDrawerOpen: v, deleteOrderId: orderId }),
   setIsMobileFilterModalOpen: (v) => set({ isMobileFilterModalOpen: v }),

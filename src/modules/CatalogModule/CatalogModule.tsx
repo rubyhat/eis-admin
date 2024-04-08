@@ -64,7 +64,7 @@ export const CatalogModule = () => {
                 Список всех объектов
               </Typography>
               <Badge
-                badgeContent={catalogData?.length || 0}
+                badgeContent={catalogData?.length || "0"}
                 color="primary"
                 sx={{ marginLeft: 2, marginTop: 1 }}
               />

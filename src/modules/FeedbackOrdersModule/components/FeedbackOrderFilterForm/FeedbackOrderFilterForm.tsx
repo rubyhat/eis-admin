@@ -8,11 +8,17 @@ import {
 import { Box, MenuItem, Select, Typography } from "@mui/material";
 
 import { CustomInput } from "../../../../components/CustomInput";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { FetchAllUsers } from "../../../../shared/api/apiFetchAllUsers";
 import { CustomButton } from "../../../../components/CustomButton";
-import { useFeedbackOrdersStore } from "../../store";
+import {
+  FilterState,
+  initialFilterState,
+  useFeedbackOrdersStore,
+} from "../../store";
 import { useNavigate } from "react-router-dom";
+import { apiFeedbackOrdersModule } from "../../api";
+import toast from "react-hot-toast";
 
 const selectStyles = {
   height: "36px",
@@ -33,17 +39,12 @@ const selectInputProps = {
   fontSize: 16,
 };
 
-const initialFilterState = {
-  phone: "",
-  estateId: "",
-  estateAgent: "",
-};
-
 // todo: add params in url, when form was used, add request, when backend will be ready
 export const FeedbackOrderFilterForm = () => {
-  const { setIsMobileFilterModalOpen } = useFeedbackOrdersStore(
-    (state) => state,
-  );
+  const queryClient = useQueryClient();
+
+  const { filterState, setFilterState, setIsMobileFilterModalOpen } =
+    useFeedbackOrdersStore((state) => state);
   const [isLoading, setIsLoading] = React.useState(false);
   const {
     control,
@@ -52,8 +53,78 @@ export const FeedbackOrderFilterForm = () => {
     formState: { errors },
     reset,
   } = useForm<FieldValues>({
-    defaultValues: initialFilterState,
+    defaultValues: filterState,
   });
+
+  React.useEffect(() => {
+    reset(initialFilterState); // Сбрасываем форму к исходным значениям
+    setFilterState(initialFilterState); // Сбрасываем стейт фильтра к исходному состоянию
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location, reset, setFilterState]);
+
+  React.useEffect(() => {
+    const updateFilterState = async () => {
+      // Получаем параметры из URL
+      const searchParams = new URLSearchParams(location.search);
+
+      // Преобразуем их в объект
+      const params = Object.fromEntries(searchParams.entries());
+      const newFilterValues = { ...initialFilterState, ...params };
+      setFilterState(newFilterValues); // обновляем стейт в стейт менеджере
+      reset(newFilterValues); // обновляем стейт в react-hook-form
+    };
+
+    // Проверяем, есть ли параметры в URL
+    if (location.search) {
+      updateFilterState();
+    }
+  }, [setFilterState, reset, queryClient]);
+
+  const fetchData = async (queryParams: string = "") => {
+    setIsLoading(true);
+    try {
+      await queryClient.fetchQuery({
+        queryKey: ["feedbackOrders"],
+        queryFn: () => apiFeedbackOrdersModule.fetchFeedbacks(queryParams),
+      });
+      toast.success("Фльтры успешно обновлены!");
+    } catch (error) {
+      toast.error("Извините, произошла ошибка, попробуйте повторить позднее.");
+      // eslint-disable-next-line no-console
+      console.error("fetch data error", error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const updateUrlParams = (data: FieldValues) => {
+    // Очищаем от пустых значений
+    const filteredData = Object.fromEntries(
+      Object.entries(data).filter(
+        ([, value]) => value !== "" && value !== null,
+      ),
+    );
+
+    // Сохраняем стейт фильтра
+    setFilterState({ ...data } as FilterState);
+
+    // Создаем параметры для ссылки
+    const queryParams = new URLSearchParams(filteredData).toString();
+
+    // Получение текущего URL
+    const currentUrl = new URL(window.location.href);
+
+    // Добавляем параметры запроса к текущему URL
+    currentUrl.search = queryParams;
+
+    console.log("123");
+    // Обновляем URL без перезагрузки страницы
+    window.history.pushState({}, "", currentUrl);
+
+    // Делаем запрос за данными на сервер
+    fetchData(queryParams);
+  };
 
   const {
     data: usersData,
@@ -70,12 +141,13 @@ export const FeedbackOrderFilterForm = () => {
     reset(initialFilterState);
     setIsMobileFilterModalOpen(false);
     navigate(""); // Очищаем урл параметры
-    // setFilterState(initialFilterState);
-    // fetchData(""); // Делаем новый запрос без параметров
+    setFilterState(initialFilterState);
+    fetchData(""); // Делаем новый запрос без параметров
   };
 
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(true);
+    updateUrlParams(data);
+    setIsMobileFilterModalOpen(false);
     console.log(data);
   };
 
@@ -103,6 +175,24 @@ export const FeedbackOrderFilterForm = () => {
             disabled={isLoading}
             formatPrice={false}
             placeholder="Введите уникальный ID объекта"
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textFootnoteRegular"
+            marginBottom={0.5}
+          >
+            Имя
+          </Typography>
+          <CustomInput
+            id="name"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            formatPrice={false}
+            placeholder="Введите телефон клиента"
           />
         </Box>
         <Box marginBottom={1.5}>
@@ -147,7 +237,6 @@ export const FeedbackOrderFilterForm = () => {
               control={control}
               render={({ field }) => (
                 <Select
-                  required
                   {...field}
                   displayEmpty
                   sx={selectStyles}

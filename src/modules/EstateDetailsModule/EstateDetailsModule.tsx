@@ -25,6 +25,7 @@ import { useScreenSize } from "../../hooks/useScreenSize";
 import { useFormatDate } from "../../shared/hooks/useFormatDate";
 import { useUserStore } from "../UserModule/store/useUserStore";
 import { OwnerInfoBlock } from "./components/OwnerInfoBlock";
+import { EstateIdTag } from "./components/EstateIdTag";
 
 export const EstateDetailsModule = () => {
   useTitle("Детали объекта недвижимости");
@@ -114,6 +115,7 @@ export const EstateDetailsModule = () => {
           )}
           <Grid item xs={12}>
             <TitleGroup estateDetails={estateDetails} />
+            {id && <EstateIdTag id={id} />}
           </Grid>
           {isMobile && (
             <Grid item xs={12}>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Box, Container, Grid, Typography } from "@mui/material";
+import { Alert, Badge, Box, Container, Grid, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 
 import { FeedbackOrderList } from "./components/FeedbackOrderList";
@@ -36,6 +36,11 @@ export const FeedbackOrdersModule = () => {
         <Grid item xs={12}>
           <Typography component="h1" variant="titleFirstRegular">
             Заявки на недвижимость
+            <Badge
+              color="primary"
+              badgeContent={FeedbacksData.length || "0"}
+              sx={{ marginLeft: 2, marginBottom: 2 }}
+            />
           </Typography>
           <FeedbackOrderFilterMobileWrapper />
         </Grid>
