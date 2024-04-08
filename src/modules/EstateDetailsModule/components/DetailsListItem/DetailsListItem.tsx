@@ -14,7 +14,7 @@ interface DetailsListItemProps {
 
 export const DetailsListItem = (props: DetailsListItemProps) => {
   const { label, title, link, videoLink, price = 0, discount = 0 } = props;
-  const { totalPrice } = usePriceNormalize(price, discount);
+  const { totalPrice, discountPercentage } = usePriceNormalize(price, discount);
   return (
     <Box
       component="li"
@@ -30,7 +30,12 @@ export const DetailsListItem = (props: DetailsListItemProps) => {
       <Typography component="p" variant="textBodyRegular">
         {title && title}
         {price > 0 ? (
-          <Box component="span" display="flex" alignItems="center">
+          <Box
+            component="span"
+            display="flex"
+            alignItems="center"
+            flexWrap="wrap"
+          >
             {totalPrice} <TbCurrencyTenge />
             {discount > 0 && (
               <>
@@ -60,7 +65,7 @@ export const DetailsListItem = (props: DetailsListItemProps) => {
                   }}
                 >
                   <Typography variant="textFootnoteRegular">
-                    снижение цены
+                    снижение на {discountPercentage}%
                   </Typography>
                 </Box>
               </>
