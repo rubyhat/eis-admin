@@ -38,7 +38,7 @@ export const FeedbackOrdersModule = () => {
             Заявки на недвижимость
             <Badge
               color="primary"
-              badgeContent={FeedbacksData.length || "0"}
+              badgeContent={FeedbacksData?.length || "0"}
               sx={{ marginLeft: 2, marginBottom: 2 }}
             />
           </Typography>
