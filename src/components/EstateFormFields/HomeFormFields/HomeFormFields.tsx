@@ -399,6 +399,7 @@ export const HomeFormFields = ({ isLoading }: HomeFormFieldsProps) => {
                   </Typography>
                 </MenuItem>
                 <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="has">Есть</MenuItem>
                 <MenuItem value="full">Есть, входит в стоимость</MenuItem>
                 <MenuItem value="part">Есть, обсуждается отдельно</MenuItem>
                 <MenuItem value="none">Нет</MenuItem>

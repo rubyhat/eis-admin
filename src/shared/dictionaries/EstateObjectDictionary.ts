@@ -92,6 +92,7 @@ export const estateObjectDictionary = {
     none: "Нет",
   },
   garage: {
+    has: "",
     full: "Есть, входит в стоимость",
     part: "Есть, обсуждается отдельно",
     none: "Нет",
