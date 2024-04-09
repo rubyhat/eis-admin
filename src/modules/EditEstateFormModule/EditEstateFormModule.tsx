@@ -195,7 +195,10 @@ export const EditEstateFormModule = ({
       visibilityStatus: visibilityStatus,
       estateAgent: estateAgent,
       geoPosition: geoPosition,
-      ownerInfo: ownerInfo,
+      ownerInfo: {
+        ...ownerInfo,
+        ownerPhone: ownerInfo.ownerPhone.split(" ").join(""),
+      },
       apartmentComplex: apartmentComplex,
     };
 

@@ -38,6 +38,7 @@ export const UserCreateForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<FieldValues>({
     defaultValues: { ...initialFormFieldData },
   });
@@ -72,14 +73,36 @@ export const UserCreateForm = () => {
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
     const formData = new FormData();
 
-    Object.entries(data).forEach(([key, value]) => {
+    const cleanData = { ...data, phone: data.phone.split(" ").join("") };
+
+    Object.entries(cleanData).forEach(([key, value]) => {
       if (key !== "avatar") {
         if (value !== "" && value !== null) formData.append(key, value);
       } else if (key === "avatar" && value instanceof FileList) {
         formData.append(key, value[0], value[0].name);
       }
     });
+
     sendCreaeteUser(formData);
+  };
+
+  // todo: вынести в переиспользуемую утилиту/компонент
+  const handlePhoneInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let { value } = event.target;
+    if (!value.startsWith("+7")) {
+      value = "+7" + value.replace(/[^\d]/g, ""); // Убедимся, что номер начинается с +7
+    }
+    const cleanValue = value.replace(/[^\d+]/g, ""); // Удаляем все, кроме цифр и знака +
+    // Форматируем номер, убираем лишние символы, если они есть
+    let formattedValue = cleanValue
+      .replace(/(\+\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/, "$1 $2 $3 $4 $5")
+      .trim(); // Убираем лишние пробелы
+
+    if (formattedValue.length > 16) {
+      formattedValue = formattedValue.substring(0, 16);
+    }
+
+    setValue("phone", formattedValue, { shouldValidate: true });
   };
 
   return (
@@ -157,7 +180,9 @@ export const UserCreateForm = () => {
         </Typography>
         <CustomInput
           id="phone"
+          type="tel"
           register={register}
+          onInput={handlePhoneInput}
           errors={errors}
           disabled={isLoading}
           placeholder="+7 705 123 45 67"

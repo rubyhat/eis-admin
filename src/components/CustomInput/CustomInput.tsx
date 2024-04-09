@@ -20,6 +20,7 @@ interface CustomInputProps {
   accept?: string;
   step?: number;
   min?: string;
+  onInput?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
 export const CustomInput = (props: CustomInputProps) => {
@@ -39,6 +40,7 @@ export const CustomInput = (props: CustomInputProps) => {
     accept,
     step,
     min,
+    onInput,
   } = props;
   const theme = useTheme();
 
@@ -84,6 +86,7 @@ export const CustomInput = (props: CustomInputProps) => {
             color: theme.palette.customColors?.labelsTertiary,
           },
         }}
+        onInput={onInput}
       />
     </Box>
   );

@@ -8,7 +8,26 @@ interface OwnerFormFieldsProps {
 }
 
 export const OwnerFormFields = ({ isLoading }: OwnerFormFieldsProps) => {
-  const { register, formState } = useFormContext();
+  const { register, formState, setValue } = useFormContext();
+
+  // todo: вынести в переиспользуемую утилиту/компонент
+  const handlePhoneInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let { value } = event.target;
+    if (!value.startsWith("+7")) {
+      value = "+7" + value.replace(/[^\d]/g, ""); // Убедимся, что номер начинается с +7
+    }
+    const cleanValue = value.replace(/[^\d+]/g, ""); // Удаляем все, кроме цифр и знака +
+    // Форматируем номер, убираем лишние символы, если они есть
+    let formattedValue = cleanValue
+      .replace(/(\+\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/, "$1 $2 $3 $4 $5")
+      .trim(); // Убираем лишние пробелы
+
+    if (formattedValue.length > 16) {
+      formattedValue = formattedValue.substring(0, 16);
+    }
+
+    setValue("ownerInfo.ownerPhone", formattedValue, { shouldValidate: true });
+  };
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={4}>
@@ -59,7 +78,9 @@ export const OwnerFormFields = ({ isLoading }: OwnerFormFieldsProps) => {
           <CustomInput
             required
             id="ownerInfo.ownerPhone"
+            type="tel"
             register={register}
+            onInput={handlePhoneInput}
             errors={formState.errors}
             disabled={isLoading}
             formatPrice={false}
