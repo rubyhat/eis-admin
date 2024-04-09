@@ -170,10 +170,11 @@ export const BasicFormFields = ({
                 {...field}
                 sx={selectStyles}
                 inputProps={{ sx: selectInputProps }}
-                disabled={!isAdmin}
               >
                 <MenuItem value="checking">На проверке</MenuItem>
-                <MenuItem value="active">Активный</MenuItem>
+                <MenuItem value="active" disabled={!isAdmin}>
+                  Активный {!isAdmin && "(только для Админа)"}
+                </MenuItem>
                 <MenuItem value="sold">Продано</MenuItem>
                 <MenuItem value="canceled">Отменено</MenuItem>
                 <MenuItem value="rented">Сдан в аренду</MenuItem>

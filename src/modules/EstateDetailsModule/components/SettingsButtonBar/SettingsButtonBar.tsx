@@ -77,7 +77,8 @@ export const SettingsButtonBar = ({
       >
         {!isAdmin && (
           <Alert severity="info" sx={{ width: "fit-content", marginBottom: 2 }}>
-            Сменить статус может только <strong>Администратор</strong>
+            Сменить статус на <strong>Активный</strong> может только{" "}
+            <strong>Администратор</strong>
           </Alert>
         )}
         <Box sx={{ display: "flex", alignItems: "center", width: 1 }}>
@@ -96,9 +97,10 @@ export const SettingsButtonBar = ({
               },
             }}
             inputProps={{ padding: 1, fontSize: 16 }}
-            disabled={!isAdmin}
           >
-            <MenuItem value="active">Активный</MenuItem>
+            <MenuItem value="active" disabled={!isAdmin}>
+              Активный
+            </MenuItem>
             <MenuItem value="sold">Проданный</MenuItem>
             <MenuItem value="checking">На проверке</MenuItem>
             <MenuItem value="canceled">Отмененный</MenuItem>
