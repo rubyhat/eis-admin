@@ -64,6 +64,7 @@ export const EditOrderFeedbackForm = ({
       estateAgent: order.estateAgent?._id || "",
       description: order.description || "",
       title: order.title || "",
+      status: order.status,
     },
   });
 
@@ -177,6 +178,36 @@ export const EditOrderFeedbackForm = ({
             disabled
             formatPrice={false}
             placeholder="Введите телефон клиента"
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textFootnoteRegular"
+            marginBottom={0.5}
+          >
+            Статус
+          </Typography>
+          <Controller
+            name="status"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+                onChange={(e) => {
+                  const selectedValue = e.target.value;
+                  field.onChange(selectedValue);
+                }}
+              >
+                <MenuItem value="new">Новая</MenuItem>
+                <MenuItem value="inWork">В работе</MenuItem>
+                <MenuItem value="completed">Завершена</MenuItem>
+              </Select>
+            )}
           />
         </Box>
         <Box marginBottom={1.5}>

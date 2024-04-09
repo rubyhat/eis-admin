@@ -35,7 +35,7 @@ export const FeedbackOrdersModule = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography component="h1" variant="titleFirstRegular">
-            Заявки на недвижимость
+            Заявки на покупку
             <Badge
               color="primary"
               badgeContent={FeedbacksData?.length || "0"}

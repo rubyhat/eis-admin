@@ -20,7 +20,7 @@ const list: OrdersCard[] = [
     icon: <IoHomeOutline size={128} color={iconColor} />,
     link: "/orders/feedback",
     disabled: false,
-    title: "Заявки на недвижимость",
+    title: "Заявки на покупку",
   },
   {
     icon: <AiOutlineDollar size={128} color="#DCDCDD" />,
@@ -32,7 +32,7 @@ const list: OrdersCard[] = [
     icon: <IoSearch size={128} color="#DCDCDD" />,
     link: "/orders/buy",
     disabled: true,
-    title: "Заявки на покупку",
+    title: "Заявки на поиск",
   },
 ];
 

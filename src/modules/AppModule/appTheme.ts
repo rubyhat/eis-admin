@@ -185,6 +185,10 @@ appTheme = createTheme(
         main: "hsla(32, 100%, 55%, 1)",
         contrastText: "#fff",
       },
+      success: {
+        main: "hsla(123, 59%, 45%, 1)",
+        contrastText: "#fff",
+      },
 
       customColors: {
         colorsWhite: "hsla(0, 0%, 100%, 1)",

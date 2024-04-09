@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Box,
+  Chip,
   IconButton,
   List,
   ListItem,
@@ -23,6 +24,18 @@ import { FeedbackOrderDeleteDrawer } from "../FeedbackOrderDeleteDrawer";
 interface FeedbackOrderCardProps {
   order: FeedbackOrderDisplay;
 }
+
+const statusColorValue = {
+  new: "customColors.colorsOrange",
+  inWork: "customColors.colorsBlue",
+  completed: "customColors.colorsGreen",
+};
+
+const statusLabelValue = {
+  new: "Новая",
+  inWork: "В работе",
+  completed: "Завершена",
+};
 
 export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
   const navigate = useNavigate();
@@ -62,15 +75,38 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
         display: "flex",
         flexDirection: "column",
         padding: 2,
-        border: "1px solid",
-        borderColor: "customColors.labelsQuaternary",
+        border: "2px solid",
+        borderColor: statusColorValue[order.status],
         borderRadius: 2,
+        height: 1,
       }}
     >
-      <Typography component="h6" variant="titleThirdRegular" marginBottom={2}>
-        {order.title}
-      </Typography>
-      <Typography component="h6" variant="textBodyRegular" fontWeight={500}>
+      <Box
+        sx={{
+          width: 1,
+          display: "flex",
+          justifyContent: "space-between",
+          gap: 1,
+        }}
+      >
+        <Typography component="h6" variant="titleThirdRegular" marginBottom={2}>
+          {order.title}
+        </Typography>
+        <Chip
+          sx={{
+            backgroundColor: statusColorValue[order.status],
+            color: "customColors.colorsWhite",
+          }}
+          label={statusLabelValue[order.status] || "Ошибка"}
+          size="small"
+        />
+      </Box>
+      <Typography
+        component="h6"
+        variant="textBodyRegular"
+        fontWeight={500}
+        marginTop="auto"
+      >
         Информация от пользователя
       </Typography>
       <List>

@@ -8,11 +8,14 @@ export interface FeedbackOrder {
   _id: string; // Айдишник
   name: string; // Имя из формы
   phone: string; // Номер телефона из формы
+  status: FeedbackOrderStatus; // Статус заявки
   description?: string; // Здесь уже сотрудники будут примечания писать
   estateId?: string; // Айдишник объекта недвижимости, с которого пришла заявки
   estateAgent?: string; // Объект с данными сотрудника, за которым заявка будет закреплена
-  title?: string;
+  title?: string; // Основная краткая информация по объекту
 }
+
+export type FeedbackOrderStatus = "new" | "inWork" | "completed";
 
 interface FeedbackOrdersStore {
   filterState: FilterState;
@@ -31,11 +34,13 @@ export interface FilterState {
   phone?: string;
   estateId?: string;
   estateAgent?: string;
+  status?: FeedbackOrderStatus | "";
 }
 
 export const initialFilterState: FilterState = {
   name: "",
   phone: "",
+  status: "",
   estateId: "",
   estateAgent: "",
 };
