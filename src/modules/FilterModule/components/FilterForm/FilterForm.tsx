@@ -241,6 +241,38 @@ export const FilterForm = () => {
             variant="textCalloutRegular"
             marginBottom={0.5}
           >
+            Категория
+          </Typography>
+          <Controller
+            name="category"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="apartment">Квартира</MenuItem>
+                <MenuItem value="house">Дом</MenuItem>
+                <MenuItem value="townhouse">Таунхаус</MenuItem>
+                <MenuItem value="cottage">Дача</MenuItem>
+                <MenuItem value="land">Земельный участок</MenuItem>
+                <MenuItem value="business">Коммерческая недвижимость</MenuItem>
+                {/* <MenuItem value="factory">Заводы, фабрики</MenuItem> */}
+                {/* <MenuItem value="other">Другое</MenuItem> */}
+              </Select>
+            )}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
             Город
           </Typography>
           <Controller
@@ -302,46 +334,6 @@ export const FilterForm = () => {
                 <MenuItem value="Майкудук">Майкудук</MenuItem>
                 <MenuItem value="Федоровка">Федоровка</MenuItem>
                 <MenuItem value="Кунгей">Кунгей</MenuItem>
-              </Select>
-            )}
-          />
-        </Box>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textCalloutRegular"
-            marginBottom={0.5}
-          >
-            Категория
-          </Typography>
-          <Controller
-            name="category"
-            control={control}
-            render={({ field }) => (
-              <Select
-                {...field}
-                displayEmpty
-                sx={selectStyles}
-                inputProps={{ sx: selectInputProps }}
-              >
-                {/* <MenuItem disabled value="">
-                  <Typography
-                    variant="textCalloutRegular"
-                    color="customColors.labelsSecondary"
-                  >
-                    Например: Квартира
-                  </Typography>
-                </MenuItem> */}
-                <MenuItem value="">Не указывать</MenuItem>
-                <MenuItem value="apartment">Квартира</MenuItem>
-                <MenuItem value="house">Дом</MenuItem>
-                <MenuItem value="townhouse">Таунхаус</MenuItem>
-                <MenuItem value="land">Земельный участок</MenuItem>
-                <MenuItem value="business">Коммерческая недвижимость</MenuItem>
-                {/* <MenuItem value="cottage">Дача</MenuItem> */}
-                {/* <MenuItem value="factory">Заводы, фабрики</MenuItem> */}
-                {/* <MenuItem value="other">Другое</MenuItem> */}
               </Select>
             )}
           />

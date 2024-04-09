@@ -17,6 +17,7 @@ const listLinkStepsData: ListLinkSteps = {
       title: "Таунхаус",
       subtitle: "Продажа недвижимости",
     },
+    { id: "cottage", title: "Дача", subtitle: "Продажа недвижимости" },
     {
       id: "land",
       title: "Земельный участок",
@@ -27,7 +28,6 @@ const listLinkStepsData: ListLinkSteps = {
       title: "Коммерческая недвижимость",
       subtitle: "Помещения для бизнеса",
     },
-    // { id: "cottage", title: "Дачи", subtitle: "Продажа недвижимости" },
     // {
     //   id: "factory",
     //   title: "Предприятия",
