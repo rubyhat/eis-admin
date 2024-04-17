@@ -139,7 +139,6 @@ export const EstateDetailsModule = () => {
               component="p"
               variant="textFootnoteRegular"
               color="customColors.labelsSecondary"
-              marginTop={2}
               textAlign="right"
             >
               Обновлено: {dayAndMonth} в {time}

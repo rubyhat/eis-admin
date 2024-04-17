@@ -20,6 +20,7 @@ import { CustomHr } from "../../../../components/CustomHr";
 import { CustomButton } from "../../../../components/CustomButton";
 import { useUserStore } from "../../../UserModule/store/useUserStore";
 import { FeedbackOrderDeleteDrawer } from "../FeedbackOrderDeleteDrawer";
+import { useFormatDate } from "../../../../shared/hooks/useFormatDate";
 
 interface FeedbackOrderCardProps {
   order: FeedbackOrderDisplay;
@@ -40,7 +41,12 @@ const statusLabelValue = {
 export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-
+  const { dayAndMonth: updateDate, time: updateTime } = useFormatDate(
+    order.updatedAt,
+  );
+  const { dayAndMonth: createDate, time: createTime } = useFormatDate(
+    order.createdAt,
+  );
   const { isAdmin } = useUserStore((state) => state);
   const { setIsDeleteDrawerOpen } = useFeedbackOrdersStore((state) => state);
 
@@ -185,6 +191,29 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
           />
         </ListItem>
       </List>
+
+      <Box sx={{ padding: "8px 0" }}>
+        <Typography component="p" variant="textFootnoteRegular">
+          Дата создания:{" "}
+          <Typography
+            variant="textFootnoteEmphasized"
+            component="span"
+            color="customColors.colorsOrange"
+          >
+            {createDate} в {createTime}
+          </Typography>
+        </Typography>
+        <Typography component="p" variant="textFootnoteRegular">
+          Дата обновления:{" "}
+          <Typography
+            variant="textFootnoteEmphasized"
+            component="span"
+            color="customColors.colorsOrange"
+          >
+            {updateDate} в {updateTime}
+          </Typography>
+        </Typography>
+      </Box>
 
       <CustomHr sx={{ margin: "8px 0 16px" }} />
 

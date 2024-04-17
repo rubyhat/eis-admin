@@ -3,6 +3,8 @@ import { EstateAgentInfo } from "../../../shared/interfaces/EstateObjectTypes";
 
 export type FeedbackOrderDisplay = Omit<FeedbackOrder, "estateAgent"> & {
   estateAgent: EstateAgentInfo | null;
+  createdAt: string;
+  updatedAt: string;
 };
 export interface FeedbackOrder {
   _id: string; // Айдишник
