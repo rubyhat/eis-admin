@@ -10,6 +10,7 @@ import {
 
 import {
   Apartment,
+  Business,
   Flat,
   FormFieldsData,
   FormFieldsType,
@@ -40,6 +41,7 @@ import {
 import { LoadingSplashScreen } from "../../components/LoadingSplashScreen";
 import { OwnerFormFields } from "../../components/EstateFormFields/OwnerFormFields";
 import { ApartmentComplexFormFields } from "../../components/EstateFormFields/ApartmentComplexFormFields";
+import { BusinessFormFields } from "../../components/EstateFormFields/BusinessFormFields";
 
 interface EditEstateFormModuleProps {
   editEstateData: FormFieldsData | Apartment | House | Flat | Land;
@@ -175,6 +177,11 @@ export const EditEstateFormModule = ({
       landSquare,
     } = data as Land;
 
+    const {
+      // Business
+      businessType,
+    } = data as Business;
+
     const basicData = {
       description: description,
       price: Number(price),
@@ -187,7 +194,7 @@ export const EditEstateFormModule = ({
       tiktokLink: tiktokLink,
       mortgage: mortgage,
       exchange: exchange,
-      isCommercial: isCommercial,
+      isCommercial: isCommercial || Boolean(businessType),
       pledge: pledge,
       documents: documents,
       type: type,
@@ -240,6 +247,7 @@ export const EditEstateFormModule = ({
     };
 
     const landData = { landSquare: Number(landSquare) };
+    const businessData = { businessType: businessType };
 
     const totalData = {
       apartment: { ...apartmentData, ...flatData },
@@ -247,7 +255,7 @@ export const EditEstateFormModule = ({
       house: { ...apartmentData, ...houseData },
       land: { ...landData },
       townhouse: { ...apartmentData },
-      business: {},
+      business: { ...businessData },
       factory: {},
       other: {},
     };
@@ -393,19 +401,17 @@ export const EditEstateFormModule = ({
               </Typography>
               <HomeFormFields isLoading={isLoading} />
               <CustomHr />
-              {livingSpaces.includes(formFieldsData.category) && (
-                <>
-                  <Typography
-                    component="h6"
-                    variant="titleThirdRegular"
-                    marginBottom={1}
-                  >
-                    Жилой комплекс
-                  </Typography>
-                  <ApartmentComplexFormFields isLoading={isLoading} />
-                  <CustomHr />
-                </>
-              )}
+
+              <Typography
+                component="h6"
+                variant="titleThirdRegular"
+                marginBottom={1}
+              >
+                Жилой комплекс
+              </Typography>
+              <ApartmentComplexFormFields isLoading={isLoading} />
+              <CustomHr />
+
               {formFieldsData.category === "apartment" && (
                 <>
                   <Typography
@@ -419,6 +425,7 @@ export const EditEstateFormModule = ({
                   <CustomHr />
                 </>
               )}
+
               {houseAndCottage.includes(formFieldsData.category) && (
                 <>
                   <Typography
@@ -429,6 +436,20 @@ export const EditEstateFormModule = ({
                     Свойства дома и дачи
                   </Typography>
                   <HouseFormFileds isLoading={isLoading} />
+                  <CustomHr />
+                </>
+              )}
+
+              {formFieldsData.category === "business" && (
+                <>
+                  <Typography
+                    component="h6"
+                    variant="titleThirdRegular"
+                    marginBottom={1}
+                  >
+                    Свойства коммерческой недвижимости
+                  </Typography>
+                  <BusinessFormFields isLoading={isLoading} />
                   <CustomHr />
                 </>
               )}

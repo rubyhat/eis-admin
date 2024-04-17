@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import {
   Apartment,
+  Business,
   Flat,
   FormFieldsData,
   House,
@@ -9,7 +10,7 @@ import {
 import { FormFieldsDataInitial } from "../../../shared/constants/FormFieldsDataInitital";
 
 interface CreateEstateForm {
-  formFieldsData: FormFieldsData | Apartment | House | Flat | Land;
+  formFieldsData: FormFieldsData | Apartment | House | Flat | Land | Business;
   setFormFieldsData: (
     v: FormFieldsData | Apartment | House | Flat | Land,
   ) => void;

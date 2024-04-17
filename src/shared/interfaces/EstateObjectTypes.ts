@@ -48,6 +48,13 @@ export type HouseRoofMaterialType =
   | "slate"; // Шифер
 export type MortgageType = "accepted" | "declined" | "possibly";
 export type ExchangeType = "yes" | "no";
+export type BusinessType =
+  | "freeSpace"
+  | "cafe"
+  | "office"
+  | "areaBase"
+  | "factory"
+  | "store"; // свободное помещение, кафе и рестораны, офисы, базы, заводы, магазины
 
 export interface ObjectImages {
   _id: string;
@@ -90,9 +97,15 @@ export interface ApartmentComplex {
   title: string;
 }
 
-export type FormFieldsType = BasicObject | Apartment | House | Flat | Land;
+export type FormFieldsType =
+  | BasicObject
+  | Apartment
+  | House
+  | Flat
+  | Land
+  | Business;
 
-export interface EstateObject extends Apartment, House, Flat, Land {
+export interface EstateObject extends Apartment, House, Flat, Land, Business {
   _id: string;
 }
 
@@ -169,9 +182,12 @@ export interface Land extends BasicObject {
   landSquare: string; // Площадь земли
 }
 
+export interface Business extends BasicObject {
+  businessType: BusinessType | "";
+}
+
 export interface Townhouse extends BasicObject {}
 export interface Commercial extends BasicObject {}
-export interface Business extends BasicObject {}
 export interface Factory extends BasicObject {}
 export interface OtherObject extends BasicObject {}
 

@@ -119,4 +119,12 @@ export const estateObjectDictionary = {
     yes: "Есть",
     no: "Нет",
   },
+  businessType: {
+    freeSpace: "Свободное помещение",
+    cafe: "Кафе и рестораны",
+    office: "Офисы",
+    areaBase: "Базы",
+    factory: "Заводы",
+    store: "Магазины",
+  },
 };

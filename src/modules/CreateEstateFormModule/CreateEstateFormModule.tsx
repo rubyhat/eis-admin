@@ -10,6 +10,7 @@ import {
 
 import {
   Apartment,
+  Business,
   Flat,
   FormFieldsType,
   House,
@@ -40,6 +41,7 @@ import { LoadingSplashScreen } from "../../components/LoadingSplashScreen";
 import { useCreateEstateStore } from "../CreateEstateModule/store";
 import { OwnerFormFields } from "../../components/EstateFormFields/OwnerFormFields";
 import { ApartmentComplexFormFields } from "../../components/EstateFormFields/ApartmentComplexFormFields";
+import { BusinessFormFields } from "../../components/EstateFormFields/BusinessFormFields";
 
 export const CreateEstateFormModule = () => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -155,6 +157,11 @@ export const CreateEstateFormModule = () => {
       landSquare,
     } = data as Land;
 
+    const {
+      // Business
+      businessType,
+    } = data as Business;
+
     const basicData = {
       description: description,
       price: Number(price),
@@ -164,7 +171,7 @@ export const CreateEstateFormModule = () => {
       tiktokLink: tiktokLink,
       mortgage: mortgage,
       exchange: exchange,
-      isCommercial: isCommercial,
+      isCommercial: isCommercial || Boolean(businessType),
       pledge: pledge,
       documents: documents,
       type: type,
@@ -217,6 +224,7 @@ export const CreateEstateFormModule = () => {
     };
 
     const landData = { landSquare: Number(landSquare) };
+    const businessData = { businessType: businessType };
 
     const totalData = {
       apartment: { ...apartmentData, ...flatData },
@@ -224,7 +232,7 @@ export const CreateEstateFormModule = () => {
       house: { ...apartmentData, ...houseData },
       land: { ...landData },
       townhouse: { ...apartmentData },
-      business: {},
+      business: { ...businessData },
       factory: {},
       other: {},
     };
@@ -357,19 +365,17 @@ export const CreateEstateFormModule = () => {
               </Typography>
               <HomeFormFields isLoading={isLoading} />
               <CustomHr />
-              {livingSpaces.includes(formFieldsData.category) && (
-                <>
-                  <Typography
-                    component="h6"
-                    variant="titleThirdRegular"
-                    marginBottom={1}
-                  >
-                    Жилой комплекс
-                  </Typography>
-                  <ApartmentComplexFormFields isLoading={isLoading} />
-                  <CustomHr />
-                </>
-              )}
+
+              <Typography
+                component="h6"
+                variant="titleThirdRegular"
+                marginBottom={1}
+              >
+                Жилой комплекс
+              </Typography>
+              <ApartmentComplexFormFields isLoading={isLoading} />
+              <CustomHr />
+
               {formFieldsData.category === "apartment" && (
                 <>
                   <Typography
@@ -383,6 +389,7 @@ export const CreateEstateFormModule = () => {
                   <CustomHr />
                 </>
               )}
+
               {houseAndCottage.includes(formFieldsData.category) && (
                 <>
                   <Typography
@@ -393,6 +400,20 @@ export const CreateEstateFormModule = () => {
                     Свойства дома и дачи
                   </Typography>
                   <HouseFormFileds isLoading={isLoading} />
+                  <CustomHr />
+                </>
+              )}
+
+              {formFieldsData.category === "business" && (
+                <>
+                  <Typography
+                    component="h6"
+                    variant="titleThirdRegular"
+                    marginBottom={1}
+                  >
+                    Свойства коммерческой недвижимости
+                  </Typography>
+                  <BusinessFormFields isLoading={isLoading} />
                   <CustomHr />
                 </>
               )}
