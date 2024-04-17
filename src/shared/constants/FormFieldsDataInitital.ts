@@ -81,4 +81,4 @@ export const livingSpaces = [
   "townhouse",
   "business",
 ];
-export const houseAndCottage = ["house", "cottage"];
+export const houseAndCottage = ["house", "cottage", "business"];
