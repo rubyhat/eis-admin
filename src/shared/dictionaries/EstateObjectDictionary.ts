@@ -14,11 +14,13 @@ export const estateObjectDictionary = {
     other: "Другое",
   },
   houseCondition: {
-    perfect: "Хорошее",
-    good: "Среднее",
-    bad: "Требует ремонта",
+    perfect: "Евроремонт",
+    good: "Косметический ремонт",
+    bad: "Без ремонта",
     free: "Свободная планировка",
     build: "Черновая отделка",
+    medium: "Средний ремонт",
+    clean: "Предчистовая отделка",
   },
   houseWallMaterial: {
     brick: "Кирпич",
