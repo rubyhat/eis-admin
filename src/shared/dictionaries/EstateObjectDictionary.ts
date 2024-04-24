@@ -49,8 +49,8 @@ export const estateObjectDictionary = {
     none: "Без мебели",
   },
   houseType: {
-    part: "Целый дом",
-    full: "Часть дома",
+    part: "Часть дома",
+    full: "Целый дом",
     other: "Другое",
   },
   electricType: {
