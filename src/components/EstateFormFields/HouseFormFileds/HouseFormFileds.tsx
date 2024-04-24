@@ -50,7 +50,7 @@ export const HouseFormFileds = ({ isLoading }: HouseFormFiledsProps) => {
                 </MenuItem>
                 <MenuItem value="">Не указывать</MenuItem>
                 <MenuItem value="part">Часть дома</MenuItem>
-                <MenuItem value="full">Целый дом</MenuItem>
+                <MenuItem value="full">Отдельностоящий</MenuItem>
                 <MenuItem value="other">Другое</MenuItem>
               </Select>
             )}

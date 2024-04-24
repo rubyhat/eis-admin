@@ -15,7 +15,7 @@ export type VisibilityStatusType =
   | "checking"
   | "rented"; // Активен, Продан, Отменен, На проверке, Сдан в аренду на клиенте показываем только Активные
 export type HouseConditionType = "perfect" | "good" | "bad" | "free" | "build"; // Хорошее, среднее, требует ремонта, свободная планировка, черновая отделка / евроремонт - косметический ремонт - без ремонта - предчистовая
-export type HouseType = "part" | "full" | "other"; // Часть дома, Целый дом, Другое
+export type HouseType = "part" | "full" | "other"; // Часть дома, Отдельностоящий, Другое
 export type FurnitureType = "part" | "full" | "none"; // Мебелирован: частично, полностью, без мебели
 export type ElectricType = "part" | "full" | "none"; // Электричество: частично, есть, нет
 export type HeatingType = "central" | "gas" | "solid" | "liquid" | "none"; // Отопление: Центральное, на газу, на угле, на бензине, нет
