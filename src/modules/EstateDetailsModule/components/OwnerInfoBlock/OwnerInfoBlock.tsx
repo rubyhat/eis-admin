@@ -118,9 +118,7 @@ export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
               Этаж:
             </Typography>
             <Typography component="p" variant="textBodyRegular">
-              {estateDetails.targetFloor > 0
-                ? estateDetails.targetFloor
-                : "Не указан"}
+              {targetFloor > 0 ? estateDetails.targetFloor : "Не указан"}
             </Typography>
           </Box>
         )}
