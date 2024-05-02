@@ -1,6 +1,7 @@
-import { Box, IconButton, Typography } from "@mui/material";
 import React from "react";
+import { Box, IconButton, Typography } from "@mui/material";
 import { FiShare } from "react-icons/fi";
+
 import { CustomButton } from "../../../../components/CustomButton";
 import { DisplayEstateObject } from "../../../../shared/interfaces/EstateObjectTypes";
 import { useCopySharingLink } from "../../../../hooks/useCopySharingLink";
@@ -12,6 +13,8 @@ interface OwnerInfoBlockProps {
 }
 
 export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
+  const { apartmentComplex, ownerInfo, targetFloor, tiktokLink } =
+    estateDetails;
   const { isMobileDevice } = useScreenSize();
   const { deviceShareLink, copyLink } = useCopySharingLink();
   const msgText = `Информация о собственнике недвижимости:\nИмя: ${
@@ -68,20 +71,19 @@ export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
       </Typography>
       <Typography
         component="a"
-        href={`tel:${estateDetails.ownerInfo.ownerPhone}`}
+        href={`tel:${ownerInfo.ownerPhone}`}
         sx={{
           display: "inline-block",
           color: "customColors.colorsOrange",
           textDecoration: "underline",
           padding: 0.25,
-          marginBottom: 1,
         }}
       >
-        {estateDetails.ownerInfo.ownerPhone}
+        {ownerInfo.ownerPhone}
       </Typography>
-
-      <Box sx={{ display: "flex", gap: 3 }}>
-        {estateDetails.ownerInfo.entranceNumber && (
+      <CustomHr />
+      <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0 }}>
+        {ownerInfo.entranceNumber && (
           <Box>
             <Typography component="p" variant="textBodyEmphasized">
               Подъезд:
@@ -95,21 +97,7 @@ export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
             </Typography>
           </Box>
         )}
-        {estateDetails.ownerInfo.apartmentNumber && (
-          <Box>
-            <Typography component="p" variant="textBodyEmphasized">
-              Квартира:
-            </Typography>
-            <Typography
-              component="p"
-              variant="textBodyRegular"
-              marginBottom={1}
-            >
-              {estateDetails.ownerInfo.apartmentNumber}
-            </Typography>
-          </Box>
-        )}
-        {estateDetails.ownerInfo.intercomNumber && (
+        {ownerInfo.intercomNumber && (
           <Box>
             <Typography component="p" variant="textBodyEmphasized">
               Домофон:
@@ -119,24 +107,47 @@ export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
               variant="textBodyRegular"
               marginBottom={1}
             >
-              {estateDetails.ownerInfo.intercomNumber}
+              {ownerInfo.intercomNumber}
+            </Typography>
+          </Box>
+        )}
+
+        {targetFloor !== null && targetFloor !== undefined && (
+          <Box>
+            <Typography component="p" variant="textBodyEmphasized">
+              Этаж:
+            </Typography>
+            <Typography component="p" variant="textBodyRegular">
+              {estateDetails.targetFloor > 0
+                ? estateDetails.targetFloor
+                : "Не указан"}
+            </Typography>
+          </Box>
+        )}
+        {ownerInfo.apartmentNumber && (
+          <Box>
+            <Typography component="p" variant="textBodyEmphasized">
+              Квартира:
+            </Typography>
+            <Typography component="p" variant="textBodyRegular">
+              {ownerInfo.apartmentNumber}
             </Typography>
           </Box>
         )}
       </Box>
-
-      {estateDetails.ownerInfo.description && (
+      <CustomHr margin="8px 0" />
+      {ownerInfo.description && (
         <>
           <Typography component="p" variant="textBodyEmphasized">
             Заметка:
           </Typography>
           <Typography component="p" variant="textBodyRegular" marginBottom={1}>
-            {estateDetails.ownerInfo.description}
+            {ownerInfo.description}
           </Typography>
         </>
       )}
 
-      {estateDetails.tiktokLink && (
+      {tiktokLink && (
         <>
           <Typography component="p" variant="textBodyEmphasized">
             Ссылка на ТикТок:
@@ -150,15 +161,15 @@ export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
                 padding: 0.25,
               }}
               component="a"
-              href={estateDetails.tiktokLink}
+              href={tiktokLink}
               target="_blank"
             >
-              {estateDetails.tiktokLink}
+              {tiktokLink}
             </Typography>
           </Typography>
         </>
       )}
-      {estateDetails.apartmentComplex && (
+      {apartmentComplex && apartmentComplex.title && (
         <>
           <CustomHr />
           <Typography
@@ -172,7 +183,7 @@ export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
             Название:
           </Typography>
           <Typography component="p" variant="textBodyRegular" marginBottom={1}>
-            {estateDetails.apartmentComplex.title}
+            {apartmentComplex.title}
           </Typography>
         </>
       )}
@@ -183,14 +194,14 @@ export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
           gap: 2,
         }}
       >
-        <Box component="a" href={`tel:${estateDetails.ownerInfo.ownerPhone}`}>
+        <Box component="a" href={`tel:${ownerInfo.ownerPhone}`}>
           <CustomButton size="medium" fullWidth>
             Позвонить
           </CustomButton>
         </Box>
         <Box
           component="a"
-          href={`https://api.whatsapp.com/send?phone=${estateDetails.ownerInfo.ownerPhone.slice(
+          href={`https://api.whatsapp.com/send?phone=${ownerInfo.ownerPhone.slice(
             1,
           )}&text=Здравствуйте, меня интересует недвижимость на Вашем сайте.`}
           target="_blank"
