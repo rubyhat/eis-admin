@@ -34,8 +34,12 @@ export const EstateDetailsModule = () => {
   const { id } = useParams();
   const { isMobile } = useScreenSize();
   const { isAdmin, user: currentUser } = useUserStore();
-  const { estateDetails, setEstateDetails, setActiveImage } =
-    useEstateDetailsStore((state) => state);
+  const {
+    estateDetails,
+    setEstateDetails,
+    setActiveImage,
+    setCurrentVisibilityStatus,
+  } = useEstateDetailsStore((state) => state);
   const { dayAndMonth, time } = useFormatDate(
     estateDetails ? estateDetails.updatedAt : "",
   );
@@ -61,6 +65,11 @@ export const EstateDetailsModule = () => {
 
     if (isSuccess) setEstateDetails(estateDetailsData);
   }, [estateDetailsData, isSuccess, location.state, setEstateDetails]);
+
+  React.useEffect(() => {
+    if (estateDetails)
+      setCurrentVisibilityStatus(estateDetails.visibilityStatus);
+  }, [estateDetails, setCurrentVisibilityStatus]);
 
   React.useEffect(() => {
     const images = estateDetails?.images;
@@ -102,11 +111,7 @@ export const EstateDetailsModule = () => {
       <Container>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <SettingsButtonBar
-              key={uuidv4()}
-              _id={estateDetails._id}
-              currentStatus={estateDetails.visibilityStatus}
-            />
+            <SettingsButtonBar key={uuidv4()} _id={estateDetails._id} />
           </Grid>
           {estateDetails.ownerInfo && (
             <Grid item xs={12} md={6}>

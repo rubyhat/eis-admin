@@ -1,5 +1,8 @@
 import { create } from "zustand";
-import { DisplayEstateObject } from "../../../shared/interfaces/EstateObjectTypes";
+import {
+  DisplayEstateObject,
+  VisibilityStatusType,
+} from "../../../shared/interfaces/EstateObjectTypes";
 
 interface EstateDetailsStore {
   activeImage: string | null;
@@ -11,6 +14,8 @@ interface EstateDetailsStore {
   setIsViewerModalOpen: (v: boolean) => void;
   isDeleteDrawerOpen: boolean;
   setIsDeleteDrawerOpen: (v: boolean) => void;
+  setCurrentVisibilityStatus: (v: VisibilityStatusType) => void;
+  currentVisibilityStatus: VisibilityStatusType;
 }
 
 export const useEstateDetailsStore = create<EstateDetailsStore>((set) => ({
@@ -19,6 +24,8 @@ export const useEstateDetailsStore = create<EstateDetailsStore>((set) => ({
   activeImageIndex: null,
   isViewerModalOpen: false,
   isDeleteDrawerOpen: false,
+  currentVisibilityStatus: "checking",
+  setCurrentVisibilityStatus: (v) => set({ currentVisibilityStatus: v }),
   setEstateDetails: (v) => set({ estateDetails: v }),
   setIsViewerModalOpen: (v) => set({ isViewerModalOpen: v }),
   setActiveImage: (v, i) => set({ activeImage: v, activeImageIndex: i }),

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Alert,
   Box,
@@ -6,7 +7,6 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import React from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -18,21 +18,20 @@ import { apiEstateDetailsModule } from "../../api/apiEstateDetailsModule";
 import { VisibilityStatusType } from "../../../../shared/interfaces/EstateObjectTypes";
 import { apiEditEstateFormModule } from "../../../EditEstateFormModule/api/apiEditEstateFormModule";
 import { useUserStore } from "../../../UserModule/store/useUserStore";
+import { DrawerSoldEstateModule } from "../../../DrawerSoldEstateModule";
 
 interface SettingsButtonBarProps {
   _id: string;
-  currentStatus: VisibilityStatusType;
 }
 
-export const SettingsButtonBar = ({
-  _id,
-  currentStatus,
-}: SettingsButtonBarProps) => {
+export const SettingsButtonBar = ({ _id }: SettingsButtonBarProps) => {
   const navigate = useNavigate();
-  const { setIsDeleteDrawerOpen } = useEstateDetailsStore((state) => state);
+  const {
+    setIsDeleteDrawerOpen,
+    currentVisibilityStatus,
+    setCurrentVisibilityStatus,
+  } = useEstateDetailsStore((state) => state);
   const { isAdmin } = useUserStore((state) => state);
-  const [status, setStatus] =
-    React.useState<VisibilityStatusType>(currentStatus);
 
   const handleClickDeleteButton = () => setIsDeleteDrawerOpen(true);
   const handleDeleteEstateObject = async () => {
@@ -50,12 +49,15 @@ export const SettingsButtonBar = ({
 
   const handleChangeStatus = (event: SelectChangeEvent) => {
     const inputStatus = event.target.value as VisibilityStatusType;
-    setStatus(inputStatus);
+    setCurrentVisibilityStatus(inputStatus);
   };
 
   const handleClickChangeStatusButton = async () => {
     try {
-      await apiEditEstateFormModule.editObjecStatus(status, _id);
+      await apiEditEstateFormModule.editObjectStatus(
+        currentVisibilityStatus,
+        _id,
+      );
       toast.success("Статус успешно изменен!");
     } catch (error) {
       toast.error(
@@ -65,7 +67,7 @@ export const SettingsButtonBar = ({
     }
   };
 
-  if (currentStatus)
+  if (currentVisibilityStatus)
     return (
       <Box
         sx={{
@@ -84,7 +86,7 @@ export const SettingsButtonBar = ({
         <Box sx={{ display: "flex", alignItems: "center", width: 1 }}>
           <Select
             id="status-select"
-            value={status}
+            value={currentVisibilityStatus}
             onChange={(e) => handleChangeStatus(e)}
             sx={{
               padding: 0,
@@ -128,6 +130,11 @@ export const SettingsButtonBar = ({
             />
           </Box>
         </Box>
+        {!["sold", "canceled"].includes(currentVisibilityStatus) && (
+          <Box paddingTop={1.5}>
+            <DrawerSoldEstateModule />
+          </Box>
+        )}
       </Box>
     );
 };

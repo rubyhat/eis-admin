@@ -18,7 +18,7 @@ export const apiEditEstateFormModule = {
         throw error;
       });
   },
-  editObjecStatus(
+  editObjectStatus(
     visibilityStatus: VisibilityStatusType,
     _id: string,
   ): Promise<DisplayEstateObject> {

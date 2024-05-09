@@ -123,6 +123,7 @@ export interface BasicObject {
   visibilityStatus: VisibilityStatusType;
   type: ServiceType;
   price: number | null;
+  soldPrice?: number | null;
   discount?: number | null;
   description: string;
   images?: FileList | [];
