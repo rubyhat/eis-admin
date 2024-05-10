@@ -349,6 +349,7 @@ export const CreateEstateFormModule = () => {
             Базовые свойства
           </Typography>
           <BasicFormFields
+            mode="create"
             isLoading={isLoading}
             formFieldsData={formFieldsData}
             setFormFieldsData={setFormFieldsData}

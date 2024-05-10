@@ -12,16 +12,19 @@ import { apiDrawerSoldEstate } from "../../api/apiDrawerSoldEstate";
 import { DisplayEstateObject } from "../../../../shared/interfaces/EstateObjectTypes";
 import { useEstateDetailsStore } from "../../../EstateDetailsModule/store";
 import { useDrawerSoldEstateStore } from "../../store/useDrawerSoldEstateStore";
+import { useQueryClient } from "@tanstack/react-query";
+import { apiEstateDetailsModule } from "../../../EstateDetailsModule/api/apiEstateDetailsModule";
 
 export const DrawerSoldForm = () => {
-  const { id } = useParams();
-  const { register, handleSubmit, formState, setValue } = useForm<FieldValues>({
-    defaultValues: {
-      soldPrice: null,
-    },
-  });
   const { setIsDrawerOpen } = useDrawerSoldEstateStore();
   const { setCurrentVisibilityStatus, estateDetails } = useEstateDetailsStore();
+  const { id } = useParams();
+  const queryClient = useQueryClient();
+  const { register, handleSubmit, formState, setValue } = useForm<FieldValues>({
+    defaultValues: {
+      soldPrice: estateDetails?.soldPrice || null,
+    },
+  });
 
   const [isLoading, setIsLoading] = React.useState(false);
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
@@ -39,6 +42,12 @@ export const DrawerSoldForm = () => {
           if (response) {
             toast.success("Объект успешно обновлен!");
             setCurrentVisibilityStatus("sold");
+            // todo: мы берем данные из useLocation на странице estateDetails, поэтому этот метод не совсем подходит. Нужно будет поизучать этот момент
+            // queryClient.invalidateQueries({ queryKey: ["estateDetails"] });
+            queryClient.fetchQuery({
+              queryKey: ["estateDetails", id],
+              queryFn: () => apiEstateDetailsModule.getDetailsById(id),
+            });
           }
         })
         .catch(() => {

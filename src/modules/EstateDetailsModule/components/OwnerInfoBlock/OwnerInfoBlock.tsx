@@ -41,7 +41,7 @@ export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
         border: "1px solid",
         borderRadius: 1,
         borderColor: "customColors.labelsQuaternary",
-        padding: 1,
+        padding: 2,
       }}
     >
       <Box display="flex" justifyContent="space-between" alignItems=" center">

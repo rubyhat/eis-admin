@@ -10,6 +10,7 @@ import {
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineDelete } from "react-icons/ai";
+import { TbCurrencyTenge } from "react-icons/tb";
 
 import { DrawerDelete } from "../DrawerDelete";
 import { useEstateDetailsStore } from "../../store";
@@ -19,6 +20,7 @@ import { VisibilityStatusType } from "../../../../shared/interfaces/EstateObject
 import { apiEditEstateFormModule } from "../../../EditEstateFormModule/api/apiEditEstateFormModule";
 import { useUserStore } from "../../../UserModule/store/useUserStore";
 import { DrawerSoldEstateModule } from "../../../DrawerSoldEstateModule";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface SettingsButtonBarProps {
   _id: string;
@@ -26,8 +28,10 @@ interface SettingsButtonBarProps {
 
 export const SettingsButtonBar = ({ _id }: SettingsButtonBarProps) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const {
     setIsDeleteDrawerOpen,
+    estateDetails,
     currentVisibilityStatus,
     setCurrentVisibilityStatus,
   } = useEstateDetailsStore((state) => state);
@@ -54,10 +58,16 @@ export const SettingsButtonBar = ({ _id }: SettingsButtonBarProps) => {
 
   const handleClickChangeStatusButton = async () => {
     try {
-      await apiEditEstateFormModule.editObjectStatus(
-        currentVisibilityStatus,
-        _id,
-      );
+      await apiEditEstateFormModule
+        .editObjectStatus(currentVisibilityStatus, _id)
+        .then(() => {
+          // todo: мы берем данные из useLocation на странице estateDetails, поэтому этот метод не совсем подходит. Нужно будет поизучать этот момент
+          // queryClient.invalidateQueries({ queryKey: ["estateDetails"] });
+          queryClient.fetchQuery({
+            queryKey: ["estateDetails", _id],
+            queryFn: () => apiEstateDetailsModule.getDetailsById(_id),
+          });
+        });
       toast.success("Статус успешно изменен!");
     } catch (error) {
       toast.error(
@@ -66,6 +76,9 @@ export const SettingsButtonBar = ({ _id }: SettingsButtonBarProps) => {
       );
     }
   };
+
+  const showSoldPriceBlock =
+    estateDetails && ["sold", "rented"].includes(currentVisibilityStatus);
 
   if (currentVisibilityStatus)
     return (
@@ -103,10 +116,14 @@ export const SettingsButtonBar = ({ _id }: SettingsButtonBarProps) => {
             <MenuItem value="active" disabled={!isAdmin}>
               Активный
             </MenuItem>
-            <MenuItem value="sold">Проданный</MenuItem>
             <MenuItem value="checking">На проверке</MenuItem>
             <MenuItem value="canceled">Отмененный</MenuItem>
-            <MenuItem value="rented">Сдан в аренду</MenuItem>
+            <MenuItem disabled value="sold">
+              Проданный
+            </MenuItem>
+            <MenuItem disabled value="rented">
+              Сдан в аренду
+            </MenuItem>
           </Select>
           <CustomButton
             disabled={!isAdmin}
@@ -130,9 +147,28 @@ export const SettingsButtonBar = ({ _id }: SettingsButtonBarProps) => {
             />
           </Box>
         </Box>
-        {!["sold", "canceled"].includes(currentVisibilityStatus) && (
-          <Box paddingTop={1.5}>
+        {!["sold", "canceled", "rented"].includes(currentVisibilityStatus) && (
+          <Box paddingTop={1.5} maxWidth={568}>
             <DrawerSoldEstateModule />
+          </Box>
+        )}
+        {showSoldPriceBlock && estateDetails.soldPrice && (
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 1.5,
+              marginTop: 1,
+              borderRadius: 1,
+              color: "customColors.colorsWhite",
+              backgroundColor: "customColors.colorsGreen",
+              maxWidth: 568,
+            }}
+          >
+            {estateDetails.type === "rent" ? "Сдано в аренду" : "Продано"} за:{" "}
+            {estateDetails.soldPrice.toLocaleString("ru-RU")}{" "}
+            <TbCurrencyTenge />
           </Box>
         )}
       </Box>

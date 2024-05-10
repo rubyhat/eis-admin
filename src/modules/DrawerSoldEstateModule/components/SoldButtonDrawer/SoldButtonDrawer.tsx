@@ -5,7 +5,7 @@ import { useDrawerSoldEstateStore } from "../../store/useDrawerSoldEstateStore";
 import { useEstateDetailsStore } from "../../../EstateDetailsModule/store";
 
 export const SoldButtonDrawer = () => {
-  const { setIsDrawerOpen } = useDrawerSoldEstateStore((state) => state);
+  const { setIsDrawerOpen } = useDrawerSoldEstateStore();
   const { estateDetails } = useEstateDetailsStore();
 
   const handleClickSoldButton = () => setIsDrawerOpen(true);

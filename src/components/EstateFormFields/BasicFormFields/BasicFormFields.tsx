@@ -27,6 +27,7 @@ import { useScreenSize } from "../../../hooks/useScreenSize";
 
 interface BasicFormFieldsProps {
   isLoading: boolean;
+  mode: "edit" | "create";
   formFieldsData: FormFieldsData | Apartment | House | Flat | Land;
   setFormFieldsData: (
     v: FormFieldsData | Apartment | House | Flat | Land,
@@ -34,6 +35,7 @@ interface BasicFormFieldsProps {
 }
 
 export const BasicFormFields = ({
+  mode,
   isLoading,
   formFieldsData,
   setFormFieldsData,
@@ -454,6 +456,29 @@ export const BasicFormFields = ({
             min="0"
           />
         </Box>
+        {mode === "edit" && (
+          <Box marginBottom={1.5}>
+            <Typography
+              component="p"
+              color="customColors.labelsSecondary"
+              variant="textCalloutRegular"
+              marginBottom={0.5}
+            >
+              Сумма продажи/аренды
+            </Typography>
+            <CustomInput
+              id="soldPrice"
+              register={register}
+              errors={formState.errors}
+              disabled={isLoading}
+              formatPrice={false}
+              placeholder="Например: 2 000 000"
+              type="number"
+              min="0"
+              sx={{ width: 1 }}
+            />
+          </Box>
+        )}
         <Box marginBottom={1.5}>
           <Typography
             component="p"

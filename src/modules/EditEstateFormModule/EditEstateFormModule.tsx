@@ -117,6 +117,7 @@ export const EditEstateFormModule = ({
       description,
       price,
       discount,
+      soldPrice,
       images,
       videoLink,
       tiktokLink,
@@ -186,6 +187,7 @@ export const EditEstateFormModule = ({
       description: description,
       price: Number(price),
       discount: Number(discount),
+      soldPrice: Number(soldPrice),
       images: images,
       existingImages: JSON.stringify(
         existingImages.length > 0 ? existingImages : [],
@@ -199,7 +201,7 @@ export const EditEstateFormModule = ({
       documents: documents,
       type: type,
       category: category,
-      visibilityStatus: visibilityStatus,
+      visibilityStatus: Number(soldPrice) > 0 ? "sold" : visibilityStatus,
       estateAgent: estateAgent,
       geoPosition: geoPosition,
       ownerInfo: {
@@ -388,6 +390,7 @@ export const EditEstateFormModule = ({
             isLoading={isLoading}
             formFieldsData={formFieldsData}
             setFormFieldsData={setFormFieldsData}
+            mode="edit"
           />
           <CustomHr />
           {livingSpaces.includes(formFieldsData.category) && (
