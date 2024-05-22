@@ -134,4 +134,9 @@ export const estateObjectDictionary = {
     tiktok: "TikTok",
     other: "Другое",
   },
+  dealOwner: {
+    agency: "АН Розе",
+    owner: "Собственник",
+    other: "Другое",
+  },
 };

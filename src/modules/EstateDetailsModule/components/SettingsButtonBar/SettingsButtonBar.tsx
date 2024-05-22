@@ -6,6 +6,7 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  Typography,
 } from "@mui/material";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -157,24 +158,59 @@ export const SettingsButtonBar = ({ _id }: SettingsButtonBarProps) => {
           <Box
             sx={{
               display: "flex",
-              alignItems: "center",
+              flexDirection: "column",
               justifyContent: "center",
               padding: 1.5,
               marginTop: 1,
               borderRadius: 1,
-              color: "customColors.colorsWhite",
-              backgroundColor: "customColors.colorsGreen",
               maxWidth: 568,
+              border: "2px solid",
+              borderColor: "customColors.colorsGreen",
             }}
           >
-            {estateDetails.type === "rent" ? "Сдано в аренду" : "Продано"} за:{" "}
-            {estateDetails.soldPrice.toLocaleString("ru-RU")}{" "}
-            <TbCurrencyTenge />(
-            {estateDetails.sourceCustomer &&
-              estateObjectDictionary.sourceCustomer[
-                estateDetails.sourceCustomer
-              ]}
-            )
+            <Typography component="p" variant="textBodyEmphasized">
+              {estateDetails.type === "rent" ? "Сдано в аренду" : "Продано"} за:
+            </Typography>
+            <Typography
+              component="p"
+              variant="textBodyRegular"
+              marginBottom={1}
+            >
+              {estateDetails.soldPrice.toLocaleString("ru-RU")}{" "}
+              <TbCurrencyTenge />
+            </Typography>
+            {estateDetails.sourceCustomer && (
+              <>
+                <Typography component="p" variant="textBodyEmphasized">
+                  Источник продажи:
+                </Typography>
+                <Typography
+                  component="p"
+                  variant="textBodyRegular"
+                  marginBottom={1}
+                >
+                  {
+                    estateObjectDictionary.sourceCustomer[
+                      estateDetails.sourceCustomer
+                    ]
+                  }
+                </Typography>
+              </>
+            )}
+            {estateDetails.dealOwner && (
+              <>
+                <Typography component="p" variant="textBodyEmphasized">
+                  Организатор продажи:
+                </Typography>
+                <Typography
+                  component="p"
+                  variant="textBodyRegular"
+                  marginBottom={1}
+                >
+                  {estateObjectDictionary.dealOwner[estateDetails.dealOwner]}
+                </Typography>
+              </>
+            )}
           </Box>
         )}
       </Box>

@@ -104,6 +104,8 @@ export type SourceCustomerType =
   | "tiktok"
   | "other";
 
+export type DealOwnerType = "agency" | "owner" | "other";
+
 export type FormFieldsType =
   | BasicObject
   | Apartment
@@ -124,6 +126,7 @@ export type DisplayEstateObject = Omit<
   images: ObjectImages[];
   updatedAt: string;
   sourceCustomer?: SourceCustomerType;
+  dealOwner?: DealOwnerType;
 };
 
 export interface BasicObject {

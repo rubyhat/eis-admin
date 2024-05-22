@@ -34,6 +34,7 @@ export const DrawerSoldForm = () => {
       defaultValues: {
         soldPrice: estateDetails?.soldPrice || null,
         sourceCustomer: "",
+        dealOwner: "agency",
       },
     });
 
@@ -162,6 +163,33 @@ export const DrawerSoldForm = () => {
               <MenuItem value="krisha">Крыша.kz</MenuItem>
               <MenuItem value="instagram">Instagram</MenuItem>
               <MenuItem value="tiktok">Tik Tok</MenuItem>
+              <MenuItem value="other">Другое</MenuItem>
+            </Select>
+          )}
+        />
+      </Box>
+      <Box marginBottom={1.5}>
+        <Typography
+          component="p"
+          color="customColors.labelsSecondary"
+          variant="textCalloutRegular"
+          marginBottom={0.5}
+        >
+          Организатор{" "}
+          {estateDetails?.type === "sell" ? "продажи" : "сдачи в аренду"}
+        </Typography>
+        <Controller
+          name="dealOwner"
+          control={control}
+          render={({ field }) => (
+            <Select
+              {...field}
+              sx={selectStyles}
+              inputProps={{ sx: selectInputProps }}
+              required
+            >
+              <MenuItem value="agency">АН Розе</MenuItem>
+              <MenuItem value="owner">Собственник</MenuItem>
               <MenuItem value="other">Другое</MenuItem>
             </Select>
           )}
