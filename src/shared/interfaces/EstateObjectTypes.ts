@@ -97,6 +97,13 @@ export interface ApartmentComplex {
   title: string;
 }
 
+export type SourceCustomerType =
+  | "roze"
+  | "krisha"
+  | "instagram"
+  | "tiktok"
+  | "other";
+
 export type FormFieldsType =
   | BasicObject
   | Apartment
@@ -116,6 +123,7 @@ export type DisplayEstateObject = Omit<
   estateAgent: EstateAgentInfo | null;
   images: ObjectImages[];
   updatedAt: string;
+  sourceCustomer?: SourceCustomerType;
 };
 
 export interface BasicObject {

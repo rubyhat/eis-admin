@@ -1,8 +1,13 @@
 import React from "react";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
-import { Box, Typography } from "@mui/material";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { Box, MenuItem, Select, Typography } from "@mui/material";
+import {
+  Controller,
+  FieldValues,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
 import { TbCurrencyTenge } from "react-icons/tb";
 
 import { CustomInput } from "../../../../components/CustomInput";
@@ -14,17 +19,23 @@ import { useEstateDetailsStore } from "../../../EstateDetailsModule/store";
 import { useDrawerSoldEstateStore } from "../../store/useDrawerSoldEstateStore";
 import { useQueryClient } from "@tanstack/react-query";
 import { apiEstateDetailsModule } from "../../../EstateDetailsModule/api/apiEstateDetailsModule";
+import {
+  selectInputProps,
+  selectStyles,
+} from "../../../../components/EstateFormFields/assets/styles";
 
 export const DrawerSoldForm = () => {
   const { setIsDrawerOpen } = useDrawerSoldEstateStore();
   const { setCurrentVisibilityStatus, estateDetails } = useEstateDetailsStore();
   const { id } = useParams();
   const queryClient = useQueryClient();
-  const { register, handleSubmit, formState, setValue } = useForm<FieldValues>({
-    defaultValues: {
-      soldPrice: estateDetails?.soldPrice || null,
-    },
-  });
+  const { register, handleSubmit, formState, setValue, control } =
+    useForm<FieldValues>({
+      defaultValues: {
+        soldPrice: estateDetails?.soldPrice || null,
+        sourceCustomer: "",
+      },
+    });
 
   const [isLoading, setIsLoading] = React.useState(false);
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
@@ -33,6 +44,7 @@ export const DrawerSoldForm = () => {
     const clearData: Partial<DisplayEstateObject> = {
       soldPrice: Number(data.soldPrice),
       visibilityStatus: "sold",
+      sourceCustomer: data.sourceCustomer,
     };
 
     if (id) {
@@ -121,6 +133,38 @@ export const DrawerSoldForm = () => {
           placeholder="Например: 42 000 000"
           type="number"
           min="0"
+        />
+      </Box>
+      <Box marginBottom={1.5}>
+        <Typography
+          component="p"
+          color="customColors.labelsSecondary"
+          variant="textCalloutRegular"
+          marginBottom={0.5}
+        >
+          Источник покупателя
+        </Typography>
+        <Controller
+          name="sourceCustomer"
+          control={control}
+          render={({ field }) => (
+            <Select
+              {...field}
+              sx={selectStyles}
+              displayEmpty
+              inputProps={{ sx: selectInputProps }}
+              required
+            >
+              <MenuItem value="" disabled>
+                Выберите источник
+              </MenuItem>
+              <MenuItem value="roze">Roze.kz</MenuItem>
+              <MenuItem value="krisha">Крыша.kz</MenuItem>
+              <MenuItem value="instagram">Instagram</MenuItem>
+              <MenuItem value="tiktok">Tik Tok</MenuItem>
+              <MenuItem value="other">Другое</MenuItem>
+            </Select>
+          )}
         />
       </Box>
       <Box>

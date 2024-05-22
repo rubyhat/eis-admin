@@ -21,6 +21,7 @@ import { apiEditEstateFormModule } from "../../../EditEstateFormModule/api/apiEd
 import { useUserStore } from "../../../UserModule/store/useUserStore";
 import { DrawerSoldEstateModule } from "../../../DrawerSoldEstateModule";
 import { useQueryClient } from "@tanstack/react-query";
+import { estateObjectDictionary } from "../../../../shared/dictionaries/EstateObjectDictionary";
 
 interface SettingsButtonBarProps {
   _id: string;
@@ -168,7 +169,12 @@ export const SettingsButtonBar = ({ _id }: SettingsButtonBarProps) => {
           >
             {estateDetails.type === "rent" ? "Сдано в аренду" : "Продано"} за:{" "}
             {estateDetails.soldPrice.toLocaleString("ru-RU")}{" "}
-            <TbCurrencyTenge />
+            <TbCurrencyTenge />(
+            {estateDetails.sourceCustomer &&
+              estateObjectDictionary.sourceCustomer[
+                estateDetails.sourceCustomer
+              ]}
+            )
           </Box>
         )}
       </Box>

@@ -127,4 +127,11 @@ export const estateObjectDictionary = {
     factory: "Заводы",
     store: "Магазины",
   },
+  sourceCustomer: {
+    roze: "Roze.kz",
+    krisha: "Krisha.kz",
+    instagram: "Instagram",
+    tiktok: "TikTok",
+    other: "Другое",
+  },
 };
