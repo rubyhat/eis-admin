@@ -37,7 +37,7 @@ export const SettingsButtonBar = ({ _id }: SettingsButtonBarProps) => {
     currentVisibilityStatus,
     setCurrentVisibilityStatus,
   } = useEstateDetailsStore((state) => state);
-  const { isAdmin } = useUserStore((state) => state);
+  const { isAdmin, isManager } = useUserStore((state) => state);
 
   const handleClickDeleteButton = () => setIsDeleteDrawerOpen(true);
   const handleDeleteEstateObject = async () => {
@@ -92,10 +92,10 @@ export const SettingsButtonBar = ({ _id }: SettingsButtonBarProps) => {
           width: 1,
         }}
       >
-        {!isAdmin && (
+        {!isAdmin && !isManager && (
           <Alert severity="info" sx={{ width: "fit-content", marginBottom: 2 }}>
             Сменить статус на <strong>Активный</strong> может только{" "}
-            <strong>Администратор</strong>
+            <strong>Администратор</strong> или <strong>Менеджер</strong>
           </Alert>
         )}
         <Box sx={{ display: "flex", alignItems: "center", width: 1 }}>
@@ -115,39 +115,35 @@ export const SettingsButtonBar = ({ _id }: SettingsButtonBarProps) => {
             }}
             inputProps={{ padding: 1, fontSize: 16 }}
           >
-            <MenuItem value="active" disabled={!isAdmin}>
+            <MenuItem value="active" disabled={!isAdmin && !isManager}>
               Активный
             </MenuItem>
             <MenuItem value="checking">На проверке</MenuItem>
             <MenuItem value="canceled">Отмененный</MenuItem>
-            <MenuItem disabled value="sold">
-              Проданный
-            </MenuItem>
-            <MenuItem disabled value="rented">
-              Сдан в аренду
-            </MenuItem>
           </Select>
           <CustomButton
-            disabled={!isAdmin}
+            disabled={!isAdmin && !isManager}
             size="small"
             onClick={handleClickChangeStatusButton}
           >
             Сменить статус
           </CustomButton>
-          <Box
-            sx={{
-              display: { xs: "inherit", md: "none" },
-              marginLeft: { xs: "auto", md: 2 },
-            }}
-          >
-            <IconButton onClick={handleClickDeleteButton} color="error">
-              <AiOutlineDelete size={20} />
-            </IconButton>
-            <DrawerDelete
-              onClick={handleClickDeleteButton}
-              onDelete={handleDeleteEstateObject}
-            />
-          </Box>
+          {isAdmin && (
+            <Box
+              sx={{
+                display: { xs: "inherit", md: "none" },
+                marginLeft: { xs: "auto", md: 2 },
+              }}
+            >
+              <IconButton onClick={handleClickDeleteButton} color="error">
+                <AiOutlineDelete size={20} />
+              </IconButton>
+              <DrawerDelete
+                onClick={handleClickDeleteButton}
+                onDelete={handleDeleteEstateObject}
+              />
+            </Box>
+          )}
         </Box>
         {!["sold", "canceled", "rented"].includes(currentVisibilityStatus) && (
           <Box paddingTop={1.5} maxWidth={568}>
