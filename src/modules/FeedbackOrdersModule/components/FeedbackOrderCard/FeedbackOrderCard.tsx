@@ -47,9 +47,8 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
   const { dayAndMonth: createDate, time: createTime } = useFormatDate(
     order.createdAt,
   );
-  const { isAdmin } = useUserStore((state) => state);
+  const { isAdmin, isManager } = useUserStore((state) => state);
   const { setIsDeleteDrawerOpen } = useFeedbackOrdersStore((state) => state);
-
   const deleteFeedbackMutation = useMutation({
     mutationFn: () =>
       apiFeedbackOrdersModule.deleteFeedbackOrderById(order._id),
@@ -156,21 +155,26 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
         <Typography component="h6" variant="textBodyRegular" fontWeight={500}>
           Информация от сотрудника
         </Typography>
-        {isAdmin && (
-          <Box>
+
+        <Box>
+          {(isAdmin || isManager) && (
             <IconButton onClick={handleEditFeedbackorder} color="primary">
               <FiEdit2 size={20} />
             </IconButton>
-            <IconButton color="error" onClick={handleClickDeleteButton}>
-              <MdDeleteOutline />
-            </IconButton>
-            <FeedbackOrderDeleteDrawer
-              onClick={handleClickDeleteButton}
-              onDelete={handleDeleteFeedbackOrder}
-              orderId={order._id}
-            />
-          </Box>
-        )}
+          )}
+          {isAdmin && (
+            <>
+              <IconButton color="error" onClick={handleClickDeleteButton}>
+                <MdDeleteOutline />
+              </IconButton>
+              <FeedbackOrderDeleteDrawer
+                onClick={handleClickDeleteButton}
+                onDelete={handleDeleteFeedbackOrder}
+                orderId={order._id}
+              />
+            </>
+          )}
+        </Box>
       </Box>
 
       <List>

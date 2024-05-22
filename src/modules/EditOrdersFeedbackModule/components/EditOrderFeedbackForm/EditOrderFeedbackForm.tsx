@@ -217,7 +217,7 @@ export const EditOrderFeedbackForm = ({
             variant="textFootnoteRegular"
             marginBottom={0.5}
           >
-            Агент по недвижимости
+            Сотрудник
           </Typography>
           {isLoadingUsers ? (
             <Select
@@ -245,7 +245,7 @@ export const EditOrderFeedbackForm = ({
                   }}
                 >
                   <MenuItem disabled value="">
-                    Выберите агента
+                    Выберите сотрудника
                   </MenuItem>
                   {isError && (
                     <MenuItem

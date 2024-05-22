@@ -253,7 +253,7 @@ export const FeedbackOrderFilterForm = () => {
             variant="textFootnoteRegular"
             marginBottom={0.5}
           >
-            Агент по недвижимости
+            Сотрудник
           </Typography>
           {isLoadingUsers ? (
             <Select
@@ -285,7 +285,7 @@ export const FeedbackOrderFilterForm = () => {
                   }}
                 >
                   <MenuItem disabled value="">
-                    Выберите агента
+                    Выберите сотрудника
                   </MenuItem>
                   {isError && (
                     <MenuItem
