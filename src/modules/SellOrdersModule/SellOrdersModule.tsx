@@ -1,9 +1,8 @@
 import { Alert, Badge, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 import { OrdersList } from "./components/OrdersList";
-import { useQuery } from "@tanstack/react-query";
-import { apiSellOrdersModule } from "./api/apiSellOrdersModule";
 import { SellOrderCardSkeleton } from "./components/SellOrderCardSkeleton";
+import { useFetchSellOrders } from "./hooks/useFetchSellOrders";
 
 export const SellOrdersModule = () => {
   const {
@@ -11,12 +10,7 @@ export const SellOrdersModule = () => {
     isLoading,
     isSuccess,
     isError,
-  } = useQuery({
-    queryFn: () => apiSellOrdersModule.fetchSells(""),
-    queryKey: ["sellOrders"],
-  });
-
-  React.useEffect(() => console.log("SellsData", SellsData), [SellsData]);
+  } = useFetchSellOrders();
 
   return (
     <Container>
@@ -34,7 +28,7 @@ export const SellOrdersModule = () => {
         <Grid item xs={12}>
           Toolbar
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} lg={8}>
           {isSuccess && Boolean(!SellsData.length) && (
             <Alert severity="info">
               Список заявок пуст. Если так быть не должно, проверьте фильтры или
