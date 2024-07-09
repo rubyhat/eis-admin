@@ -172,7 +172,11 @@ export const ImagesFormField = ({
       <Grid item xs={12} md={6}>
         <Typography
           component="p"
-          color="customColors.labelsSecondary"
+          color={
+            selectedImages.length > 30
+              ? "customColors.colorsRed"
+              : "customColors.labelsSecondary"
+          }
           variant="textCalloutRegular"
           marginBottom={0.5}
         >

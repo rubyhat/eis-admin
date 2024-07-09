@@ -90,7 +90,7 @@ export const CreateEstateFormModule = () => {
 
   // Перечисление всех свойств это дичь, нужно будет подумать как переделать
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(true);
+    // setIsLoading(true);
     setFormFieldsData(data as FormFieldsType);
     const {
       // basic values
@@ -288,6 +288,14 @@ export const CreateEstateFormModule = () => {
         })
         .finally(() => setIsLoading(false));
     };
+
+    // todo: добавить yup и нормальную валидацию данных в форме
+    if (images && images.length > 30) {
+      return toast.error(
+        "Выбрано слишком много фотографий! Пожалуйста удалите лишние, лимит 30 фотографий.",
+        { duration: 5000 },
+      );
+    }
     createObjectReq();
   };
 
