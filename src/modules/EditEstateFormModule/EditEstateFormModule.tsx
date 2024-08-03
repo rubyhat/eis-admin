@@ -110,6 +110,8 @@ export const EditEstateFormModule = ({
   };
 
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
+    if (isLoading) return;
+
     setIsLoading(true);
     setFormFieldsData(data as FormFieldsType);
     const {
@@ -303,9 +305,12 @@ export const EditEstateFormModule = ({
             navigate("/catalog/" + _id);
           }
         })
-        .catch(() => {
+        .catch((error) => {
           toast.error(
-            "Произошла ошибка! Пожалуйста, обратитьесь в тех. поддержку",
+            "Произошла ошибка! Пожалуйста, обратитьесь в тех. поддержку " +
+              error +
+              error.toString(),
+            { duration: 5000 },
           );
         })
         .finally(() => setIsLoading(false));

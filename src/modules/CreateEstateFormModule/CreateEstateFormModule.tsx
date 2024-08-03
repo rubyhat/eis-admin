@@ -90,7 +90,9 @@ export const CreateEstateFormModule = () => {
 
   // Перечисление всех свойств это дичь, нужно будет подумать как переделать
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
-    // setIsLoading(true);
+    if (isLoading) return;
+
+    setIsLoading(true);
     setFormFieldsData(data as FormFieldsType);
     const {
       // basic values
@@ -281,9 +283,12 @@ export const CreateEstateFormModule = () => {
             setFormFieldsData(FormFieldsDataInitial);
           }
         })
-        .catch(() => {
+        .catch((error) => {
           toast.error(
-            "Произошла ошибка! Пожалуйста, обратитьесь в тех. поддержку",
+            "Произошла ошибка! Пожалуйста, обратитьесь в тех. поддержку " +
+              error +
+              error.toString(),
+            { duration: 5000 },
           );
         })
         .finally(() => setIsLoading(false));
