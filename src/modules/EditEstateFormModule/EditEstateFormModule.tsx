@@ -77,6 +77,8 @@ export const EditEstateFormModule = ({
     },
   });
 
+  console.log(editEstateData);
+
   // Стейт для уже существующих фото, редактируем его если нужно удалить старое фото
   const [existingImages, setExistingImages] = React.useState<ObjectImages[]>(
     [],

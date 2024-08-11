@@ -160,6 +160,31 @@ export const FilterForm = () => {
             variant="textCalloutRegular"
             marginBottom={0.5}
           >
+            Тип
+          </Typography>
+          <Controller
+            name="type"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="sell">Продажа</MenuItem>
+                <MenuItem value="rent">Аренда</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
             Статус
           </Typography>
           <Controller
@@ -179,6 +204,173 @@ export const FilterForm = () => {
                 <MenuItem value="canceled">Отмененные</MenuItem>
                 <MenuItem value="rented">Сдан в аренду</MenuItem>
               </Select>
+            )}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Категория
+          </Typography>
+          <Controller
+            name="category"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="apartment">Квартира</MenuItem>
+                <MenuItem value="house">Дом</MenuItem>
+                <MenuItem value="townhouse">Таунхаус</MenuItem>
+                <MenuItem value="cottage">Дача</MenuItem>
+                <MenuItem value="land">Земельный участок</MenuItem>
+                <MenuItem value="business">Коммерческая недвижимость</MenuItem>
+                {/* <MenuItem value="factory">Заводы, фабрики</MenuItem> */}
+                {/* <MenuItem value="other">Другое</MenuItem> */}
+              </Select>
+            )}
+          />
+        </Box>
+        <Box marginBottom={1.5}>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginBottom={0.5}
+          >
+            Количество комнат
+          </Typography>
+          <Controller
+            name="roomCount"
+            control={control}
+            render={({ field }) => (
+              <Select
+                {...field}
+                displayEmpty
+                sx={selectStyles}
+                inputProps={{ sx: selectInputProps }}
+              >
+                {/* <MenuItem disabled value="">
+                  <Typography
+                    variant="textCalloutRegular"
+                    color="customColors.labelsSecondary"
+                  >
+                    Например: 1 ком.
+                  </Typography>
+                </MenuItem> */}
+                <MenuItem value="">Не указывать</MenuItem>
+                <MenuItem value="1">1 ком.</MenuItem>
+                <MenuItem value="2">2-х ком.</MenuItem>
+                <MenuItem value="3">3-х ком.</MenuItem>
+                <MenuItem value="4">4-х ком.</MenuItem>
+                <MenuItem value="5">5 и более</MenuItem>
+              </Select>
+            )}
+          />
+        </Box>
+
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1.5,
+            marginBottom: 1.5,
+          }}
+        >
+          <Box>
+            <Typography
+              component="p"
+              color="customColors.labelsSecondary"
+              variant="textCalloutRegular"
+              marginBottom={0.5}
+            >
+              Этаж
+            </Typography>
+            <CustomInput
+              id="targetFloor"
+              register={register}
+              errors={errors}
+              disabled={isLoading}
+              formatPrice={false}
+              placeholder="2"
+              type="number"
+              min="0"
+            />
+          </Box>
+          <Typography
+            component="p"
+            color="customColors.labelsSecondary"
+            variant="textCalloutRegular"
+            marginTop={3}
+          >
+            /
+          </Typography>
+          <Box>
+            <Typography
+              component="p"
+              color="customColors.labelsSecondary"
+              variant="textCalloutRegular"
+              marginBottom={0.5}
+            >
+              Всего
+            </Typography>
+            <CustomInput
+              id="totalFloor"
+              register={register}
+              errors={errors}
+              disabled={isLoading}
+              formatPrice={false}
+              placeholder="5"
+              type="number"
+              min="0"
+            />
+          </Box>
+        </Box>
+        <Box>
+          <Controller
+            name="notFirstFloor"
+            control={control}
+            render={({ field }) => (
+              <FormControlLabel
+                {...field}
+                control={
+                  <Switch
+                    {...field}
+                    checked={String(field.value) === "true"}
+                    onChange={(e) =>
+                      field.onChange(e.target.checked.toString())
+                    }
+                  />
+                }
+                label="Не первый этаж"
+              />
+            )}
+          />
+          <Controller
+            name="notLastFloor"
+            control={control}
+            render={({ field }) => (
+              <FormControlLabel
+                {...field}
+                control={
+                  <Switch
+                    {...field}
+                    checked={String(field.value) === "true"}
+                    onChange={(e) =>
+                      field.onChange(e.target.checked.toString())
+                    }
+                  />
+                }
+                label="Не последний этаж"
+              />
             )}
           />
         </Box>
@@ -216,23 +408,63 @@ export const FilterForm = () => {
             variant="textCalloutRegular"
             marginBottom={0.5}
           >
-            Тип
+            Год постройки от
           </Typography>
-          <Controller
-            name="type"
-            control={control}
-            render={({ field }) => (
-              <Select
-                {...field}
-                displayEmpty
-                sx={selectStyles}
-                inputProps={{ sx: selectInputProps }}
-              >
-                <MenuItem value="sell">Продажа</MenuItem>
-                <MenuItem value="rent">Аренда</MenuItem>
-              </Select>
-            )}
+          <CustomInput
+            id="houseBuildingYear"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            formatPrice={false}
+            placeholder="Например: 2023"
+            sx={{ marginBottom: 1.5 }}
           />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1.5,
+          }}
+        >
+          <Box>
+            <Typography
+              component="p"
+              color="customColors.labelsSecondary"
+              variant="textCalloutRegular"
+              marginBottom={0.5}
+            >
+              Площадь, от м²
+            </Typography>
+            <CustomInput
+              id="houseSquare"
+              register={register}
+              errors={errors}
+              disabled={isLoading}
+              formatPrice={false}
+              placeholder="42"
+              sx={{ marginBottom: 1.5 }}
+            />
+          </Box>
+          <Box>
+            <Typography
+              component="p"
+              color="customColors.labelsSecondary"
+              variant="textCalloutRegular"
+              marginBottom={0.5}
+            >
+              Площадь, до м²
+            </Typography>
+            <CustomInput
+              id="houseSquareEnd"
+              register={register}
+              errors={errors}
+              disabled={isLoading}
+              formatPrice={false}
+              placeholder="142"
+              sx={{ marginBottom: 1.5 }}
+            />
+          </Box>
         </Box>
         <Box marginBottom={1.5}>
           <Typography
@@ -241,29 +473,16 @@ export const FilterForm = () => {
             variant="textCalloutRegular"
             marginBottom={0.5}
           >
-            Категория
+            Площадь кухни, от м²
           </Typography>
-          <Controller
-            name="category"
-            control={control}
-            render={({ field }) => (
-              <Select
-                {...field}
-                displayEmpty
-                sx={selectStyles}
-                inputProps={{ sx: selectInputProps }}
-              >
-                <MenuItem value="">Не указывать</MenuItem>
-                <MenuItem value="apartment">Квартира</MenuItem>
-                <MenuItem value="house">Дом</MenuItem>
-                <MenuItem value="townhouse">Таунхаус</MenuItem>
-                <MenuItem value="cottage">Дача</MenuItem>
-                <MenuItem value="land">Земельный участок</MenuItem>
-                <MenuItem value="business">Коммерческая недвижимость</MenuItem>
-                {/* <MenuItem value="factory">Заводы, фабрики</MenuItem> */}
-                {/* <MenuItem value="other">Другое</MenuItem> */}
-              </Select>
-            )}
+          <CustomInput
+            id="kitchenSquare"
+            register={register}
+            errors={errors}
+            disabled={isLoading}
+            formatPrice={false}
+            placeholder="Например: 15"
+            sx={{ marginBottom: 1.5 }}
           />
         </Box>
         <Box marginBottom={1.5}>
@@ -525,225 +744,6 @@ export const FilterForm = () => {
                 <MenuItem value="no">Нет</MenuItem>
               </Select>
             )}
-          />
-        </Box>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textCalloutRegular"
-            marginBottom={0.5}
-          >
-            Количество комнат
-          </Typography>
-          <Controller
-            name="roomCount"
-            control={control}
-            render={({ field }) => (
-              <Select
-                {...field}
-                displayEmpty
-                sx={selectStyles}
-                inputProps={{ sx: selectInputProps }}
-              >
-                {/* <MenuItem disabled value="">
-                  <Typography
-                    variant="textCalloutRegular"
-                    color="customColors.labelsSecondary"
-                  >
-                    Например: 1 ком.
-                  </Typography>
-                </MenuItem> */}
-                <MenuItem value="">Не указывать</MenuItem>
-                <MenuItem value="1">1 ком.</MenuItem>
-                <MenuItem value="2">2-х ком.</MenuItem>
-                <MenuItem value="3">3-х ком.</MenuItem>
-                <MenuItem value="4">4-х ком.</MenuItem>
-                <MenuItem value="5">5 и более</MenuItem>
-              </Select>
-            )}
-          />
-        </Box>
-
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1.5,
-            marginBottom: 1.5,
-          }}
-        >
-          <Box>
-            <Typography
-              component="p"
-              color="customColors.labelsSecondary"
-              variant="textCalloutRegular"
-              marginBottom={0.5}
-            >
-              Этаж
-            </Typography>
-            <CustomInput
-              id="targetFloor"
-              register={register}
-              errors={errors}
-              disabled={isLoading}
-              formatPrice={false}
-              placeholder="2"
-              type="number"
-              min="0"
-            />
-          </Box>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textCalloutRegular"
-            marginTop={3}
-          >
-            /
-          </Typography>
-          <Box>
-            <Typography
-              component="p"
-              color="customColors.labelsSecondary"
-              variant="textCalloutRegular"
-              marginBottom={0.5}
-            >
-              Всего
-            </Typography>
-            <CustomInput
-              id="totalFloor"
-              register={register}
-              errors={errors}
-              disabled={isLoading}
-              formatPrice={false}
-              placeholder="5"
-              type="number"
-              min="0"
-            />
-          </Box>
-        </Box>
-        <Box>
-          <Controller
-            name="notFirstFloor"
-            control={control}
-            render={({ field }) => (
-              <FormControlLabel
-                {...field}
-                control={
-                  <Switch
-                    {...field}
-                    checked={String(field.value) === "true"}
-                    onChange={(e) =>
-                      field.onChange(e.target.checked.toString())
-                    }
-                  />
-                }
-                label="Не первый этаж"
-              />
-            )}
-          />
-          <Controller
-            name="notLastFloor"
-            control={control}
-            render={({ field }) => (
-              <FormControlLabel
-                {...field}
-                control={
-                  <Switch
-                    {...field}
-                    checked={String(field.value) === "true"}
-                    onChange={(e) =>
-                      field.onChange(e.target.checked.toString())
-                    }
-                  />
-                }
-                label="Не последний этаж"
-              />
-            )}
-          />
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1.5,
-          }}
-        >
-          <Box>
-            <Typography
-              component="p"
-              color="customColors.labelsSecondary"
-              variant="textCalloutRegular"
-              marginBottom={0.5}
-            >
-              Площадь, от м²
-            </Typography>
-            <CustomInput
-              id="houseSquare"
-              register={register}
-              errors={errors}
-              disabled={isLoading}
-              formatPrice={false}
-              placeholder="42"
-              sx={{ marginBottom: 1.5 }}
-            />
-          </Box>
-          <Box>
-            <Typography
-              component="p"
-              color="customColors.labelsSecondary"
-              variant="textCalloutRegular"
-              marginBottom={0.5}
-            >
-              Площадь, до м²
-            </Typography>
-            <CustomInput
-              id="houseSquareEnd"
-              register={register}
-              errors={errors}
-              disabled={isLoading}
-              formatPrice={false}
-              placeholder="142"
-              sx={{ marginBottom: 1.5 }}
-            />
-          </Box>
-        </Box>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textCalloutRegular"
-            marginBottom={0.5}
-          >
-            Площадь кухни, от м²
-          </Typography>
-          <CustomInput
-            id="kitchenSquare"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-            formatPrice={false}
-            placeholder="Например: 15"
-            sx={{ marginBottom: 1.5 }}
-          />
-        </Box>
-        <Box marginBottom={1.5}>
-          <Typography
-            component="p"
-            color="customColors.labelsSecondary"
-            variant="textCalloutRegular"
-            marginBottom={0.5}
-          >
-            Год постройки от
-          </Typography>
-          <CustomInput
-            id="houseBuildingYear"
-            register={register}
-            errors={errors}
-            disabled={isLoading}
-            formatPrice={false}
-            placeholder="Например: 2023"
-            sx={{ marginBottom: 1.5 }}
           />
         </Box>
       </Box>

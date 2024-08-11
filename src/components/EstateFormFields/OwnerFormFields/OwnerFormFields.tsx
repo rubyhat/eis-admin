@@ -1,6 +1,9 @@
-import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+
+import { Box, Grid, IconButton, Tooltip, Typography } from "@mui/material";
+import { BsQuestionCircle } from "react-icons/bs";
+
 import { CustomInput } from "../../CustomInput";
 
 interface OwnerFormFieldsProps {
@@ -153,15 +156,28 @@ export const OwnerFormFields = ({ isLoading }: OwnerFormFieldsProps) => {
             color="customColors.labelsSecondary"
             variant="textCalloutRegular"
             marginBottom={0.5}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              cursor: "pointer",
+            }}
           >
             Заметка(хозяева, КСК, соседи, брак, долги)
+            <Tooltip
+              title={`Заметка по документам - ?\nЗалог, сумма залога? - ?\nКод домофона - ?\nДругое - ?\nВопросы? - ?\nИмена всех хозяев - ?\nКск - ?\nСоседи - ?\nПродавец в браке сейчас/ранее - ?\nДолги по коммунальным платежам - ?`}
+            >
+              <IconButton size="small">
+                <BsQuestionCircle color="#ff6800" />
+              </IconButton>
+            </Tooltip>
           </Typography>
           <Box
             component="textarea"
             id="ownerInfo.description"
             {...register("ownerInfo.description", { required: false })}
             disabled={isLoading}
-            placeholder={`Имена всех хозяев - ?\nКск - ?\nСоседи - ?\nПродавец в браке сейчас/ранее - ?\nДолги по коммунальным платежам - ?`}
+            placeholder={`Заметка по документам - ?\nЗалог, сумма залога? - ?\nКод домофона - ?\nДругое - ?\nВопросы? - ?`}
             sx={{
               width: 1,
               minHeight: { xs: 250, sm: 110 },
