@@ -41,7 +41,7 @@ export const BasicFormFields = ({
   setFormFieldsData,
 }: BasicFormFieldsProps) => {
   const { control, register, formState } = useFormContext();
-  const { isAdmin } = useUserStore((state) => state);
+  const { isAdmin, isManager } = useUserStore((state) => state);
   const { isMobile } = useScreenSize();
 
   const {
@@ -172,11 +172,10 @@ export const BasicFormFields = ({
                 {...field}
                 sx={selectStyles}
                 inputProps={{ sx: selectInputProps }}
+                disabled={!isAdmin && !isManager}
               >
                 <MenuItem value="checking">На проверке</MenuItem>
-                <MenuItem value="active" disabled={!isAdmin}>
-                  Активный {!isAdmin && "(только для Админа)"}
-                </MenuItem>
+                <MenuItem value="active">Активный</MenuItem>
                 <MenuItem value="sold">Продано</MenuItem>
                 <MenuItem value="canceled">Отменено</MenuItem>
                 <MenuItem value="rented">Сдан в аренду</MenuItem>

@@ -81,6 +81,9 @@ export const SettingsButtonBar = ({ _id }: SettingsButtonBarProps) => {
 
   const showSoldPriceBlock =
     estateDetails && ["sold", "rented"].includes(currentVisibilityStatus);
+  const showSoldButton =
+    !["sold", "canceled", "rented"].includes(currentVisibilityStatus) &&
+    (isAdmin || isManager);
 
   if (currentVisibilityStatus)
     return (
@@ -93,59 +96,61 @@ export const SettingsButtonBar = ({ _id }: SettingsButtonBarProps) => {
         }}
       >
         {!isAdmin && !isManager && (
-          <Alert severity="info" sx={{ width: "fit-content", marginBottom: 2 }}>
-            Сменить статус на <strong>Активный</strong> может только{" "}
-            <strong>Администратор</strong> или <strong>Менеджер</strong>
+          <Alert severity="info" sx={{ width: "fit-content" }}>
+            Сменить статус может только <strong>Администратор</strong> или{" "}
+            <strong>Менеджер</strong>
           </Alert>
         )}
-        <Box sx={{ display: "flex", alignItems: "center", width: 1 }}>
-          <Select
-            id="status-select"
-            value={currentVisibilityStatus}
-            onChange={(e) => handleChangeStatus(e)}
-            sx={{
-              padding: 0,
-              height: "36px",
-              fontSize: "15px",
-              width: "140px",
-              marginRight: 2,
-              "& fieldset": {
-                borderColor: "customColors.labelsQuaternary",
-              },
-            }}
-            inputProps={{ padding: 1, fontSize: 16 }}
-          >
-            <MenuItem value="active" disabled={!isAdmin && !isManager}>
-              Активный
-            </MenuItem>
-            <MenuItem value="checking">На проверке</MenuItem>
-            <MenuItem value="canceled">Отмененный</MenuItem>
-          </Select>
-          <CustomButton
-            disabled={!isAdmin && !isManager}
-            size="small"
-            onClick={handleClickChangeStatusButton}
-          >
-            Сменить статус
-          </CustomButton>
-          {isAdmin && (
-            <Box
+        {(isAdmin || isManager) && (
+          <Box sx={{ display: "flex", alignItems: "center", width: 1 }}>
+            <Select
+              id="status-select"
+              value={currentVisibilityStatus}
+              onChange={(e) => handleChangeStatus(e)}
               sx={{
-                display: { xs: "inherit", md: "none" },
-                marginLeft: { xs: "auto", md: 2 },
+                padding: 0,
+                height: "36px",
+                fontSize: "15px",
+                width: "140px",
+                marginRight: 2,
+                "& fieldset": {
+                  borderColor: "customColors.labelsQuaternary",
+                },
               }}
+              inputProps={{ padding: 1, fontSize: 16 }}
             >
-              <IconButton onClick={handleClickDeleteButton} color="error">
-                <AiOutlineDelete size={20} />
-              </IconButton>
-              <DrawerDelete
-                onClick={handleClickDeleteButton}
-                onDelete={handleDeleteEstateObject}
-              />
-            </Box>
-          )}
-        </Box>
-        {!["sold", "canceled", "rented"].includes(currentVisibilityStatus) && (
+              <MenuItem value="active" disabled={!isAdmin && !isManager}>
+                Активный
+              </MenuItem>
+              <MenuItem value="checking">На проверке</MenuItem>
+              <MenuItem value="canceled">Отмененный</MenuItem>
+            </Select>
+            <CustomButton
+              disabled={!isAdmin && !isManager}
+              size="small"
+              onClick={handleClickChangeStatusButton}
+            >
+              Сменить статус
+            </CustomButton>
+            {isAdmin && (
+              <Box
+                sx={{
+                  display: { xs: "inherit", md: "none" },
+                  marginLeft: { xs: "auto", md: 2 },
+                }}
+              >
+                <IconButton onClick={handleClickDeleteButton} color="error">
+                  <AiOutlineDelete size={20} />
+                </IconButton>
+                <DrawerDelete
+                  onClick={handleClickDeleteButton}
+                  onDelete={handleDeleteEstateObject}
+                />
+              </Box>
+            )}
+          </Box>
+        )}
+        {showSoldButton && (
           <Box paddingTop={1.5} maxWidth={568}>
             <DrawerSoldEstateModule />
           </Box>
