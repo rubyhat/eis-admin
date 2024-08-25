@@ -67,6 +67,7 @@ export const EditEstateFormModule = ({
   React.useEffect(() => {
     if (editEstateData) {
       setFormFieldsData(editEstateData);
+      setDescriptionTempText(editEstateData.description);
     }
   }, [editEstateData, setFormFieldsData]);
 

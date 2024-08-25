@@ -1,7 +1,14 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-import { Box, Grid, IconButton, Tooltip, Typography } from "@mui/material";
+import {
+  Box,
+  Grid,
+  IconButton,
+  Menu,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { BsQuestionCircle } from "react-icons/bs";
 
 import { CustomInput } from "../../CustomInput";
@@ -31,6 +38,16 @@ export const OwnerFormFields = ({ isLoading }: OwnerFormFieldsProps) => {
 
     setValue("ownerInfo.ownerPhone", formattedValue, { shouldValidate: true });
   };
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClickTipIcon = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={4}>
@@ -167,10 +184,34 @@ export const OwnerFormFields = ({ isLoading }: OwnerFormFieldsProps) => {
             <Tooltip
               title={`Заметка по документам - ?\nЗалог, сумма залога? - ?\nКод домофона - ?\nДругое - ?\nВопросы? - ?\nИмена всех хозяев - ?\nКск - ?\nСоседи - ?\nПродавец в браке сейчас/ранее - ?\nДолги по коммунальным платежам - ?`}
             >
-              <IconButton size="small">
+              <IconButton size="small" onClick={handleClickTipIcon}>
                 <BsQuestionCircle color="#ff6800" />
               </IconButton>
             </Tooltip>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleCloseMenu}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+            >
+              <Box p={2} onClick={handleCloseMenu}>
+                <Typography component="p" variant="caption">
+                  Заметка по документам - ? <br />
+                  Залог, сумма залога? - ?<br />
+                  Код домофона - ?<br />
+                  Другое - ?<br />
+                  Вопросы? - ?<br />
+                  Имена всех хозяев - ?<br />
+                  Кск - ?<br />
+                  Соседи - ?<br />
+                  Продавец в браке сейчас/ранее - ?<br />
+                  Долги по коммунальным платежам - ?
+                </Typography>
+              </Box>
+            </Menu>
           </Typography>
           <Box
             component="textarea"
