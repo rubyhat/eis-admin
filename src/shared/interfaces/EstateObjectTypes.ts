@@ -81,6 +81,7 @@ export interface EstateAgentInfo {
   _id?: string;
   email?: string;
   avatar?: string;
+  birthday?: string;
 }
 
 // Информация о собтвеннике объекта, нужна только для сотрудников

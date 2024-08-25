@@ -2,6 +2,14 @@ import React from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import {
+  Controller,
+  FieldValues,
+  SubmitHandler,
+  useForm,
+  useWatch,
+} from "react-hook-form";
+
+import {
   Alert,
   Box,
   Checkbox,
@@ -10,13 +18,9 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import {
-  Controller,
-  FieldValues,
-  SubmitHandler,
-  useForm,
-  useWatch,
-} from "react-hook-form";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { ruRU } from "@mui/x-date-pickers/locales";
 
 import { CustomInput } from "../../../../components/CustomInput";
 import { CustomButton } from "../../../../components/CustomButton";
@@ -27,6 +31,7 @@ import {
   selectInputProps,
   selectStyles,
 } from "../../../../components/EstateFormFields/assets/styles";
+import dayjs from "dayjs";
 
 interface UserCreateFormProps {
   editUserData: EstateAgentInfo;
@@ -45,7 +50,11 @@ export const UserEditForm = ({ editUserData }: UserCreateFormProps) => {
     formState: { errors },
     setValue,
   } = useForm<FieldValues>({
-    defaultValues: { ...editUserData, avatar: editUserData.avatar || "" },
+    defaultValues: {
+      ...editUserData,
+      avatar: editUserData.avatar || "",
+      birthday: editUserData.birthday ? dayjs(editUserData.birthday) : null,
+    },
   });
 
   const navigate = useNavigate();
@@ -80,7 +89,11 @@ export const UserEditForm = ({ editUserData }: UserCreateFormProps) => {
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
     const formData = new FormData();
 
-    const cleanData = { ...data, phone: data.phone.split(" ").join("") };
+    const cleanData = {
+      ...data,
+      phone: data.phone.split(" ").join(""),
+      birthday: new Date(data.birthday).toISOString(),
+    };
 
     Object.entries(cleanData).forEach(([key, value]) => {
       if (key !== "avatar") {
@@ -132,6 +145,51 @@ export const UserEditForm = ({ editUserData }: UserCreateFormProps) => {
           placeholder="Артур Розе"
           required
         />
+      </Box>
+      <Box padding="8px 0">
+        <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
+          Дата рождения
+          <Typography
+            component="span"
+            color="customColors.colorsRed"
+            marginLeft={0.5}
+          >
+            *
+          </Typography>
+        </Typography>
+        <LocalizationProvider
+          dateAdapter={AdapterDayjs}
+          localeText={
+            ruRU.components.MuiLocalizationProvider.defaultProps.localeText
+          }
+        >
+          <Controller
+            name="birthday"
+            control={control}
+            render={({ field }) => (
+              <DatePicker
+                label="Дата рождения"
+                value={field.value}
+                onChange={(newValue) => field.onChange(newValue)}
+                sx={{
+                  width: 1,
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "customColors.labelsQuaternary",
+                      borderWidth: 1,
+                    },
+                  },
+                }}
+                slotProps={{
+                  textField: {
+                    error: !!errors.birthday,
+                    helperText: errors.birthday ? "Некорректная дата" : "",
+                  },
+                }}
+              />
+            )}
+          />
+        </LocalizationProvider>
       </Box>
       <Box padding="8px 0">
         <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>

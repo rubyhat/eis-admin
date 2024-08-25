@@ -247,7 +247,7 @@ export const CreateEstateFormModule = () => {
 
       const filteredData = Object.entries(sendData).reduce(
         (acc, [key, value]) => {
-          if (value !== "" && value !== null) {
+          if (value !== "" && value !== null && value !== 0) {
             acc[key] = value;
           }
           return acc;

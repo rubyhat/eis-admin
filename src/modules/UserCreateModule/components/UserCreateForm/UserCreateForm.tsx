@@ -20,6 +20,10 @@ import {
 } from "../../../../components/EstateFormFields/assets/styles";
 import { LoadingSplashScreen } from "../../../../components/LoadingSplashScreen";
 
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { ruRU } from "@mui/x-date-pickers/locales";
+
 const initialFormFieldData = {
   name: "",
   username: "",
@@ -28,11 +32,13 @@ const initialFormFieldData = {
   password: "", // todo: добавить инпут "подтверждение пароля"
   email: "", // todo: нужна ли почта? или создавать всем корпоративную почту?
   avatar: "",
+  birthday: null,
 };
 
 export const UserCreateForm = () => {
   const { user } = useUserStore((state) => state);
   const [isLoading, setIsLoading] = React.useState(false);
+
   const {
     control,
     register,
@@ -55,7 +61,7 @@ export const UserCreateForm = () => {
       ? URL.createObjectURL(avatar[0])
       : avatar;
 
-  const sendCreaeteUser = async (data: FormData) => {
+  const sendCreateUser = async (data: FormData) => {
     setIsLoading(true);
     try {
       await apiUserCreate.createUser(data);
@@ -73,7 +79,11 @@ export const UserCreateForm = () => {
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
     const formData = new FormData();
 
-    const cleanData = { ...data, phone: data.phone.split(" ").join("") };
+    const cleanData = {
+      ...data,
+      phone: data.phone.split(" ").join(""),
+      birthday: new Date(data.birthday).toISOString(),
+    };
 
     Object.entries(cleanData).forEach(([key, value]) => {
       if (key !== "avatar") {
@@ -83,7 +93,7 @@ export const UserCreateForm = () => {
       }
     });
 
-    sendCreaeteUser(formData);
+    sendCreateUser(formData);
   };
 
   // todo: вынести в переиспользуемую утилиту/компонент
@@ -129,6 +139,51 @@ export const UserCreateForm = () => {
       </Box>
       <Box padding="8px 0">
         <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
+          Дата рождения
+          <Typography
+            component="span"
+            color="customColors.colorsRed"
+            marginLeft={0.5}
+          >
+            *
+          </Typography>
+        </Typography>
+        <LocalizationProvider
+          dateAdapter={AdapterDayjs}
+          localeText={
+            ruRU.components.MuiLocalizationProvider.defaultProps.localeText
+          }
+        >
+          <Controller
+            name="birthday"
+            control={control}
+            render={({ field }) => (
+              <DatePicker
+                label="Дата рождения"
+                value={field.value}
+                onChange={(newValue) => field.onChange(newValue)}
+                sx={{
+                  width: 1,
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "customColors.labelsQuaternary",
+                      borderWidth: 1,
+                    },
+                  },
+                }}
+                slotProps={{
+                  textField: {
+                    error: !!errors.birthday,
+                    helperText: errors.birthday ? "Некорректная дата" : "",
+                  },
+                }}
+              />
+            )}
+          />
+        </LocalizationProvider>
+      </Box>
+      <Box padding="8px 0">
+        <Typography component="p" variant="textBodyRegular" marginBottom={0.5}>
           Логин для входа{" "}
           <Typography
             component="span"
@@ -163,7 +218,7 @@ export const UserCreateForm = () => {
           register={register}
           errors={errors}
           disabled={isLoading}
-          placeholder="Придумайте надеждный пароль"
+          placeholder="Придумайте надежный пароль"
           required
         />
       </Box>

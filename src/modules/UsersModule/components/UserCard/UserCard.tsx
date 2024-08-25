@@ -10,7 +10,9 @@ import {
   Typography,
 } from "@mui/material";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+
 import { CiImageOff } from "react-icons/ci";
 import { FiEdit2 } from "react-icons/fi";
 import { MdDeleteOutline } from "react-icons/md";
@@ -20,7 +22,7 @@ import { apiUsersModule } from "../../api";
 import { UserDeleteDrawer } from "../UserDeleteDrawer";
 import { useUsersStore } from "../../store/useUsersStore";
 import { useUserStore } from "../../../UserModule/store/useUserStore";
-import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 
 interface UserCardProps {
   user: EstateAgentInfo;
@@ -117,6 +119,15 @@ export const UserCard = ({ user }: UserCardProps) => {
               sx={{ margin: 0 }}
               primary={user.email}
               secondary="Адрес почты"
+            />
+          </ListItem>
+        )}
+        {user.birthday && (
+          <ListItem>
+            <ListItemText
+              sx={{ margin: 0 }}
+              primary={dayjs(user.birthday).format("DD.MM.YYYY")}
+              secondary="Дата рождения"
             />
           </ListItem>
         )}
