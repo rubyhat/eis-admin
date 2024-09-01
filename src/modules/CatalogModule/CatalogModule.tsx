@@ -11,6 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useCatalogStore } from "./store";
 import { CatalogCardSkeleton } from "./components/CatalogCardSkeleton";
 import { ButtonStickyBottom } from "../../components/ButtonStickyBottom";
+import { CatalogSearch } from "./components/CatalogSearch";
 
 export const CatalogModule = () => {
   useTitle("Каталог");
@@ -55,7 +56,7 @@ export const CatalogModule = () => {
               },
             }}
           >
-            <Box sx={{ width: 1, display: "flex", alignItems: "ceter" }}>
+            <Box sx={{ width: 1, display: "flex" }}>
               <Typography
                 component="h2"
                 variant="titleFirstRegular"
@@ -73,6 +74,7 @@ export const CatalogModule = () => {
             </Box>
             <FilterMobileWrapper />
           </Box>
+          <CatalogSearch />
         </Grid>
         <Grid item xs={12} md={8} lg={9}>
           {isSuccess && Boolean(!estateObjects.length) && (

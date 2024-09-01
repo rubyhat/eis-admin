@@ -234,10 +234,17 @@ export const CreateEstateFormModule = () => {
       house: { ...apartmentData, ...houseData },
       land: { ...landData },
       townhouse: { ...apartmentData },
-      business: { ...businessData },
+      business: {
+        ...apartmentData,
+        ...flatData,
+        ...houseData,
+        ...landData,
+        ...businessData,
+      },
       factory: {},
       other: {},
     };
+    console.log(totalData);
 
     const createObjectReq = () => {
       const sendData = {

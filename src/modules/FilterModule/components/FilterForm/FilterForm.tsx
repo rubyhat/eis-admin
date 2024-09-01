@@ -94,7 +94,7 @@ export const FilterForm = () => {
         queryKey: ["catalogItems"],
         queryFn: () => apiCatalogModule.fetchCatalog(queryParams),
       });
-      toast.success("Фльтры успешно обновлены!");
+      toast.success("Фильтры успешно обновлены!");
     } catch (error) {
       toast.error("Извините, произошла ошибка, попробуйте повторить позднее.");
       // eslint-disable-next-line no-console

@@ -653,7 +653,8 @@ export const BasicFormFields = ({
           Выберите нужное
         </Typography>
         <Box marginBottom={1.5}>
-          <Controller
+          {/* todo: нужен ли этот свитч? */}
+          {/* <Controller
             name="isCommercial"
             control={control}
             render={({ field }) => (
@@ -671,7 +672,7 @@ export const BasicFormFields = ({
                 label="Коммерческая недвижимость"
               />
             )}
-          />
+          /> */}
           {!isMobile && (
             <Controller
               name="geoPosition.isInfoHidden"
