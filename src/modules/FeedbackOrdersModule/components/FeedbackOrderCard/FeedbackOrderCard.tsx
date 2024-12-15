@@ -49,6 +49,8 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
   );
   const { isAdmin, isManager } = useUserStore((state) => state);
   const { setIsDeleteDrawerOpen } = useFeedbackOrdersStore((state) => state);
+
+  // todo: move to custom hooks
   const deleteFeedbackMutation = useMutation({
     mutationFn: () =>
       apiFeedbackOrdersModule.deleteFeedbackOrderById(order._id),

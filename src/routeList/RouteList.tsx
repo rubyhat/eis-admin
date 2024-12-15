@@ -17,6 +17,8 @@ const HelpDetails = React.lazy(() => import("../pages/HelpDetails"));
 const CreateEstate = React.lazy(() => import("../pages/CreateEstate"));
 const EstateDetails = React.lazy(() => import("../pages/EstateDetails"));
 
+const SellOrders = React.lazy(() => import("../pages/Orders/SellOrders"));
+
 const FeedbackOrders = React.lazy(() => import("../pages/Orders/Feedback"));
 const EditOrdersFeedback = React.lazy(
   () => import("../pages/EditOrdersFeedback"),
@@ -136,6 +138,14 @@ export const RouteList = () => {
         element={
           <ProtectedRoute isAuth={isAuth}>
             <FeedbackOrders />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/orders/sell"
+        element={
+          <ProtectedRoute isAuth={isAuth}>
+            <SellOrders />
           </ProtectedRoute>
         }
       />

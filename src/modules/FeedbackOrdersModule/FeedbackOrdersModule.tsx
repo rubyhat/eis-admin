@@ -1,13 +1,13 @@
 import React from "react";
-import { Alert, Badge, Box, Container, Grid, Typography } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
+import { Alert, Box, Container, Grid } from "@mui/material";
 
 import { FeedbackOrderList } from "./components/FeedbackOrderList";
 import { FeedbackOrderFilterForm } from "./components/FeedbackOrderFilterForm";
 import { FeedbackOrderFilterMobileWrapper } from "./components/FeedbackOrderFilterMobileWrapper";
-import { apiFeedbackOrdersModule } from "./api/apiFeedbackOrdersModule";
 import { useFeedbackOrdersStore } from "./store";
 import { FeedbackOrderCardSkeleton } from "./components/FeedbackOrderCardSkeleton";
+import { TitleWithCounter } from "../../shared/components/TitleWithCounter";
+import { useFetchAllFeedbackOrders } from "./hooks";
 
 export const FeedbackOrdersModule = () => {
   const searchParams = new URLSearchParams(location.search);
@@ -18,11 +18,7 @@ export const FeedbackOrdersModule = () => {
     isLoading,
     isSuccess,
     isError,
-  } = useQuery({
-    queryFn: () =>
-      apiFeedbackOrdersModule.fetchFeedbacks(searchParams.toString()),
-    queryKey: ["feedbackOrders"],
-  });
+  } = useFetchAllFeedbackOrders(searchParams.toString());
 
   React.useEffect(() => {
     if (isSuccess && !isError) {
@@ -34,14 +30,7 @@ export const FeedbackOrdersModule = () => {
     <Container>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Typography component="h1" variant="titleFirstRegular">
-            Заявки на покупку
-            <Badge
-              color="primary"
-              badgeContent={FeedbacksData?.length || "0"}
-              sx={{ marginLeft: 2, marginBottom: 2 }}
-            />
-          </Typography>
+          <TitleWithCounter count={FeedbacksData?.length || "0"} />
           <FeedbackOrderFilterMobileWrapper />
         </Grid>
         <Grid item xs={12} lg={8}>
