@@ -78,8 +78,6 @@ export const EditEstateFormModule = ({
     },
   });
 
-  console.log(editEstateData);
-
   // Стейт для уже существующих фото, редактируем его если нужно удалить старое фото
   const [existingImages, setExistingImages] = React.useState<ObjectImages[]>(
     [],
@@ -281,7 +279,10 @@ export const EditEstateFormModule = ({
 
       const filteredData = Object.entries(sendData).reduce(
         (acc, [key, value]) => {
-          if (value !== "" && value !== null && value !== 0) {
+          if (
+            (value !== "" && value !== null && value !== 0) ||
+            key === "discount"
+          ) {
             acc[key] = value;
           }
           return acc;
