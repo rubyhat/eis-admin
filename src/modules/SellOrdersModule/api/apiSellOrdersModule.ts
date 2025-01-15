@@ -1,8 +1,10 @@
 import { axiosBaseWrap } from "../../../configs/AxiosConfig";
-import { DisplayEstateObject } from "../../../shared/interfaces";
+import { ResponseSellOrderData } from "../../../shared/interfaces";
 
 export const apiSellOrdersModule = {
-  fetchAllSellOrders(): Promise<DisplayEstateObject[]> {
-    return axiosBaseWrap.get("/orders/sell").then((response) => response.data);
+  fetchAllSellOrders(params: string): Promise<ResponseSellOrderData[]> {
+    return axiosBaseWrap
+      .get("/orders/sell" + params)
+      .then((response) => response.data);
   },
 };

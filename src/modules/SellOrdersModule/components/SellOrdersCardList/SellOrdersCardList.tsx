@@ -1,25 +1,23 @@
 import React from "react";
-import { Container, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 
 import { SellOrdersCardItem } from "../SellOrdersCardItem";
-import { DisplayEstateObject } from "../../../../shared/interfaces";
+import { ResponseSellOrderData } from "../../../../shared/interfaces";
 
 interface SellOrdersCardListProps {
-  sellOrdersData: DisplayEstateObject[];
+  sellOrdersData: ResponseSellOrderData[];
 }
 
 export const SellOrdersCardList = ({
   sellOrdersData,
 }: SellOrdersCardListProps) => {
   return (
-    <Container maxWidth={false}>
-      <Grid container spacing={2}>
-        {sellOrdersData.map((order) => (
-          <Grid item xs={12} lg={4}>
-            <SellOrdersCardItem key={order._id} order={order} />
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+    <Box
+      sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", width: 1 }}
+    >
+      {sellOrdersData.map((order) => (
+        <SellOrdersCardItem key={order._id} order={order} />
+      ))}
+    </Box>
   );
 };

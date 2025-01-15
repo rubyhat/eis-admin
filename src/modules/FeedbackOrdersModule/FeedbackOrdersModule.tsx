@@ -30,7 +30,10 @@ export const FeedbackOrdersModule = () => {
     <Container>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <TitleWithCounter count={FeedbacksData?.length || "0"} />
+          <TitleWithCounter
+            text="Заявки на покупку"
+            count={FeedbacksData?.length || "0"}
+          />
           <FeedbackOrderFilterMobileWrapper />
         </Grid>
         <Grid item xs={12} lg={8}>

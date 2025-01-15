@@ -14,7 +14,7 @@ export const AxiosErrorAlertMessage = ({
   const message = error.response?.data?.message || error.message;
   const code = error.response?.data?.statusCode;
   return (
-    <Alert severity="error">
+    <Alert severity="error" sx={{ width: "fit-content" }}>
       Ошибка получения данных с сервера.{" "}
       <strong>
         {message} Code: {code}

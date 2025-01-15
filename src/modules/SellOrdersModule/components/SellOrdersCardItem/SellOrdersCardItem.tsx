@@ -1,36 +1,58 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Chip, IconButton, Typography } from "@mui/material";
 
-import { DisplayEstateObject } from "../../../../shared/interfaces";
-import { estateObjectDictionary } from "../../../../shared/dictionaries/EstateObjectDictionary";
-import { TbCurrencyTenge } from "react-icons/tb";
-import { usePriceNormalize } from "../../../../hooks/usePriceNormalize";
+import { ResponseSellOrderData } from "../../../../shared/interfaces";
+import {
+  sellOrderCardChipStyles,
+  sellOrderCardStyles,
+  sellOrderChipWrapperStyles,
+} from "./styles";
+import { statusLabelMap } from "../../constants";
+import { useFormatDate } from "../../../../shared/hooks";
+import { SellOrdersCardInfoBlock } from "../SellOrdersCardInfoBlock";
+import { useDeleteSellOrderByIdMutation } from "../../../../shared/hooks/Orders/SellOrders";
+import { MdOutlineDelete } from "react-icons/md";
 
 interface SellOrdersCardItemParams {
-  order: DisplayEstateObject;
+  order: ResponseSellOrderData;
 }
 
 export const SellOrdersCardItem = ({ order }: SellOrdersCardItemParams) => {
+  const { fullDate, time } = useFormatDate(order.createdAt);
+  const deleteSellOrderMutation = useDeleteSellOrderByIdMutation();
   return (
-    <Box>
+    <Box sx={sellOrderCardStyles(order.status)}>
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box sx={sellOrderChipWrapperStyles}>
+          <Chip
+            label={statusLabelMap[order.status]}
+            size="small"
+            sx={sellOrderCardChipStyles(order.status)}
+          />
+          <IconButton
+            size="small"
+            color="error"
+            onClick={() => deleteSellOrderMutation.mutate(order._id)}
+          >
+            <MdOutlineDelete />
+          </IconButton>
+        </Box>
+        <Typography
+          component="p"
+          variant="textCalloutRegular"
+          color="customColors.labelsSecondary"
+        >
+          {fullDate} в {time}
+        </Typography>
+      </Box>
       <Typography
         component="p"
-        variant="textBodyRegular"
+        variant="titleThirdRegular"
         color="customColors.labelsPrimary"
       >
         {order.geoPosition.street}, {order.geoPosition.houseNumber}
       </Typography>
-      <Typography
-        component="p"
-        variant="textSubheadlineRegular"
-        color="customColors.labelsSecondary"
-        sx={{ display: { xs: "none", md: "flex" }, alignItems: "center" }}
-      >
-        {estateObjectDictionary.category[order.category]} | Комнат:{" "}
-        {order.roomCount} | Площадь: {order.houseSquare} м² |{" "}
-        <TbCurrencyTenge size={16} />{" "}
-        {usePriceNormalize(order.price || 0, order.discount || 0).totalPrice}
-      </Typography>
+      <SellOrdersCardInfoBlock order={order} />
     </Box>
   );
 };

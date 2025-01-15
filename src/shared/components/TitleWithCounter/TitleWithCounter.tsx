@@ -2,13 +2,14 @@ import { Badge, Typography } from "@mui/material";
 import React from "react";
 
 interface TitleWithCounterProps {
+  text: string;
   count: string | number;
 }
 
-export const TitleWithCounter = ({ count }: TitleWithCounterProps) => {
+export const TitleWithCounter = ({ text, count }: TitleWithCounterProps) => {
   return (
     <Typography component="h1" variant="titleFirstRegular">
-      Заявки на покупку
+      {text}
       <Badge
         color="primary"
         badgeContent={count}
