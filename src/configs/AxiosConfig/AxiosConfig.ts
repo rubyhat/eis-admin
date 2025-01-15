@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 const API_BASE_PATH = import.meta.env.VITE_API_BASE_PATH;
 
 export const axiosBaseWrap = axios.create({
+  timeout: 15 * 60 * 1000,
   baseURL: API_BASE_PATH,
   withCredentials: true,
   headers: {

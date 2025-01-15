@@ -244,7 +244,6 @@ export const CreateEstateFormModule = () => {
       factory: {},
       other: {},
     };
-    console.log(totalData);
 
     const createObjectReq = () => {
       const sendData = {
