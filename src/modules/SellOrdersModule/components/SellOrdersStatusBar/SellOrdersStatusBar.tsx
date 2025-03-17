@@ -37,7 +37,7 @@ export const SellOrdersStatusBar = ({
     });
   };
 
-  const currentStatus = searchParams.get("status") || SellOrderStatusEnum.New;
+  const currentStatus = searchParams.get("status") || SellOrderStatusEnum.NEW;
 
   return (
     <Box sx={selectStatusWrapperStyles}>
@@ -57,46 +57,54 @@ export const SellOrdersStatusBar = ({
             Выберите статус заявки
           </Typography>
         </MenuItem>
-        <MenuItem value={SellOrderStatusEnum.New} sx={menuItemStyles}>
+        <MenuItem value={SellOrderStatusEnum.NEW} sx={menuItemStyles}>
           <Box sx={menuItemStyles}>
             <Box
-              sx={statusDotStyles(statusColorMap[SellOrderStatusEnum.New])}
+              sx={statusDotStyles(statusColorMap[SellOrderStatusEnum.NEW])}
             />
             Новые заявки
           </Box>
         </MenuItem>
-        <MenuItem value={SellOrderStatusEnum.Waiting}>
+        <MenuItem value={SellOrderStatusEnum.WAITING}>
           <Box sx={menuItemStyles}>
             <Box
-              sx={statusDotStyles(statusColorMap[SellOrderStatusEnum.Waiting])}
+              sx={statusDotStyles(statusColorMap[SellOrderStatusEnum.WAITING])}
             />
             Ожидают встречи
           </Box>
         </MenuItem>
-        <MenuItem value={SellOrderStatusEnum.InWork}>
+        <MenuItem value={SellOrderStatusEnum.IN_WORK}>
           <Box sx={menuItemStyles}>
             <Box
-              sx={statusDotStyles(statusColorMap[SellOrderStatusEnum.InWork])}
+              sx={statusDotStyles(statusColorMap[SellOrderStatusEnum.IN_WORK])}
             />
             В работе
           </Box>
         </MenuItem>
-        <MenuItem value={SellOrderStatusEnum.Declined}>
+        <MenuItem value={SellOrderStatusEnum.DECLINED}>
           <Box sx={menuItemStyles}>
             <Box
-              sx={statusDotStyles(statusColorMap[SellOrderStatusEnum.Declined])}
+              sx={statusDotStyles(statusColorMap[SellOrderStatusEnum.DECLINED])}
             />
             Завершены
           </Box>
         </MenuItem>
-        <MenuItem value={SellOrderStatusEnum.Completed}>
+        <MenuItem value={SellOrderStatusEnum.COMPLETED}>
           <Box sx={menuItemStyles}>
             <Box
               sx={statusDotStyles(
-                statusColorMap[SellOrderStatusEnum.Completed],
+                statusColorMap[SellOrderStatusEnum.COMPLETED],
               )}
             />
             Отклонены
+          </Box>
+        </MenuItem>
+        <MenuItem value={SellOrderStatusEnum.COMPLETED}>
+          <Box sx={menuItemStyles}>
+            <Box
+              sx={statusDotStyles(statusColorMap[SellOrderStatusEnum.CANCELED])}
+            />
+            Отменены клиентом
           </Box>
         </MenuItem>
       </Select>

@@ -21,9 +21,9 @@ import {
   Land,
 } from "../../../shared/interfaces/EstateObjectTypes";
 import { selectInputProps, selectStyles } from "../assets/styles";
-import { FetchAllUsers } from "../../../shared/api/apiFetchAllUsers";
 import { useUserStore } from "../../../modules/UserModule/store/useUserStore";
 import { useScreenSize } from "../../../hooks/useScreenSize";
+import { apiFetchAllUsers } from "../../../shared/api";
 
 interface BasicFormFieldsProps {
   isLoading: boolean;
@@ -49,7 +49,7 @@ export const BasicFormFields = ({
     isLoading: isLoadingUsers,
     isError,
   } = useQuery({
-    queryFn: () => FetchAllUsers(),
+    queryFn: () => apiFetchAllUsers.fetchAllUsers(),
     queryKey: ["usersItems"],
   });
 

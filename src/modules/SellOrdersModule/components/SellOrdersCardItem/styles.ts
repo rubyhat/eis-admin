@@ -3,6 +3,7 @@ import { statusColorMap } from "../../constants";
 
 export const sellOrderCardStyles = (status: SellOrderStatusEnum) => {
   return {
+    mr: 2,
     border: "2px solid",
     borderColor: statusColorMap[status],
     borderRadius: 2,
@@ -18,7 +19,7 @@ export const sellOrderCardStyles = (status: SellOrderStatusEnum) => {
 export const sellOrderCardChipStyles = (status: SellOrderStatusEnum) => {
   return {
     backgroundColor: statusColorMap[status],
-    color: status === SellOrderStatusEnum.Waiting ? "#000" : "#fff",
+    color: status === SellOrderStatusEnum.WAITING ? "#000" : "#fff",
   };
 };
 

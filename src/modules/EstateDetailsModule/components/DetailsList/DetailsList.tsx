@@ -3,9 +3,10 @@ import { Box } from "@mui/material";
 import { DetailsListItem } from "../DetailsListItem";
 import { estateObjectDictionary } from "../../../../shared/dictionaries/EstateObjectDictionary";
 import { DisplayEstateObject } from "../../../../shared/interfaces/EstateObjectTypes";
+import { ResponseSellOrderData } from "../../../../shared/interfaces";
 
 interface DetailsListProps {
-  estateDetails: DisplayEstateObject;
+  estateDetails: DisplayEstateObject | ResponseSellOrderData; // todo: fix types
 }
 
 // todo: add accordion to show all properties?

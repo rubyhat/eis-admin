@@ -14,4 +14,5 @@ export type ResponseSellOrderData = Omit<
   updatedAt: Date;
   createdAt: Date;
   status: SellOrderStatusEnum;
+  declineReason?: string;
 };

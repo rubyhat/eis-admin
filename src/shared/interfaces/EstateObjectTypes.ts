@@ -84,7 +84,7 @@ export interface EstateAgentInfo {
   birthday?: string;
 }
 
-// Информация о собтвеннике объекта, нужна только для сотрудников
+// Информация о собственнике объекта, нужна только для сотрудников
 export interface OwnerInfo {
   ownerName: string;
   ownerPhone: string;
@@ -92,6 +92,7 @@ export interface OwnerInfo {
   apartmentNumber?: string; // номер квартиры
   entranceNumber?: string; // номер подъезда
   intercomNumber?: string; // номер домофона
+  ownerComment?: string;
 }
 
 export interface ApartmentComplex {

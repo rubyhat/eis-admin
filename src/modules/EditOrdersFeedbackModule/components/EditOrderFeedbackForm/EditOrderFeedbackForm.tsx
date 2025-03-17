@@ -14,10 +14,10 @@ import {
 import { CustomInput } from "../../../../components/CustomInput";
 import { CustomButton } from "../../../../components/CustomButton";
 import { useQuery } from "@tanstack/react-query";
-import { FetchAllUsers } from "../../../../shared/api/apiFetchAllUsers";
 import { apiFeedbackOrdersModule } from "../../../FeedbackOrdersModule/api";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { apiFetchAllUsers } from "../../../../shared/api";
 
 const selectStyles = {
   height: "36px",
@@ -73,7 +73,7 @@ export const EditOrderFeedbackForm = ({
     isLoading: isLoadingUsers,
     isError,
   } = useQuery({
-    queryFn: () => FetchAllUsers(),
+    queryFn: () => apiFetchAllUsers.fetchAllUsers(),
     queryKey: ["usersItems"],
   });
 

@@ -5,39 +5,21 @@ import {
   SubmitHandler,
   useForm,
 } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Box, MenuItem, Select, Typography } from "@mui/material";
 
 import { CustomInput } from "../../../../components/CustomInput";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { FetchAllUsers } from "../../../../shared/api/apiFetchAllUsers";
+import { apiFetchAllUsers } from "../../../../shared/api/apiFetchAllUsers";
 import { CustomButton } from "../../../../components/CustomButton";
 import {
   FilterState,
   initialFilterState,
   useFeedbackOrdersStore,
 } from "../../store";
-import { useNavigate } from "react-router-dom";
 import { apiFeedbackOrdersModule } from "../../api";
-import toast from "react-hot-toast";
-
-const selectStyles = {
-  height: "36px",
-  width: "100%",
-  fontSize: "15px",
-  "&:hover": {
-    "& fieldset": {
-      borderColor: "hsla(213, 100%, 53%, 1) !important",
-    },
-  },
-  "& fieldset": {
-    borderColor: "customColors.labelsQuaternary",
-  },
-};
-
-const selectInputProps = {
-  padding: 1,
-  fontSize: 16,
-};
+import { selectInputProps, selectStyles } from "./styles";
 
 // todo: add params in url, when form was used, add request, when backend will be ready
 export const FeedbackOrderFilterForm = () => {
@@ -56,6 +38,7 @@ export const FeedbackOrderFilterForm = () => {
     defaultValues: filterState,
   });
 
+  // todo: вынести в кастом хуки
   React.useEffect(() => {
     reset(initialFilterState); // Сбрасываем форму к исходным значениям
     setFilterState(initialFilterState); // Сбрасываем стейт фильтра к исходному состоянию
@@ -98,6 +81,7 @@ export const FeedbackOrderFilterForm = () => {
     }
   };
 
+  // todo: вынести в utils
   const updateUrlParams = (data: FieldValues) => {
     // Очищаем от пустых значений
     const filteredData = Object.fromEntries(
@@ -118,7 +102,6 @@ export const FeedbackOrderFilterForm = () => {
     // Добавляем параметры запроса к текущему URL
     currentUrl.search = queryParams;
 
-    console.log("123");
     // Обновляем URL без перезагрузки страницы
     window.history.pushState({}, "", currentUrl);
 
@@ -131,7 +114,7 @@ export const FeedbackOrderFilterForm = () => {
     isLoading: isLoadingUsers,
     isError,
   } = useQuery({
-    queryFn: () => FetchAllUsers(),
+    queryFn: () => apiFetchAllUsers.fetchAllUsers(),
     queryKey: ["usersItems"],
   });
 
