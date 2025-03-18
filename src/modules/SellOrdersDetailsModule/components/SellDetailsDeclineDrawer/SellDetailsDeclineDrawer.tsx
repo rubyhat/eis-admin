@@ -50,11 +50,11 @@ export const SellDetailsDeclineDrawer = ({
   const handleFormSubmit: SubmitHandler<SellDetailsDeclineDataTypes> = ({
     reason,
   }) => {
-    // todo: передать на бекенд причину отказа
     sellOrderMutation.mutate({
       id: order._id,
       data: { status: SellOrderStatusEnum.DECLINED, declineReason: reason },
     });
+    setOpenDeclineDrawer(false);
   };
 
   return (
@@ -85,16 +85,27 @@ export const SellDetailsDeclineDrawer = ({
               placeholder="Введите причину блокировки"
               error={!!errors["reason"]}
               helperText={errors["reason"]?.message}
-              // disabled={blockUserMutation.isPending}
+              disabled={sellOrderMutation.isPending}
               multiline
               minRows={6}
             />
           )}
         />
         <Box sx={buttonsWrapperStyles}>
-          <Button variant="contained">Отмена</Button>
-          <Button variant="contained" color="error" type="submit">
-            Отклонить заявку
+          <Button
+            variant="contained"
+            onClick={() => setOpenDeclineDrawer(false)}
+            disabled={sellOrderMutation.isPending}
+          >
+            Отмена
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            type="submit"
+            disabled={sellOrderMutation.isPending}
+          >
+            {sellOrderMutation.isPending ? "Загрузка..." : "Отклонить заявку"}
           </Button>
         </Box>
       </Box>

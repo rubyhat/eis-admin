@@ -10,6 +10,7 @@ import {
 
 import { useUpdateSellOrderMutation } from "../../../../shared/hooks/Orders/SellOrders";
 import { ResponseSellOrderData } from "../../../../shared/interfaces";
+import { useUserStore } from "../../../UserModule/store/useUserStore";
 
 interface SellDetailsSelectUserAgentProps {
   order: ResponseSellOrderData;
@@ -20,6 +21,7 @@ export const SellDetailsSelectUserAgent = ({
   order,
   refetchSellOrderDetails,
 }: SellDetailsSelectUserAgentProps) => {
+  const { isManager, isAdmin } = useUserStore((state) => state);
   const {
     data: usersData,
     isLoading: isLoadingUsers,
@@ -66,6 +68,7 @@ export const SellDetailsSelectUserAgent = ({
           sx={selectStyles}
           inputProps={{ sx: selectInputProps }}
           onChange={handleSelectChange}
+          disabled={!(isAdmin || isManager)}
         >
           <MenuItem disabled value="">
             Выберите агента
@@ -87,6 +90,16 @@ export const SellDetailsSelectUserAgent = ({
               </MenuItem>
             ))}
         </Select>
+      )}
+      {!(isAdmin || isManager) && (
+        <Typography
+          component="p"
+          variant="textBodyRegular"
+          color="customColors.labelsSecondary"
+          mt={1}
+        >
+          Заявку назначить сотруднику может только Менеджер
+        </Typography>
       )}
     </React.Fragment>
   );

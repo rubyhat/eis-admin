@@ -65,28 +65,20 @@ export const SellOrdersStatusBar = ({
             Новые заявки
           </Box>
         </MenuItem>
-        <MenuItem value={SellOrderStatusEnum.WAITING}>
+        {/* <MenuItem value={SellOrderStatusEnum.WAITING}> // todo: проверить нужен ли этот статус
           <Box sx={menuItemStyles}>
             <Box
               sx={statusDotStyles(statusColorMap[SellOrderStatusEnum.WAITING])}
             />
             Ожидают встречи
           </Box>
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem value={SellOrderStatusEnum.IN_WORK}>
           <Box sx={menuItemStyles}>
             <Box
               sx={statusDotStyles(statusColorMap[SellOrderStatusEnum.IN_WORK])}
             />
             В работе
-          </Box>
-        </MenuItem>
-        <MenuItem value={SellOrderStatusEnum.DECLINED}>
-          <Box sx={menuItemStyles}>
-            <Box
-              sx={statusDotStyles(statusColorMap[SellOrderStatusEnum.DECLINED])}
-            />
-            Завершены
           </Box>
         </MenuItem>
         <MenuItem value={SellOrderStatusEnum.COMPLETED}>
@@ -96,15 +88,33 @@ export const SellOrdersStatusBar = ({
                 statusColorMap[SellOrderStatusEnum.COMPLETED],
               )}
             />
+            Завершены
+          </Box>
+        </MenuItem>
+        <MenuItem value={SellOrderStatusEnum.DECLINED}>
+          <Box sx={menuItemStyles}>
+            <Box
+              sx={statusDotStyles(statusColorMap[SellOrderStatusEnum.DECLINED])}
+            />
             Отклонены
           </Box>
         </MenuItem>
-        <MenuItem value={SellOrderStatusEnum.COMPLETED}>
+        <MenuItem value={SellOrderStatusEnum.CANCELED}>
           <Box sx={menuItemStyles}>
             <Box
               sx={statusDotStyles(statusColorMap[SellOrderStatusEnum.CANCELED])}
             />
             Отменены клиентом
+          </Box>
+        </MenuItem>
+        <MenuItem value={SellOrderStatusEnum.FALSE_ORDER}>
+          <Box sx={menuItemStyles}>
+            <Box
+              sx={statusDotStyles(
+                statusColorMap[SellOrderStatusEnum.FALSE_ORDER],
+              )}
+            />
+            Ложные заявки
           </Box>
         </MenuItem>
       </Select>
