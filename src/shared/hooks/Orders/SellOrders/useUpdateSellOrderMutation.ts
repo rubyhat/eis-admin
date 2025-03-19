@@ -1,8 +1,10 @@
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
-import { useAxiosMutation } from "../../../../configs/RQT/useAxiosMutation";
+
 import { apiSellOrders } from "../../../api";
 import { ResponseSellOrderData } from "../../../interfaces";
+import { useAxiosMutation } from "../../../../configs/RQT/useAxiosMutation";
 
 interface useUpdateSellOrderMutationProps {
   refetchSellOrderDetails: () => void;
@@ -14,6 +16,7 @@ export const useUpdateSellOrderMutation = ({
   toastMsgs,
 }: useUpdateSellOrderMutationProps) => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   return useAxiosMutation({
     mutationFn: ({
@@ -31,6 +34,10 @@ export const useUpdateSellOrderMutation = ({
       });
       refetchSellOrderDetails();
       toast.success(toastMsgs.success);
+
+      if (response.data.createdObjectId) {
+        navigate("/catalog/" + response.data.createdObjectId);
+      }
     },
     onError: (error) => {
       const message = error.response?.data.message;

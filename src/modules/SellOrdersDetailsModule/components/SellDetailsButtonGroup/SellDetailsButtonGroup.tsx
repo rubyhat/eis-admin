@@ -5,6 +5,7 @@ import { SellOrderStatusEnum } from "@estate-information-system/shared-types";
 import { SellDetailsDeclineDrawer } from "../SellDetailsDeclineDrawer";
 import { ResponseSellOrderData } from "../../../../shared/interfaces";
 import { useUpdateSellOrderMutation } from "../../../../shared/hooks/Orders/SellOrders";
+import { useNavigate } from "react-router-dom";
 
 interface SellDetailsButtonGroupProps {
   order: ResponseSellOrderData;
@@ -16,6 +17,7 @@ export const SellDetailsButtonGroup = ({
   refetchSellOrderDetails,
 }: SellDetailsButtonGroupProps) => {
   const [openDeclineDrawer, setOpenDeclineDrawer] = React.useState(false);
+  const navigate = useNavigate();
 
   const sellOrderMutation = useUpdateSellOrderMutation({
     refetchSellOrderDetails,
@@ -34,6 +36,17 @@ export const SellDetailsButtonGroup = ({
 
   return (
     <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2 }}>
+      {order.createdObjectId && (
+        <Button
+          variant="contained"
+          sx={{ gridColumn: "1 / 3" }}
+          color="primary"
+          size="large"
+          onClick={() => navigate("/catalog/" + order.createdObjectId)}
+        >
+          Открыть объект
+        </Button>
+      )}
       {order.status === SellOrderStatusEnum.NEW && (
         <Button
           fullWidth

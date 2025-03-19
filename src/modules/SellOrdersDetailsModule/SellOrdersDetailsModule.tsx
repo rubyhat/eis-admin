@@ -81,10 +81,22 @@ export const SellOrdersDetailsModule = () => {
               <Box padding="16px 0">
                 <DetailsList estateDetails={order} />
               </Box>
-              <SellDetailsButtonGroup
-                order={order}
-                refetchSellOrderDetails={refetch}
-              />
+              {order.estateAgent ? (
+                <SellDetailsButtonGroup
+                  order={order}
+                  refetchSellOrderDetails={refetch}
+                />
+              ) : (
+                <Alert
+                  // todo: Нужно автоматически проверять закреплен ли сотрудник, если нет,
+                  // то перед тем как сменить статус закрепить его автоматически на фоне,
+                  // а кнопки отображать всегда, если роль позволяет с ними взаимодействовать
+                  severity="warning"
+                >
+                  Чтобы изменить статус заявки необходимо закрепить сотрудника
+                  за данной заявкой
+                </Alert>
+              )}
             </Grid>
           </React.Fragment>
         )}
