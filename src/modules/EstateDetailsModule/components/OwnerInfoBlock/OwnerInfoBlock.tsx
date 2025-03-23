@@ -12,6 +12,7 @@ interface OwnerInfoBlockProps {
   estateDetails: DisplayEstateObject;
 }
 
+// todo: need refactoring
 export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
   const { apartmentComplex, ownerInfo, targetFloor, tiktokLink } =
     estateDetails;
@@ -167,9 +168,23 @@ export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
           </Typography>
         </>
       )}
+      {ownerInfo.ownerComment && (
+        <>
+          <Typography
+            component="p"
+            variant="textBodyEmphasized"
+            marginBottom={1}
+          >
+            Комментарий от собственника
+          </Typography>
+          <Typography component="p" variant="textBodyRegular" marginBottom={1}>
+            {ownerInfo.ownerComment}
+          </Typography>
+        </>
+      )}
       {apartmentComplex && apartmentComplex.title && (
         <>
-          <CustomHr />
+          {ownerInfo.ownerComment && <CustomHr />}
           <Typography
             component="p"
             variant="textBodyEmphasized"
@@ -192,23 +207,40 @@ export const OwnerInfoBlock = ({ estateDetails }: OwnerInfoBlockProps) => {
           gap: 2,
         }}
       >
-        <Box component="a" href={`tel:${ownerInfo.ownerPhone}`}>
-          <CustomButton size="medium" fullWidth>
+        {ownerInfo.ownerPhone ? (
+          <Box component="a" href={`tel:${ownerInfo.ownerPhone}`}>
+            <CustomButton size="medium" fullWidth>
+              Позвонить
+            </CustomButton>
+          </Box>
+        ) : (
+          <CustomButton size="medium" fullWidth disabled>
             Позвонить
           </CustomButton>
-        </Box>
-        <Box
-          component="a"
-          href={`https://api.whatsapp.com/send?phone=${ownerInfo.ownerPhone.slice(
-            1,
-          )}&text=Здравствуйте, меня интересует недвижимость на Вашем сайте.`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <CustomButton fullWidth size="medium" isGreenButton>
+        )}
+        {ownerInfo.ownerPhone ? (
+          <Box
+            component="a"
+            href={`https://api.whatsapp.com/send?phone=${ownerInfo.ownerPhone.slice(
+              1,
+            )}&text=Здравствуйте, меня интересует недвижимость на Вашем сайте.`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <CustomButton
+              fullWidth
+              size="medium"
+              isGreenButton
+              disabled={!ownerInfo.ownerPhone}
+            >
+              Написать
+            </CustomButton>
+          </Box>
+        ) : (
+          <CustomButton fullWidth size="medium" isGreenButton disabled>
             Написать
           </CustomButton>
-        </Box>
+        )}
       </Box>
     </Box>
   );

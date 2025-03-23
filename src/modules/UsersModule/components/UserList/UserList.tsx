@@ -1,9 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import { UserCard } from "../UserCard";
 import { Alert, Grid } from "@mui/material";
+import { useQuery } from "@tanstack/react-query";
+
+import { UserCard } from "../UserCard";
 import { UserCardSkeleton } from "../UserCardSkeleton";
-import { FetchAllUsers } from "../../../../shared/api/apiFetchAllUsers";
+import { apiFetchAllUsers } from "../../../../shared/api/apiFetchAllUsers";
 
 export const UserList = () => {
   const {
@@ -12,7 +12,7 @@ export const UserList = () => {
     isSuccess,
     isError,
   } = useQuery({
-    queryFn: () => FetchAllUsers(),
+    queryFn: () => apiFetchAllUsers.fetchAllUsers(),
     queryKey: ["usersItems"],
   });
 

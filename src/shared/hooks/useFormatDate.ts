@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 
-export const useFormatDate = (dateISO: string) => {
+export const useFormatDate = (dateISO: string | Date) => {
   dayjs.locale("ru"); // использование русской локализации глобально
   const date = dayjs(dateISO);
   const time = date.format("HH:mm");

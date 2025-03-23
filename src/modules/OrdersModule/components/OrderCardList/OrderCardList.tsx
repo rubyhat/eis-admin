@@ -23,9 +23,9 @@ const list: OrdersCard[] = [
     title: "Заявки на покупку",
   },
   {
-    icon: <AiOutlineDollar size={128} color="#DCDCDD" />,
-    link: "/orders/sell",
-    disabled: true,
+    icon: <AiOutlineDollar size={128} color={iconColor} />,
+    link: "/orders/sell?status=NEW",
+    disabled: false,
     title: "Заявки на продажу",
   },
   {

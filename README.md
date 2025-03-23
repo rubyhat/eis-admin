@@ -14,3 +14,7 @@ Frontend admin panel for EIS project
 ## Build with
 
 `Vite + React + Typescript`
+
+## Utils
+
+tree -I 'node_modules|dist|.git' > admin-eis-structure.txt - generate project structure info

@@ -34,7 +34,7 @@ export const Header = () => {
           borderColor: "customColors.labelsQuaternary",
         }}
       >
-        <Container>
+        <Container maxWidth={false}>
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12}>
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -63,7 +63,7 @@ export const Header = () => {
         borderColor: "customColors.labelsQuaternary",
       }}
     >
-      <Container>
+      <Container maxWidth={false}>
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={8} md={3}>
             <Logotype />
