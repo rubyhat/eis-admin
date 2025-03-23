@@ -43,7 +43,10 @@ export const SellOrdersCardItem = ({ order }: SellOrdersCardItemParams) => {
             <IconButton
               size="small"
               color="error"
-              onClick={() => deleteSellOrderMutation.mutate(order._id)}
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteSellOrderMutation.mutate(order._id);
+              }}
             >
               <MdOutlineDelete />
             </IconButton>

@@ -98,6 +98,15 @@ export const SellOrdersDetailsModule = () => {
                 </Alert>
               )}
             </Grid>
+            <Grid item xs={12} md={6}>
+              {order.images.length > 0 && (
+                <Box
+                  component="img"
+                  src={order.images[0].imageUrl}
+                  sx={{ width: 1 }}
+                />
+              )}
+            </Grid>
           </React.Fragment>
         )}
       </Grid>

@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 
 import { SellOrdersCardItem } from "../SellOrdersCardItem";
 import { ResponseSellOrderData } from "../../../../shared/interfaces";
+import { cardListStyles } from "./styles";
 
 interface SellOrdersCardListProps {
   sellOrdersData: ResponseSellOrderData[];
@@ -12,9 +13,7 @@ export const SellOrdersCardList = ({
   sellOrdersData,
 }: SellOrdersCardListProps) => {
   return (
-    <Box
-      sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", width: 1 }}
-    >
+    <Box sx={cardListStyles}>
       {sellOrdersData.map((order) => (
         <SellOrdersCardItem key={order._id} order={order} />
       ))}
