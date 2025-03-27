@@ -21,6 +21,12 @@ import { CustomButton } from "../../../../components/CustomButton";
 import { useUserStore } from "../../../UserModule/store/useUserStore";
 import { FeedbackOrderDeleteDrawer } from "../FeedbackOrderDeleteDrawer";
 import { useFormatDate } from "../../../../shared/hooks/useFormatDate";
+import {
+  buttonsWrapperStyles,
+  cardWrapperStyles,
+  infoWrapperStyles,
+  titleWrapperStyles,
+} from "./styles";
 
 interface FeedbackOrderCardProps {
   order: FeedbackOrderDisplay;
@@ -55,7 +61,7 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
     mutationFn: () =>
       apiFeedbackOrdersModule.deleteFeedbackOrderById(order._id),
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["feedbackOrders"] });
+      queryClient.invalidateQueries({ queryKey: ["feedback-orders"] });
       toast.success("Заявка успешно удалена!");
     },
     onError() {
@@ -68,7 +74,7 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
 
   const handleClickOpenEstateButton = () =>
     navigate(`/catalog/${order.estateId}`);
-  const handleEditFeedbackorder = () =>
+  const handleEditFeedbackOrder = () =>
     navigate(`/orders/feedback/edit`, { state: { order } });
 
   const handleClickDeleteButton = () => setIsDeleteDrawerOpen(true, order._id);
@@ -77,25 +83,8 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
   };
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        padding: 2,
-        border: "2px solid",
-        borderColor: statusColorValue[order.status],
-        borderRadius: 2,
-        height: 1,
-      }}
-    >
-      <Box
-        sx={{
-          width: 1,
-          display: "flex",
-          justifyContent: "space-between",
-          gap: 1,
-        }}
-      >
+    <Box sx={cardWrapperStyles(statusColorValue[order.status])}>
+      <Box sx={titleWrapperStyles}>
         <Typography component="h6" variant="titleThirdRegular" marginBottom={2}>
           {order.title}
         </Typography>
@@ -147,20 +136,14 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
       </List>
       <CustomHr sx={{ margin: "8px 0" }} />
 
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
+      <Box sx={infoWrapperStyles}>
         <Typography component="h6" variant="textBodyRegular" fontWeight={500}>
           Информация от сотрудника
         </Typography>
 
         <Box>
           {(isAdmin || isManager) && (
-            <IconButton onClick={handleEditFeedbackorder} color="primary">
+            <IconButton onClick={handleEditFeedbackOrder} color="primary">
               <FiEdit2 size={20} />
             </IconButton>
           )}
@@ -223,14 +206,7 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
 
       <CustomHr sx={{ margin: "8px 0 16px" }} />
 
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 1,
-          marginBottom: 1,
-        }}
-      >
+      <Box sx={buttonsWrapperStyles}>
         <Box component="a" href={`tel:${order.phone}`}>
           <CustomButton fullWidth>Позвонить</CustomButton>
         </Box>
@@ -252,13 +228,7 @@ export const FeedbackOrderCard = ({ order }: FeedbackOrderCardProps) => {
           </CustomButton>
         </Box>
       </Box>
-      <Box
-        sx={{
-          display: "grid",
-          gridTemplateColumns: "1fr",
-          gap: 1,
-        }}
-      >
+      <Box>
         <CustomButton fullWidth onClick={handleClickOpenEstateButton}>
           Посмотреть Объект
         </CustomButton>

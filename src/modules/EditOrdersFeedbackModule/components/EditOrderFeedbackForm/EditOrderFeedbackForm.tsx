@@ -5,38 +5,19 @@ import {
   SubmitHandler,
   useForm,
 } from "react-hook-form";
-
+import { useQuery } from "@tanstack/react-query";
 import { Box, MenuItem, Select, Typography } from "@mui/material";
+
 import {
   FeedbackOrder,
   FeedbackOrderDisplay,
 } from "../../../FeedbackOrdersModule/store";
 import { CustomInput } from "../../../../components/CustomInput";
 import { CustomButton } from "../../../../components/CustomButton";
-import { useQuery } from "@tanstack/react-query";
-import { apiFeedbackOrdersModule } from "../../../FeedbackOrdersModule/api";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 import { apiFetchAllUsers } from "../../../../shared/api";
-
-const selectStyles = {
-  height: "36px",
-  width: "100%",
-  fontSize: "15px",
-  "&:hover": {
-    "& fieldset": {
-      borderColor: "hsla(213, 100%, 53%, 1) !important",
-    },
-  },
-  "& fieldset": {
-    borderColor: "customColors.labelsQuaternary",
-  },
-};
-
-const selectInputProps = {
-  padding: 1,
-  fontSize: 16,
-};
+import { formStyles, textareaStyles } from "./styles";
+import { useUpdateFeedbackMutation } from "../../hooks";
+import { selectInputProps, selectStyles } from "../../../../shared/styles";
 
 interface EditOrderFeedbackFormProps {
   order: FeedbackOrderDisplay;
@@ -45,10 +26,6 @@ interface EditOrderFeedbackFormProps {
 export const EditOrderFeedbackForm = ({
   order,
 }: EditOrderFeedbackFormProps) => {
-  const navigate = useNavigate();
-
-  const [isLoading, setIsLoading] = React.useState(false);
-
   const {
     control,
     register,
@@ -86,9 +63,14 @@ export const EditOrderFeedbackForm = ({
     }
   }, [setValue, usersData]);
 
+  const updateFeedbackMutation = useUpdateFeedbackMutation();
+
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(true);
-    const feedback = { ...order, ...data, estateAgent: data.estateAgent };
+    const feedback: FeedbackOrder = {
+      ...order,
+      ...data,
+      estateAgent: data.estateAgent,
+    };
 
     const filteredData = Object.fromEntries(
       Object.entries(feedback).filter(
@@ -96,29 +78,14 @@ export const EditOrderFeedbackForm = ({
       ),
     );
 
-    try {
-      apiFeedbackOrdersModule.updateFeedback(filteredData as FeedbackOrder);
-      setTimeout(() => navigate("/orders/feedback"), 100); // из-за быстрой загрузки и редиректа, на странице всех заявок приходит еще не обновленная заявка
-      toast.success("Заявка успешно обновлена!");
-    } catch (error) {
-      toast.success("Произошла ошибка!");
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
+    updateFeedbackMutation.mutate(filteredData as FeedbackOrder);
   };
 
   return (
     <Box
       component="form"
       onSubmit={handleSubmit(handleFormSubmit)}
-      sx={{
-        width: 1,
-        borderRadius: 2,
-        boxShadow:
-          "0px 0px 0px 0.5px rgba(0, 0, 0, 0.05), 0px 0.5px 2.5px 0px rgba(0, 0, 0, 0.30)",
-        height: "fit-content",
-      }}
+      sx={formStyles}
     >
       <Box padding="12px 16px">
         <Typography component="h6" variant="titleSecondRegular">
@@ -281,22 +248,9 @@ export const EditOrderFeedbackForm = ({
             id="description"
             component="textarea"
             placeholder="Эту заметку будут видеть только сотрудники..."
-            disabled={isLoading}
+            disabled={updateFeedbackMutation.isPending}
             {...register("description")}
-            sx={{
-              width: 1,
-              minHeight: 150,
-              border: `1px solid`,
-              borderColor: "customColors.labelsQuaternary",
-              borderRadius: "5px",
-              fontSize: 16,
-              padding: 1,
-              outlineColor: "customColors.colorsOrange",
-              "&::placeholder": {
-                fontSize: 14,
-                color: "customColors.labelsTertiary",
-              },
-            }}
+            sx={textareaStyles}
           />
         </Box>
       </Box>
@@ -305,9 +259,9 @@ export const EditOrderFeedbackForm = ({
           size="medium"
           fullWidth
           type="submit"
-          disabled={isLoading}
+          disabled={updateFeedbackMutation.isPending}
         >
-          Сохранить
+          {updateFeedbackMutation.isPending ? "Загрузка..." : "Сохранить"}
         </CustomButton>
       </Box>
     </Box>

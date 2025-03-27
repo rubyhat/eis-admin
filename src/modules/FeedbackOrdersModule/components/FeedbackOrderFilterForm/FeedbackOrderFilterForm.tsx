@@ -19,7 +19,7 @@ import {
   useFeedbackOrdersStore,
 } from "../../store";
 import { apiFeedbackOrdersModule } from "../../api";
-import { selectInputProps, selectStyles } from "./styles";
+import { selectInputProps, selectStyles } from "../../../../shared/styles";
 
 // todo: add params in url, when form was used, add request, when backend will be ready
 export const FeedbackOrderFilterForm = () => {

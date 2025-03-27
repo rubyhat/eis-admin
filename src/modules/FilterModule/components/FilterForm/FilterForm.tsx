@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   FormControlLabel,
@@ -6,7 +7,6 @@ import {
   Switch,
   Typography,
 } from "@mui/material";
-import React from "react";
 import {
   Controller,
   FieldValues,
@@ -14,31 +14,14 @@ import {
   useForm,
 } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
+
 import { CustomButton } from "../../../../components/CustomButton";
 import { CustomInput } from "../../../../components/CustomInput";
 import { FilterState, initialFilterState, useFilterStore } from "../../store";
-import { useQueryClient } from "@tanstack/react-query";
 import { apiCatalogModule } from "../../../CatalogModule/api/apiCatalogModule";
-import { useNavigate } from "react-router-dom";
-
-const selectStyles = {
-  height: "36px",
-  width: "100%",
-  fontSize: "15px",
-  "&:hover": {
-    "& fieldset": {
-      borderColor: "hsla(213, 100%, 53%, 1) !important",
-    },
-  },
-  "& fieldset": {
-    borderColor: "customColors.labelsQuaternary",
-  },
-};
-
-const selectInputProps = {
-  padding: 1,
-  fontSize: 16,
-};
+import { selectInputProps, selectStyles } from "../../../../shared/styles";
 
 // todo: при выборе фильтров - обновляется урл страницы - если обновить страницу - урл остался прежним,
 // а форма в фильтре обнулилась. Нужно либо очищать урл при обновлении страницы, либо обновлять фильтр
